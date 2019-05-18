@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { Camera } from '@ionic-native/camera/ngx';
 
 //Cambio de prueba
-
+//aasdasdasd
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
