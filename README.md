@@ -1,7 +1,7 @@
 # 2019_TP_PPS_Comanda
 
 # Restaurant "La comanda"
-![la comanda](https://i.imgur.com/GzRLCcys.png "la comanda")
+![la comanda](https://elpalomardecuenca.files.wordpress.com/2015/12/icono-restaurante.png?w=1200 "la comanda")
 # Nombre del equipo: 
  - ## TeamRest
 
