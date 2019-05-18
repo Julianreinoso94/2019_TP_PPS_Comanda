@@ -1,0 +1,7 @@
+{
+  "name": "controlador-eventos",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
