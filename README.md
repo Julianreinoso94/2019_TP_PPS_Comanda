@@ -61,7 +61,8 @@ _El proyecto se va a estar orientada a dispositivos moviles, desarrollada a trav
  # Responsabilidades por Integrante:
 ##  - De La Fuente
 ##  - Santiago
-
+|   Responsabilidad | Estado   |
+| :------------: | :------------: |
 |  Alta de producto (plato y bebida) | ![rojo](/images/rojo.png)  | 
 |  Alta de Cliente |![rojo](/images/rojo.png)   | 
 |  Qr lista espera  |  ![rojo](/images/rojo.png)   | 
