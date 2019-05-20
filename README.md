@@ -8,7 +8,7 @@
 # Integrantes:
  - ### Reinoso Julian [![](/images/github.png)](https://github.com/julianreinoso94  "Github de Julian Reinoso")
  - ### Santamaria Evelin  [![](/images/github.png)](https://github.com/eveyazmins "Github de Evelin Santamaria")
-
+ - ### De La Fuente Santiago  [![](/images/github.png)](<agregar git> "Github de Santiago De La Fuente")
  
 ## ¿De que se trata el proyecto?
 _El Proyecto Consiste En Desarrollar Una Aplicacion Para La Gestion De Un Restaurant, Enfocada En La Experiencia De Usuario._
@@ -36,32 +36,40 @@ _El proyecto se va a estar orientada a dispositivos moviles, desarrollada a trav
 
 |   Responsabilidad | Estado   |
 | :------------: | :------------: |
-|  Alta de plato | ![rojo](/images/rojo.png)  |
-|  Alta de bebida |![rojo](/images/rojo.png)   |
-|  Alta de supervisor |![rojo](/images/rojo.png)   |
-|  Alta de dueño |![rojo](/images/rojo.png)   |
-|  Qr de propina |![rojo](/images/rojo.png)   |
-|  Splash | ![rojo](/images/rojo.png)  |
-|  Login |  ![rojo](/images/rojo.png) |
-|  Encuesta Supervisor  |  ![rojo](/images/rojo.png)   |
-|  Alta cliente anonimo  |  ![rojo](/images/rojo.png)   |
-|  Qr lista espera  |  ![rojo](/images/rojo.png)   |
+|  Alta de supervisor |![rojo](/images/rojo.png)   | 
+|  Alta de dueño |![rojo](/images/rojo.png)   | 
+|  Qr de la mesa  |  ![rojo](/images/rojo.png)   | 
+|  Encuesta cliente  |  ![rojo](/images/rojo.png)   | 
+|  Gestion de pedir platos y bebidas   |  ![rojo](/images/rojo.png)   | 
+|  Push notification (pedir cuenta)  |  ![rojo](/images/rojo.png)   | 
+|  Push notification (hacer reserva)  |  ![rojo](/images/rojo.png)   | 
+|  Juegos (bebida gratis)  |  ![rojo](/images/rojo.png)   | 
  
 ##  - Santamaria
 ##  - Evelin
 |   Responsabilidad | Estado   |
 | :------------: | :------------: |
-|  Menu Principal| ![rojo](/images/rojo.png)  |
-|  Alta de Cliente |![rojo](/images/rojo.png)   |
-|  Encuesta entrada-salida | ![rojo](/images/rojo.png)   |
-|  Encuesta Satisfaccion |  ![rojo](/images/rojo.png)   |
-|  Gestion de mesas |  ![rojo](/images/rojo.png)   |
-|  Alta de pedido |  ![rojo](/images/rojo.png)   |
-|  Gestion de pedidos  |  ![rojo](/images/rojo.png)   |
-|  Qr de la mesa  |  ![rojo](/images/rojo.png)   |
-|  Alta de mesa  |  ![rojo](/images/rojo.png)   |
-|  Reservas(cliente)  |  ![rojo](/images/rojo.png)   |
-|  Push notification (pedir cuenta)  |  ![rojo](/images/rojo.png)   | 
+|  Alta de empleado |![rojo](/images/rojo.png)   | 
+|  Alta de mesa  |  ![rojo](/images/rojo.png)   | 
+|  Qr de propina |![rojo](/images/rojo.png)   |
+|  Encuesta Supervisor  |  ![rojo](/images/rojo.png)   | 
+|  Gestion de tomar pedido |  ![rojo](/images/rojo.png)   | 
+|  Push notification (pedir mesa)  |  ![rojo](/images/rojo.png)   | 
+|  Push notification (delivery)  |  ![rojo](/images/rojo.png)   | 
+|  Juegos (10% descuento)  |  ![rojo](/images/rojo.png)   | 
 
+ # Responsabilidades por Integrante:
+##  - De La Fuente
+##  - Santiago
+
+|  Alta de producto (plato y bebida) | ![rojo](/images/rojo.png)  | 
+|  Alta de Cliente |![rojo](/images/rojo.png)   | 
+|  Qr lista espera  |  ![rojo](/images/rojo.png)   | 
+|  Encuesta empleado  |  ![rojo](/images/rojo.png)   |
+|  Gestion de reservas agendadas |  ![rojo](/images/rojo.png)   | 
+|  Push notification (pedir platos y bebidas)  |  ![rojo](/images/rojo.png)   | 
+|  Delivery (realizar pedido GPS)  |  ![rojo](/images/rojo.png)   | 
+|  Delivery (mapa de ruta)  |  ![rojo](/images/rojo.png)   | 
+|  Juegos (postre gratis)  |  ![rojo](/images/rojo.png)   | 
 
 Registrate en: https://forms.gle/yZ8xsdWj7W7ECWAG8
