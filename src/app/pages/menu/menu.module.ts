@@ -10,7 +10,17 @@ import { MenuPage } from './menu.page';
 const routes: Routes = [
   {
     path: '',
-    component: MenuPage
+    component: MenuPage,
+    children: [
+      {
+        path: 'first',
+        loadChildren: '../altaduenio/altaduenio.module#AltaduenioPageModule'
+      },
+      {
+        path: 'second',
+        loadChildren: '../second/second.module#SecondPageModule'
+      }
+    ]
   }
 ];
 
