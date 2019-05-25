@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
 
   async loginUser(loginForm: FormGroup): Promise<void> {
     if (!loginForm.valid) {
+
       console.log('Form is not valid yet, current value:', loginForm.value);
     } else {
       this.loading = await this.loadingCtrl.create();
@@ -44,7 +45,7 @@ export class LoginPage implements OnInit {
 
       this.authService.loginUser(email, password).then(() => {
           this.loading.dismiss().then(() => {
-            this.router.navigateByUrl('home');
+            this.router.navigateByUrl('menu');
           });
         },
         error => {
