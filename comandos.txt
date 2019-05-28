@@ -1,0 +1,4 @@
+barcodescanner
+
+ionic cordova plugin add phonegap-plugin-barcodescanner
+npm install @ionic-native/barcode-scanner
