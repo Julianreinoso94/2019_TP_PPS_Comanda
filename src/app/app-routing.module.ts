@@ -25,7 +25,9 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
-  { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
+  { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },  { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
+  { path: 'alta-duenio', loadChildren: './pages/alta-duenio/alta-duenio.module#AltaDuenioPageModule' },
+
 ];
 
 @NgModule({
