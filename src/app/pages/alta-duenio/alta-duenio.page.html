@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic 4 Firestore CRUD Operation Demo
+    Alta Dueño/Supervisor
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,28 +12,58 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-input placeholder="Enter Name" [(ngModel)]="studentName"></ion-input>
+          <ion-input placeholder="Ingrese nombre" [(ngModel)]="nombre"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-input placeholder="Enter Age" [(ngModel)]="studentAge"></ion-input>
+          <ion-input placeholder="Ingrese Apellido" [(ngModel)]="apellido"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-input placeholder="Enter Address" [(ngModel)]="studentAddress"></ion-input>
+          <ion-input placeholder="Ingrese Dni" [(ngModel)]="dni"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Ingrese CUIL" [(ngModel)]="cuil"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Ingrese foto" [(ngModel)]="foto"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+  <ion-item>
+    <ion-label>Tipo de Usuario</ion-label>
+    <ion-select [(ngModel)]="perfil" value="brown" okText="Aceptar" cancelText="Cancelar">
+      <ion-select-option value="Supervisor">Supervisor</ion-select-option>
+      <ion-select-option value="Dueño">Dueño</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col text-center>
-        <ion-button (click)="CreateRecord()" [disabled]="!studentName || !studentAge || !studentAddress">
+        <ion-button (click)="CreateRecord()" [disabled]="!nombre || !apellido || !dni">
           <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
           &nbsp;Create Record
         </ion-button>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col text-center>
+    <ion-button (click)="SacarFoto()" >SacarFotoCamara</ion-button>
+  </ion-col>
+</ion-row>
+
   </ion-grid>
 
 

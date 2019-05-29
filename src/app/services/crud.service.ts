@@ -13,18 +13,18 @@ export class CrudService {
 
 
   create_NewStudent(record) {
-    return this.firestore.collection('Students').add(record);
+    return this.firestore.collection('Supervisor').add(record);
   }
 
   read_Students() {
-    return this.firestore.collection('Students').snapshotChanges();
+    return this.firestore.collection('Supervisor').snapshotChanges();
   }
 
   update_Student(recordID,record){
-    this.firestore.doc('Students/' + recordID).update(record);
+    this.firestore.doc('Supervisor/' + recordID).update(record);
   }
 
   delete_Student(record_id) {
-    this.firestore.doc('Students/' + record_id).delete();
+    this.firestore.doc('Supervisor/' + record_id).delete();
   }
 }

@@ -9,9 +9,12 @@ import { CrudService } from '../../services/crud.service';
 })
 export class AltaDuenioPage implements OnInit {
   students: any;
-   studentName: string;
-   studentAge: number;
-   studentAddress: string;
+   nombre: string;
+   apellido: number;
+   dni: string;
+   cuil:number
+   foto:string;
+   perfil:string;
 
    constructor(private crudService: CrudService) { }
 
@@ -22,9 +25,13 @@ export class AltaDuenioPage implements OnInit {
          return {
            id: e.payload.doc.id,
            isEdit: false,
-           Name: e.payload.doc.data()['Name'],
-           Age: e.payload.doc.data()['Age'],
-           Address: e.payload.doc.data()['Address'],
+           nombre: e.payload.doc.data()['nombre'],
+           apellido: e.payload.doc.data()['apellido'],
+           dni: e.payload.doc.data()['dni'],
+           cuil: e.payload.doc.data()['cuil'],
+           foto: e.payload.doc.data()['foto'],
+           perfil: e.payload.doc.data()['perfil'],
+
          };
        })
        console.log(this.students);
@@ -34,13 +41,20 @@ export class AltaDuenioPage implements OnInit {
 
    CreateRecord() {
      let record = {};
-     record['Name'] = this.studentName;
-     record['Age'] = this.studentAge;
-     record['Address'] = this.studentAddress;
+     record['nombre'] = this.nombre;
+     record['apellido'] = this.apellido;
+     record['dni'] = this.dni;
+     record['cuil'] = this.cuil;
+     record['foto'] = this.foto;
+     record['perfil'] = this.perfil;
+
      this.crudService.create_NewStudent(record).then(resp => {
-       this.studentName = "";
-       this.studentAge = undefined;
-       this.studentAddress = "";
+       this.nombre = "";
+       this.apellido = undefined;
+       this.dni = "";
+       this.cuil = "";
+       this.foto = "";
+       this.perfil = "";
        console.log(resp);
      })
        .catch(error => {
@@ -54,16 +68,19 @@ export class AltaDuenioPage implements OnInit {
 
    EditRecord(record) {
      record.isEdit = true;
-     record.EditName = record.Name;
-     record.EditAge = record.Age;
-     record.EditAddress = record.Address;
+     record.EditName = record.nombre;
+     record.EditAge = record.apellido;
+     record.EditAddress = record.perfil;
    }
 
    UpdateRecord(recordRow) {
      let record = {};
-     record['Name'] = recordRow.EditName;
-     record['Age'] = recordRow.EditAge;
-     record['Address'] = recordRow.EditAddress;
+     record['nombre'] = recordRow.EditName;
+     record['apellido'] = recordRow.EditAge;
+     record['dni'] = recordRow.EditAddress;
+     record['cuil'] = recordRow.EditAddress;
+     record['nombre'] = recordRow.EditAddress;
+     record['perfil'] = recordRow.EditAddress;
      this.crudService.update_Student(recordRow.id, record);
      recordRow.isEdit = false;
    }
