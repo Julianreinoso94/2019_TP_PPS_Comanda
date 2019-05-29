@@ -13,16 +13,17 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import { environment } from '../environments/environment';
 //import { AngularFireModule } from 'angularfire2';
+import {AngularFireStorageModule} from '@angular/fire/storage';
 
 import { AngularFireModule } from '@angular/fire';
-
+import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,AngularFireModule.initializeApp(environment.firebase),
-AngularFirestoreModule,
+AngularFirestoreModule,    AngularFireStorageModule,
     AngularFireDatabaseModule,
    IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
   providers: [

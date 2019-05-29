@@ -8,7 +8,7 @@
   <form [formGroup]="loginForm">
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
-      <ion-input
+      <ion-input [(ngModel)]="email"
         formControlName="email"
         type="email"
         placeholder="Your email address"
@@ -27,7 +27,7 @@
 
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
-      <ion-input
+      <ion-input  [(ngModel)]="password"
         formControlName="password"
         type="password"
         placeholder="Your password"
@@ -46,6 +46,9 @@
     <ion-button (click)="loginUser(loginForm)" expand="block" [disabled]="!loginForm.valid">
       Log In
     </ion-button>
+    <ion-button (click)="elegirusuario()" expand="block">
+      Elegir Usuario
+    </ion-button>
   </form>
 
   <ion-button expand="block" fill="clear" routerLink="/signup">
@@ -55,4 +58,6 @@
   <ion-button expand="block" fill="clear" routerLink="/reset-password">
     I forgot my password
   </ion-button>
+
+
 </ion-content>

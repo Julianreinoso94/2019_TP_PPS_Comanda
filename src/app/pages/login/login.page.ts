@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/user/auth.service';
 import { Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
@@ -11,9 +13,13 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
   public loginForm: FormGroup;
+  email:string;
+  password:string;
+
   public loading: HTMLIonLoadingElement;
-  constructor(
+  constructor (
     public loadingCtrl: LoadingController,
+    public actionSheetController: ActionSheetController,
     public alertCtrl: AlertController,
     private authService: AuthService,
     private router: Router,
@@ -59,4 +65,64 @@ export class LoginPage implements OnInit {
       );
     }
   }
+
+  async elegirusuario() {
+   const actionSheet = await this.actionSheetController.create({
+     header: 'Usuarios',
+     buttons: [{
+       text: 'Supervisor',
+       role: 'destructive',
+       handler: () => {
+         this.email="julianreinoso94@gmail.com";
+         this.password="123456";
+         console.log('Delete clicked');
+       }
+     }, {
+       text: 'Empleado',
+       icon: 'share',
+       handler: () => {
+         this.email="empleado1@empleado1.com";
+         this.password="123456";
+         console.log('Share clicked');
+       }
+     }, {
+       text: 'Cliente',
+       icon: 'arrow-dropright-circle',
+       handler: () => {
+         this.email="cliente@cliente.com";
+         this.password="123456";
+         console.log('Play clicked');
+       }
+     }, {
+       text: 'Anonimo',
+       icon: 'heart',
+       handler: () => {
+         this.email="Anonimo@anonimo.com";
+         this.password="123456";
+         console.log('Favorite clicked');
+       }
+     },
+     {
+      text: 'Dueño',
+      icon: 'heart',
+      handler: () => {
+        this.email="empleado1@empleado1.com";
+        this.password="123456";
+        console.log('Favorite clicked');
+      }
+    },
+
+      {
+       text: 'Cancelar',
+       icon: 'close',
+       role: 'cancel',
+       handler: () => {
+
+         console.log('Cancel clicked');
+       }
+     }]
+   });
+   await actionSheet.present();
+ }
+
 }

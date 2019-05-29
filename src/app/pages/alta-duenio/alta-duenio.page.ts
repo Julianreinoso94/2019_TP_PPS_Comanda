@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { CrudService } from '../../services/crud.service';
-
+import { AngularFireStorage } from '@angular/fire/storage';
+import * as firebase from 'firebase/app';
+import { AlertController } from '@ionic/angular';
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-alta-duenio',
   templateUrl: './alta-duenio.page.html',
@@ -16,7 +19,7 @@ export class AltaDuenioPage implements OnInit {
    foto:string;
    perfil:string;
 
-   constructor(private crudService: CrudService) { }
+   constructor(private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService) { }
 
    ngOnInit() {
      this.crudService.read_Students().subscribe(data => {
@@ -84,6 +87,31 @@ export class AltaDuenioPage implements OnInit {
      this.crudService.update_Student(recordRow.id, record);
      recordRow.isEdit = false;
    }
+
+   SacarFoto() {
+       this.filename = Math.random().toString(36).substring(2);
+       const options: CameraOptions = {
+         quality: 50,
+         targetHeight: 600,
+         targetWidth: 600,
+         destinationType: this.camera.DestinationType.DATA_URL,
+         encodingType: this.camera.EncodingType.JPEG,
+         mediaType: this.camera.MediaType.PICTURE,
+         correctOrientation: true
+       }
+
+       this.camera.getPicture(options).then((imageData) => {
+       // this.foto = "data:image/jpeg;base64," + imageData;
+        this.foto='data:image/jpeg;base64,' + imageData;
+        this.storage.ref('/cosasMalas/').child(this.filename).putString(this.foto, 'data_url', {contentType:'image/jpeg'});
+
+               }, (err) => {
+                 //  // Handle error
+            alert("error " + JSON.stringify(err))
+               });
+          //  this.obtenerURL2();
+
+      }
 
 
  }
