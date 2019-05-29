@@ -5,6 +5,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import * as firebase from 'firebase/app';
 import { AlertController } from '@ionic/angular';
 import { Router } from "@angular/router";
+import {AuthService} from "../../services/user/auth.service";
+
 @Component({
   selector: 'app-alta-duenio',
   templateUrl: './alta-duenio.page.html',
@@ -18,6 +20,8 @@ export class AltaDuenioPage implements OnInit {
    cuil:number
    foto:string;
    perfil:string;
+   filename:string;
+
 
    constructor(private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService) { }
 
@@ -103,7 +107,7 @@ export class AltaDuenioPage implements OnInit {
        this.camera.getPicture(options).then((imageData) => {
        // this.foto = "data:image/jpeg;base64," + imageData;
         this.foto='data:image/jpeg;base64,' + imageData;
-        this.storage.ref('/cosasMalas/').child(this.filename).putString(this.foto, 'data_url', {contentType:'image/jpeg'});
+        this.storage.ref('/FotosSupervisor/').child(this.filename).putString(this.foto, 'data_url', {contentType:'image/jpeg'});
 
                }, (err) => {
                  //  // Handle error
@@ -112,6 +116,39 @@ export class AltaDuenioPage implements OnInit {
           //  this.obtenerURL2();
 
       }
+
+      Subir()
+         {
+
+           //this.urlwpa="";
+           var source = "";
+           var storage = firebase.storage();
+           storage.ref("FotosSupervisor/"+this.filename).getDownloadURL().then(url => {
+            alert(url);
+            let record = {};
+            record['nombre'] = this.nombre;
+            record['apellido'] = this.apellido;
+            record['dni'] = this.dni;
+            record['cuil'] = this.cuil;
+            record['foto'] = this.foto;
+            record['perfil'] = this.filename;
+
+            this.crudService.create_NewStudent(record).then(resp => {
+              this.nombre = "";
+              this.apellido = undefined;
+              this.dni = "";
+              this.cuil = "";
+              this.foto = "";
+              this.perfil = "";
+              console.log(resp);
+            })
+              .catch(error => {
+                console.log(error);
+              });
+
+          });
+
+        }//fin metodo
 
 
  }

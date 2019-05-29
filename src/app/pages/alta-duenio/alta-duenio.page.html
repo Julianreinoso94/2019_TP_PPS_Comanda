@@ -60,9 +60,23 @@
     </ion-row>
     <ion-row>
       <ion-col text-center>
+        <ion-button (click)="Subir()" [disabled]="!filename">
+          <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
+           Guardar imagen en servicio
+                </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
     <ion-button (click)="SacarFoto()" >SacarFotoCamara</ion-button>
   </ion-col>
 </ion-row>
+<ion-col text-center>
+  <ion-button (click)="Subir()" >
+    <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
+     Guardar imagen en servicio
+          </ion-button>
+</ion-col>
 
   </ion-grid>
 
