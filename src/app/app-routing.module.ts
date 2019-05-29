@@ -26,6 +26,17 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
+  {
+     path: 'comida-create',
+     loadChildren: './pages/comida-create/comida-create.module#ComidaCreatePageModule',
+     canActivate: [AuthGuard]
+   },
+  {
+    path: 'comida-detail/:id',
+    loadChildren: './pages/comida-detail/comida-detail.module#ComidaDetailPageModule',
+    canActivate: [AuthGuard]
+   },
+  { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },
 ];
 
 @NgModule({
