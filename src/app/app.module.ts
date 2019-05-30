@@ -10,11 +10,21 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { Camera } from '@ionic-native/camera/ngx';
+//import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
+import { environment } from '../environments/environment';
+//import { AngularFireModule } from 'angularfire2';
 
+import { AngularFireModule } from '@angular/fire';
+
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule,AngularFireModule.initializeApp(environment.firebase),
+AngularFirestoreModule,
+    AngularFireDatabaseModule,
+   IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
   providers: [
     StatusBar,
     SplashScreen,

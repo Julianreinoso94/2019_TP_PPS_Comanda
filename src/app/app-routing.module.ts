@@ -36,7 +36,9 @@ const routes: Routes = [
     loadChildren: './pages/comida-detail/comida-detail.module#ComidaDetailPageModule',
     canActivate: [AuthGuard]
    },
-  { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },
+  { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },  { path: 'alta-empleado', loadChildren: './pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule' },
+  { path: 'alta-mesa', loadChildren: './pages/alta-mesa/alta-mesa.module#AltaMesaPageModule' },
+
 ];
 
 @NgModule({

@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Alta Empleado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-item>
+    <ion-label position="stacked">Nombre</ion-label>
+      <ion-input
+      [(ngModel)]="nombre"
+      type="text"
+      placeholder="Ingrese Nombre"
+      >
+      </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Apellido</ion-label>
+      <ion-input
+      [(ngModel)]="apellido"
+      type="text"
+      placeholder="Ingrese Apellido"
+      >
+      </ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+        <ion-input
+        [(ngModel)]="email"
+        type="text"
+        placeholder="Ingrese Email"
+        >
+        </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">DNI</ion-label>
+        <ion-input
+        [(ngModel)]="dni"
+        type="text"
+        placeholder="Ingrese DNI"
+        >
+        </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">CUIL</ion-label>
+        <ion-input
+        [(ngModel)]="cuil"
+        type="text"
+        placeholder="Ingrese CUIL"
+        >
+        </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tipo de Empleado</ion-label>
+        <ion-select [(ngModel)]="perfil" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione Perfil">
+          <ion-select-option value="Cocinero">Cocinero</ion-select-option>
+          <ion-select-option value="Bartender">Bartender</ion-select-option>
+          <ion-select-option value="Mozo">Mozo</ion-select-option>
+        </ion-select>
+      </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Foto</ion-label>
+          <ion-input
+          [(ngModel)]="foto"
+          type="text"
+          placeholder="Adjunte foto"
+          >
+          </ion-input>
+      </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Tomar Foto</ion-label>
+        <ion-button (click)="fotoService.takePicture()">
+          <ion-icon slot="icon-only" name="camera"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-grid>
+      </ion-grid>
+      <ion-button
+      expand="block"
+      (click)="CreateRecord()" [disabled]="!nombre || !apellido || !dni">
+      Guardar
+    </ion-button>
+
+
+<ion-card *ngFor="let item of empleados">
+    <span *ngIf="!item.isEdit; else elseBlock">
+      <ion-card-header>
+        <ion-card-title>{{item.nombre}}  {{item.apellido}} </ion-card-title>
+        <ion-card-subtitle>Email: {{item.email}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+          <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
+
+        </ion-button>
+        <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+          <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
+
+        </ion-button>
+      </ion-card-content>
+    </span>
+    <ng-template #elseBlock>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Edit
+              </ion-col>
+              <ion-col>
+                <ion-button fill="clear" color="medium" size="small" (click)="item.isEdit = false">
+                  Cancel
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button fill="outline" color="success" size="small" (click)="UpdateRecord(item)">
+                  Update
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label><strong>Nombre</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditNombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Apellido</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditApellido"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Email</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditEmail"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ng-template>
+  </ion-card>
+
+
+</ion-content>
