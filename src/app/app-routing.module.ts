@@ -37,6 +37,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
    },
   { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },
+  { path: 'cliente-create', loadChildren: './pages/cliente-create/cliente-create.module#ClienteCreatePageModule' },
 ];
 
 @NgModule({

@@ -11,12 +11,10 @@ import { FotosService } from '../../services/fotos/fotos.service';
 })
 export class ComidaCreatePage implements OnInit {
 
-  public fotoComida: string = null;
   loading = false;
   constructor(
     private router: Router,
     private comidaService: ComidasService,
-    // private camara: Camera,
     public fotoService: FotosService
   ) { }
 

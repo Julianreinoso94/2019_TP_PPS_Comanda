@@ -14,7 +14,7 @@ export class FotosService {
   async takePicture(): Promise<void> {
 
     const options: CameraOptions = {
-      quality: 25,
+      quality: 15,
       // sourceType: this.camara.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camara.DestinationType.DATA_URL,
       encodingType: this.camara.EncodingType.PNG,
