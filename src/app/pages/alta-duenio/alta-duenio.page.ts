@@ -15,9 +15,9 @@ import {AuthService} from "../../services/user/auth.service";
 export class AltaDuenioPage implements OnInit {
   students: any;
    nombre: string;
-   apellido: number;
+   apellido: string;
    dni: string;
-   cuil:number
+   cuil:string;
    foto:string;
    perfil:string;
    filename:string;
