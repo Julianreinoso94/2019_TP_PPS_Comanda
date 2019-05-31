@@ -4,3 +4,6 @@ ionic cordova plugin add phonegap-plugin-barcodescanner
 npm install @ionic-native/barcode-scanner
 
 npm i @angular/fire
+npm install --save firebase @angular/fire                                     
+npm i @firebase/firestore                                                     
+                                                           

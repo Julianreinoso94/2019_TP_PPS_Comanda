@@ -6,8 +6,7 @@ import * as firebase from 'firebase/app';
 import { AlertController } from '@ionic/angular';
 import { Router } from "@angular/router";
 import {AuthService} from "../../services/user/auth.service";
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-
+import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 @Component({
   selector: 'app-alta-duenio',
   templateUrl: './alta-duenio.page.html',
@@ -17,15 +16,33 @@ export class AltaDuenioPage implements OnInit {
   students: any;
    nombre: string;
    apellido: string;
-   dni: string;
+   dni: any;
    cuil:string;
    foto:string;
    perfil:string;
    filename:string;
 
+   datosEscaneados: any;
+   datos: any;
+   loading = false;
 
-   constructor(private barcodeScanner: BarcodeScanner,private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService) { }
+   //////////////
+   encodeData: any;
+ scannedData: {};
+ barcodeScannerOptions: BarcodeScannerOptions;
+ //////////
 
+
+
+   constructor(    private scanner: BarcodeScanner,private barcodeScanner: BarcodeScanner,
+private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService)
+{
+  //Options
+   this.barcodeScannerOptions = {
+     showTorchButton: true,
+     showFlipCameraButton: true
+ }
+}
    ngOnInit() {
      this.crudService.read_Students().subscribe(data => {
 
@@ -151,14 +168,37 @@ export class AltaDuenioPage implements OnInit {
 
         }//fin metodo
 
-        qr()
-        {
-          this.barcodeScanner.scan().then(barcodeData => {
-           console.log('Barcode data', barcodeData);
-          }).catch(err => {
-              console.log('Error', err);
-          });
-        }
 
+
+cargarDatosDesdeDni(datos: any) {
+  alert(datos);
+  let parsedData = datos.text.split('@');
+  let nombrescan = parsedData[0].toString();
+  let apellido = parsedData[1].toString();
+  let dniscan: number = +parsedData[2];
+  this.nombre=nombrescan;
+  this.apellido=apellido;
+  this.dni=dniscan;
+
+
+  // this.guardardatosDeDueSup(datos);
+
+    // this.formDueSup.get('nombreCtrl').setValue(nombre);
+    // this.formDueSup.get('apellidoCtrl').setValue(apellido);
+    // this.formDueSup.get('DNICtrl').setValue(dni);
+}
+
+scanCodepag() {
+   this.barcodeScanner
+     .scan()
+     .then(barcodeData => {
+       alert("Barcode data " + JSON.stringify(barcodeData));
+       this.scannedData = barcodeData;
+       this.cargarDatosDesdeDni(this.scannedData);
+     })
+     .catch(err => {
+       console.log("Error", err);
+     });
+ }
 
  }

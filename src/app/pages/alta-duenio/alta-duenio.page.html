@@ -9,30 +9,20 @@
 <ion-content padding>
 
   <ion-grid fixed>
-    <ion-row>
-      <ion-col>
+
         <ion-item>
           <ion-input placeholder="Ingrese nombre" [(ngModel)]="nombre"></ion-input>
         </ion-item>
-      </ion-col>
-      <ion-col>
         <ion-item>
           <ion-input placeholder="Ingrese Apellido" [(ngModel)]="apellido"></ion-input>
         </ion-item>
-      </ion-col>
-      <ion-col>
         <ion-item>
           <ion-input placeholder="Ingrese Dni" [(ngModel)]="dni"></ion-input>
         </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
         <ion-item>
           <ion-input placeholder="Ingrese CUIL" [(ngModel)]="cuil"></ion-input>
         </ion-item>
-      </ion-col>
-
+    <ion-row>
       <ion-col>
         <ion-list>
   <ion-item>
@@ -46,22 +36,7 @@
 </ion-list>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <ion-button (click)="CreateRecord()" [disabled]="!nombre || !apellido || !dni">
-          <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
-           Guardar
-                </ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <ion-button (click)="Subir()" [disabled]="!filename">
-          <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
-           Guardar imagen en servicio
-                </ion-button>
-      </ion-col>
-    </ion-row>
+
     <ion-row>
       <ion-col text-center>
     <ion-button (click)="SacarFoto()" >SacarFotoCamara</ion-button>
@@ -69,13 +44,13 @@
 </ion-row>
 <ion-row>
   <ion-col text-center>
-<ion-button (click)="qr()" >QR</ion-button>
+<ion-button (click)="scanCodepag()" >QR Documento</ion-button>
 </ion-col>
 </ion-row>
 <ion-col text-center>
-  <ion-button (click)="Subir()" >
+  <ion-button (click)="Subir()"  [disabled]="!nombre || !apellido || !dni || !perfil || !cuil || !filename">
     <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
-     Guardar imagen en servicio
+     Guardar Datos
           </ion-button>
 </ion-col>
 
