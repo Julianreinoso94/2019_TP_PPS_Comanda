@@ -32,11 +32,7 @@
           <ion-input placeholder="Ingrese CUIL" [(ngModel)]="cuil"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-input placeholder="Ingrese foto" [(ngModel)]="foto"></ion-input>
-        </ion-item>
-      </ion-col>
+
       <ion-col>
         <ion-list>
   <ion-item>
@@ -70,6 +66,11 @@
       <ion-col text-center>
     <ion-button (click)="SacarFoto()" >SacarFotoCamara</ion-button>
   </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col text-center>
+<ion-button (click)="qr()" >QR</ion-button>
+</ion-col>
 </ion-row>
 <ion-col text-center>
   <ion-button (click)="Subir()" >

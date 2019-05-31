@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 import { AlertController } from '@ionic/angular';
 import { Router } from "@angular/router";
 import {AuthService} from "../../services/user/auth.service";
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-alta-duenio',
@@ -23,7 +24,7 @@ export class AltaDuenioPage implements OnInit {
    filename:string;
 
 
-   constructor(private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService) { }
+   constructor(private barcodeScanner: BarcodeScanner,private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService) { }
 
    ngOnInit() {
      this.crudService.read_Students().subscribe(data => {
@@ -130,7 +131,7 @@ export class AltaDuenioPage implements OnInit {
             record['apellido'] = this.apellido;
             record['dni'] = this.dni;
             record['cuil'] = this.cuil;
-            record['foto'] = this.foto;
+            record['foto'] =url;
             record['perfil'] = this.filename;
 
             this.crudService.create_NewStudent(record).then(resp => {
@@ -149,6 +150,15 @@ export class AltaDuenioPage implements OnInit {
           });
 
         }//fin metodo
+
+        qr()
+        {
+          this.barcodeScanner.scan().then(barcodeData => {
+           console.log('Barcode data', barcodeData);
+          }).catch(err => {
+              console.log('Error', err);
+          });
+        }
 
 
  }
