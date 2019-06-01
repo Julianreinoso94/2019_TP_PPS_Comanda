@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,12 @@ export class MesasService {
 
   public listaMesasRef: firebase.firestore.CollectionReference;
 
-  constructor() {
+  constructor(private firestore: AngularFirestore) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.listaMesasRef = firebase
           .firestore()
-          .collection(`/Mesas`);
+          .collection('/Mesas');
       }
     });
   }
@@ -36,24 +37,20 @@ export class MesasService {
     }).then( ( newMesa ) => {
 
       if (mesaPicture != null) {
-        // return firebase.firestore().runTransaction(transaction => {
-
-          // return transaction.get(this.listaComidasRef.doc(newComida.id)).then(comidaDoc => {
 
               return this.cargarFoto(mesaPicture, newMesa.id);
-
-            // });
-          // });
       }
     });
   }
 
-  getComidasList(): firebase.firestore.CollectionReference {
+  getMesasList(): firebase.firestore.CollectionReference {
     return this.listaMesasRef;
   }
 
-  getDetalleComida(eventId: string): firebase.firestore.DocumentReference {
-    return this.listaMesasRef.doc(eventId);
+  TraerMesas() {
+    console.log("entro");
+    //return this.firestore.collection('Empleado').snapshotChanges();
+    return this.firestore.collection('Mesas').snapshotChanges();
   }
 
   cargarFoto(fotos, id): Promise<firebase.firestore.DocumentReference> {
@@ -85,6 +82,16 @@ export class MesasService {
     return promise;
 
   }
+
+  ModificarMesa(recordID,record){
+    this.firestore.doc('Mesas/' + recordID).update(record);
+  }
+  
+    EliminarMesa(record_id) {
+    this.firestore.doc('Mesas/' + record_id).delete();
+    }
+
+
 
 
 
