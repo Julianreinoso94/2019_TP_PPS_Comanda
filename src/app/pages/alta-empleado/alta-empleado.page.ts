@@ -10,6 +10,7 @@ import { IUsuario } from '../../clases/usuario';
 import {EmpleadosService} from '../../services/empleados/empleados.service';
 import { FotosService } from '../../services/fotos/fotos.service';
 import { Router } from '@angular/router';
+import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 
 @Component({
   selector: 'app-alta-empleado',
@@ -20,9 +21,10 @@ import { Router } from '@angular/router';
 export class AltaEmpleadoPage implements OnInit {
 
   empleados: any;
- /* nombre: string;
+  nombre: string;
   apellido: number;
-  dni: string;
+  dni: any;
+ /*
   cuil:number
   foto:string;
   perfil:string;
@@ -30,12 +32,23 @@ export class AltaEmpleadoPage implements OnInit {
   */
   public fotoMesa: string = null;
   loading = false;
+  encodeData: any;
+  scannedData: {};
+  barcodeScannerOptions: BarcodeScannerOptions;
 
   constructor(
     private empleadosService: EmpleadosService,
     private router: Router,
     // private camara: Camera,
-    public fotoService: FotosService ) { }
+    public fotoService: FotosService,
+    private scanner: BarcodeScanner,
+    private barcodeScanner: BarcodeScanner) { 
+
+      this.barcodeScannerOptions = {
+        showTorchButton: true,
+        showFlipCameraButton: true
+      }
+    }
 
   ngOnInit() {
     this.empleadosService.TraerEmpleados().subscribe(data => {
@@ -141,5 +154,35 @@ export class AltaEmpleadoPage implements OnInit {
     this.empleadosService.EliminarEmpleado(rowID);
   }
 
+  cargarDatosDesdeDni(datos: any) {
+    alert(datos);
+    let parsedData = datos.text.split('@');
+    let nombrescan = parsedData[0].toString();
+    let apellido = parsedData[1].toString();
+    let dniscan: number = +parsedData[2];
+    this.nombre=nombrescan;
+    this.apellido=apellido;
+    this.dni=dniscan;
+  
+  
+    // this.guardardatosDeDueSup(datos);
+  
+      // this.formDueSup.get('nombreCtrl').setValue(nombre);
+      // this.formDueSup.get('apellidoCtrl').setValue(apellido);
+      // this.formDueSup.get('DNICtrl').setValue(dni);
+  }
+  
+  scanCodepag() {
+     this.barcodeScanner
+       .scan()
+       .then(barcodeData => {
+         alert("Barcode data " + JSON.stringify(barcodeData));
+         this.scannedData = barcodeData;
+         this.cargarDatosDesdeDni(this.scannedData);
+       })
+       .catch(err => {
+         console.log("Error", err);
+       });
+   }
 
 }

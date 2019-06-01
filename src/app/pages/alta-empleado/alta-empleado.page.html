@@ -89,6 +89,12 @@
       (click)="cargarEmpleado(nombre, apellido, email, dni, cuil, perfil)" [disabled]="!nombre || !apellido || !dni">
       Guardar
     </ion-button>
+
+    <ion-button 
+    expand ="block"
+    (click)= "scanCodepag()">
+    Scannear QR
+  </ion-button>
   </div>
 
 <ion-card *ngFor="let item of empleados">
@@ -101,12 +107,11 @@
 
         <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
           <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
-
         </ion-button>
         <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
           <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
-
         </ion-button>
+  
       </ion-card-content>
     </span>
     <ng-template #elseBlock>
