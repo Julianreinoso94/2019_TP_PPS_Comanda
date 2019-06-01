@@ -1,9 +1,14 @@
-barcodescanner
+barcodescanner//////////////////////////////////////////////////////////////////////////////
 
 ionic cordova plugin add phonegap-plugin-barcodescanner
 npm install @ionic-native/barcode-scanner
+
+//////////////////////////////////////////FIREBASE/////////////////////////////////////////
 
 npm i @angular/fire
 npm install --save firebase @angular/fire                                     
 npm i @firebase/firestore                                                     
                                                            
+/////////////////////////////////////FIREBASE MESSAGING CLOUD(PUSH NOTIFICATION)////////////
+ionic cordova plugin add cordova-plugin-fcm-with-dependecy-updated 
+npm install @ionic-native/fcm
