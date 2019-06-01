@@ -5,13 +5,14 @@
 </ion-header>
 
 <ion-content>
+  <img class = "icon" src="assets/icon/login.png">
   <form [formGroup]="loginForm">
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
       <ion-input [(ngModel)]="email"
         formControlName="email"
         type="email"
-        placeholder="Your email address"
+        placeholder="Ingrese Email"
         [class.invalid]="!loginForm.controls['email'].valid &&
         loginForm.controls['email'].touched"
       >
@@ -22,15 +23,15 @@
       *ngIf="!loginForm.controls['email'].valid &&
          loginForm.controls['email'].touched"
     >
-      <ion-label>Please enter a valid email address.</ion-label>
+      <ion-label>Por favor ingrese un email valido</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Password</ion-label>
-      <ion-input  [(ngModel)]="password"
+      <ion-label position="stacked">Clave</ion-label>
+      <ion-input [(ngModel)]="password"
         formControlName="password"
         type="password"
-        placeholder="Your password"
+        placeholder="Ingrese Clave"
         [class.invalid]="!loginForm.controls['password'].valid&& loginForm.controls['password'].touched"
       >
       </ion-input>
@@ -40,11 +41,11 @@
       *ngIf="!loginForm.controls['password'].valid
         && loginForm.controls['password'].touched"
     >
-      <ion-label>Your password needs more than 6 characters.</ion-label>
+      <ion-label>Su clave debe poseer mas de 6 caracteres</ion-label>
     </ion-item>
 
     <ion-button (click)="loginUser(loginForm)" expand="block" [disabled]="!loginForm.valid">
-      Log In
+      Ingresar
     </ion-button>
     <ion-button (click)="elegirusuario()" expand="block">
       Elegir Usuario
@@ -52,11 +53,11 @@
   </form>
 
   <ion-button expand="block" fill="clear" routerLink="/signup">
-    Create a new account
+    Crear una nueva cuenta
   </ion-button>
 
   <ion-button expand="block" fill="clear" routerLink="/reset-password">
-    I forgot my password
+    Olvidaste tu clave?
   </ion-button>
 
 
