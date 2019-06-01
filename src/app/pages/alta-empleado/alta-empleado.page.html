@@ -8,83 +8,88 @@
 </ion-header>
 
 <ion-content padding>
-    <img class = "icon" src="assets/icon/empleados2.png">
-  <ion-item>
-    <ion-label position="stacked">Nombre</ion-label>
+  <img class = "icon" src="assets/icon/empleados2.png">
+  <div class="" *ngIf="loading">
+    <ion-spinner name="dots" color="dark" ></ion-spinner>
+  </div>
+  <div class="" *ngIf="!loading">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
       <ion-input
-      [(ngModel)]="nombre"
-      type="text"
-      placeholder="Ingrese Nombre"
-      >
+        [(ngModel)]="nombre"
+        type="text"
+        placeholder="Ingrese Nombre"
+        >
       </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Apellido</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Apellido</ion-label>
       <ion-input
-      [(ngModel)]="apellido"
-      type="text"
-      placeholder="Ingrese Apellido"
-      >
+        [(ngModel)]="apellido"
+        type="text"
+        placeholder="Ingrese Apellido"
+        >
       </ion-input>
-  </ion-item>
-  <ion-item>
+    </ion-item>
+
+    <ion-item>
       <ion-label position="stacked">Email</ion-label>
-        <ion-input
+      <ion-input
         [(ngModel)]="email"
         type="text"
         placeholder="Ingrese Email"
         >
-        </ion-input>
+      </ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="stacked">DNI</ion-label>
-        <ion-input
+      <ion-input
         [(ngModel)]="dni"
         type="text"
         placeholder="Ingrese DNI"
         >
-        </ion-input>
+      </ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="stacked">CUIL</ion-label>
-        <ion-input
-        [(ngModel)]="cuil"
-        type="text"
-        placeholder="Ingrese CUIL"
-        >
-        </ion-input>
+      <ion-input
+      [(ngModel)]="cuil"
+      type="text"
+      placeholder="Ingrese CUIL"
+      >
+      </ion-input>
     </ion-item>
+
     <ion-item>
-      <ion-label>Tipo de Empleado</ion-label>
-        <ion-select [(ngModel)]="perfil" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione Perfil">
-          <ion-select-option value="Cocinero">Cocinero</ion-select-option>
-          <ion-select-option value="Bartender">Bartender</ion-select-option>
-          <ion-select-option value="Mozo">Mozo</ion-select-option>
-        </ion-select>
-      </ion-item>
+      <ion-label>Tipo de empleado</ion-label>
+      <ion-select [(ngModel)]="perfil" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione cantidad de personas">
+        <ion-select-option value="cocinero">Cocinero</ion-select-option>
+        <ion-select-option value="bartender">Bartender</ion-select-option>
+        <ion-select-option value="Mozo">Mozo</ion-select-option>
+      </ion-select>
+    </ion-item>
+
     <ion-item>
-        <ion-label position="stacked">Foto</ion-label>
-          <ion-input
-          [(ngModel)]="foto"
-          type="text"
-          placeholder="Adjunte foto"
-          >
-          </ion-input>
-      </ion-item>
-    <ion-item>
-        <ion-label position="stacked">Tomar Foto</ion-label>
-        <ion-button (click)="fotoService.takePicture()">
-          <ion-icon slot="icon-only" name="camera"></ion-icon>
-        </ion-button>
-      </ion-item>
-      <ion-grid>
-      </ion-grid>
-      <ion-button
+      <ion-button (click)="fotoService.takePicture()">
+        <ion-icon slot="icon-only" name="camera"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let photo of fotoService.photos">
+          <img [src]="photo.data" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-button
       expand="block"
-      (click)="CreateRecord()" [disabled]="!nombre || !apellido || !dni">
+      (click)="cargarEmpleado(nombre, apellido, email, dni, cuil, perfil)" [disabled]="!nombre || !apellido || !dni">
       Guardar
     </ion-button>
-
+  </div>
 
 <ion-card *ngFor="let item of empleados">
     <span *ngIf="!item.isEdit; else elseBlock">

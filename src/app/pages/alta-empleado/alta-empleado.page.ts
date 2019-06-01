@@ -9,24 +9,33 @@ import { IUsuario } from '../../clases/usuario';
 //import {AuthProvider} from '../../../providers/auth/auth';
 import {EmpleadosService} from '../../services/empleados/empleados.service';
 import { FotosService } from '../../services/fotos/fotos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alta-empleado',
   templateUrl: './alta-empleado.page.html',
   styleUrls: ['./alta-empleado.page.scss'],
 })
+
 export class AltaEmpleadoPage implements OnInit {
 
   empleados: any;
-  nombre: string;
+ /* nombre: string;
   apellido: number;
   dni: string;
   cuil:number
   foto:string;
   perfil:string;
   email:string;
+  */
+  public fotoMesa: string = null;
+  loading = false;
 
-  constructor(private empleadosService: EmpleadosService) { }
+  constructor(
+    private empleadosService: EmpleadosService,
+    private router: Router,
+    // private camara: Camera,
+    public fotoService: FotosService ) { }
 
   ngOnInit() {
     this.empleadosService.TraerEmpleados().subscribe(data => {
@@ -48,6 +57,7 @@ export class AltaEmpleadoPage implements OnInit {
     });
   }
 
+  /*
   CreateRecord() {
     let record = {};
     record['nombre'] = this.nombre;
@@ -70,6 +80,36 @@ export class AltaEmpleadoPage implements OnInit {
     })
       .catch(error => {
         console.log(error);
+      });
+  }
+  */
+
+  cargarEmpleado(
+    nombre: string,
+    apellido: string,
+    email: string,
+    dni: number,
+    cuil: number,
+    perfil: string
+  ): void {
+
+    if (
+      nombre === undefined ||
+      apellido === undefined ||
+      email === undefined ||
+      dni === undefined ||
+      cuil === undefined ||
+      perfil === undefined
+    ) {
+      return;
+    }
+    this.loading = true;
+    this.empleadosService
+      .crearEmpleado(nombre, apellido, email, dni, cuil, perfil, this.fotoService.photos)
+      .then(() => {
+        this.router.navigateByUrl('');
+        this.fotoService.photos = [];
+        this.loading = false;
       });
   }
 
