@@ -10,12 +10,17 @@ import 'firebase/storage';
 export class EventService {
 
   public eventListRef: firebase.firestore.CollectionReference;
+  public clienteListRef: firebase.firestore.CollectionReference;
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.eventListRef = firebase
           .firestore()
           .collection(`/userProfile/${user.uid}/eventList`);
+
+        this.clienteListRef = firebase
+          .firestore()
+          .collection(`/listaClientes/`);
       }
     });
   }
@@ -90,5 +95,49 @@ export class EventService {
        alert(error);
        console.error(error);
     }
+  }
+
+  cargarCliente(
+    clienteName: string,
+    clienteLastname: string,
+    clienteDni: any,
+    clientePicture: any = null
+  ): Promise<firebase.firestore.DocumentReference> {
+    return this.clienteListRef.add({
+      nombre: clienteName,
+      apellido: clienteLastname,
+      dni: clienteDni
+    }).then( ( newCliente ) => {
+
+      if (clientePicture != null) {
+
+        return this.cargarFoto(clientePicture, newCliente.id);
+
+      }
+    });
+  }
+
+  cargarFoto(fotos, id): Promise<firebase.firestore.DocumentReference> {
+    let i = 0;
+    let urls = [];
+    let promise: any;
+    for (const foto of fotos) {
+
+      const storageRef = firebase.storage().ref(`/fotos/${id}/cliente.${i}.png`);
+
+      promise = storageRef.putString(foto.data, 'data_url')
+        .then(() => {
+
+          storageRef.getDownloadURL().then(downloadURL => {
+            urls[i] = downloadURL;
+
+          });
+        }, (err) => {
+          alert(err.name + ' ' + err.message);
+        });
+      i++;
+    }
+
+    return promise;
   }
 }

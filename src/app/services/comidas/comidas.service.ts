@@ -67,9 +67,6 @@ export class ComidasService {
 
           storageRef.getDownloadURL().then(downloadURL => {
             urls[i] = downloadURL;
-            // urls.unshift({
-            //     i: downloadURL
-            // });
           });
         }, (err) => {
           alert(err.name + ' ' + err.message);
@@ -77,9 +74,9 @@ export class ComidasService {
       i++;
     }
 
-    this.listaComidasRef
-      .doc(id)
-      .update({ profilePicture: urls });
+    // this.listaComidasRef
+    //   .doc(id)
+    //   .update({ profilePicture: urls });
     return promise;
 
 
