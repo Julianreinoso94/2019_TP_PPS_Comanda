@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home',
     loadChildren: './home/home.module#HomePageModule',
@@ -37,7 +37,9 @@ const routes: Routes = [
     loadChildren: './pages/comida-detail/comida-detail.module#ComidaDetailPageModule',
     canActivate: [AuthGuard]
    },
-  { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },
+  { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },  { path: 'alta-empleado', loadChildren: './pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule' },
+  { path: 'alta-mesa', loadChildren: './pages/alta-mesa/alta-mesa.module#AltaMesaPageModule' },
+
 ];
 
 @NgModule({
@@ -46,4 +48,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
