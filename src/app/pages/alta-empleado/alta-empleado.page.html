@@ -111,7 +111,7 @@
         <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
           <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
         </ion-button>
-  
+      
       </ion-card-content>
     </span>
     <ng-template #elseBlock>
@@ -120,16 +120,17 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                Edit
+                Editar Empleado
+              </ion-col>
+              <br>
+              <ion-col>
               </ion-col>
               <ion-col>
-                <ion-button fill="clear" color="medium" size="small" (click)="item.isEdit = false">
-                  Cancel
+                <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
+                  Confirmar
                 </ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button fill="outline" color="success" size="small" (click)="UpdateRecord(item)">
-                  Update
+                <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
+                  Cancelar
                 </ion-button>
               </ion-col>
             </ion-row>
@@ -146,9 +147,33 @@
           <ion-input type="text" [(ngModel)]="item.EditApellido"></ion-input>
         </ion-item>
         <ion-item>
+          <ion-label><strong>Dni</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditDni"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Cuil</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditCuil"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Perfil</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditPerfil"></ion-input>
+        </ion-item>
+        <ion-item>
           <ion-label><strong>Email</strong></ion-label>
           <ion-input type="text" [(ngModel)]="item.EditEmail"></ion-input>
         </ion-item>
+        <ion-item>
+          <ion-button (click)="fotoService.takePicture()">
+            <ion-icon slot="icon-only" name="camera"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let photo of fotoService.photos">
+              <img [src]="photo.data" />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ng-template>
   </ion-card>
