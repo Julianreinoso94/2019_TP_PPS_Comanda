@@ -5,9 +5,11 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class MesasService {
 
   public listaMesasRef: firebase.firestore.CollectionReference;
@@ -22,15 +24,16 @@ export class MesasService {
     });
   }
 
+
   crearMesa(
-    mesaId: number,
-    mesaCantPersonas: number,
+    mesaCodigo: number,
+    mesaCantPersonas: any,
     mesaTipo: string,
     mesaEstado: string,
     mesaPicture: any = null
   ): Promise<firebase.firestore.DocumentReference> {
     return this.listaMesasRef.add({
-      id: mesaId,
+      codigo: mesaCodigo,
       cantPersonas: mesaCantPersonas,
       tipo: mesaTipo,
       estado: mesaEstado
@@ -43,15 +46,6 @@ export class MesasService {
     });
   }
 
-  getMesasList(): firebase.firestore.CollectionReference {
-    return this.listaMesasRef;
-  }
-
-  TraerMesas() {
-    console.log("entro");
-    //return this.firestore.collection('Empleado').snapshotChanges();
-    return this.firestore.collection('Mesas').snapshotChanges();
-  }
 
   cargarFoto(fotos, id): Promise<firebase.firestore.DocumentReference> {
     let i = 0;
@@ -59,7 +53,7 @@ export class MesasService {
     let promise: any;
     for (const foto of fotos) {
 
-      const storageRef = firebase.storage().ref(`/fotos/${id}/mesa.${i}.png`);
+      const storageRef = firebase.storage().ref(`/FotosMesa/${id}/mesa.${i}.png`);
 
       promise = storageRef.putString(foto.data, 'data_url')
         .then(() => {
@@ -77,22 +71,31 @@ export class MesasService {
     }
 
     this.listaMesasRef
-      .doc(id)
-      .update({ profilePicture: urls });
-    return promise;
+    .doc(id)
+    .update({ profilePicture: urls });
+  return promise;
+
 
   }
 
-  ModificarMesa(recordID,record){
-    this.firestore.doc('Mesas/' + recordID).update(record);
-  }
   
-    EliminarMesa(record_id) {
-    this.firestore.doc('Mesas/' + record_id).delete();
-    }
+  TraerMesas() {
+    console.log("entro");
+    return this.firestore.collection('Mesas').snapshotChanges();
+  }
 
+  /*
+  public TraerEmpleados(){
+    return this.firestore.collection<IUsuario>('Empleado').valueChanges();
+  }
+  */
+  ModificarMesa(recordID,record){
+  this.firestore.doc('Mesas/' + recordID).update(record);
+  }
 
-
+  EliminarMesa(record_id) {
+  this.firestore.doc('Mesas/' + record_id).delete();
+  }
 
 
 }
