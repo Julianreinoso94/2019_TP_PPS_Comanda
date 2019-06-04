@@ -60,6 +60,16 @@
           </ion-item>
 
           <ion-item>
+            <ion-label position="stacked">Cliente</ion-label>
+            <ion-input
+              [(ngModel)]="cliente"
+              type="text"
+              placeholder="Ingrese Nombre de Cliente"
+            >
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
             <ion-button (click)="fotoService.takePicture()">
               <ion-icon slot="icon-only" name="camera"></ion-icon>
             </ion-button>
@@ -74,7 +84,7 @@
 
     <ion-button
       expand="block"
-      (click)="cargarMesa(codigo, cantPersonas, tipo, estado)">
+      (click)="cargarMesa(codigo, cantPersonas, tipo, estado, cliente)">
       Guardar
     </ion-button>
   </div>
@@ -137,6 +147,11 @@
                   <ion-select-option value="Ocupado">Ocupado</ion-select-option>
                   <ion-select-option value="Disponible">Disponible</ion-select-option>
                 </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label><strong>Cliente</strong></ion-label>
+                <ion-input type="text" [(ngModel)]="item.EditCliente"></ion-input>
               </ion-item>
     
               <ion-item>

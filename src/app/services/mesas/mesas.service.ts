@@ -30,13 +30,25 @@ export class MesasService {
     mesaCantPersonas: any,
     mesaTipo: string,
     mesaEstado: string,
-    mesaPicture: any = null
+    mesaPicture: any = null,
+    mesaCliente: string, 
+    mesaDesc10: boolean,
+    mesaDescBebida: boolean,
+    mesaDescPostre: boolean,
+    monto: number, 
+    propina: number
   ): Promise<firebase.firestore.DocumentReference> {
     return this.listaMesasRef.add({
       codigo: mesaCodigo,
       cantPersonas: mesaCantPersonas,
       tipo: mesaTipo,
-      estado: mesaEstado
+      estado: mesaEstado, 
+      cliente: mesaCliente,
+      descuento10: mesaDesc10,
+      descuentoBebida: mesaDescBebida,
+      descuentoPostre: mesaDescPostre,
+      monto: monto,
+      propina: propina
     }).then( ( newMesa ) => {
 
       if (mesaPicture != null) {

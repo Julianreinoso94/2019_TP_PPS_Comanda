@@ -5,6 +5,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FotosService } from '../../services/fotos/fotos.service';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { ToastController } from '@ionic/angular';
+import { isBoolean } from 'util';
 
 @Component({
   selector: 'app-alta-mesa',
@@ -36,7 +37,13 @@ export class AltaMesaPage implements OnInit {
                 codigo: e.payload.doc.data()['codigo'],
                 estado: e.payload.doc.data()['estado'],
                 tipo: e.payload.doc.data()['tipo'],
-               
+                cantPersonas: e.payload.doc.data()['cantPersonas'],
+                cliente: e.payload.doc.data()['cliente'],
+                monto: e.payload.doc.data()['monto'],
+                propina: e.payload.doc.data()['propina'],
+                descuento10: e.payload.doc.data()['descuento10'],
+                descuentoBebida: e.payload.doc.data()['descuentoBebida'],
+                descuentoPostre: e.payload.doc.data()['descuentoPostre'],
               };
             })
             console.log(this.mesas);
@@ -48,7 +55,8 @@ export class AltaMesaPage implements OnInit {
     codigo: number,
     cantPersonas: number,
     tipo: string,
-    estado: string
+    estado: string,
+    cliente: string
   ): void {
 
     if (
@@ -62,7 +70,7 @@ export class AltaMesaPage implements OnInit {
     }
     this.loading = true;
     this.mesasService
-      .crearMesa(codigo, cantPersonas, tipo, estado, this.fotoService.photos)
+      .crearMesa(codigo, cantPersonas, tipo, estado, this.fotoService.photos, cliente, false, false, false, 0, 0)
       .then(() => {
         this.loading = false;
         //this.mostrarToast("Se cargó el empleado con exito","successToast");
@@ -91,6 +99,7 @@ export class AltaMesaPage implements OnInit {
     record.EditCodigo = record.codigo;
     record.EditEstado = record.estado;
     record.EditTipo = record.tipo;
+    record.EditCliente = record.cliente;
   }
 
   UpdateRecord(recordRow) {
@@ -98,6 +107,7 @@ export class AltaMesaPage implements OnInit {
     record['codigo'] = recordRow.EditCodigo;
     record['estado'] = recordRow.EditEstado;
     record['tipo'] = recordRow.EditTipo;
+    record['cliente'] = recordRow.EditCliente;
     this.mesasService.ModificarMesa(recordRow.id, record);
     recordRow.isEdit = false;
   }
