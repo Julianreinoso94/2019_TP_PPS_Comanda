@@ -83,10 +83,10 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-camera": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {}
       "phonegap-plugin-barcodescanner": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      }
+      },
+        "cordova-plugin-fcm-with-dependecy-updated": {}
     },
     "platforms": [
       "android"
