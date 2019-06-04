@@ -27,6 +27,8 @@ const routes: Routes = [
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'alta-duenio', loadChildren: './pages/alta-duenio/alta-duenio.module#AltaDuenioPageModule' },
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
+  { path: 'alta-empleado', loadChildren: './pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule' },
+  { path: 'alta-mesa', loadChildren: './pages/alta-mesa/alta-mesa.module#AltaMesaPageModule' },
   {
      path: 'comida-create',
      loadChildren: './pages/comida-create/comida-create.module#ComidaCreatePageModule',
@@ -38,9 +40,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]
    },
   { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },  { path: 'alta-empleado', loadChildren: './pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule' },
-  { path: 'alta-mesa', loadChildren: './pages/alta-mesa/alta-mesa.module#AltaMesaPageModule' },
-
+  { path: 'cliente-create', loadChildren: './pages/cliente-create/cliente-create.module#ClienteCreatePageModule' },
 ];
+
 
 @NgModule({
   imports: [

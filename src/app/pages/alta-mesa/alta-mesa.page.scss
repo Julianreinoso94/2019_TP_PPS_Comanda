@@ -5,3 +5,32 @@
     width: 50%;
   }
   
+      /*Toast*/
+.errorToast{
+    > div{
+      background-color:#CC0000!important;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  .warningToast{
+    > div{
+      background-color:#FF8800!important;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  .infoToast{
+    > div{
+      background-color:#0099CC!important;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  .successToast{
+    > div{
+      background-color:#007E33!important;
+      text-align: center;
+      font-weight: bold;
+    }
+  }

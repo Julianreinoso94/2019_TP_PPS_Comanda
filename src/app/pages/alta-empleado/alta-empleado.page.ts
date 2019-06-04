@@ -11,6 +11,7 @@ import {EmpleadosService} from '../../services/empleados/empleados.service';
 import { FotosService } from '../../services/fotos/fotos.service';
 import { Router } from '@angular/router';
 import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alta-empleado',
@@ -42,7 +43,8 @@ export class AltaEmpleadoPage implements OnInit {
     // private camara: Camera,
     public fotoService: FotosService,
     private scanner: BarcodeScanner,
-    private barcodeScanner: BarcodeScanner) { 
+    private barcodeScanner: BarcodeScanner,
+    public toastCtrl: ToastController) { 
 
       this.barcodeScannerOptions = {
         showTorchButton: true,
@@ -70,33 +72,6 @@ export class AltaEmpleadoPage implements OnInit {
     });
   }
 
-  /*
-  CreateRecord() {
-    let record = {};
-    record['nombre'] = this.nombre;
-    record['apellido'] = this.apellido;
-    record['dni'] = this.dni;
-    record['cuil'] = this.cuil;
-    record['foto'] = this.foto;
-    record['perfil'] = this.perfil;
-    record['email'] = this.email;
-
-    this.empleadosService.AltaEmpleado(record).then(resp => {
-      this.nombre = "";
-      this.apellido = undefined;
-      this.dni = "";
-      this.cuil = 0;
-      this.foto = "";
-      this.perfil = "";
-      this.email = "";
-      console.log(resp);
-    })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-  */
-
   cargarEmpleado(
     nombre: string,
     apellido: string,
@@ -120,30 +95,45 @@ export class AltaEmpleadoPage implements OnInit {
     this.empleadosService
       .crearEmpleado(nombre, apellido, email, dni, cuil, perfil, this.fotoService.photos)
       .then(() => {
-        this.router.navigateByUrl('');
-        this.fotoService.photos = [];
         this.loading = false;
+        this.mostrarToast("Se cargo el empleado con exito", "successToast");
+        this.router.navigateByUrl('/home');
+        this.fotoService.photos = [];
       });
   }
 
+  async mostrarToast(miMsj:string,color:string) 
+  {
+    let toast = await this.toastCtrl.create({
+      showCloseButton: true,
+      closeButtonText:"cerrar",
+      cssClass: color,
+      message: miMsj,
+      duration: 3000,
+      position: 'top'
+    });
+    return await toast.present();
+  }
+
+
   EditRecord(record) {
     record.isEdit = true;
-    record.EditName = record.nombre;
+    record.EditNombre = record.nombre;
     record.EditApellido = record.apellido;
     record.EditDni = record.dni;
     record.EditCuil = record.cuil;
-    record.EditFoto = record.foto;
+    //record.EditFoto = record.foto;
     record.EditPerfil = record.perfil;
     record.EditEmail = record.email;
   }
 
   UpdateRecord(recordRow) {
     let record = {};
-    record['nombre'] = recordRow.EditName;
+    record['nombre'] = recordRow.EditNombre;
     record['apellido'] = recordRow.EditApellido;
     record['dni'] = recordRow.EditDni;
     record['cuil'] = recordRow.EditCuil;
-    record['foto'] = recordRow.EditFoto;
+   // record['foto'] = recordRow.EditFoto;
     record['perfil'] = recordRow.EditPerfil;
     record['email'] = recordRow.EditEmail;
     this.empleadosService.ModificarEmpleado(recordRow.id, record);
