@@ -96,6 +96,18 @@ export class MesasService {
     return this.firestore.collection('Mesas').snapshotChanges();
   }
 
+  TraerMesasDisponibles()
+  {
+    console.log("entro");
+    
+    return this.firestore.collection('Mesas', ref => ref.where('estado', '>=', 'Ocupado')
+    .where('estado', '<=', 'Ocupado' + '\uf8ff'))
+    .snapshotChanges();
+
+  }
+
+ 
+
   /*
   public TraerEmpleados(){
     return this.firestore.collection<IUsuario>('Empleado').valueChanges();

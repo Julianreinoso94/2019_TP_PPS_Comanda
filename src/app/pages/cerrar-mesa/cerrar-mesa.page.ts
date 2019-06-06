@@ -7,17 +7,17 @@ import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
 
-@Component({
-  selector: 'app-alta-mesa',
-  templateUrl: './alta-mesa.page.html',
-  styleUrls: ['./alta-mesa.page.scss'],
-})
-export class AltaMesaPage implements OnInit {
 
-  public fotoMesa: string = null;
+@Component({
+  selector: 'app-cerrar-mesa',
+  templateUrl: './cerrar-mesa.page.html',
+  styleUrls: ['./cerrar-mesa.page.scss'],
+})
+export class CerrarMesaPage implements OnInit {
+
   loading = false;
   mesas : any;
-  
+
   constructor(
     private router: Router,
     private mesasService: MesasService,
@@ -28,7 +28,7 @@ export class AltaMesaPage implements OnInit {
 
   ngOnInit() {
 
-    this.mesasService.TraerMesas().subscribe(data => {
+    this.mesasService.TraerMesasDisponibles().subscribe(data => {
       
             this.mesas = data.map(e => {
               return {
@@ -50,34 +50,31 @@ export class AltaMesaPage implements OnInit {
           });
   }
 
+  CerrarMesaaa(record) {
+    record.isEdit = true;
+    record.EditEstado = record.estado;
+    record.EditCliente = record.cliente;
+    record.Editdescuento10 = record.descuento10;
+    record.EditdescuentoBebida = record.descuentoBebida;
+    record.EditdescuentoPostre = record.descuentoPostre;
+    record.EditPropina = record.propina;
+    record.EditMonto = record.monto;
+  }
 
-  cargarMesa(
-    codigo: number,
-    cantPersonas: number,
-    tipo: string
-    //estado: string,
-    //cliente: string
-  ): void {
+  CerrarMesa(recordRow) {
+    let record = {};
+    record['estado'] = 'Disponible';
+    record['cliente'] = '';
+    record['descuento10'] = false;
+    record['descuentoBebida'] = false;
+    record['descuentoPostre'] = false;
+    record['propina'] = '';
+    record['monto'] = 0;
 
-    if (
-      codigo === undefined ||
-      cantPersonas === undefined ||
-      tipo === undefined 
-      //estado === undefined
-    ) {
-     
-      return;
-    }
-    this.loading = true;
-    this.mesasService
-      .crearMesa(codigo, cantPersonas, tipo, 'Disponible', this.fotoService.photos, '', false, false, false, 0, 0)
-      .then(() => {
-        this.loading = false;
-        //this.mostrarToast("Se cargó el empleado con exito","successToast");
-        this.mostrarToast("Se cargo la mesa con exito", "successToast");
-        this.router.navigateByUrl('/alta-mesa');
-        this.fotoService.photos = [];
-      });
+    this.mesasService.ModificarMesa(recordRow.id, record);
+    recordRow.isEdit = false;
+    this.mostrarToast("Se cerró la mesa con exito", "successToast");
+    this.router.navigateByUrl('/cerrar-mesa');
   }
 
   async mostrarToast(miMsj:string,color:string) 
@@ -92,43 +89,5 @@ export class AltaMesaPage implements OnInit {
     });
     return await toast.present();
   }
-
-  
-  EditRecord(record) {
-    record.isEdit = true;
-    record.EditCodigo = record.codigo;
-    record.EditEstado = record.estado;
-    record.EditTipo = record.tipo;
-    record.EditCliente = record.cliente;
-  }
-
-  UpdateRecord(recordRow) {
-    let record = {};
-    record['codigo'] = recordRow.EditCodigo;
-    record['estado'] = recordRow.EditEstado;
-    record['tipo'] = recordRow.EditTipo;
-    record['cliente'] = recordRow.EditCliente;
-    this.mesasService.ModificarMesa(recordRow.id, record);
-    recordRow.isEdit = false;
-    this.mostrarToast("Se editó la mesa con exito", "successToast");
-    this.router.navigateByUrl('/alta-mesa');
-  }
-
-
-  RemoveRecord(rowID) {
-    this.mesasService.EliminarMesa(rowID);
-    this.mostrarToast("Se eliminó la mesa con exito", "successToast");
-    this.router.navigateByUrl('/alta-mesa');
-  }
-
-  
-
-
-
-
-
-
-
-
 
 }

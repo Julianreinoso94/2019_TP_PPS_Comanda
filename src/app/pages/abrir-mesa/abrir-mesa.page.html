@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Abrir / Reservar Mesa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <img class = "icon" src="assets/icon/mesa1.png">
+  <div class="" *ngIf="loading">
+      <ion-spinner name="dots" color="dark" ></ion-spinner>
+  </div>
+  <div class="" *ngIf="!loading">
+
+  </div>
+
+  <ion-card *ngFor="let item of mesas">
+    <span *ngIf="!item.isEdit; else elseBlock">
+      <ion-card-header>
+        <ion-card-title> Mesa {{item.codigo}} - {{item.tipo}} </ion-card-title>
+        <ion-card-subtitle>Estado: {{item.estado}} </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+          <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+              <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
+            </ion-button>
+           
+      </ion-card-content>
+    </span>
+    <ng-template #elseBlock>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Abrir / Reservar Mesa
+              </ion-col>
+              <ion-col>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
+                  Confirmar
+                </ion-button>
+                <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
+                  Cancelar
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+            <ion-item>
+              <ion-label>Estado</ion-label>
+                <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione estado de mesa">
+                  <ion-select-option value="Ocupado">Ocupada</ion-select-option>
+                  <ion-select-option value="Disponible">Disponible</ion-select-option>
+                  <ion-select-option value="Reservada">Reservada</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label><strong>Cliente</strong></ion-label>
+                <ion-input type="text" [(ngModel)]="item.EditCliente"></ion-input>
+              </ion-item>
+      </ion-card-content>
+    </ng-template>
+  </ion-card>
+
+
+</ion-content>
