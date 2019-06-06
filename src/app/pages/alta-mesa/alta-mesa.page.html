@@ -51,23 +51,6 @@
             <ion-select-option value="Normal">Normal</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item>
-          <ion-label>Estado</ion-label>
-            <ion-select [(ngModel)]="estado" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione estado de mesa">
-              <ion-select-option value="Ocupado">Ocupado</ion-select-option>
-              <ion-select-option value="Disponible">Disponible</ion-select-option>
-            </ion-select>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Cliente</ion-label>
-            <ion-input
-              [(ngModel)]="cliente"
-              type="text"
-              placeholder="Ingrese Nombre de Cliente"
-            >
-            </ion-input>
-          </ion-item>
 
           <ion-item>
             <ion-button (click)="fotoService.takePicture()">
@@ -84,7 +67,7 @@
 
     <ion-button
       expand="block"
-      (click)="cargarMesa(codigo, cantPersonas, tipo, estado, cliente)">
+      (click)="cargarMesa(codigo, cantPersonas, tipo)">
       Guardar
     </ion-button>
   </div>
@@ -141,18 +124,6 @@
                 <ion-select-option value="Normal">Normal</ion-select-option>
               </ion-select>
             </ion-item>
-            <ion-item>
-              <ion-label>Estado</ion-label>
-                <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione estado de mesa">
-                  <ion-select-option value="Ocupado">Ocupado</ion-select-option>
-                  <ion-select-option value="Disponible">Disponible</ion-select-option>
-                </ion-select>
-              </ion-item>
-
-              <ion-item>
-                <ion-label><strong>Cliente</strong></ion-label>
-                <ion-input type="text" [(ngModel)]="item.EditCliente"></ion-input>
-              </ion-item>
     
               <ion-item>
                 <ion-button (click)="fotoService.takePicture()">
