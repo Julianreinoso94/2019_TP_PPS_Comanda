@@ -41,6 +41,7 @@ const routes: Routes = [
    },
   { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },  { path: 'alta-empleado', loadChildren: './pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule' },
   { path: 'cliente-create', loadChildren: './pages/cliente-create/cliente-create.module#ClienteCreatePageModule' },
+  { path: 'encuesta-empleado-create', loadChildren: './pages/encuesta-empleado-create/encuesta-empleado-create.module#EncuestaEmpleadoCreatePageModule' },
 ];
 
 
