@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'abrir-mesa', loadChildren: './pages/abrir-mesa/abrir-mesa.module#AbrirMesaPageModule' },
   { path: 'cerrar-mesa', loadChildren: './pages/cerrar-mesa/cerrar-mesa.module#CerrarMesaPageModule' },
   {
-    path: 'encuesta-empleado-create',
+    path: 'encuesta-empleado',
     loadChildren: './pages/encuesta-empleado-create/encuesta-empleado-create.module#EncuestaEmpleadoCreatePageModule' },
 ];
 

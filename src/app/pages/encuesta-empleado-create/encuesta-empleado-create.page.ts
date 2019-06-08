@@ -9,6 +9,11 @@ import { EventService } from '../../services/event/event.service';
 })
 export class EncuestaEmpleadoCreatePage implements OnInit {
 
+  public cantidad: any;
+  public select: any;
+  public porcentaje: any;
+  public texto: any;
+
   constructor(private router: Router, private eventService: EventService) {}
 
   ngOnInit() {

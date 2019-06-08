@@ -8,50 +8,65 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-list [(ngModel)]="select">
+  <ion-list-header>Simple</ion-list-header>
+
   <ion-item>
-    <ion-label position="stacked">Event Name</ion-label>
+    <ion-label>Hair Color</ion-label>
+    <ion-select  value="brown" okText="Okay" cancelText="Dismiss">
+      <ion-select-option value="brown">Brown</ion-select-option>
+      <ion-select-option value="blonde">Blonde</ion-select-option>
+      <ion-select-option value="black">Black</ion-select-option>
+      <ion-select-option value="red">Red</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</ion-list>
+<ion-list [(ngModel)]="unidad">
+  <ion-radio-group>
+    <ion-list-header>
+      <ion-label>Name</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Biff</ion-label>
+      <ion-radio slot="start" value="biff" checked></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Griff</ion-label>
+      <ion-radio slot="start" value="griff"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Buford</ion-label>
+      <ion-radio slot="start" value="buford"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>
+  <ion-item>
+    <ion-label position="stacked">Texto</ion-label>
     <ion-input
-      [(ngModel)]="eventName"
+      [(ngModel)]="texto"
       type="text"
-      placeholder="What's your event's name?"
     >
     </ion-input>
   </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Porcentaje</ion-label>
+    <ion-range [(ngModel)]="procentaje" min="0" max="100" step="10" snaps="true" color="secondary"></ion-range>
+  </ion-item>
+
+
   <ion-item>
     <ion-label position="stacked">Cantidad</ion-label>
-    <ion-range min="0" max="100" step="10" snaps="true" color="secondary"></ion-range>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Price</ion-label>
     <ion-input
-      [(ngModel)]="eventPrice"
+      [(ngModel)]="cantidad"
       type="number"
-      placeholder="How much will guests pay?"
     >
     </ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Cost</ion-label>
-    <ion-input
-      [(ngModel)]="eventCost"
-      type="number"
-      placeholder="How much are you spending?"
-    >
-    </ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Event Date</ion-label>
-    <ion-datetime
-      [(ngModel)]="eventDate"
-      displayFormat="D MMM, YY"
-      pickerFormat="DD MMM YYYY"
-      min="2017"
-      max="2020-12-31"
-    >
-    </ion-datetime>
-  </ion-item>
   <ion-item>
     <ion-label>Foto</ion-label>
     <ion-button (click)="takePicture()">
