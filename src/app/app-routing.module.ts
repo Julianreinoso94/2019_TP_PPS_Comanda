@@ -39,10 +39,12 @@ const routes: Routes = [
     loadChildren: './pages/comida-detail/comida-detail.module#ComidaDetailPageModule',
     canActivate: [AuthGuard]
    },
-  { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },  { path: 'alta-empleado', loadChildren: './pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule' },
+  { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },
+  { path: 'alta-empleado', loadChildren: './pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule' },
   { path: 'cliente-create', loadChildren: './pages/cliente-create/cliente-create.module#ClienteCreatePageModule' },
   { path: 'abrir-mesa', loadChildren: './pages/abrir-mesa/abrir-mesa.module#AbrirMesaPageModule' },
   { path: 'cerrar-mesa', loadChildren: './pages/cerrar-mesa/cerrar-mesa.module#CerrarMesaPageModule' },
+  { path: 'alta-pedido', loadChildren: './pages/alta-pedido/alta-pedido.module#AltaPedidoPageModule' },
 ];
 
 
