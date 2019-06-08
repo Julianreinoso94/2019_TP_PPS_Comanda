@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from '../../services/event/event.service';
+import { FotosService } from '../../services/fotos/fotos.service';
 
 @Component({
   selector: 'app-encuesta-empleado-create',
@@ -13,31 +14,47 @@ export class EncuestaEmpleadoCreatePage implements OnInit {
   public select: any;
   public porcentaje: any;
   public texto: any;
+  loading = false;
+  alerta = false;
 
-  constructor(private router: Router, private eventService: EventService) {}
+  constructor(
+    private router: Router,
+    private eventService: EventService,
+    public fotoService: FotosService
+  ) {}
 
   ngOnInit() {
   }
 
-  createEvent(
-    eventName: string,
-    eventDate: string,
-    eventPrice: number,
-    eventCost: number
-  ): void {
-    if (
-      eventName === undefined ||
-      eventDate === undefined ||
-      eventPrice === undefined ||
-      eventCost === undefined
-    ) {
-      return;
-    }
-    this.eventService
-      .createEvent(eventName, eventDate, eventPrice, eventCost)
-      .then(() => {
-        this.router.navigateByUrl('');
-      });
+  apagar() {
+    this.alerta = false;
   }
-
+  /*
+    Crear Encuesta de Empleado
+  */
+  crearEncuesta(
+    unidad, select, procentaje, cantidad, texto
+  ) {
+    if (
+      unidad === undefined ||
+      select === undefined ||
+      procentaje === undefined ||
+      cantidad === undefined ||
+      texto === undefined ||
+      this.fotoService.fotoUnica === undefined
+    ) {
+        this.alerta = true;
+        this.loading = false;
+        return false;
+    } else {
+      this.loading = true;
+      this.eventService
+        .cargarEncuesta( unidad, select, procentaje, cantidad, texto, this.fotoService.fotoUnica )
+        .then(() => {
+          this.router.navigateByUrl('');
+          this.fotoService.fotoUnica = null;
+          this.loading = false;
+        });
+    }
+  }
 }

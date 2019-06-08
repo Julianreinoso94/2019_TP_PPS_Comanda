@@ -11,6 +11,7 @@ export class EventService {
 
   public eventListRef: firebase.firestore.CollectionReference;
   public clienteListRef: firebase.firestore.CollectionReference;
+  public encuestaEmpleadoRef: firebase.firestore.CollectionReference;
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -21,6 +22,10 @@ export class EventService {
         this.clienteListRef = firebase
           .firestore()
           .collection(`/listaClientes/`);
+
+        this.encuestaEmpleadoRef = firebase
+          .firestore()
+          .collection(`/encuestaEmpleado/`);
       }
     });
   }
@@ -139,5 +144,57 @@ export class EventService {
     }
 
     return promise;
+  }
+
+  /*
+    ENCUESTA DE EMPLEADOS
+  */
+  cargarEncuesta(
+    unidad: string,
+    select: string,
+    procentaje: number,
+    cantidad: number,
+    texto: string,
+    guestPicture: any = null
+  ): Promise<void> {
+    let promesaEncuesta: any;
+    try {
+    promesaEncuesta = this.encuestaEmpleadoRef
+      .add({
+        unidad: unidad,
+        select: select,
+        procentaje: procentaje,
+        cantidad: cantidad,
+        texto: texto
+      })
+      .then((newEnc) => {
+
+            if (guestPicture != null) {
+
+              const storageRef = firebase
+                .storage()
+                .ref(`/encuestaEmpleado/${newEnc.id}/fotoEncuesta.png`);
+
+              return storageRef
+                .putString(guestPicture, 'data_url')
+                .then(() => {
+                  // alert('Guardo string');
+                  return storageRef.getDownloadURL().then(downloadURL => {
+                    // alert('dos: ' + downloadURL);
+                    return this.encuestaEmpleadoRef
+                      .doc(newEnc.id)
+                      .update({ fotoEncuesta: downloadURL });
+                  });
+                }, (err) => {
+                  alert(err.name + ' ' + err.message);
+                });
+            }
+          });
+
+    } catch (error) {
+       alert(error);
+       console.error(error);
+    }
+    return promesaEncuesta;
   }
 }
