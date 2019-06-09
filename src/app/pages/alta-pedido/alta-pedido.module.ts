@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ComidaCreatePage } from './comida-create.page';
+import { AltaPedidoPage } from './alta-pedido.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ComidaCreatePage
+    component: AltaPedidoPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ComidaCreatePage]
+  declarations: [AltaPedidoPage]
 })
-export class ComidaCreatePageModule {}
+export class AltaPedidoPageModule {}

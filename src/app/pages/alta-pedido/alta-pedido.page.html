@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cargar Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!--<img class = "icon" src="assets/icon/mesa1.png">-->
+  <div class="" *ngIf="loading">
+      <ion-spinner name="dots" color="dark" ></ion-spinner>
+  </div>
+  <div class="" *ngIf="!loading">
+
+    <ion-item>
+      <ion-label position="stacked">Codigo de Pedido</ion-label>
+      <ion-input
+        [(ngModel)]="codigoPedido"
+        type="text"
+        placeholder="Ingrese codigo de Pedido">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Codigo de Mesa</ion-label>
+      <ion-input
+        [(ngModel)]="codigoMesa"
+        type="text"
+        placeholder="Ingrese codigo de Mesa">
+      </ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="stacked">Codigo de Producto</ion-label>
+      <ion-input
+        [(ngModel)]="codigoProducto"
+        type="text"
+        placeholder="Ingrese codigo de Producto">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Cantidad</ion-label>
+      <ion-input
+        [(ngModel)]="cantidad"
+        type="text"
+        placeholder="Ingrese cantidad">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tipo de pedido</ion-label>
+        <ion-select [(ngModel)]="tipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo de pedido">
+          <ion-select-option value="Bebida">Bebida</ion-select-option>
+          <ion-select-option value="Cocina">Comida</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Detalle</ion-label>
+      <ion-input
+        [(ngModel)]="detalle"
+        type="text"
+        placeholder="Ingrese detalle de pedido">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">ID Mozo</ion-label>
+      <ion-input
+        [(ngModel)]="idMozo"
+        type="text"
+        placeholder="Ingrese id de empleado">
+      </ion-input>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      (click)="cargarPedido(codigoPedido, codigoMesa, codigoProducto, cantidad, tipo, detalle, idMozo)">
+      Guardar
+    </ion-button>
+  </div>
+
+  <ion-card *ngFor="let item of pedidos">
+    <span *ngIf="!item.isEdit; else elseBlock">
+      <ion-card-header>
+        <ion-card-title> Pedido {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
+        <ion-card-subtitle>Estado: {{item.estadoPedido}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+          <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+              <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
+            </ion-button>
+            <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+              <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+      </ion-card-content>
+    </span>
+    <ng-template #elseBlock>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Editar Pedido
+              </ion-col>
+              <ion-col>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
+                  Confirmar
+                </ion-button>
+                <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
+                  Cancelar
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label><strong>Codigo</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditCodigo"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Tipo de pedido</ion-label>
+              <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo de pedido">
+                <ion-select-option value="Bebida">Bebida</ion-select-option>
+                <ion-select-option value="Cocina">Comida</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+            <ion-label>Estado</ion-label>
+            <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione estado de pedido">
+              <ion-select-option value="Entregado">Entregado</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+      </ion-card-content>
+    </ng-template>
+  </ion-card>
+
+
+</ion-content>

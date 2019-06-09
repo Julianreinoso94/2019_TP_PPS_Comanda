@@ -22,6 +22,17 @@
       >
       </ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Codigo</ion-label>
+      <ion-input
+        [(ngModel)]="comidaCodigo"
+        type="text"
+        placeholder="Codigo de comida"
+      >
+      </ion-input>
+    </ion-item>
+
     <ion-item>
       <ion-label position="stacked">Descripción</ion-label>
       <ion-input
@@ -65,7 +76,7 @@
     </ion-grid>
     <ion-button
       expand="block"
-      (click)="cargarComida(comidaName, comidaDescription, comidaPrice, comidaTime)"
+      (click)="cargarComida(comidaCodigo, comidaName, comidaDescription, comidaPrice, comidaTime)"
     >
       Guardar
     </ion-button>

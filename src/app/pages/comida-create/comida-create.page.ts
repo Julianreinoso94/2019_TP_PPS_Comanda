@@ -22,23 +22,35 @@ export class ComidaCreatePage implements OnInit {
   }
 
   cargarComida(
+    /* comidaCodigo, comidaName, comidaDescription, comidaPrice, comidaTime*/
+    comidaCodigo: number,
     comidaName: string,
     comidaDescription: string,
     comidaPrice: number,
-    comidaTime: number
+    comidaTime: string
   ): void {
 
     if (
+      comidaCodigo === undefined ||
       comidaName === undefined ||
       comidaDescription === undefined ||
       comidaPrice === undefined ||
       comidaTime === undefined
     ) {
       return;
+      /*
+          comidaCodigo: number,
+    comidaName: string,
+    comidaDescription: string,
+    comidaPrice: number,
+    comidaTime: string,
+    comidaTipo: string,
+    comidaPicture: any = null
+      */
     }
     this.loading = true;
     this.comidaService
-      .crearComida(comidaName, comidaDescription, comidaPrice, comidaTime, this.fotoService.photos)
+      .crearComida(comidaCodigo, comidaName, comidaDescription, comidaPrice, comidaTime, this.fotoService.photos)
       .then(() => {
         this.router.navigateByUrl('');
         this.fotoService.photos = [];
