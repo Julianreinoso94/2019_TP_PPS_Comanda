@@ -18,7 +18,7 @@
   <ion-button expand="block" color="primary" routerLink="/event-list">
     See your events
   </ion-button> -->
-  <ion-button expand="block" color="primary" routerLink="/comida-create">
+  <ion-button   *ngIf="userProfile?.perfil=='Supervisor' "  expand="block" color="primary" routerLink="/comida-create">
     Cargar Comidas
   </ion-button>
   <ion-button expand="block" color="primary" routerLink="/alta-duenio">
