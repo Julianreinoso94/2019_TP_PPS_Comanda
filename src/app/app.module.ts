@@ -28,7 +28,8 @@ AngularFirestoreModule,    AngularFireStorageModule,
     AngularFireDatabaseModule,
    IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
   providers: [
-    StatusBar,FCM,
+   StatusBar,FCM,
+    StatusBar,
     SplashScreen,BarcodeScanner,
     Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
