@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Bienvenido {{userProfile?.perfil}}</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/profile">
         <ion-icon slot="icon-only" name="person"></ion-icon>
@@ -11,37 +11,52 @@
 
 <ion-content>
     <img class = "icon" src="assets/icon/home1.png">
-  <!-- <ion-button expand="block" color="primary" routerLink="/event-create">
-    Create a new Event
-  </ion-button>
-
-  <ion-button expand="block" color="primary" routerLink="/event-list">
-    See your events
-  </ion-button> -->
-  <ion-button   *ngIf="userProfile?.perfil=='Supervisor' "  expand="block" color="primary" routerLink="/comida-create">
+    <ion-label>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="text-left" size="5"> Usuario </ion-col>
+          <ion-col class="text-center" size="7" *ngIf="userProfile?.email">
+            {{userProfile?.email}}
+          </ion-col>
+          <ion-col
+            size="7"
+            class="placeholder-profile text-center"
+            *ngIf="!userProfile?.email"
+          >
+            <span> Tap here to edit. </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-label>
+  <ion-button   *ngIf="userProfile?.perfil=='Supervisor' ||  userProfile?.perfil=='cocinero' "  expand="block" color="primary" routerLink="/comida-create">
     Cargar Comidas
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/alta-duenio">
+  <ion-button expand="block"  *ngIf="userProfile?.perfil=='Supervisor'  " color="primary" routerLink="/alta-duenio">
     Alta Dueño/Supervisor
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/alta-mesa">
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' "  expand="block" color="primary" routerLink="/alta-mesa">
     Cargar Mesa
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/alta-empleado">
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' "expand="block" color="primary" routerLink="/alta-empleado">
     Alta de Empleado
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/cliente-create">
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/cliente-create">
     Cargar Cliente
   </ion-button>
-  <ion-button expand="block" color="secondary" routerLink="/qrmesa">
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor'|| userProfile?.perfil=='cliente' " expand="block" color="secondary" routerLink="/qrmesa">
     QRMesa
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/abrir-mesa">
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo'  " expand="block" color="primary" routerLink="/abrir-mesa">
     Abrir o Reservar Mesa
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/cerrar-mesa">
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/cerrar-mesa">
     Cerrar Mesa
   </ion-button>
+  <ion-button  *ngIf="userProfile?.perfil=='bartender' || userProfile?.perfil=='cocinero' " expand="block" color="primary" >
+   Tomar Pedido
+   </ion-button>
+   
+
 
 
 </ion-content>

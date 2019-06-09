@@ -78,10 +78,10 @@ export class LoginPage implements OnInit {
          console.log('Delete clicked');
        }
      }, {
-       text: 'Empleado',
+       text: 'Bartender',
        icon: 'share',
        handler: () => {
-         this.email="empleado1@empleado1.com";
+         this.email="bartender@bartender.com";
          this.password="123456";
          console.log('Share clicked');
        }
@@ -103,10 +103,19 @@ export class LoginPage implements OnInit {
        }
      },
      {
-      text: 'Dueño',
+       text: 'Cocinero',
+       icon: 'heart',
+       handler: () => {
+         this.email="cocinero@cocinero.com";
+         this.password="123456";
+         console.log('Favorite clicked');
+       }
+     },
+     {
+      text: 'Mozo',
       icon: 'heart',
       handler: () => {
-        this.email="empleado1@empleado1.com";
+        this.email="mozo@mozo.com";
         this.password="123456";
         console.log('Favorite clicked');
       }
