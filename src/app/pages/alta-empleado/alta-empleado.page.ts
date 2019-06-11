@@ -22,6 +22,7 @@ import { ProfileService } from '../../services/user/profile.service';
 
 export class AltaEmpleadoPage implements OnInit {
 
+  premio:any;
   empleados: any;
   nombre: string;
   apellido: number;
