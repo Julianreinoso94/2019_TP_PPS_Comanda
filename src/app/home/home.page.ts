@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProfileService } from './../services/user/profile.service';
 import {AuthService} from "./../services/user/auth.service";
 import { AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +15,19 @@ export class HomePage {
     public birthDate: Date;
     public perfil:string;
     public valor="hola";
+    price: any = '';
+
 
 
     constructor(
-      private alertCtrl: AlertController,
+      private alertCtrl: AlertController,private route: ActivatedRoute,
       private authService: AuthService,
       private profileService: ProfileService,
 
-    ) { }
+    ) {
+      this.price = this.route.snapshot.params['price'];
+
+    }
   ngOnInit() {
     this.profileService
       .getUserProfile()

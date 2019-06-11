@@ -1,10 +1,10 @@
+import { PedidosService } from 'src/app/services/pedidos.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MesasService } from '../../services/mesas/mesas.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FotosService } from '../../services/fotos/fotos.service';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
-import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
 
@@ -24,13 +24,13 @@ export class AltaPedidoPage implements OnInit {
     // private camara: Camera,
     public fotoService: FotosService,
     public toastCtrl: ToastController,
-    private pedidosService: PedidosService 
+    private pedidosService: PedidosService
   ) { }
 
   ngOnInit() {
 
     this.pedidosService.TraerPedidos().subscribe(data => {
-      
+
             this.pedidos = data.map(e => {
               return {
                 id: e.payload.doc.id,
@@ -59,7 +59,7 @@ export class AltaPedidoPage implements OnInit {
     detalle: string,
     //estadoPedido: string,
     //horaEntrega: string,
-    idEmpleado: number 
+    idEmpleado: number
 */
 
 
@@ -82,10 +82,10 @@ export class AltaPedidoPage implements OnInit {
       cantidad === undefined ||
       tipoPedido === undefined ||
       detalle === undefined ||
-      idEmpleado === undefined 
+      idEmpleado === undefined
       //estado === undefined
     ) {
-     
+
       return;
     }
     this.loading = true;
@@ -99,7 +99,7 @@ export class AltaPedidoPage implements OnInit {
       });
   }
 
-  async mostrarToast(miMsj:string,color:string) 
+  async mostrarToast(miMsj:string,color:string)
   {
     let toast = await this.toastCtrl.create({
       showCloseButton: true,
@@ -112,12 +112,12 @@ export class AltaPedidoPage implements OnInit {
     return await toast.present();
   }
 
-  
+
   EditRecord(record) {
     record.isEdit = true;
     record.EditEstado = record.estado;
     record.EditTipo = record.tipo;
-    
+
   }
 
   UpdateRecord(recordRow) {

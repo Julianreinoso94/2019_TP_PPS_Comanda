@@ -9,6 +9,7 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule',
     canActivate: [AuthGuard],
   },
+  { path: 'home/:price', loadChildren: './home/home.module#HomePageModule' },
   {
     path: 'event-create',
     loadChildren:
