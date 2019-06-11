@@ -28,8 +28,8 @@
         </ion-row>
       </ion-grid>
     </ion-label>
-  <ion-button   *ngIf="userProfile?.perfil=='Supervisor' ||  userProfile?.perfil=='cocinero' "  expand="block" color="primary" routerLink="/comida-create">
-    Cargar Comidas
+  <ion-button   *ngIf="userProfile?.perfil=='Supervisor' ||  userProfile?.perfil=='cocinero' "  expand="block" color="primary" routerLink="/comida-list">
+    Lista de Comidas
   </ion-button>
   <ion-button expand="block"  *ngIf="userProfile?.perfil=='Supervisor'  " color="primary" routerLink="/alta-duenio">
     Alta Dueño/Supervisor
@@ -55,7 +55,7 @@
   <ion-button  *ngIf="userProfile?.perfil=='bartender' || userProfile?.perfil=='cocinero' " expand="block" color="primary" >
    Tomar Pedido
    </ion-button>
-   
+
 
 
 
