@@ -104,6 +104,14 @@ export class EmpleadosService {
     return this.firestore.collection('Empleado').snapshotChanges();
   }
 
+  //traer mozos
+  TraerMozos() {
+    console.log("entro");
+    return this.firestore.collection( "Empleado" , ref => ref.where ( 'perfil' , '==' , 'Mozo' ) ).snapshotChanges ();
+
+  }
+
+
   /*
   public TraerEmpleados(){
     return this.firestore.collection<IUsuario>('Empleado').valueChanges();
