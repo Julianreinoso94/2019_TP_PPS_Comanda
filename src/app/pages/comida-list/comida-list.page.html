@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>comida-list</ion-title>
+    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
+    <ion-title>Comidas/Bebidas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/comida-create">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <ion-list>
+    <!-- <ion-list-header>
+      <ion-label>Your next events</ion-label>
+    </ion-list-header> -->
+    <ion-item *ngFor="let comida of comidasList" >
+      <ion-label>
+        <h2>{{comida?.name}}</h2>
+        <!-- <p>Descripción: {{comida?.description}}</p> -->
+        <!-- <p>Tiempo: {{comida?.time}}</p> -->
+        <p>Precio: ${{comida?.price}}</p>
+      </ion-label>
+      <ion-button routerLink="/comida-detail/{{ comida.id }}">
+        <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+      </ion-button>
+      <ion-button (click)="borrarComida( comida.id )">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -22,7 +22,7 @@
       <h2>{{price}}</h2>
     </ion-card-content>
   </ion-card>
-  
+
     <ion-label>
       <ion-grid>
         <ion-row>
@@ -40,8 +40,8 @@
         </ion-row>
       </ion-grid>
     </ion-label>
-  <ion-button   *ngIf="userProfile?.perfil=='Supervisor' ||  userProfile?.perfil=='cocinero' "  expand="block" color="primary" routerLink="/comida-create">
-    Cargar Comidas
+  <ion-button   *ngIf="userProfile?.perfil=='Supervisor' ||  userProfile?.perfil=='cocinero' "  expand="block" color="primary" routerLink="/comida-list">
+    Lista de Comidas
   </ion-button>
   <ion-button expand="block"  *ngIf="userProfile?.perfil=='Supervisor'  " color="primary" routerLink="/alta-duenio">
     Alta Dueño/Supervisor
