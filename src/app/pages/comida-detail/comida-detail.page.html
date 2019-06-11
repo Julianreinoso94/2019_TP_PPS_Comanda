@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>comida-detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{comidaActual?.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Descripción:
+      <span [class.profitable]="1 > 0">
+        {{comidaActual?.description}}
+      </span>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Precio: <strong>${{comidaActual?.price | currency}}</strong></p>
+      <p>Tiempo: <strong>{{comidaActual?.time}}</strong></p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

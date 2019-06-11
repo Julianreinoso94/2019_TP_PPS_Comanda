@@ -7,6 +7,11 @@ import { AlertController } from '@ionic/angular';
 import { Router } from "@angular/router";
 import {AuthService} from "../../services/user/auth.service";
 import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
+import { FCM } from '@ionic-native/fcm/ngx';//AGREGADO PUSH NOTIF
+
+
+import { ProfileService } from '../../services/user/profile.service';
+
 @Component({
   selector: 'app-alta-duenio',
   templateUrl: './alta-duenio.page.html',
@@ -35,7 +40,8 @@ export class AltaDuenioPage implements OnInit {
 
 
    constructor(    private scanner: BarcodeScanner,private barcodeScanner: BarcodeScanner,
-private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService)
+       private profileService: ProfileService,
+private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService,private fcm: FCM)
 {
   //Options
    this.barcodeScannerOptions = {
@@ -200,5 +206,11 @@ scanCodepag() {
        console.log("Error", err);
      });
  }
+
+ updateperfil(){
+  alert("actualizndo");
+     this.profileService.updateperfil("Supervisor");
+ }
+
 
  }

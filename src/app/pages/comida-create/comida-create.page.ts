@@ -40,7 +40,7 @@ export class ComidaCreatePage implements OnInit {
     this.comidaService
       .crearComida(comidaName, comidaDescription, comidaPrice, comidaTime, this.fotoService.photos)
       .then(() => {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('comida-list');
         this.fotoService.photos = [];
         this.loading = false;
       });

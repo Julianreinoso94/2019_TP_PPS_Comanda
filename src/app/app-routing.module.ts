@@ -41,6 +41,7 @@ const routes: Routes = [
    },
   { path: 'comida-list', loadChildren: './pages/comida-list/comida-list.module#ComidaListPageModule' },  { path: 'alta-empleado', loadChildren: './pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule' },
   { path: 'cliente-create', loadChildren: './pages/cliente-create/cliente-create.module#ClienteCreatePageModule' },
+  { path: 'qrmesa', loadChildren: './pages/qrmesa/qrmesa.module#QrmesaPageModule' },
   { path: 'abrir-mesa', loadChildren: './pages/abrir-mesa/abrir-mesa.module#AbrirMesaPageModule' },
   { path: 'cerrar-mesa', loadChildren: './pages/cerrar-mesa/cerrar-mesa.module#CerrarMesaPageModule' },
   {

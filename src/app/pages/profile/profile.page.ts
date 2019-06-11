@@ -13,6 +13,7 @@ export class ProfilePage implements OnInit {
 
   public userProfile: any;
   public birthDate: Date;
+  public perfil:string;
 
   constructor(
     private alertCtrl: AlertController,
@@ -29,6 +30,7 @@ export class ProfilePage implements OnInit {
         this.userProfile = userProfileSnapshot.data();
         console.log(this.userProfile);
         this.birthDate = userProfileSnapshot.data().birthDate;
+        this.perfil= userProfileSnapshot.data().perfil;
       });
   }
 
@@ -124,4 +126,13 @@ export class ProfilePage implements OnInit {
     });
     await alert.present();
   }
+
+  //llamar a este metodo para roles
+
+  updateperfil(perfil: string): void {
+   alert("actualizndo");
+
+    this.profileService.updateperfil(perfil);
+  }
+
 }

@@ -12,6 +12,7 @@ import { FotosService } from '../../services/fotos/fotos.service';
 import { Router } from '@angular/router';
 import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 import { ToastController } from '@ionic/angular';
+import { ProfileService } from '../../services/user/profile.service';
 
 @Component({
   selector: 'app-alta-empleado',
@@ -44,7 +45,7 @@ export class AltaEmpleadoPage implements OnInit {
     public fotoService: FotosService,
     private scanner: BarcodeScanner,
     private barcodeScanner: BarcodeScanner,
-    public toastCtrl: ToastController) { 
+    public toastCtrl: ToastController) {
 
       this.barcodeScannerOptions = {
         showTorchButton: true,
@@ -97,12 +98,24 @@ export class AltaEmpleadoPage implements OnInit {
       .then(() => {
         this.loading = false;
         this.mostrarToast("Se cargo el empleado con exito", "successToast");
+        if (perfil=="bartender")
+        {
+          alert("bartender");
+        }
+        if (perfil=="cocinero")
+        {
+          alert ("cocinero");
+        }
+        if (perfil=="Mozo")
+        {
+          alert("Mozo");
+        }
         this.router.navigateByUrl('/home');
         this.fotoService.photos = [];
       });
   }
 
-  async mostrarToast(miMsj:string,color:string) 
+  async mostrarToast(miMsj:string,color:string)
   {
     let toast = await this.toastCtrl.create({
       showCloseButton: true,
@@ -153,15 +166,15 @@ export class AltaEmpleadoPage implements OnInit {
     this.nombre=nombrescan;
     this.apellido=apellido;
     this.dni=dniscan;
-  
-  
+
+
     // this.guardardatosDeDueSup(datos);
-  
+
       // this.formDueSup.get('nombreCtrl').setValue(nombre);
       // this.formDueSup.get('apellidoCtrl').setValue(apellido);
       // this.formDueSup.get('DNICtrl').setValue(dni);
   }
-  
+
   scanCodepag() {
      this.barcodeScanner
        .scan()

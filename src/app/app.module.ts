@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FCM } from '@ionic-native/fcm/ngx';//PLUGIN PUSH NOTIFICATION
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,6 +28,7 @@ AngularFirestoreModule,    AngularFireStorageModule,
     AngularFireDatabaseModule,
    IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
   providers: [
+   StatusBar,FCM,
     StatusBar,
     SplashScreen,BarcodeScanner,
     Camera,

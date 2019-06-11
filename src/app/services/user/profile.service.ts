@@ -28,9 +28,14 @@ public currentUser: firebase.User;
     return this.userProfile.update({ firstName, lastName });
   }
 
+  updateperfil(perfil: string): Promise<any> {
+    return this.userProfile.update({ perfil });
+  }
+
   updateDOB(birthDate: string): Promise<any> {
     return this.userProfile.update({ birthDate });
   }
+
 
 
 

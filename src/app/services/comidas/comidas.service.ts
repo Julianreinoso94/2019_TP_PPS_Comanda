@@ -50,8 +50,12 @@ export class ComidasService {
     return this.listaComidasRef;
   }
 
-  getDetalleComida(eventId: string): firebase.firestore.DocumentReference {
-    return this.listaComidasRef.doc(eventId);
+  getDetalleComida(comidaId: string): firebase.firestore.DocumentReference {
+    return this.listaComidasRef.doc(comidaId);
+  }
+
+  deleteComida(comidaId: string): any {
+    return this.listaComidasRef.doc(comidaId).delete();
   }
 
   cargarFoto(fotos, id): Promise<firebase.firestore.DocumentReference> {
@@ -74,9 +78,6 @@ export class ComidasService {
       i++;
     }
 
-    // this.listaComidasRef
-    //   .doc(id)
-    //   .update({ profilePicture: urls });
     return promise;
 
 
