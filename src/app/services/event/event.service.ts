@@ -197,4 +197,8 @@ export class EventService {
     }
     return promesaEncuesta;
   }
+
+  getEncuestatList(): firebase.firestore.CollectionReference {
+    return this.encuestaEmpleadoRef;
+  }
 }

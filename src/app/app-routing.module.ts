@@ -46,6 +46,7 @@ const routes: Routes = [
   {
     path: 'encuesta-empleado',
     loadChildren: './pages/encuesta-empleado-create/encuesta-empleado-create.module#EncuestaEmpleadoCreatePageModule' },
+  { path: 'encuesta-graficos', loadChildren: './pages/encuesta-graficos/encuesta-graficos.module#EncuestaGraficosPageModule' },
 ];
 
 

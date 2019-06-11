@@ -3,11 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Encuesta Empleado</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-button expand="block" color="primary" routerLink="/encuesta-graficos">
+    graficos
+  </ion-button>
   <div class="" *ngIf="loading">
       <ion-spinner name="dots" color="dark" ></ion-spinner>
   </div>
