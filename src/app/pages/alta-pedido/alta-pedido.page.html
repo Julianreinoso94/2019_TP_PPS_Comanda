@@ -15,13 +15,20 @@
   <div class="" *ngIf="!loading">
 
     <ion-item>
-      <ion-label position="stacked">Codigo de Pedido</ion-label>
+      <ion-label position="stacked">Codigo de Mesa</ion-label>
       <ion-input
-        [(ngModel)]="codigoPedido"
+        [(ngModel)]="codigoMesa"
         type="text"
         placeholder="Ingrese codigo de Pedido">
       </ion-input>
     </ion-item>
+    <ion-item>
+        <ion-label>Mesa</ion-label>
+        <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" cancel-text="Cancelar" >
+            <ion-select-option *ngFor="let item of  mesas" value="{{item.codigoMesa}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    
 
     <ion-item>
       <ion-label position="stacked">Codigo de Mesa</ion-label>
@@ -40,15 +47,35 @@
         placeholder="Ingrese codigo de Producto">
       </ion-input>
     </ion-item>
+    <ion-card-header>
+        <ion-label position="stacked">Cantidad</ion-label>
 
-    <ion-item>
-      <ion-label position="stacked">Cantidad</ion-label>
-      <ion-input
-        [(ngModel)]="cantidad"
-        type="text"
-        placeholder="Ingrese cantidad">
-      </ion-input>
-    </ion-item>
+      <ion-card-title>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button color="success" size="small" (click)="increment()">
+                  <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+              </ion-button>
+              <ion-input
+              [(ngModel)]="cantidad"
+              type="text"
+             >
+            </ion-input>
+              <ion-button  color="danger" size="small" (click)="decrement()">
+                  <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+              </ion-button>            </ion-col>
+            <ion-col>
+            </ion-col>
+            <ion-col>
+            </ion-col>
+            <ion-col>
+             
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-title>
+    </ion-card-header>
 
     <ion-item>
       <ion-label>Tipo de pedido</ion-label>
@@ -66,6 +93,15 @@
         placeholder="Ingrese detalle de pedido">
       </ion-input>
     </ion-item>
+
+
+    
+  <ion-item>
+    <ion-label>Seleccionar Mozo</ion-label>
+    <ion-select [(ngModel)]="idMozo" ok-text="Seleccionar" cancel-text="Cancelar" >
+        <ion-select-option *ngFor="let item of  empleados" value="{{item.id}}">{{item.apellido}}</ion-select-option>
+    </ion-select>
+</ion-item>
 
     <ion-item>
       <ion-label position="stacked">ID Mozo</ion-label>

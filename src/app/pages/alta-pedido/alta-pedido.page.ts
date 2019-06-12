@@ -7,6 +7,7 @@ import { FotosService } from '../../services/fotos/fotos.service';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
+import { ComidasService } from 'src/app/services/comidas/comidas.service';
 
 @Component({
   selector: 'app-alta-pedido',
@@ -14,12 +15,17 @@ import { isBoolean } from 'util';
   styleUrls: ['./alta-pedido.page.scss'],
 })
 export class AltaPedidoPage implements OnInit {
+  empleados: any;
 
   loading = false;
   pedidos : any;
+  cantidad = 1;
+  mesas : any;
+  public comidasList: Array<any>;
 
-  constructor(
-    private router: Router,
+
+  constructor(private comidasService: ComidasService,
+    private router: Router,  private empleadosService: EmpleadosService,
     private mesasService: MesasService,
     // private camara: Camera,
     public fotoService: FotosService,
@@ -28,6 +34,61 @@ export class AltaPedidoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.comidasService
+    .getComidasList().orderBy('name', 'asc')
+    .get()
+    .then(comidasListSnapshot => {
+      this.comidasList = [];
+      comidasListSnapshot.forEach(snap => {
+        this.comidasList.push({
+          id: snap.id,
+          name: snap.data().name,
+          description: snap.data().description,
+          price: snap.data().price,
+          time: snap.data().time,
+        });
+        // return false;
+      });
+    });
+
+    this.mesasService.TraerMesasDisponibles().subscribe(data => {
+      
+      this.mesas = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          codigo: e.payload.doc.data()['codigo'],
+          estado: e.payload.doc.data()['estado'],
+          tipo: e.payload.doc.data()['tipo'],
+          cantPersonas: e.payload.doc.data()['cantPersonas'],
+          cliente: e.payload.doc.data()['cliente'],
+          monto: e.payload.doc.data()['monto'],
+          propina: e.payload.doc.data()['propina'],
+          descuento10: e.payload.doc.data()['descuento10'],
+          descuentoBebida: e.payload.doc.data()['descuentoBebida'],
+          descuentoPostre: e.payload.doc.data()['descuentoPostre'],
+        };
+      })
+      console.log(this.mesas);
+    });
+
+    this.empleadosService.TraerMozos().subscribe(data => {
+
+      this.empleados = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          nombre: e.payload.doc.data()['nombre'],
+          apellido: e.payload.doc.data()['apellido'],
+          dni: e.payload.doc.data()['dni'],
+          cuil: e.payload.doc.data()['cuil'], 
+          foto: e.payload.doc.data()['foto'],
+          perfil: e.payload.doc.data()['perfil'],
+          email: e.payload.doc.data()['email'],
+        };
+      })
+      console.log(this.empleados);
+    });
 
     this.pedidosService.TraerPedidos().subscribe(data => {
 
@@ -62,7 +123,22 @@ export class AltaPedidoPage implements OnInit {
     idEmpleado: number
 */
 
+private increment () {
+ 
+  this.cantidad++;
 
+}
+
+private decrement () {
+  if(this.cantidad==1)
+  {
+    this.cantidad=1;
+ 
+  }
+  else
+  {
+    this.cantidad--;
+  }}
   cargarPedido(
     codigoPedido: number,
     codigoMesa: number,

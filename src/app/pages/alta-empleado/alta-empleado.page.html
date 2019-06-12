@@ -10,12 +10,6 @@
 <ion-content padding>
   <img class = "icon" src="assets/icon/empleados2.png">
 
-  <ion-item>
-    <ion-label>Premios</ion-label>
-    <ion-select [(ngModel)]="premio" ok-text="Seleccionar" cancel-text="Cancelar" >
-        <ion-select-option *ngFor="let item of  empleados" value="{{item.nombre}}">{{item.apellido}}</ion-select-option>
-    </ion-select>
-</ion-item>
 
   <div class="" *ngIf="loading">
     <ion-spinner name="dots" color="dark" ></ion-spinner>

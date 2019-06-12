@@ -64,7 +64,7 @@ export class AltaEmpleadoPage implements OnInit {
           nombre: e.payload.doc.data()['nombre'],
           apellido: e.payload.doc.data()['apellido'],
           dni: e.payload.doc.data()['dni'],
-          cuil: e.payload.doc.data()['cuil'],
+          cuil: e.payload.doc.data()['cuil'], 
           foto: e.payload.doc.data()['foto'],
           perfil: e.payload.doc.data()['perfil'],
           email: e.payload.doc.data()['email'],
