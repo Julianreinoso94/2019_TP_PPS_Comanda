@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-button expand="block" color="primary" routerLink="/encuesta-graficos">
+    graficos
+  </ion-button>
+  <div class="" *ngIf="loading">
+      <ion-spinner name="dots" color="dark" ></ion-spinner>
+  </div>
+  <div class="" *ngIf="!loading">
+    <div tappable *ngIf="alerta" (click)="apagar()" >
+      <ion-label color="danger" class="ion-text-center" >
+        <h2 >TODOS LOS CAMPOS SON OBLIGATORIOS</h2>
+      </ion-label>
+    </div>
+    <ion-list>
+      <ion-radio-group  [(ngModel)]="unidad">
+        <ion-label position="stacked">Turno:</ion-label>
+        <ion-item>
+          <ion-label>Mañana</ion-label>
+          <ion-radio slot="start" value="mañana" checked></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Mediodia</ion-label>
+          <ion-radio slot="start" value="mediodia"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Noche</ion-label>
+          <ion-radio slot="start" value="noche"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list >
+      <ion-item>
+        <ion-label position="stacked">Como recibió el area de trabajo:</ion-label>
+        <ion-select  [(ngModel)]="select" value="normal" okText="ok" cancelText="Cancelar">
+          <ion-select-option value="impecable">Impecable</ion-select-option>
+          <ion-select-option value="limpio">Limpio</ion-select-option>
+          <ion-select-option value="normal">Normal</ion-select-option>
+          <ion-select-option value="sucio">Sucio</ion-select-option>
+          <ion-select-option value="asqueroso">Asqueroso</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label position="stacked">Nivel de limpieza:</ion-label>
+      <ion-range [(ngModel)]="procentaje" min="0" max="100" step="10" snaps="true" color="dark"></ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Cantidad de Faltas encontradas:</ion-label>
+      <ion-input [(ngModel)]="cantidad" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Comentarios:</ion-label>
+      <ion-input [(ngModel)]="texto" type="text" ></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-button (click)="fotoService.tomarFoto()" *ngIf="!fotoService.fotoUnica">
+        <ion-icon slot="icon-only" name="camera"></ion-icon>
+      </ion-button>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" *ngIf="fotoService.fotoUnica">
+          <img [src]="fotoService.fotoUnica" />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      (click)="crearEncuesta( unidad,select, procentaje, cantidad, texto)"
+    >
+      Guardar
+    </ion-button>
+  </div>
+</ion-content>
