@@ -9,6 +9,7 @@ import { Chart } from 'chart.js';
   styleUrls: ['./encuesta-graficos.page.scss'],
 })
 export class EncuestaGraficosPage implements OnInit {
+
   public encuestaList: Array<any>;
   public selectList: Array<any>;
   public selectCant: Array<any>;
@@ -16,10 +17,8 @@ export class EncuestaGraficosPage implements OnInit {
   donaChart: any;
   @ViewChild('lineCanvas') lineCanvas;
   @ViewChild('doughnutCanvas') doughnutCanvas;
-  constructor(private router: Router, private eventService: EventService) {
 
-
-   }
+  constructor(private router: Router, private eventService: EventService) {}
 
   ngOnInit() {
     this.selectCant = [];
@@ -58,23 +57,23 @@ export class EncuestaGraficosPage implements OnInit {
     switch (select)
     {
     case'impecable':
-      alert(1);
+
       this.selectCant['impecable'] += 1;
       break;
     case'limpio':
-      alert(2);
+
       this.selectCant['limpio'] += 1;
       break;
     case'normal':
-      alert(3);
+
       this.selectCant['normal'] += 1;
       break;
     case'sucio':
-      alert(4);
+
       this.selectCant['sucio'] += 1;
       break;
     case'asqueroso':
-      alert(5);
+
       this.selectCant['asqueroso'] += 1;
       break;
     default:
@@ -89,7 +88,6 @@ export class EncuestaGraficosPage implements OnInit {
       if (grafico === 2) {
           this.mostrarGraficoDona();
       }
-    // console.log(this.selectCant);
   }
 
 
