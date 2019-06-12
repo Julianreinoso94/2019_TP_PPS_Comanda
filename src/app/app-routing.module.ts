@@ -47,6 +47,10 @@ const routes: Routes = [
   { path: 'cerrar-mesa', loadChildren: './pages/cerrar-mesa/cerrar-mesa.module#CerrarMesaPageModule' },
   { path: 'qrmesa', loadChildren: './pages/qrmesa/qrmesa.module#QrmesaPageModule' },
   { path: 'alta-pedido', loadChildren: './pages/alta-pedido/alta-pedido.module#AltaPedidoPageModule' },
+  {
+    path: 'encuesta-empleado',
+    loadChildren: './pages/encuesta-empleado-create/encuesta-empleado-create.module#EncuestaEmpleadoCreatePageModule' },
+  { path: 'encuesta-graficos', loadChildren: './pages/encuesta-graficos/encuesta-graficos.module#EncuestaGraficosPageModule' },
 ];
 
 

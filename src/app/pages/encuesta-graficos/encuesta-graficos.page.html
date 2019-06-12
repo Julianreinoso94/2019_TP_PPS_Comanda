@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="block" color="dark" (click)="Resultado(1)">
+    lineCanvas
+  </ion-button>
+  <ion-button expand="block" color="dark" (click)="Resultado(2)">
+    Circulo
+  </ion-button>
+  <canvas #lineCanvas></canvas>
+  <canvas #doughnutCanvas></canvas>
+</ion-content>
