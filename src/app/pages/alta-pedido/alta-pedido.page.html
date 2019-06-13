@@ -15,20 +15,12 @@
   <div class="" *ngIf="!loading">
 
     <ion-item>
-      <ion-label position="stacked">Codigo de Mesa</ion-label>
-      <ion-input
-        [(ngModel)]="codigoMesa"
-        type="text"
-        placeholder="Ingrese codigo de Pedido">
-      </ion-input>
-    </ion-item>
-    <ion-item>
         <ion-label>Mesa</ion-label>
         <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" cancel-text="Cancelar" >
-            <ion-select-option *ngFor="let item of  mesas" value="{{item.codigoMesa}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+            <ion-select-option *ngFor="let item of  mesas" value="{{item.codigo}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
         </ion-select>
     </ion-item>
-    
+
 
     <ion-item>
       <ion-label position="stacked">Codigo de Mesa</ion-label>
@@ -38,15 +30,21 @@
         placeholder="Ingrese codigo de Mesa">
       </ion-input>
     </ion-item>
+    <ion-item>
+        <ion-label>Producto</ion-label>
+        <ion-select [(ngModel)]="codigoProducto" ok-text="Seleccionar" (ngModelChange)="calcularprecio()" cancel-text="Cancelar" >
+            <ion-select-option  *ngFor="let item of  comidasList" value="{{item.id}}"  > {{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
 
     <ion-item>
-      <ion-label position="stacked">Codigo de Producto</ion-label>
-      <ion-input
-        [(ngModel)]="codigoProducto"
-        type="text"
-        placeholder="Ingrese codigo de Producto">
-      </ion-input>
-    </ion-item>
+    <ion-input disabled=true
+    [(ngModel)]="precioUnitario"
+    type="text" value={{comidaActual?.price}}
+   >  <p>Precio: <strong>${{comidaActual?.price | currency}}</strong></p></ion-input>
+
+      </ion-item>
     <ion-card-header>
         <ion-label position="stacked">Cantidad</ion-label>
 
@@ -70,7 +68,7 @@
             <ion-col>
             </ion-col>
             <ion-col>
-             
+
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -93,9 +91,17 @@
         placeholder="Ingrese detalle de pedido">
       </ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Precio total Pedido</ion-label>
+      <ion-input
+        [(ngModel)]="preciototalpedido"
+        type="text"
+        placeholder="Precio">
+      </ion-input>
+    </ion-item>
 
 
-    
+
   <ion-item>
     <ion-label>Seleccionar Mozo</ion-label>
     <ion-select [(ngModel)]="idMozo" ok-text="Seleccionar" cancel-text="Cancelar" >

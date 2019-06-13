@@ -20,17 +20,21 @@ export class ComidasService {
   }
 
   crearComida(
+    comidaCodigo: number,
     comidaName: string,
     comidaDescription: string,
     comidaPrice: number,
     comidaTime: number,
-    comidaPicture: any = null
+    comidaPicture: any = null,
+    tipo: string
   ): Promise<firebase.firestore.DocumentReference> {
     return this.listaComidasRef.add({
+      comidaCodigo: comidaCodigo,
       name: comidaName,
       description: comidaDescription,
       price: comidaPrice,
-      time: comidaTime
+      time: comidaTime,
+      tipo:tipo
     }).then( ( newComida ) => {
 
       if (comidaPicture != null) {

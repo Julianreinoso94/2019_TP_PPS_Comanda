@@ -16,15 +16,19 @@ import { ComidasService } from 'src/app/services/comidas/comidas.service';
 })
 export class AltaPedidoPage implements OnInit {
   empleados: any;
+  public comidaActual: any = {};
 
   loading = false;
   pedidos : any;
   cantidad = 1;
   mesas : any;
+  precioUnitario=0;
   public comidasList: Array<any>;
+  preciototalpedido=this.cantidad;
+  codigoProducto:string;
 
 
-  constructor(private comidasService: ComidasService,
+  constructor(private comidaService: ComidasService,
     private router: Router,  private empleadosService: EmpleadosService,
     private mesasService: MesasService,
     // private camara: Camera,
@@ -33,8 +37,29 @@ export class AltaPedidoPage implements OnInit {
     private pedidosService: PedidosService
   ) { }
 
+  calcularprecio()
+  {
+    this.comidaService
+      .getDetalleComida(this.codigoProducto)
+      .get()
+      .then(eventSnapshot => {
+
+        this.comidaActual = eventSnapshot.data();
+        this.comidaActual.id = eventSnapshot.id;
+      });
+ this.preciototalpedido=0;
+ this.cantidad=1;
+
+  }
+
   ngOnInit() {
-    this.comidasService
+
+
+    //const comidaId: string = this.route.snapshot.paramMap.get('id');
+    //trae la comida por id
+
+    //trae todas la lista comidas
+    this.comidaService
     .getComidasList().orderBy('name', 'asc')
     .get()
     .then(comidasListSnapshot => {
@@ -52,7 +77,7 @@ export class AltaPedidoPage implements OnInit {
     });
 
     this.mesasService.TraerMesasDisponibles().subscribe(data => {
-      
+
       this.mesas = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -81,7 +106,7 @@ export class AltaPedidoPage implements OnInit {
           nombre: e.payload.doc.data()['nombre'],
           apellido: e.payload.doc.data()['apellido'],
           dni: e.payload.doc.data()['dni'],
-          cuil: e.payload.doc.data()['cuil'], 
+          cuil: e.payload.doc.data()['cuil'],
           foto: e.payload.doc.data()['foto'],
           perfil: e.payload.doc.data()['perfil'],
           email: e.payload.doc.data()['email'],
@@ -124,16 +149,17 @@ export class AltaPedidoPage implements OnInit {
 */
 
 private increment () {
- 
-  this.cantidad++;
 
+  this.cantidad++;
+  alert(this.precioUnitario);
+  this.preciototalpedido=this.cantidad*this.precioUnitario;
 }
 
 private decrement () {
   if(this.cantidad==1)
   {
     this.cantidad=1;
- 
+
   }
   else
   {
