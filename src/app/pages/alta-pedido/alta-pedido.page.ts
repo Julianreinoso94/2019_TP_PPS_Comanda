@@ -152,7 +152,7 @@ export class AltaPedidoPage implements OnInit {
 private increment () {
 
   this.cantidad++;
-  this.preciototalpedido=this.cantidad*this.precioUnitario;
+   this.preciototalpedido=this.cantidad*this.precioUnitario;
 
 }
 
