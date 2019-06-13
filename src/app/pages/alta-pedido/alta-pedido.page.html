@@ -41,7 +41,7 @@
     <ion-item>
     <ion-input disabled=true
     [(ngModel)]="precioUnitario"
-    type="text" value={{comidaActual?.price}}
+    type="text" value={{comidaActual?.price}}  (ngModelChange)="cambioproducto()"
    >  <p>Precio: <strong>${{comidaActual?.price | currency}}</strong></p></ion-input>
 
       </ion-item>

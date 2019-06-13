@@ -24,7 +24,7 @@ export class AltaPedidoPage implements OnInit {
   mesas : any;
   precioUnitario=0;
   public comidasList: Array<any>;
-  preciototalpedido=this.cantidad;
+  preciototalpedido=0;
   codigoProducto:string;
 
 
@@ -47,16 +47,17 @@ export class AltaPedidoPage implements OnInit {
         this.comidaActual = eventSnapshot.data();
         this.comidaActual.id = eventSnapshot.id;
       });
- this.preciototalpedido=0;
+// this.preciototalpedido=0;
  this.cantidad=1;
 
+  }
+  cambioproducto()
+  {
+    this.preciototalpedido=this.precioUnitario;
   }
 
   ngOnInit() {
 
-
-    //const comidaId: string = this.route.snapshot.paramMap.get('id');
-    //trae la comida por id
 
     //trae todas la lista comidas
     this.comidaService
@@ -151,8 +152,8 @@ export class AltaPedidoPage implements OnInit {
 private increment () {
 
   this.cantidad++;
-  alert(this.precioUnitario);
   this.preciototalpedido=this.cantidad*this.precioUnitario;
+
 }
 
 private decrement () {
@@ -164,6 +165,7 @@ private decrement () {
   else
   {
     this.cantidad--;
+    this.preciototalpedido=this.preciototalpedido-this.precioUnitario;
   }}
   cargarPedido(
     codigoPedido: number,
