@@ -1,0 +1,47 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="background">
+  <div class="" *ngIf="!jugando">
+    <div id="jugando">
+      <button (click)="onStart()" type="button" >Jugar</button>
+    </div>
+  </div>
+  <div class="container" *ngIf="jugando">
+    <h1  class="header">Simon</h1>
+
+    <div class="box">
+      <div class="box-wrap">
+
+        <div class="row">
+          <div id="green" class="btn-press green" (click)="select(0)"></div>
+          <div id="red" class="btn-press red" (click)="select(1)"></div>
+        </div>
+        <div class="row">
+          <div id="yellow" class="btn-press yellow" (click)="select(2)"></div>
+          <div id="blue" class="btn-press blue" (click)="select(3)"></div>
+        </div>
+
+        <div class="interface">
+          <div class="interface-wrap">
+            <div class="level">{{game.level}}</div>
+            <div class="mode">
+              <!-- <a class="start" id="start" (click)="onStart()" [hidden]="game.isStart">Start</a> -->
+              <!-- <a id="strict" (click)="onStrict()" [ngClass]="isStrict ? 'strict-active' : 'strict-inactive'"></a> -->
+            </div>
+          </div>
+        </div><!-- end interface -->
+
+      </div>
+    </div><!-- end box -->
+
+    <h2 class="message" id="msg">{{msg}}</h2><!-- end message -->
+    <a id="restart" [hidden]="!game.isWin" (click)="onStart()">Replay <ion-icon name="ion-android-refresh"></ion-icon></a><!-- end replay-->
+
+  </div><!-- end container -->
+</ion-content>
