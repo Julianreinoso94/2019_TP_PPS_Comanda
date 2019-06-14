@@ -17,7 +17,7 @@ export class AltaMesaPage implements OnInit {
   public fotoMesa: string = null;
   loading = false;
   mesas : any;
-  
+
   constructor(
     private router: Router,
     private mesasService: MesasService,
@@ -29,7 +29,7 @@ export class AltaMesaPage implements OnInit {
   ngOnInit() {
 
     this.mesasService.TraerMesas().subscribe(data => {
-      
+
             this.mesas = data.map(e => {
               return {
                 id: e.payload.doc.id,
@@ -44,7 +44,8 @@ export class AltaMesaPage implements OnInit {
                 descuento10: e.payload.doc.data()['descuento10'],
                 descuentoBebida: e.payload.doc.data()['descuentoBebida'],
                 descuentoPostre: e.payload.doc.data()['descuentoPostre'],
-              };
+                estadobool:false,
+                };
             })
             console.log(this.mesas);
           });
@@ -62,10 +63,10 @@ export class AltaMesaPage implements OnInit {
     if (
       codigo === undefined ||
       cantPersonas === undefined ||
-      tipo === undefined 
+      tipo === undefined
       //estado === undefined
     ) {
-     
+
       return;
     }
     this.loading = true;
@@ -80,7 +81,7 @@ export class AltaMesaPage implements OnInit {
       });
   }
 
-  async mostrarToast(miMsj:string,color:string) 
+  async mostrarToast(miMsj:string,color:string)
   {
     let toast = await this.toastCtrl.create({
       showCloseButton: true,
@@ -93,7 +94,7 @@ export class AltaMesaPage implements OnInit {
     return await toast.present();
   }
 
-  
+
   EditRecord(record) {
     record.isEdit = true;
     record.EditCodigo = record.codigo;
@@ -121,7 +122,7 @@ export class AltaMesaPage implements OnInit {
     this.router.navigateByUrl('/alta-mesa');
   }
 
-  
+
 
 
 

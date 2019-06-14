@@ -53,7 +53,7 @@
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/cerrar-mesa">
     Cerrar Mesa
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='bartender' || userProfile?.perfil=='cocinero' " expand="block" color="primary" >
+  <ion-button  *ngIf="userProfile?.perfil=='bartender' || userProfile?.perfil=='cocinero' || userProfile?.perfil=='Supervisor'  " expand="block" color="primary" routerLink="/tomarpedidos" >
    Tomar Pedido
    </ion-button>
    <ion-button expand="block" color="primary" routerLink="/alta-pedido">

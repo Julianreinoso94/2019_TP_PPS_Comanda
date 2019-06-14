@@ -31,18 +31,18 @@ export class MesasService {
     mesaTipo: string,
     mesaEstado: string,
     mesaPicture: any = null,
-    mesaCliente: string, 
+    mesaCliente: string,
     mesaDesc10: boolean,
     mesaDescBebida: boolean,
     mesaDescPostre: boolean,
-    monto: number, 
+    monto: number,
     propina: number
   ): Promise<firebase.firestore.DocumentReference> {
     return this.listaMesasRef.add({
       codigo: mesaCodigo,
       cantPersonas: mesaCantPersonas,
       tipo: mesaTipo,
-      estado: mesaEstado, 
+      estado: mesaEstado,
       cliente: mesaCliente,
       descuento10: mesaDesc10,
       descuentoBebida: mesaDescBebida,
@@ -90,23 +90,23 @@ export class MesasService {
 
   }
 
-  
+
   TraerMesas() {
     console.log("entro");
     return this.firestore.collection('Mesas').snapshotChanges();
   }
 
   TraerMesasDisponibles()
-  {
-    console.log("entro");
-    
-    return this.firestore.collection('Mesas', ref => ref.where('estado', '>=', 'Ocupado')
-    .where('estado', '<=', 'Ocupado' + '\uf8ff'))
-    .snapshotChanges();
+{
+  console.log("entro");
 
-  }
+  return this.firestore.collection('Mesas', ref => ref.where('estado', '>=', 'Ocupado')
+  .where('estado', '<=', 'Ocupado' + '\uf8ff'))
+  .snapshotChanges();
 
- 
+}
+
+
 
   /*
   public TraerEmpleados(){
@@ -117,9 +117,21 @@ export class MesasService {
   this.firestore.doc('Mesas/' + recordID).update(record);
   }
 
+
+//ModificarMontoDeunaMesa
+  ModificarMontoDeunaMesa(id,monto)
+  {
+    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+    this.firestore.doc('Mesas/' + id).update({monto: monto})
+    }
+
   EliminarMesa(record_id) {
   this.firestore.doc('Mesas/' + record_id).delete();
   }
+
+  //traer preciototal de mesa
+  //editar preciototaldemesa
+
 
 
 }

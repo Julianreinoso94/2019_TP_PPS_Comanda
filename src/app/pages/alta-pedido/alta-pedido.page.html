@@ -17,7 +17,7 @@
     <ion-item>
         <ion-label>Mesa</ion-label>
         <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" cancel-text="Cancelar" >
-            <ion-select-option *ngFor="let item of  mesas" value="{{item.codigo}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+            <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
         </ion-select>
     </ion-item>
 
@@ -115,6 +115,14 @@
         [(ngModel)]="idMozo"
         type="text"
         placeholder="Ingrese id de empleado">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Monto Meza Acumulado</ion-label>
+      <ion-input
+        [(ngModel)]="idMozo"
+        type="text"
+        placeholder="Monto">
       </ion-input>
     </ion-item>
 

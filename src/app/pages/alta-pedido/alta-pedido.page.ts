@@ -26,6 +26,8 @@ export class AltaPedidoPage implements OnInit {
   public comidasList: Array<any>;
   preciototalpedido=0;
   codigoProducto:string;
+  codigoMesa:any;
+  montoTotal:number;
 
 
   constructor(private comidaService: ComidasService,
@@ -35,7 +37,28 @@ export class AltaPedidoPage implements OnInit {
     public fotoService: FotosService,
     public toastCtrl: ToastController,
     private pedidosService: PedidosService
-  ) { }
+  ) {
+    this.mesasService.TraerMesas().subscribe(data => {
+
+      this.mesas = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          codigo: e.payload.doc.data()['codigo'],
+          estado: e.payload.doc.data()['estado'],
+          tipo: e.payload.doc.data()['tipo'],
+          cantPersonas: e.payload.doc.data()['cantPersonas'],
+          cliente: e.payload.doc.data()['cliente'],
+          monto: e.payload.doc.data()['monto'],
+          propina: e.payload.doc.data()['propina'],
+          descuento10: e.payload.doc.data()['descuento10'],
+          descuentoBebida: e.payload.doc.data()['descuentoBebida'],
+          descuentoPostre: e.payload.doc.data()['descuentoPostre'],
+        };
+      })
+      console.log(this.mesas);
+    });
+   }
 
   calcularprecio()
   {
@@ -77,7 +100,7 @@ export class AltaPedidoPage implements OnInit {
       });
     });
 
-    this.mesasService.TraerMesasDisponibles().subscribe(data => {
+    this.mesasService.TraerMesas().subscribe(data => {
 
       this.mesas = data.map(e => {
         return {
@@ -137,6 +160,8 @@ export class AltaPedidoPage implements OnInit {
           });
   }
 
+
+
 /*
     codigoPedido: number,
     codigoMesa: number,
@@ -156,6 +181,9 @@ private increment () {
 
 }
 
+// TraerMontoMesa(id){
+//
+// }
 private decrement () {
   if(this.cantidad==1)
   {
@@ -179,28 +207,33 @@ private decrement () {
     //cliente: string
   ): void {
 
-    if (
-      codigoPedido === undefined ||
-      codigoMesa === undefined ||
-      codigoProducto === undefined ||
-      cantidad === undefined ||
-      tipoPedido === undefined ||
-      detalle === undefined ||
-      idEmpleado === undefined
-      //estado === undefined
-    ) {
+    // if (
+    //   codigoPedido === undefined ||
+    //   codigoMesa === undefined ||
+    //   codigoProducto === undefined ||
+    //   cantidad === undefined ||
+    //   tipoPedido === undefined ||
+    //   detalle === undefined ||
+    //   idEmpleado === undefined
+    // ) {
+    //
+    //   return;
+    // }
+    // this.loading = true;
+    // this.pedidosService
+    //   .crearPedido(codigoPedido, codigoMesa, codigoProducto, cantidad, tipoPedido, detalle, 'Pendiente', idEmpleado)
+    //   .then(() => {
+    //     this.loading = false;
+    //     this.mostrarToast("Se cargo el pedido con exito", "successToast");
+    //     this.router.navigateByUrl('/alta-pedido')
+    //   });
 
-      return;
-    }
-    this.loading = true;
-    this.pedidosService
-      .crearPedido(codigoPedido, codigoMesa, codigoProducto, cantidad, tipoPedido, detalle, 'Pendiente', idEmpleado)
-      .then(() => {
-        this.loading = false;
-        //this.mostrarToast("Se cargó el empleado con exito","successToast");
-        this.mostrarToast("Se cargo el pedido con exito", "successToast");
-        this.router.navigateByUrl('/alta-pedido')
-      });
+      //actualizar el monto total
+      alert(this.codigoMesa);
+      alert(this.montoTotal);
+
+      this.mesasService.ModificarMontoDeunaMesa(this.codigoMesa,this.preciototalpedido);
+      alert("actualizomeza");
   }
 
   async mostrarToast(miMsj:string,color:string)
