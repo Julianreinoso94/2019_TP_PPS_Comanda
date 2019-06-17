@@ -31,14 +31,17 @@ export class PedidosService {
     codigoPedido: number,
     codigoMesa: number,
     codigoProducto: number,
+        tipoPedido: string,
+        estadoPedido: string,
     cantidad: number,
-    tipoPedido: string,
+    idEmpleadomozo: number,
     detallePedido: string,
-    estadoPedido: string,
+    preciototalpedido:number,
     //horaEntrega: string,
-    idEmpleado: number
 
   ): Promise<firebase.firestore.DocumentReference> {
+    alert("servicio");
+
     return this.listaPedidosRef.add({
       codigoPedido: codigoPedido,
       codigoMesa: codigoMesa,
@@ -46,10 +49,10 @@ export class PedidosService {
       tipoPedido: tipoPedido,
       estadoPedido: estadoPedido,
       cantidad: cantidad,
-      idEmpleado: idEmpleado,
+      idEmpleadomozo: idEmpleadomozo,
       detallePedido: detallePedido,
       //horaEntrega: mesaCliente,
-      monto: this.calcularMontoPedido(codigoProducto, cantidad),
+      monto:preciototalpedido,
       tiempoEstimado: this.fecha
       //propina: propina
     });

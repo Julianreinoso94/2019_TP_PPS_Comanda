@@ -77,6 +77,7 @@ export class AltaPedidoPage implements OnInit {
   cambioproducto()
   {
     this.preciototalpedido=this.precioUnitario;
+    alert("this.preciototalpedido")
   }
 
   ngOnInit() {
@@ -194,39 +195,54 @@ private decrement () {
   {
     this.cantidad--;
     this.preciototalpedido=this.preciototalpedido-this.precioUnitario;
-  }}
+  }
+}
+
+
+
   cargarPedido(
-    codigoPedido: number,
+   // codigoPedido: number,
     codigoMesa: number,
     codigoProducto: number,
     cantidad: number,
     tipoPedido: string,
     detalle: string,
-    idEmpleado: number
-    //estado: string,
-    //cliente: string
-  ): void {
+    idEmpleado: number,
+    //cliente: string,
+    //montoTotal:string,
+  preciototalpedido:number
 
-    // if (
-    //   codigoPedido === undefined ||
-    //   codigoMesa === undefined ||
-    //   codigoProducto === undefined ||
-    //   cantidad === undefined ||
-    //   tipoPedido === undefined ||
-    //   detalle === undefined ||
-    //   idEmpleado === undefined
-    // ) {
-    //
-    //   return;
-    // }
-    // this.loading = true;
-    // this.pedidosService
-    //   .crearPedido(codigoPedido, codigoMesa, codigoProducto, cantidad, tipoPedido, detalle, 'Pendiente', idEmpleado)
-    //   .then(() => {
-    //     this.loading = false;
-    //     this.mostrarToast("Se cargo el pedido con exito", "successToast");
-    //     this.router.navigateByUrl('/alta-pedido')
-    //   });
+  ): void {
+ alert ("cargarPedido");
+    if (
+     // codigoPedido === undefined ||
+      codigoMesa === undefined ||
+      codigoProducto === undefined ||
+      cantidad === undefined ||
+      tipoPedido === undefined ||
+      detalle === undefined ||
+      idEmpleado === undefined ||
+     preciototalpedido == undefined
+    ) {
+      // alert(codigoPedido);
+       alert(codigoMesa);
+       alert(codigoProducto);
+       alert(cantidad);
+       alert(tipoPedido);
+       alert(detalle);
+       alert(idEmpleado);
+       alert(preciototalpedido);
+       
+      return;
+    }
+    this.loading = true;
+    this.pedidosService
+      .crearPedido(1, codigoMesa, codigoProducto, tipoPedido, 'Pendiente',cantidad, idEmpleado,detalle,preciototalpedido)
+      .then(() => {
+        this.loading = false;
+        this.mostrarToast("Se cargo el pedido con exito", "successToast");
+        this.router.navigateByUrl('/alta-pedido')
+      });
 
       //actualizar el monto total
       alert(this.codigoMesa);
