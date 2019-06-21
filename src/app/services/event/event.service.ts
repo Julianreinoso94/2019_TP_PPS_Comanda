@@ -150,22 +150,22 @@ export class EventService {
     ENCUESTA DE EMPLEADOS
   */
   cargarEncuesta(
-    unidad: string,
-    select: string,
-    procentaje: number,
-    cantidad: number,
-    texto: string,
+    pUnidad: string,
+    pSelect: string,
+    pPorcentaje: number,
+    pCantidad: number,
+    pTexto: string,
     guestPicture: any = null
   ): Promise<void> {
     let promesaEncuesta: any;
     try {
     promesaEncuesta = this.encuestaEmpleadoRef
       .add({
-        unidad: unidad,
-        select: select,
-        procentaje: procentaje,
-        cantidad: cantidad,
-        texto: texto
+        unidad: pUnidad,
+        select: pSelect,
+        porcentaje: pPorcentaje,
+        cantidad: pCantidad,
+        texto: pTexto
       })
       .then((newEnc) => {
 

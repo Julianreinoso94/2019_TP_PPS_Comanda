@@ -52,7 +52,8 @@
 
     <ion-item>
       <ion-label position="stacked">Nivel de limpieza:</ion-label>
-      <ion-range [(ngModel)]="procentaje" min="0" max="100" step="10" snaps="true" color="dark"></ion-range>
+      <ion-input [ngModel]="porcentaje" name='cantidad'></ion-input>
+      <ion-range [(ngModel)]="porcentaje" min="0" max="100" step="10" snaps="true" color="dark"></ion-range>
     </ion-item>
 
     <ion-item>
@@ -80,7 +81,7 @@
 
     <ion-button
       expand="block"
-      (click)="crearEncuesta( unidad,select, procentaje, cantidad, texto)"
+      (click)="crearEncuesta( unidad,select, porcentaje, cantidad, texto)"
     >
       Guardar
     </ion-button>

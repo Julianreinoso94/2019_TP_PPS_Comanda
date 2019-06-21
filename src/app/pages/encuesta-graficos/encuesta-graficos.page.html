@@ -7,12 +7,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-button expand="block" color="dark" (click)="Resultado(1)">
+  <!-- <ion-button expand="block" color="dark" (click)="Resultado(1)">
     lineCanvas
-  </ion-button>
+  </ion-button> -->
   <ion-button expand="block" color="dark" (click)="Resultado(2)">
     Circulo
   </ion-button>
+  <ion-button expand="block" color="dark" (click)="Resultado(3)">
+    Barras
+  </ion-button>
+  <ion-button expand="block" color="dark" (click)="Resultado(4)">
+    Porcentajes
+  </ion-button>
   <canvas #lineCanvas></canvas>
   <canvas #doughnutCanvas></canvas>
+  <canvas #barCanvas></canvas>
+  <canvas #percentCanvas></canvas>
 </ion-content>
