@@ -52,6 +52,7 @@ const routes: Routes = [
     loadChildren: './pages/encuesta-empleado-create/encuesta-empleado-create.module#EncuestaEmpleadoCreatePageModule' },
   { path: 'encuesta-graficos', loadChildren: './pages/encuesta-graficos/encuesta-graficos.module#EncuestaGraficosPageModule' },
   { path: 'juego-postre', loadChildren: './pages/juego-postre/juego-postre.module#JuegoPostrePageModule' },  { path: 'tomarpedidos', loadChildren: './pages/tomarpedidos/tomarpedidos.module#TomarpedidosPageModule' },
+  { path: 'reserva-cliente', loadChildren: './pages/reserva-cliente/reserva-cliente.module#ReservaClientePageModule' },
 
 ];
 

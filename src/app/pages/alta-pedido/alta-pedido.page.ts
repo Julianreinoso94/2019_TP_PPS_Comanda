@@ -17,6 +17,9 @@ import { ComidasService } from 'src/app/services/comidas/comidas.service';
 export class AltaPedidoPage implements OnInit {
   empleados: any;
   public comidaActual: any = {};
+  public mesaActual: any = {};
+
+  
 
   loading = false;
   pedidos : any;
@@ -24,10 +27,12 @@ export class AltaPedidoPage implements OnInit {
   mesas : any;
   precioUnitario=0;
   public comidasList: Array<any>;
-  preciototalpedido=0;
   codigoProducto:string;
   codigoMesa:any;
+  ActualizarmontoTotalmesa:number;
+  preciototalpedido:number;
   montoTotal:number;
+   a:String;
 
 
   constructor(private comidaService: ComidasService,
@@ -59,6 +64,19 @@ export class AltaPedidoPage implements OnInit {
       console.log(this.mesas);
     });
    }
+   
+
+   montoMesa()
+   {
+     this.mesasService.getDetalleMesa(this.codigoMesa)
+     .get()
+     .then(eventSnapshot => {
+
+      this.mesaActual = eventSnapshot.data();
+      this.mesaActual.id = eventSnapshot.id;
+    });
+  
+   }
 
   calcularprecio()
   {
@@ -73,11 +91,12 @@ export class AltaPedidoPage implements OnInit {
 // this.preciototalpedido=0;
  this.cantidad=1;
 
+
   }
   cambioproducto()
   {
     this.preciototalpedido=this.precioUnitario;
-    alert("this.preciototalpedido")
+
   }
 
   ngOnInit() {
@@ -179,6 +198,7 @@ private increment () {
 
   this.cantidad++;
    this.preciototalpedido=this.cantidad*this.precioUnitario;
+   alert(this.montoTotal);
 
 }
 
@@ -210,7 +230,8 @@ private decrement () {
     idEmpleado: number,
     //cliente: string,
     //montoTotal:string,
-  preciototalpedido:number
+  preciototalpedido:number,
+  montoTotal:number,
 
   ): void {
  alert ("cargarPedido");
@@ -225,13 +246,13 @@ private decrement () {
      preciototalpedido == undefined
     ) {
       // alert(codigoPedido);
-       alert(codigoMesa);
-       alert(codigoProducto);
-       alert(cantidad);
-       alert(tipoPedido);
-       alert(detalle);
-       alert(idEmpleado);
-       alert(preciototalpedido);
+      //  alert(codigoMesa);
+      //  alert(codigoProducto);
+      //  alert(cantidad);
+      //  alert(tipoPedido);
+      //  alert(detalle);
+      //  alert(idEmpleado);
+      //  alert(preciototalpedido);
        
       return;
     }
@@ -245,10 +266,13 @@ private decrement () {
       });
 
       //actualizar el monto total
-      alert(this.codigoMesa);
-      alert(this.montoTotal);
 
-      this.mesasService.ModificarMontoDeunaMesa(this.codigoMesa,this.preciototalpedido);
+      alert(this.preciototalpedido);
+    
+      this.ActualizarmontoTotalmesa= +this.montoTotal + +this.preciototalpedido;
+      alert("el monto de la mesa es"+this.ActualizarmontoTotalmesa);
+
+      this.mesasService.ModificarMontoDeunaMesa(this.codigoMesa,this.ActualizarmontoTotalmesa);
       alert("actualizomeza");
   }
 

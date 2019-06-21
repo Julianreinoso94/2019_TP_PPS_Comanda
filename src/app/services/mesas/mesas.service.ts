@@ -4,6 +4,8 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Time } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 
 @Injectable({
@@ -36,7 +38,10 @@ export class MesasService {
     mesaDescBebida: boolean,
     mesaDescPostre: boolean,
     monto: number,
-    propina: number
+    propina: number,
+    diaReserva: string,
+    horarioReserva:string,
+
   ): Promise<firebase.firestore.DocumentReference> {
     return this.listaMesasRef.add({
       codigo: mesaCodigo,
@@ -48,7 +53,10 @@ export class MesasService {
       descuentoBebida: mesaDescBebida,
       descuentoPostre: mesaDescPostre,
       monto: monto,
-      propina: propina
+      propina: propina,
+      dia:diaReserva,
+      horario:horarioReserva,
+
     }).then( ( newMesa ) => {
 
       if (mesaPicture != null) {
@@ -57,6 +65,8 @@ export class MesasService {
       }
     });
   }
+
+  //traer mesa por estado
 
 
   cargarFoto(fotos, id): Promise<firebase.firestore.DocumentReference> {
@@ -118,11 +128,20 @@ export class MesasService {
   }
 
 
+  getDetalleMesa(mesaid: string): firebase.firestore.DocumentReference {
+    return this.listaMesasRef.doc(mesaid);
+  }
 //ModificarMontoDeunaMesa
   ModificarMontoDeunaMesa(id,monto)
   {
     //this.firestore.doc('Mesas/'+id).update({ monto: monto });
     this.firestore.doc('Mesas/' + id).update({monto: monto})
+    }
+
+    ModificarEstadoDeunaMesa(id,estado)
+  {
+    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+    this.firestore.doc('Mesas/' + id).update({estado: estado})
     }
 
   EliminarMesa(record_id) {

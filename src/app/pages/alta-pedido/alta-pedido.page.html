@@ -20,19 +20,19 @@
             <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
         </ion-select>
     </ion-item>
-
-
     <ion-item>
-      <ion-label position="stacked">Codigo de Mesa</ion-label>
+      <ion-label position="stacked">Monto Acumulado Mesa</ion-label>
       <ion-input
-        [(ngModel)]="codigoMesa"
+        [(ngModel)]="montoTotal" value={{mesaActual?.monto}}
         type="text"
-        placeholder="Ingrese codigo de Mesa">
+       >
       </ion-input>
     </ion-item>
+
     <ion-item>
         <ion-label>Producto</ion-label>
-        <ion-select [(ngModel)]="codigoProducto" ok-text="Seleccionar" (ngModelChange)="calcularprecio()" cancel-text="Cancelar" >
+        <ion-select [(ngModel)]="codigoProducto" ok-text="Seleccionar"  (ngModelChange)="calcularprecio()" 
+         cancel-text="Cancelar" >
             <ion-select-option  *ngFor="let item of  comidasList" value="{{item.id}}"  > {{item.name}}</ion-select-option>
         </ion-select>
     </ion-item>

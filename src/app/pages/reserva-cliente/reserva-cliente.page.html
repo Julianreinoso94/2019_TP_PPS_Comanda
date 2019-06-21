@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Hace tu Reserva!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!--<img class = "icon" src="assets/icon/mesa1.png">-->
+  <div class="" *ngIf="loading">
+      <ion-spinner name="dots" color="dark" ></ion-spinner>
+  </div>
+
+  
+  <ion-item>
+    <ion-label>Mesa</ion-label>
+    <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
+        <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+    </ion-select>
+</ion-item>
+    <ion-item>
+      <ion-label>Cantidad de personas</ion-label>
+        <ion-select [(ngModel)]="cantPersonas" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione cantidad de personas">
+          <ion-select-option value="1">1</ion-select-option>
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="4">4</ion-select-option>
+          <ion-select-option value="5">5</ion-select-option>
+          <ion-select-option value="6">6</ion-select-option>
+          <ion-select-option value="7">7</ion-select-option>
+          <ion-select-option value="8">8</ion-select-option>
+          <ion-select-option value="9">9</ion-select-option>
+          <ion-select-option value="10">10</ion-select-option>
+          <ion-select-option value="11">11</ion-select-option>
+          <ion-select-option value="12">12</ion-select-option>
+          <ion-select-option value="13">13</ion-select-option>
+          <ion-select-option value="14">14</ion-select-option>
+          <ion-select-option value="15">15</ion-select-option>
+        </ion-select>
+      </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Dia</ion-label>
+      <ion-input
+        [(ngModel)]="dia" 
+         id="date" type="date">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Horario</ion-label>
+    <ion-input type="time" name="hora"   [(ngModel)]="horario"> </ion-input>
+  </ion-item>
+
+  <ion-button
+      expand="block"
+      (click)="hacerReserva(codigoMesa)">
+      Guardar
+    </ion-button>
+  
+
+</ion-content>

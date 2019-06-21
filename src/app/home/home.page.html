@@ -29,8 +29,8 @@
         </ion-row>
       </ion-grid>
     </ion-label>
-  <ion-button   *ngIf="userProfile?.perfil=='Supervisor' ||  userProfile?.perfil=='cocinero' "  expand="block" color="primary" routerLink="/comida-list">
-    Lista de Comidas
+  <ion-button       expand="block" color="primary" routerLink="/comida-list">
+    Carta 
   </ion-button>
   <ion-button expand="block"  *ngIf="userProfile?.perfil=='Supervisor'  " color="primary" routerLink="/alta-duenio">
     Alta Dueño/Supervisor
@@ -64,6 +64,9 @@
   </ion-button>
   <ion-button expand="block" color="primary" routerLink="/juego-postre">
     Juego
+  </ion-button>
+  <ion-button expand="block" color="primary" routerLink="/reserva-cliente">
+    Reserva Cliente
   </ion-button>
   
 </ion-content>

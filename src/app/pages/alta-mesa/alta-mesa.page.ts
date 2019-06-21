@@ -6,6 +6,9 @@ import { FotosService } from '../../services/fotos/fotos.service';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
+import { timeout } from 'q';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-alta-mesa',
@@ -17,9 +20,12 @@ export class AltaMesaPage implements OnInit {
   public fotoMesa: string = null;
   loading = false;
   mesas : any;
+  today = Date.now();
+   ddMMyyyy:String ;
+  
 
   constructor(
-    private router: Router,
+    private router: Router,private datePipe: DatePipe,
     private mesasService: MesasService,
     // private camara: Camera,
     public fotoService: FotosService,
@@ -27,6 +33,7 @@ export class AltaMesaPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.ddMMyyyy = this.datePipe.transform(new Date(),"dd-MM-yyyy");
 
     this.mesasService.TraerMesas().subscribe(data => {
 
@@ -71,7 +78,7 @@ export class AltaMesaPage implements OnInit {
     }
     this.loading = true;
     this.mesasService
-      .crearMesa(codigo, cantPersonas, tipo, 'Disponible', this.fotoService.photos, '', false, false, false, 0, 0)
+      .crearMesa(codigo, cantPersonas, tipo, 'Disponible', this.fotoService.photos, '', false, false, false, 0, 0,this.today.toString(),"ss")
       .then(() => {
         this.loading = false;
         //this.mostrarToast("Se cargó el empleado con exito","successToast");

@@ -14,6 +14,7 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import { environment } from '../environments/environment';
 //import { AngularFireModule } from 'angularfire2';
 import {AngularFireStorageModule} from '@angular/fire/storage';
+import {DatePipe} from '@angular/common';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -28,7 +29,7 @@ AngularFirestoreModule,    AngularFireStorageModule,
     AngularFireDatabaseModule,
    IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
   providers: [
-   StatusBar,FCM,
+   StatusBar,FCM,DatePipe,
     StatusBar,
     SplashScreen,BarcodeScanner,
     Camera,
