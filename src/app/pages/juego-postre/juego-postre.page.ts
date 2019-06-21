@@ -197,7 +197,7 @@ export class JuegoPostrePage implements OnInit {
         // Strict mode: Restart game
         setTimeout(() => {
           this.msg = 'Error! Perdiste.';
-        }, 1500);
+        }, 1000);
 
         setTimeout(() => {
           // Esto reinicia el Juego
@@ -206,7 +206,7 @@ export class JuegoPostrePage implements OnInit {
           // PERDISTE
           // ACA SE SALE DEL JUEGO - Julián
           this.router.navigateByUrl('');
-        }, 2000);
+        }, 3000);
 
       }
     }

@@ -10,10 +10,10 @@ import { FotosService } from '../../services/fotos/fotos.service';
 })
 export class EncuestaEmpleadoCreatePage implements OnInit {
 
-  public cantidad: any;
-  public select: any;
-  public porcentaje: any;
-  public texto: any;
+  // public cantidad: any;
+  // public select: any;
+  // public porcentaje: any;
+  // public texto: any;
   loading = false;
   alerta = false;
 
@@ -24,6 +24,7 @@ export class EncuestaEmpleadoCreatePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.fotoService.fotoUnica = null;
   }
 
   apagar() {
@@ -33,15 +34,15 @@ export class EncuestaEmpleadoCreatePage implements OnInit {
     Crear Encuesta de Empleado
   */
   crearEncuesta(
-    unidad, select, procentaje, cantidad, texto
+    unidad, select, porcentaje, cantidad, texto
   ) {
     if (
       unidad === undefined ||
       select === undefined ||
-      procentaje === undefined ||
+      porcentaje === undefined ||
       cantidad === undefined ||
       texto === undefined ||
-      this.fotoService.fotoUnica === undefined
+      this.fotoService.fotoUnica === null
     ) {
         this.alerta = true;
         this.loading = false;
@@ -49,7 +50,7 @@ export class EncuestaEmpleadoCreatePage implements OnInit {
     } else {
       this.loading = true;
       this.eventService
-        .cargarEncuesta( unidad, select, procentaje, cantidad, texto, this.fotoService.fotoUnica )
+        .cargarEncuesta( unidad, select, porcentaje, cantidad, texto, this.fotoService.fotoUnica )
         .then(() => {
           this.router.navigateByUrl('');
           this.fotoService.fotoUnica = null;
