@@ -12,4 +12,14 @@ export class QrmesaPage implements OnInit {
   ngOnInit() {
   }
 
+  VerificarDisponibilidadMesa(idmesa)
+  {
+    alert("entro a disponibilidad mesa");
+  }
+
+  VerificarEstadoDelPedido()
+  {
+    alert("entro a estado del pedido");
+  }
+
 }

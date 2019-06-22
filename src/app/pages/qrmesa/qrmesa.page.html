@@ -1,20 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>qrmesa</ion-title>
+      <ion-title>QR MESA</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <ion-button expand="block" color="primary" routerLink="/comida-create">
+  <ion-button expand="block" color="primary"  (click)="VerificarDisponibilidadMesa()">
   Verificar Disponibilidad de Mesa
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/alta-duenio">
+  <ion-button expand="block" color="primary" routerLink="/reserva-cliente">
     Reservar la Mesa
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/alta-mesa">
+  <ion-button expand="block" color="primary" (click)="VerificarEstadoDelPedido()">
     Verificar Estado del Pedido
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/alta-empleado">
+  <ion-button expand="block" color="primary" routerLink="/encuesta-empleado">
    Acceder a Encuesta de Satisfaccion.
   </ion-button>
 
