@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { ProfileService } from './../services/user/profile.service';
 import {AuthService} from "./../services/user/auth.service";
 import { AlertController } from '@ionic/angular';
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage  implements OnInit{
 
     public userProfile: any;
     public birthDate: Date;
