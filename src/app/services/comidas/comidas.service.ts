@@ -74,7 +74,8 @@ export class ComidasService {
         .then(() => {
 
           storageRef.getDownloadURL().then(downloadURL => {
-            urls[i] = downloadURL;
+            this.listaComidasRef.doc( id).update(`{foto_${i}` , downloadURL)
+            //urls[i] = downloadURL;
           });
         }, (err) => {
           alert(err.name + ' ' + err.message);

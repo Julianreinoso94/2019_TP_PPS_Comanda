@@ -29,7 +29,7 @@
         </ion-row>
       </ion-grid>
     </ion-label>
-  <ion-button       expand="block" color="primary" routerLink="/comida-list">
+  <ion-button    expand="block" color="primary" routerLink="/comida-list">
     Carta 
   </ion-button>
   <ion-button expand="block"  *ngIf="userProfile?.perfil=='Supervisor'  " color="primary" routerLink="/alta-duenio">
@@ -46,6 +46,12 @@
   </ion-button>
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor'|| userProfile?.perfil=='cliente' " expand="block" color="secondary" routerLink="/qrmesa">
     QRMesa
+  </ion-button>
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor'|| userProfile?.perfil=='cliente' " expand="block" color="secondary" routerLink="/qrpropina">
+    QRPropina
+  </ion-button>
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor'|| userProfile?.perfil=='cliente' " expand="block" color="secondary" routerLink="/qringresolocal">
+    QRIngresoLocal
   </ion-button>
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo'  " expand="block" color="primary" routerLink="/abrir-mesa">
     Abrir o Reservar Mesa
