@@ -90,6 +90,31 @@ export class PedidosService {
     return this.firestore.collection('Pedidos').snapshotChanges();
   }
 
+  //traer pedidos si es cocina.
+  TraerPedidosPorTipo()
+    {
+      return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Cocina")
+      .where('tipoPedido', '<=', "Cocina" + '\uf8ff'))
+      .snapshotChanges();
+    }
+
+    TraerPedidosPorTipoCocina()
+    {
+      return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Cocina")
+      .where('tipoPedido', '<=', "Cocina" + '\uf8ff'))
+      .snapshotChanges();
+    }
+
+    TraerPedidosPorTipoBebida()
+    {
+      return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Bebida")
+      .where('tipoPedido', '<=', "Bebida" + '\uf8ff'))
+      .snapshotChanges();
+    }
+
+
+  //traer pedidos si es bebida.
+
     /*
     public TraerEmpleados(){
       return this.firestore.collection<IUsuario>('Empleado').valueChanges();

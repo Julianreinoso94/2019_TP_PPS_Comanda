@@ -33,7 +33,7 @@ export class TomarpedidosPage implements OnInit {
           private profileService: ProfileService) { }
 
   ngOnInit() {
-    this.pedidosService.TraerPedidos().subscribe(data => {
+    this.pedidosService.TraerPedidosPorTipoCocina().subscribe(data => {
 
             this.pedidos = data.map(e => {
               return {
