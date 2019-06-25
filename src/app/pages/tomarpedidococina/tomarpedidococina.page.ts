@@ -12,12 +12,13 @@ import { ComidasService } from 'src/app/services/comidas/comidas.service';
 import { ProfileService } from '../../services/user/profile.service';
 
 
+
 @Component({
-  selector: 'app-tomarpedidos',
-  templateUrl: './tomarpedidos.page.html',
-  styleUrls: ['./tomarpedidos.page.scss'],
+  selector: 'app-tomarpedidococina',
+  templateUrl: './tomarpedidococina.page.html',
+  styleUrls: ['./tomarpedidococina.page.scss'],
 })
-export class TomarpedidosPage implements OnInit {
+export class TomarpedidococinaPage implements OnInit {
 
   pedidos : any;
 
@@ -90,13 +91,11 @@ export class TomarpedidosPage implements OnInit {
   UpdateRecord(recordRow) {
     let record = {};
     record['estadoPedido'] = recordRow.EditEstado;
-    record['tipoPedido'] = recordRow.EditTipo;
+    record['tiempoEstimado'] = recordRow.EditTipo;
     this.pedidosService.ModificarPedido(recordRow.id, record);
     recordRow.isEdit = false;
     this.mostrarToast("Se editó el pedido con exito", "successToast");
    // this.router.navigateByUrl('/alta-pedido');
   }
-
-
 
 }

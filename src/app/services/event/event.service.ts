@@ -106,12 +106,13 @@ export class EventService {
     clienteName: string,
     clienteLastname: string,
     clienteDni: any,
-    clientePicture: any = null
+    clientePicture: any = null,
   ): Promise<firebase.firestore.DocumentReference> {
     return this.clienteListRef.add({
       nombre: clienteName,
       apellido: clienteLastname,
-      dni: clienteDni
+      dni: clienteDni,
+      perfil:"Cliente"
     }).then( ( newCliente ) => {
 
       if (clientePicture != null) {

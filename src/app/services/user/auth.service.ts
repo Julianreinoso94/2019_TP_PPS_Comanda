@@ -3,10 +3,13 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  
+public userProfile: firebase.firestore.DocumentReference;
 
   constructor() { }
 
@@ -23,11 +26,35 @@ export class AuthService {
           .firestore()
           .doc(`/userProfile/${newUserCredential.user.uid}`)
           .set({ email });
+
       })
       .catch(error => {
         console.error(error);
         throw new Error(error);
       });
+  }
+  
+  signupUserCliente(email: string, password: string,Perfil:string): Promise<any> {
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((newUserCredential: firebase.auth.UserCredential) => {
+        firebase
+          .firestore()
+          .doc(`/userProfile/${newUserCredential.user.uid}`)
+          .set({ perfil:Perfil });
+        
+      
+    
+      // this.userProfil<e.update({ Perfil });  
+      })
+      .catch(error => {
+        console.error(error);
+        throw new Error(error);
+      });
+
+   
+    
   }
 
   resetPassword(email: string): Promise<void> {

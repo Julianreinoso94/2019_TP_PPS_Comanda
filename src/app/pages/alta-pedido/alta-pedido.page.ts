@@ -68,6 +68,25 @@ export class AltaPedidoPage implements OnInit {
 
    montoMesa()
    {
+    this.pedidosService.TraerPedidosPorMesa(this.codigoMesa).subscribe(data => {
+
+      this.pedidos = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          codigoPedido: e.payload.doc.data()['codigoPedido'],
+          codigoProducto: e.payload.doc.data()['codigoProducto'],
+          codigoMesa: e.payload.doc.data()['codigoMesa'],
+          detallePedido: e.payload.doc.data()['detallePedido'],
+          estadoPedido: e.payload.doc.data()['estadoPedido'],
+          tipoPedido: e.payload.doc.data()['tipoPedido'],
+          cantidad: e.payload.doc.data()['cantidad'],
+          monto: e.payload.doc.data()['monto'],
+          idMozo: e.payload.doc.data()['idEmpleado']
+        };
+      })
+      console.log(this.pedidos);
+    });
      this.mesasService.getDetalleMesa(this.codigoMesa)
      .get()
      .then(eventSnapshot => {
@@ -159,7 +178,7 @@ export class AltaPedidoPage implements OnInit {
       console.log(this.empleados);
     });
 
-    this.pedidosService.TraerPedidos().subscribe(data => {
+    this.pedidosService.TraerPedidosPorMesa(this.codigoMesa).subscribe(data => {
 
             this.pedidos = data.map(e => {
               return {
@@ -198,7 +217,6 @@ private increment () {
 
   this.cantidad++;
    this.preciototalpedido=this.cantidad*this.precioUnitario;
-   alert(this.montoTotal);
 
 }
 
@@ -241,7 +259,6 @@ private decrement () {
       codigoProducto === undefined ||
       cantidad === undefined ||
       tipoPedido === undefined ||
-      detalle === undefined ||
       idEmpleado === undefined ||
      preciototalpedido == undefined
     ) {
@@ -258,9 +275,9 @@ private decrement () {
     }
     this.loading = true;
     this.pedidosService
-      .crearPedido(1, codigoMesa, codigoProducto, tipoPedido, 'Pendiente',cantidad, idEmpleado,detalle,preciototalpedido)
+      .crearPedido(1, codigoMesa, codigoProducto, tipoPedido, 'Pendiente',cantidad, idEmpleado,preciototalpedido)
       .then(() => {
-        this.loading = false;
+       // this.loading = false;
         this.mostrarToast("Se cargo el pedido con exito", "successToast");
         this.router.navigateByUrl('/alta-pedido')
       });
@@ -313,6 +330,11 @@ private decrement () {
     this.mostrarToast("Se eliminó el pedido con exito", "successToast");
     this.router.navigateByUrl('/alta-pedido');
   }
+  
+  Cuenta(){
+    this.router.navigateByUrl('cuenta');
+
+}
 
 
 }

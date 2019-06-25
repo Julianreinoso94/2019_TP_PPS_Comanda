@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title>Cargar Pedido</ion-title>
+      <ion-title>Tomar Pedidos Cocina</ion-title>
     </ion-toolbar>
   </ion-header>
   
@@ -53,17 +53,23 @@
             <ion-input type="text" [(ngModel)]="item.EditCodigo"></ion-input>
           </ion-item>
           <ion-item>
-              <ion-label>Tipo de pedido</ion-label>
-                <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo de pedido">
-                  <ion-select-option value="Bebida">Bebida</ion-select-option>
-                  <ion-select-option value="Cocina">Comida</ion-select-option>
-                </ion-select>
+              <ion-label>Tiempo</ion-label>
+                <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Tiempo:">
+                    <ion-select-option value="5">5 minutos</ion-select-option>
+                    <ion-select-option value="10">10 minutos</ion-select-option>
+                    <ion-select-option value="15">15 minutos</ion-select-option>
+                    <ion-select-option value="20">20 minutos</ion-select-option>
+                    <ion-select-option value="30">30 minutos</ion-select-option>
+                    <ion-select-option value="40">40 minutos</ion-select-option>
+                    <ion-select-option value="50">50 minutos</ion-select-option>
+                    <ion-select-option value="60">1 hs</ion-select-option>
+                             </ion-select>
               </ion-item>
   
               <ion-item>
               <ion-label>Estado</ion-label>
               <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione estado de pedido">
-                <ion-select-option value="Entregado">Entregado</ion-select-option>
+                <ion-select-option value="Realizado">Realizado</ion-select-option>
               </ion-select>
             </ion-item>
   
@@ -73,4 +79,3 @@
   
   
   </ion-content>
-  

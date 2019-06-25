@@ -84,14 +84,6 @@
       </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Detalle</ion-label>
-      <ion-input
-        [(ngModel)]="detalle"
-        type="text"
-        placeholder="Ingrese detalle de pedido">
-      </ion-input>
-    </ion-item>
-    <ion-item>
       <ion-label position="stacked">Precio total Pedido</ion-label>
       <ion-input
         [(ngModel)]="preciototalpedido"
@@ -109,29 +101,20 @@
     </ion-select>
 </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">ID Mozo</ion-label>
-      <ion-input
-        [(ngModel)]="idMozo"
-        type="text"
-        placeholder="Ingrese id de empleado">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Monto Meza Acumulado</ion-label>
-      <ion-input
-        [(ngModel)]="idMozo"
-        type="text"
-        placeholder="Monto">
-      </ion-input>
-    </ion-item>
 
     <ion-button
       expand="block"
       (click)="cargarPedido(codigoMesa, codigoProducto, cantidad, tipo,detalle, idMozo,preciototalpedido)">
       Guardar
     </ion-button>
+
+    <ion-button
+  expand="block"
+  (click)="Cuenta()">
+  Cuenta
+</ion-button>
   </div>
+  
 
   <ion-card *ngFor="let item of pedidos">
     <span *ngIf="!item.isEdit; else elseBlock">

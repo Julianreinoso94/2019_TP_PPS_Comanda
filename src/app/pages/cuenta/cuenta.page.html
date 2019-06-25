@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Aqui tiene la Cuenta...</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <!--<img class = "icon" src="assets/icon/mesa1.png">-->
+    <div class="" *ngIf="loading">
+        <ion-spinner name="dots" color="dark" ></ion-spinner>
+    </div>
+    <div class="" *ngIf="!loading">
+  
+      <ion-item>
+          <ion-label>Mesa</ion-label>
+          <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
+              <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+          </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label readonly=false
+        position="stacked">Descuento</ion-label>
+        <ion-input
+          [(ngModel)]="preciototalpedido"
+          type="text"
+          placeholder="Precio">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label readonly=false position="stacked">Precio Sin Descuento</ion-label>
+          <ion-input 
+            [(ngModel)]="montoTotal" value={{mesaActual?.monto}}
+            type="text"
+           >
+          </ion-input>
+        </ion-item>
+  
+      <ion-button
+        expand="block"
+        (click)="Pagar()">
+        Pagar
+      </ion-button>
+      <ion-button
+      expand="block"
+      (click)="Detalle()">
+      Detalle
+    </ion-button>
+    </div>
+  
+    <ion-card *ngFor="let item of pedidos">
+      <span *ngIf="!item.isEdit; else elseBlock">
+        <ion-card-header>
+          <ion-card-title> Pedido {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
+          <ion-card-subtitle>Cantidad: {{item.cantidad}}</ion-card-subtitle>
+          <ion-card-subtitle>Precio: {{item.monto}}</ion-card-subtitle>
+
+        </ion-card-header>
+     
+      </span>
+
+    </ion-card>
+  
+  
+  </ion-content>

@@ -148,6 +148,8 @@ export class MesasService {
   this.firestore.doc('Mesas/' + record_id).delete();
   }
 
+ 
+
   //traer preciototal de mesa
   //editar preciototaldemesa
 

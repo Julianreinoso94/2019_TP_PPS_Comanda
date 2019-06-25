@@ -30,7 +30,7 @@
       </ion-grid>
     </ion-label>
   <ion-button    expand="block" color="primary" routerLink="/comida-list">
-    Carta 
+    Listado de comidas
   </ion-button>
   <ion-button expand="block"  *ngIf="userProfile?.perfil=='Supervisor'  " color="primary" routerLink="/alta-duenio">
     Alta Dueño/Supervisor
@@ -59,10 +59,10 @@
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/cerrar-mesa">
     Cerrar Mesa
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='bartender' || userProfile?.perfil=='cocinero' || userProfile?.perfil=='Supervisor'  " expand="block" color="primary" routerLink="/tomarpedidos" >
+  <ion-button  *ngIf="userProfile?.perfil=='mozo' || userProfile?.perfil=='Supervisor'  " expand="block" color="primary" routerLink="/tomarpedidos" >
    Tomar Pedido
    </ion-button>
-   <ion-button expand="block" color="primary" routerLink="/alta-pedido">
+   <ion-button  *ngIf=" userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/alta-pedido">
      Alta Pedido
    </ion-button>
   <ion-button expand="block" color="primary" routerLink="/encuesta-empleado">
@@ -74,5 +74,15 @@
   <ion-button expand="block" color="primary" routerLink="/reserva-cliente">
     Reserva Cliente
   </ion-button>
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/ingreso">
+   Listado Ingreso
+  </ion-button>
+  <ion-button *ngIf="userProfile?.perfil=='cocinero' || userProfile?.perfil=='bartender' " expand="block" color="primary" routerLink="/tomarpedidococina">
+  Pedido Cocinero
+  </ion-button>
+  <ion-button *ngIf="userProfile?.perfil=='cocinero' || userProfile?.perfil=='bartender' " expand="block" color="primary" routerLink="/carta">
+   Carta
+    </ion-button>
+   
   
 </ion-content>

@@ -5,6 +5,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ComidasService } from '../services/comidas.service';
+import { and } from '@angular/router/src/utils/collection';
 
 
 @Injectable({
@@ -35,7 +36,6 @@ export class PedidosService {
         estadoPedido: string,
     cantidad: number,
     idEmpleadomozo: number,
-    detallePedido: string,
     preciototalpedido:number,
     //horaEntrega: string,
 
@@ -49,9 +49,7 @@ export class PedidosService {
       tipoPedido: tipoPedido,
       estadoPedido: estadoPedido,
       cantidad: cantidad,
-      idEmpleadomozo: idEmpleadomozo,
-      detallePedido: detallePedido,
-      //horaEntrega: mesaCliente,
+      idEmpleadomozo: idEmpleadomozo,      //horaEntrega: mesaCliente,
       monto:preciototalpedido,
       tiempoEstimado: this.fecha
       //propina: propina
@@ -108,10 +106,20 @@ export class PedidosService {
     TraerPedidosPorTipoBebida()
     {
       return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Bebida")
-      .where('tipoPedido', '<=', "Bebida" + '\uf8ff'))
+      .where('tipoPedido', '<=', "Bebida" + '\uf8ff'))&&
+      this.firestore.collection('Pedidos', ref => ref.where('estadoPedido', '>=', "Pendiente")
+      .where('estadoPedido', '<=', "Pendiente" + '\uf8ff'))
+  
       .snapshotChanges();
     }
-
+   
+    //traer pedidos  por mesa
+  TraerPedidosPorMesa($id)
+  {
+    return this.firestore.collection('Pedidos', ref => ref.where('codigoMesa', '>=', $id)
+    .where('codigoMesa', '<=', $id+ '\uf8ff'))
+    .snapshotChanges();
+  }
 
   //traer pedidos si es bebida.
 

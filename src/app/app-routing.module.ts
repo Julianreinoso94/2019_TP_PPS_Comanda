@@ -51,10 +51,15 @@ const routes: Routes = [
     path: 'encuesta-empleado',
     loadChildren: './pages/encuesta-empleado-create/encuesta-empleado-create.module#EncuestaEmpleadoCreatePageModule' },
   { path: 'encuesta-graficos', loadChildren: './pages/encuesta-graficos/encuesta-graficos.module#EncuestaGraficosPageModule' },
-  { path: 'juego-postre', loadChildren: './pages/juego-postre/juego-postre.module#JuegoPostrePageModule' },  { path: 'tomarpedidos', loadChildren: './pages/tomarpedidos/tomarpedidos.module#TomarpedidosPageModule' },
+  { path: 'juego-postre', loadChildren: './pages/juego-postre/juego-postre.module#JuegoPostrePageModule' },
+  { path: 'tomarpedidos', loadChildren: './pages/tomarpedidos/tomarpedidos.module#TomarpedidosPageModule' },
   { path: 'reserva-cliente', loadChildren: './pages/reserva-cliente/reserva-cliente.module#ReservaClientePageModule' },
   { path: 'qrpropina', loadChildren: './pages/qrpropina/qrpropina.module#QrpropinaPageModule' },
   { path: 'qringresolocal', loadChildren: './pages/qringresolocal/qringresolocal.module#QringresolocalPageModule' },
+  { path: 'ingreso', loadChildren: './pages/ingreso/ingreso.module#IngresoPageModule' },
+  { path: 'tomarpedidococina', loadChildren: './pages/tomarpedidococina/tomarpedidococina.module#TomarpedidococinaPageModule' },
+  { path: 'carta', loadChildren: './pages/carta/carta.module#CartaPageModule' },
+  { path: 'cuenta', loadChildren: './pages/cuenta/cuenta.module#CuentaPageModule' },
 
 ];
 
