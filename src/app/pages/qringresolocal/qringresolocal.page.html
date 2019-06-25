@@ -1,22 +1,24 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>QR Ingreso</ion-title>
-  
+
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  
-  
+
+
   <ion-content>
     <ion-button expand="block" color="primary"  (click)="VerificarDisponibilidadMesa()">
-    Lista de Espera
+    Cargarme en Lista de Espera
     </ion-button>
- 
+
     <ion-button expand="block" color="primary" routerLink="/encuesta-empleado">
      Acceder a Encuesta de Satisfaccion.
     </ion-button>
-  
+
+    <ion-button expand="block" color="primary" routerLink="/lista-espera">
+      Lista de Espera
+    </ion-button>
   </ion-content>
-  
