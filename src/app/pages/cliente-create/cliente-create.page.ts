@@ -54,7 +54,6 @@ export class ClienteCreatePage implements OnInit {
     apellido,
     dni
   ): void {
-    alert("entro");
     // if (
     //   nombre === undefined ||
     //   this.fotoService.photos.length === 0
