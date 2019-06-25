@@ -4,13 +4,26 @@
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
       <!-- Título de la aplicación -->
-      <ion-title>AHORCADO</ion-title>
+      <ion-title>Juega por tu descuento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <!-- Sección contenido -->
 <ion-content padding>
+  <img class = "icon" src="assets/icon/ahorcado.png">
 
+  <br>
+  <ion-item>
+    <ion-label position="stacked">Codigo de Mesa</ion-label>
+    <ion-input
+      [(ngModel)]="codigo"
+      type="text"
+      placeholder="Ingrese codigo de Mesa"
+    >
+    </ion-input>
+  </ion-item>
+<br>
+<br>
 <!-- Huecos de la palabra secreta -->
 <ion-list >
   <ion-grid>

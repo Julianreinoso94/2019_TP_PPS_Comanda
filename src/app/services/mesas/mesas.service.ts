@@ -116,6 +116,15 @@ export class MesasService {
 
 }
 
+TraerMesaPorCodigo(codigo)
+{
+  console.log("entro");
+
+  return this.firestore.collection('Mesas', ref => ref.where('codigo', '==', codigo)
+  .where('codigo', '==', codigo + '\uf8ff'))
+  .snapshotChanges();
+
+}
 
 
   /*
@@ -136,7 +145,7 @@ export class MesasService {
   {
     //this.firestore.doc('Mesas/'+id).update({ monto: monto });
     this.firestore.doc('Mesas/' + id).update({monto: monto})
-    }
+  }
 
     ModificarEstadoDeunaMesa(id,estado)
   {
@@ -147,6 +156,14 @@ export class MesasService {
   EliminarMesa(record_id) {
   this.firestore.doc('Mesas/' + record_id).delete();
   }
+
+  //ModificarMontoDeunaMesa
+  AgregarDesc10(id, valor)
+  {
+    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+    this.firestore.doc('Mesas/' + id).update({descuento10: valor})
+  }
+
 
  
 

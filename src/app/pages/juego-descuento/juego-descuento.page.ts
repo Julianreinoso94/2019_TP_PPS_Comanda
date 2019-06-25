@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { MesasService } from '../../services/mesas/mesas.service';
 
 @Component({
   selector: 'app-juego-descuento',
@@ -18,11 +19,14 @@ export class JuegoDescuentoPage implements OnInit {
     vidas: number = 5;
     puntos: number = 0;
     ganador: number = 0;
+    codigo: "";
+    valor: boolean = true;
+    recordMesa: any;
   
     // Creamos un array para guardar las letras que se van seleccionando.
     controlLetras = new Array;
   
-    constructor(public navCtrl: NavController) {  }
+    constructor(public navCtrl: NavController, private mesasService: MesasService) {  }
   
     // Método que genera una palabra aleatoria comprendida en el array nombres.	
     public palabraAleatoria(primer, ultimo) {
@@ -151,6 +155,11 @@ export class JuegoDescuentoPage implements OnInit {
       if (valor == 'gana') { 
         this.mensaje = 'Enhorabuena!, Has acertado la palabra secreta. Has conseguido un 10% de descuento en tu cuenta.';
         this.ganador = 1;
+        console.log("codigo mesa:" + this.codigo);
+        
+        console.log(this.mesasService.TraerMesaPorCodigo(this.codigo));
+        //this.mesasService.AgregarDesc10("BVtETGAAmETdzVTwFnUC", this.valor);
+
       }		
     }
   
@@ -167,5 +176,8 @@ export class JuegoDescuentoPage implements OnInit {
 
   ngOnInit() {
   }
+
+
+  
 
 }
