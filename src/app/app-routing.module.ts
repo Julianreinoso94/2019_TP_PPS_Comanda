@@ -56,6 +56,7 @@ const routes: Routes = [
   { path: 'reserva-cliente', loadChildren: './pages/reserva-cliente/reserva-cliente.module#ReservaClientePageModule' },
   { path: 'qrpropina', loadChildren: './pages/qrpropina/qrpropina.module#QrpropinaPageModule' },
   { path: 'qringresolocal', loadChildren: './pages/qringresolocal/qringresolocal.module#QringresolocalPageModule' },
+  { path: 'lista-espera', loadChildren: './pages/lista-espera/lista-espera.module#ListaEsperaPageModule' },
   { path: 'ingreso', loadChildren: './pages/ingreso/ingreso.module#IngresoPageModule' },
   { path: 'tomarpedidococina', loadChildren: './pages/tomarpedidococina/tomarpedidococina.module#TomarpedidococinaPageModule' },
   { path: 'carta', loadChildren: './pages/carta/carta.module#CartaPageModule' },

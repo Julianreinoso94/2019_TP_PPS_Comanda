@@ -8,13 +8,16 @@ import 'firebase/storage';
   providedIn: 'root'
 })
 export class EventService {
-
+  public idUsuarioLogeado: any;
   public eventListRef: firebase.firestore.CollectionReference;
   public clienteListRef: firebase.firestore.CollectionReference;
   public encuestaEmpleadoRef: firebase.firestore.CollectionReference;
+  public listaEspera: firebase.firestore.CollectionReference;
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        this.idUsuarioLogeado = user.uid;
+
         this.eventListRef = firebase
           .firestore()
           .collection(`/userProfile/${user.uid}/eventList`);
@@ -26,6 +29,10 @@ export class EventService {
         this.encuestaEmpleadoRef = firebase
           .firestore()
           .collection(`/encuestaEmpleado/`);
+
+          this.listaEspera = firebase
+            .firestore()
+            .collection(`/listaEspera/`);
       }
     });
   }
@@ -201,5 +208,23 @@ export class EventService {
 
   getEncuestatList(): firebase.firestore.CollectionReference {
     return this.encuestaEmpleadoRef;
+  }
+
+  guardarListaEspera(
+    // listaNombre: string,
+    // listaApellido: string,
+    // listaEmail: number,
+    // listaCantidad: number
+  ): Promise<firebase.firestore.DocumentReference> {
+    return this.listaEspera.add({
+      uid: this.idUsuarioLogeado,
+      estado: 'En espera',
+//      fecha: eventCost * -1,
+      status: 1
+    });
+  }
+
+  getListaEspera(): firebase.firestore.CollectionReference {
+    return this.listaEspera;
   }
 }

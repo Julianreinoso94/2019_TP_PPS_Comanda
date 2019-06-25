@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeScannerOptions,BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
+import { EventService } from '../../services/event/event.service';
 
 @Component({
   selector: 'app-qringresolocal',
@@ -6,10 +8,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./qringresolocal.page.scss'],
 })
 export class QringresolocalPage implements OnInit {
-
-  constructor() { }
+  encodeData: any;
+  scannedData: {};
+  barcodeScannerOptions: BarcodeScannerOptions;
+  constructor(
+    private barcodeScanner: BarcodeScanner,
+    private eventService: EventService
+  ) {
+    this.barcodeScannerOptions = {
+      showTorchButton: true,
+      showFlipCameraButton: true
+    }
+  }
 
   ngOnInit() {
   }
+
+  VerificarDisponibilidadMesa() {
+     this.barcodeScanner
+       .scan(this.barcodeScannerOptions)
+       .then(barcodeData => {
+         this.eventService.guardarListaEspera();
+       })
+       .catch(err => {
+         console.log("Error", err);
+       });
+   }
+
+   // cargarQrIngreso(datos: any) {
+   //
+   //   let parsedData = datos.text.split('@');
+   //   return (parsedData);
+   //   // let nombrescan = parsedData[0].toString();
+   //   // let apellido = parsedData[1].toString();
+   //   // let dniscan: number = +parsedData[2];
+   //
+   // }
 
 }

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
+    <ion-title>lista-espera</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header> <ion-label>Your next events</ion-label> </ion-list-header>
+    <ion-item *ngFor="let espera of listaEspera" >
+      <ion-label>
+        <h2>{{espera?.uid}}</h2>
+        <p>Estado: <strong>{{espera?.estado}}</strong></p>
+        <p>Status: <strong>{{espera?.status}}</strong></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
