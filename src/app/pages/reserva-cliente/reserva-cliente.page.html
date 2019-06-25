@@ -13,7 +13,7 @@
       <ion-spinner name="dots" color="dark" ></ion-spinner>
   </div>
 
-  
+
   <ion-item>
     <ion-label>Mesa</ion-label>
     <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
@@ -49,8 +49,8 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Horario</ion-label>
-    <ion-input type="time" name="hora"   [(ngModel)]="horario"> </ion-input>
-  </ion-item>
+      <ion-datetime  class="round" [(ngModel)]="hora" display-format="H:mm" placeholder="Seleccione Hora"></ion-datetime>
+    </ion-item>
 
   <ion-button
       expand="block"

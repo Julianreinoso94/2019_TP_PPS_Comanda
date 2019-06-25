@@ -21,6 +21,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FCM } from '@ionic-native/fcm/ngx';//PLUGIN PUSH NOTIFICATION
+import { Calendar } from '@ionic-native/calendar/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -29,7 +31,7 @@ AngularFirestoreModule,    AngularFireStorageModule,
     AngularFireDatabaseModule,
    IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
   providers: [
-   StatusBar,FCM,DatePipe,
+   StatusBar,FCM,DatePipe,Calendar,
     StatusBar,
     SplashScreen,BarcodeScanner,
     Camera,

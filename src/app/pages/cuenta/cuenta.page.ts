@@ -206,9 +206,11 @@ export class CuentaPage implements  OnInit {
  {
    //Limpiar mesa
    this.ResetearMesa();
-
-   //eliminar pedidos
    
+   //eliminar pedidos
+   this.eliminarPedidos();
+
+
    //cliente pueda volver a poner en la lista de ingresantes
  
    
@@ -232,6 +234,13 @@ export class CuentaPage implements  OnInit {
  
   this.mostrarToast("Su pago ha sido depositado exitosamente", "successToast");
   this.router.navigateByUrl('/home');
+}
+eliminarPedidos()
+{
+  this.pedidos.forEach(element => {
+    this.pedidosService.EliminarPedido( element.id);
+    
+  });
 }
 
 

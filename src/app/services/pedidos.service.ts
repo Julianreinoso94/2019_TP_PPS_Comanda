@@ -103,6 +103,7 @@ export class PedidosService {
       .snapshotChanges();
     }
 
+
     TraerPedidosPorTipoBebida()
     {
       return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Bebida")

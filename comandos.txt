@@ -15,3 +15,6 @@ npm install @ionic-native/fcm
 
 ////////////////////////////////CHART.JS////////////
 npm install chart.js --save
+///////////////////////////////////////////////////CALENDAR
+ionic cordova plugin add cordova-plugin-calendar
+npm install @ionic-native/calendar
