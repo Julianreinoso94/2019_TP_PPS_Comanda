@@ -8,10 +8,22 @@
 </ion-header>
 
 <ion-content padding>
-  <!--<img class = "icon" src="assets/icon/mesa1.png">-->
   <div class="" *ngIf="loading">
       <ion-spinner name="dots" color="dark" ></ion-spinner>
   </div>
+  <ion-card color="dark">
+      <ion-card-header>
+        <ion-card-title >Calendario</ion-card-title>
+      </ion-card-header>
+    
+          <ion-grid style="height: 100%">
+              <ion-row justify-content-center align-items-center style="height: 100%; flex-direction: column">
+              <ion-spinner *ngIf="spinner" name="lines"></ion-spinner>
+              <ion-spinner name="ios"></ion-spinner>
+                </ion-row>
+              </ion-grid>
+
+   </ion-card>
 
 
   <ion-item>

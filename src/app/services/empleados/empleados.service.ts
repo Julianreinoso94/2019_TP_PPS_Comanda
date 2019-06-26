@@ -125,6 +125,21 @@ export class EmpleadosService {
   this.firestore.doc('Empleado/' + record_id).delete();
   }
 
+  TraerClientePorNombre($nombre)
+{
+  return this.firestore.collection('cliente', ref => ref.where('nombre', '>=', $nombre)
+  .where('nombre', '<=', $nombre + '\uf8ff'))
+  .snapshotChanges();
+
+}
+
+ModificarMontoDeunaMesa(id,codigo)
+{
+  //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+  this.firestore.doc('cliente/' + id).update({codigoUid: codigo})
+  }
+
+
 
 }
 

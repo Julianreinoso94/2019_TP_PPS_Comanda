@@ -24,7 +24,7 @@ export class EventService {
 
         this.clienteListRef = firebase
           .firestore()
-          .collection(`/listaClientes/`);
+          .collection(`/cliente/`);
 
         this.encuestaEmpleadoRef = firebase
           .firestore()
@@ -119,7 +119,8 @@ export class EventService {
       nombre: clienteName,
       apellido: clienteLastname,
       dni: clienteDni,
-      perfil:"Cliente"
+      perfil:"Cliente",
+      codigoUid:""
     }).then( ( newCliente ) => {
 
       if (clientePicture != null) {
