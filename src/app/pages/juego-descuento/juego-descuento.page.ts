@@ -22,11 +22,34 @@ export class JuegoDescuentoPage implements OnInit {
     codigo: "";
     valor: boolean = true;
     recordMesa: any;
+    mesas : any;
+    codigoMesa:any;
   
     // Creamos un array para guardar las letras que se van seleccionando.
     controlLetras = new Array;
   
-    constructor(public navCtrl: NavController, private mesasService: MesasService) {  }
+    constructor(public navCtrl: NavController, private mesasService: MesasService) {  
+      this.mesasService.TraerMesas().subscribe(data => {
+
+        this.mesas = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            isEdit: false,
+            codigo: e.payload.doc.data()['codigo'],
+            estado: e.payload.doc.data()['estado'],
+            tipo: e.payload.doc.data()['tipo'],
+            cantPersonas: e.payload.doc.data()['cantPersonas'],
+            cliente: e.payload.doc.data()['cliente'],
+            monto: e.payload.doc.data()['monto'],
+            propina: e.payload.doc.data()['propina'],
+            descuento10: e.payload.doc.data()['descuento10'],
+            descuentoBebida: e.payload.doc.data()['descuentoBebida'],
+            descuentoPostre: e.payload.doc.data()['descuentoPostre'],
+          };
+        })
+        console.log(this.mesas);
+      });
+    }
   
     // Método que genera una palabra aleatoria comprendida en el array nombres.	
     public palabraAleatoria(primer, ultimo) {
@@ -36,6 +59,10 @@ export class JuegoDescuentoPage implements OnInit {
   
     // Método que valida la letra seleccionada.	
     public compruebaLetra() {
+      console.log(this.codigoMesa);
+
+      if(this.codigoMesa  != undefined)
+      {
       // Formateamos a mayúsculas para mejorar la legibilidad.
       let letraMayusculas = this.letra.toUpperCase();
       
@@ -119,6 +146,11 @@ export class JuegoDescuentoPage implements OnInit {
         this.mensaje = 'Seleccione una letra del listado.';
       }
     }
+    else
+    {
+      this.mensaje = 'Seleccione una mesa para poder jugar';
+    }
+    }
   
     public muestraHuecosPalabra() {
       let totalHuecos = this.nombreSecreto.length;
@@ -155,10 +187,11 @@ export class JuegoDescuentoPage implements OnInit {
       if (valor == 'gana') { 
         this.mensaje = 'Enhorabuena!, Has acertado la palabra secreta. Has conseguido un 10% de descuento en tu cuenta.';
         this.ganador = 1;
-        console.log("codigo mesa:" + this.codigo);
+//        console.log("codigo mesa:" + this.codigo);
+        console.log("codigo" + this.codigoMesa);
         
-        console.log(this.mesasService.TraerMesaPorCodigo(this.codigo));
-        //this.mesasService.AgregarDesc10("BVtETGAAmETdzVTwFnUC", this.valor);
+        //console.log(this.mesasService.TraerMesaPorCodigo(this.codigo));
+        this.mesasService.AgregarDesc10(this.codigoMesa, this.valor);
 
       }		
     }

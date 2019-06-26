@@ -13,6 +13,7 @@
   <img class = "icon" src="assets/icon/ahorcado.png">
 
   <br>
+  <!--
   <ion-item>
     <ion-label position="stacked">Codigo de Mesa</ion-label>
     <ion-input
@@ -22,6 +23,15 @@
     >
     </ion-input>
   </ion-item>
+-->
+
+<ion-item>
+  <ion-label>Seleccionar Mesa</ion-label>
+  <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" cancel-text="Cancelar" >
+      <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+  </ion-select>
+</ion-item>
+
 <br>
 <br>
 <!-- Huecos de la palabra secreta -->
@@ -93,7 +103,7 @@
 
 <!-- En caso de no tener vidas, mostramos un botón para reiniciar el juego 
 <button *ngIf="vidas==0 || ganador==1" ion-button block (click)="reiniciaJuego()">Jugar de nuevo</button>-->
-<ion-button    expand="block" color="danger" routerLink="/home">
+<ion-button   expand="block" color="danger" routerLink="/home" (click)="reiniciaJuego()">
   Salir 
 </ion-button>
 </ion-content>
