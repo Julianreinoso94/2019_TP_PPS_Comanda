@@ -37,6 +37,9 @@ public userProfile: firebase.firestore.DocumentReference;
   }
   
   signupUserCliente(email: string, password: string,Perfil:string,record,codigo :string): Promise<any> {
+
+    if(Perfil=="Cliente")
+    {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -55,9 +58,29 @@ public userProfile: firebase.firestore.DocumentReference;
         console.error(error);
         throw new Error(error);
       });
-      
+    }
+    if(Perfil=="Mozo")
+    {
 
-   
+    }
+    if(Perfil=="bartender")
+    {
+
+    }
+    if(Perfil=="Cocinero")
+    {
+
+    }
+    if(Perfil=="Anonimo")
+    {
+      
+    }
+    if(Perfil=="Supervisor")
+    {
+      
+    }
+
+
     
   }
 

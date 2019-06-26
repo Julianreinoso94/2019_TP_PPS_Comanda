@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import {AuthService} from "../../services/user/auth.service";
 import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 //import { FCM } from '@ionic-native/fcm/ngx';//AGREGADO PUSH NOTIF
+import {EmpleadosService} from '../../services/empleados/empleados.service';
 
 
 import { ProfileService } from '../../services/user/profile.service';
@@ -26,6 +27,7 @@ export class AltaDuenioPage implements OnInit {
    foto:string;
    perfil:string;
    filename:string;
+   codigoUid:string="";
 
    datosEscaneados: any;
    datos: any;
@@ -79,6 +81,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
      record['cuil'] = this.cuil;
      record['foto'] = this.foto;
      record['perfil'] = this.perfil;
+  
 
      this.crudService.create_NewStudent(record).then(resp => {
        this.nombre = "";
@@ -87,6 +90,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
        this.cuil = "";
        this.foto = "";
        this.perfil = "";
+       this.codigoUid=""
        console.log(resp);
      })
        .catch(error => {
@@ -165,6 +169,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
               this.cuil = "";
               this.foto = "";
               this.perfil = "";
+              this.codigoUid="";
               console.log(resp);
             })
               .catch(error => {
@@ -174,6 +179,52 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
           });
 
         }//fin metodo
+
+        Volver()
+        {
+      +
+      
+          this.clientes.forEach(element => {
+            this.codigo=element.codigo;
+      
+         });
+         
+         alert(this.codigo);
+       
+         
+        let record = {};
+        record['nombre'] = "";
+        record['LastName']="";
+        record['clienteDni']="";
+        record['foto']="";
+        record['perfil']="Cliente";
+           this.signupUser(record);
+      
+        }
+
+        async signupUser(record): Promise<void> {
+   
+
+          this.authService.signupUserCliente( this.clienteName+"@gmail.com", "123456","Cliente",record,this.codigo).then(
+            () => {
+              this.loading.dismiss().then(() => {
+                this.router.navigateByUrl('home');
+              });
+            },
+            error => {
+              this.loading.dismiss().then(async () => {
+                const alert = await this.alertCtrl.create({
+                  message: error.message,
+                  buttons: [{ text: 'Ok', role: 'cancel' }],
+                });
+                await alert.present();
+              });
+            }
+          );
+          this.loading = await this.loadingCtrl.create();
+         // await this.loading.present();
+        }
+    
 
 
 
