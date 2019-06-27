@@ -11,17 +11,23 @@
   <div class="" *ngIf="loading">
       <ion-spinner name="dots" color="dark" ></ion-spinner>
   </div>
-  <ion-card color="dark">
-      <ion-card-header>
-        <ion-card-title >Calendario</ion-card-title>
-      </ion-card-header>
-    
-          <ion-grid style="height: 100%">
-              <ion-row justify-content-center align-items-center style="height: 100%; flex-direction: column">
-              <ion-spinner *ngIf="spinner" name="lines"></ion-spinner>
-              <ion-spinner name="ios"></ion-spinner>
-                </ion-row>
-              </ion-grid>
+  <ion-card >
+  
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate">
+      </ion-datetime>
+    </ion-item>
+<ion-item>
+  <ion-label>hh:mm </ion-label>
+  <ion-datetime [(ngModel)]="hora" displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>
+</ion-item>
+
+<ion-button
+expand="block"
+(click)="diferencia()">
+Guardar
+</ion-button>
 
    </ion-card>
 

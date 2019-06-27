@@ -9,14 +9,17 @@ import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
 import { ComidasService } from 'src/app/services/comidas/comidas.service';
 import { Calendar } from "@ionic-native/calendar/ngx";
+import { DatetimeOptions } from '@ionic/core';
 
+import * as esLocale from 'date-fns/locale/es/index.js';
+import { DateFnsModule } from 'ngx-date-fns';
 @Component({
   selector: 'app-reserva-cliente',
   templateUrl: './reserva-cliente.page.html',
   styleUrls: ['./reserva-cliente.page.scss'],
 })
 export class ReservaClientePage implements OnInit {
- dia:any;
+
  horario:any;
  empleados: any;
  public comidaActual: any = {};
@@ -49,17 +52,127 @@ calendar = {
   currentDate: this.selectedDate
 }
 
-
-fechaElegida = {
-  dia: '',
-  mes: '',
-  hora: '',
-  minuto: ''
-}
-
-hora: any;
+hora:Date;
+myDate:Date;
+HoraParse:String;
+//hora: DatetimeOptions;
 clienteEnEspera: any;
 reservaRealizada: any = null;
+dateStart:String;
+
+today:Date;
+Christmas:Date;
+
+result:number;
+
+options = {
+  locale: esLocale
+};
+diferencia()
+{
+alert(this.myDate);
+  // alert(this.hora);
+ //alert(this.calcDaysDiff());
+this.dateStart =this.myDate.toString();
+let toArray =  this.dateStart.split("-");
+
+alert(toArray[0]);
+alert(toArray[1]);
+let toArray2=toArray[2].split("T"); 
+alert(toArray2[0]);
+alert(this.hora);
+
+
+// alert(this.options.locale.differenceInMinutes(
+//   new Date(2014, 6, 2, 12, 20, 0),
+//   new Date(2014, 6, 2, 12, 7, 59)
+// ));
+
+///////////////////////proba
+
+//funciona calcula LOS MINUTOS QUE QUEDAN
+
+var startTime = new Date('2019/10/09 12:00'); 
+var endTime = new Date('2019/10/09 12:40');
+var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
+var resultInMinutes = Math.round(difference / 60000);
+alert("resultado:"+resultInMinutes);
+
+
+
+}
+
+calcularminutos()
+{
+  var start = new Date();
+  var end = new Date();
+
+  // let start = current.setHours(this.start_time.split(":")[0], this.start_time.split(":")[1], 0);
+  this.HoraParse=this.hora.toString();
+
+  //let end = start.setHours(this.HoraParse.split(":")[0], this.HoraParse.split(":")[1], 0);
+  start.setHours(12,10,0);
+  end.setHours(12,40,0);
+
+
+  
+  var end = new Date();
+ 
+
+
+  let minutes = Math.abs(start.getHours() - end.getHours()) / 60000 // display in minutes
+ // alert(minutes);
+
+
+}
+
+
+// private difHora()
+// {
+//   let diff = moment(this.endTime, 'HH:mm').diff(moment(this.startTime, 'HH:mm'))
+// let d = moment.duration(diff);
+// let hours =  Math.floor(d.asHours());
+// let minutes = moment.utc(diff).format("mm");
+// this.totalAmount = hours * hourlyCharge + parseInt(minutes) * hourlyCharge/60;
+// this.total =hours +" hours " + minutes + " minutes";
+// }
+
+ start_time:String = "14:00";
+ end_time:String = "16:00";
+
+ updateHours() {
+  // var current = new Date();
+ 
+  // console.log(start, end)
+  // var result = dateFns.differenceInMinutes(
+  //   end,
+  //   start
+  // )
+  // console.log(result);
+}
+     
+
+private calcDaysDiff(): number {
+  const fromDate: Date = this.createDateFromNgbDate();
+  const toDate: Date = this.createDateFromNgbDate2();  
+  const daysDiff = Math.floor(Math.abs(<any>fromDate - <any>toDate) / (1000*60*60*24));
+  return daysDiff;
+}
+//private createDateFromNgbDate(ngbDate: NgbDate): Date {
+  private createDateFromNgbDate(): Date {
+ // const date: Date = new Date(Date.UTC(ngbDate.year, ngbDate.month-1, ngbDate.day));  
+  const date: Date = new Date(Date.UTC(1994,12-1,22));  
+  alert(date);
+  
+  
+  return date;
+}
+private createDateFromNgbDate2(): Date {
+  // const date: Date = new Date(Date.UTC(ngbDate.year, ngbDate.month-1, ngbDate.day));  
+   const date: Date = new Date(Date.UTC(1995,12-1,23));  
+ 
+   return date;
+ }
 
 // listaEsperaClientes: any[];
 key: any;
@@ -93,7 +206,7 @@ tienereserva: boolean = false;
     });
   }
 
-  constructor(private comidaService: ComidasService,
+  constructor(private comidaService: ComidasService,private dfns: DateFnsModule,
     private router: Router,  private empleadosService: EmpleadosService,
     private mesasService: MesasService,
     // private camara: Camera,
@@ -131,8 +244,8 @@ tienereserva: boolean = false;
     let fechaElegida = JSON.stringify(event.selectedTime);
     fechaElegida = fechaElegida.substr(1,fechaElegida.length-1);
     let splitFecha = fechaElegida.split('-');
-    this.fechaElegida.dia = splitFecha[2].split('T')[0];
-    this.fechaElegida.mes = splitFecha[1];
+    // this.fechaElegida.dia = splitFecha[2].split('T')[0];
+    // this.fechaElegida.mes = splitFecha[1];
 
   }
 
@@ -141,23 +254,22 @@ tienereserva: boolean = false;
 
     //VARIABLES
     // localStorage.setItem("tienereserva","false");
-    let horaminutoseg = this.hora.substr(11,this.hora.length-21);
+    // let horaminutoseg = this.hora.substr(11,this.hora.length-21);
     // console.log(this.hora);
-    let splitHoraMinSeg= horaminutoseg.split(':');
-    this.fechaElegida.hora = splitHoraMinSeg[0];
-    this.fechaElegida.minuto = splitHoraMinSeg[1];
-    // let usuarioLogueado: any = JSON.parse(sessionStorage.getItem('usuario'));
+    // this.fechaElegida.hora = splitHoraMinSeg[0];
+    // this.fechaElegida.minuto = splitHoraMinSeg[1];
+    // // let usuarioLogueado: any = JSON.parse(sessionStorage.getItem('usuario'));
 
-    //TABLA RESERVAMESAS
-    this.guardarReservas();
+    // //TABLA RESERVAMESAS
+    // this.guardarReservas();
 
    
 
 
-    localStorage.setItem("dia",this.fechaElegida.dia);
-    localStorage.setItem("mes",this.fechaElegida.mes);
-    localStorage.setItem("hora",this.fechaElegida.hora);
-    localStorage.setItem("minuto",this.fechaElegida.minuto);
+    // localStorage.setItem("dia",this.fechaElegida.dia);
+    // localStorage.setItem("mes",this.fechaElegida.mes);
+    // localStorage.setItem("hora",this.fechaElegida.hora);
+    // localStorage.setItem("minuto",this.fechaElegida.minuto);
   
     localStorage.setItem("reservaStatus","si");
   

@@ -18,3 +18,5 @@ npm install chart.js --save
 ///////////////////////////////////////////////////CALENDAR
 ionic cordova plugin add cordova-plugin-calendar
 npm install @ionic-native/calendar
+///////////////////////////////////
+npm install --save date-fns@1.29.0

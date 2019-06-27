@@ -182,7 +182,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
 
         Volver()
         {
-      +
+      /*+
       
           this.clientes.forEach(element => {
             this.codigo=element.codigo;
@@ -190,6 +190,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
          });
          
          alert(this.codigo);
+         */
        
          
         let record = {};
@@ -203,6 +204,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
         }
 
         async signupUser(record): Promise<void> {
+          /*
    
 
           this.authService.signupUserCliente( this.clienteName+"@gmail.com", "123456","Cliente",record,this.codigo).then(
@@ -223,6 +225,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
           );
           this.loading = await this.loadingCtrl.create();
          // await this.loading.present();
+         */
         }
     
 

@@ -22,11 +22,12 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FCM } from '@ionic-native/fcm/ngx';//PLUGIN PUSH NOTIFICATION
 import { Calendar } from '@ionic-native/calendar/ngx';
+import {DateFnsModule} from 'ngx-date-fns';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,AngularFireModule.initializeApp(environment.firebase),
+  imports: [BrowserModule,    DateFnsModule.forRoot(),AngularFireModule.initializeApp(environment.firebase),
 AngularFirestoreModule,    AngularFireStorageModule,
     AngularFireDatabaseModule,
    IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
