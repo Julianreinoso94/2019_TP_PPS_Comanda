@@ -1,0 +1,27 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>adivinar-numero</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="background">
+  <div class="inline-block w100 h40" >
+        <h1>Adivinar el número!</h1>
+  </div>
+  <div class="inline-block w100 h30 alignItems">
+      <input *ngIf="jugando" class="w100 h20 txtlgcntr" [(ngModel)]="mjeVueltas" type="text" readoly>
+  </div>
+  <div class="w100 h75 " >
+      <input *ngIf="jugando" class="w100 h60 txtlgcntr" [(ngModel)]="respuesta" type="text" readonly>
+      <input *ngIf="!jugando && terminoJuego && esGanador" class="w100 h60 txtlgcntr green" [(ngModel)]="mensajeExito" type="text" readonly>
+      <input *ngIf="!jugando && terminoJuego && esPerdedor" class="w100 h60 txtlgcntr red" [(ngModel)]="mensajeError" type="text" readonly >
+  </div>
+  <div class="inline-block w100 h110 gris"  >
+    <div class="" *ngIf="jugando">
+      <label for="[numeroJugador]">Tú Numero:</label>
+      <input class="w100 h80 txtlgcntr gris"[(ngModel)]="numeroJugador" type="number">
+    </div>
+  </div>
+  <button class="myButton" *ngIf="jugando && !terminoJuego" (click)="validar()" >Validar</button>
+  <button class="myButton" *ngIf="!jugando" (click)="iniciarJuego()" >Iniciar</button>
+</ion-content>

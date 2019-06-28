@@ -20,3 +20,6 @@ ionic cordova plugin add cordova-plugin-calendar
 npm install @ionic-native/calendar
 ///////////////////////////////////
 npm install --save date-fns@1.29.0
+
+npm i ngx-date-fns
+npm install @ionic-native/fcm

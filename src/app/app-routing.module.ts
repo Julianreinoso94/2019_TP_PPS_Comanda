@@ -61,6 +61,7 @@ const routes: Routes = [
   { path: 'tomarpedidococina', loadChildren: './pages/tomarpedidococina/tomarpedidococina.module#TomarpedidococinaPageModule' },
   { path: 'carta', loadChildren: './pages/carta/carta.module#CartaPageModule' },
   { path: 'cuenta', loadChildren: './pages/cuenta/cuenta.module#CuentaPageModule' },
+  { path: 'adivinar-numero', loadChildren: './pages/adivinar-numero/adivinar-numero.module#AdivinarNumeroPageModule' },
 
 ];
 
