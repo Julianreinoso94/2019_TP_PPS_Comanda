@@ -60,7 +60,8 @@ const routes: Routes = [
   { path: 'ingreso', loadChildren: './pages/ingreso/ingreso.module#IngresoPageModule' },
   { path: 'tomarpedidococina', loadChildren: './pages/tomarpedidococina/tomarpedidococina.module#TomarpedidococinaPageModule' },
   { path: 'carta', loadChildren: './pages/carta/carta.module#CartaPageModule' },
-  { path: 'cuenta', loadChildren: './pages/cuenta/cuenta.module#CuentaPageModule' },
+  { path: 'cuenta', loadChildren: './pages/cuenta/cuenta.module#CuentaPageModule' },  { path: 'juego-descuento', loadChildren: './pages/juego-descuento/juego-descuento.module#JuegoDescuentoPageModule' },
+
 
 ];
 
