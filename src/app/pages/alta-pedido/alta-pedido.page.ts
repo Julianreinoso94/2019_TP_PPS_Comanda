@@ -19,7 +19,7 @@ export class AltaPedidoPage implements OnInit {
   public comidaActual: any = {};
   public mesaActual: any = {};
 
-  
+
 
   loading = false;
   pedidos : any;
@@ -64,7 +64,7 @@ export class AltaPedidoPage implements OnInit {
       console.log(this.mesas);
     });
    }
-   
+
 
    montoMesa()
    {
@@ -94,7 +94,7 @@ export class AltaPedidoPage implements OnInit {
       this.mesaActual = eventSnapshot.data();
       this.mesaActual.id = eventSnapshot.id;
     });
-  
+
    }
 
   calcularprecio()
@@ -270,7 +270,7 @@ private decrement () {
       //  alert(detalle);
       //  alert(idEmpleado);
       //  alert(preciototalpedido);
-       
+
       return;
     }
     this.loading = true;
@@ -284,13 +284,13 @@ private decrement () {
 
       //actualizar el monto total
 
-      alert(this.preciototalpedido);
-    
+      // alert(this.preciototalpedido);
+
       this.ActualizarmontoTotalmesa= +this.montoTotal + +this.preciototalpedido;
-      alert("el monto de la mesa es"+this.ActualizarmontoTotalmesa);
+      // alert("el monto de la mesa es"+this.ActualizarmontoTotalmesa);
 
       this.mesasService.ModificarMontoDeunaMesa(this.codigoMesa,this.ActualizarmontoTotalmesa);
-      alert("actualizomeza");
+      // alert("actualizomeza");
   }
 
   async mostrarToast(miMsj:string,color:string)
@@ -330,7 +330,7 @@ private decrement () {
     this.mostrarToast("Se eliminó el pedido con exito", "successToast");
     this.router.navigateByUrl('/alta-pedido');
   }
-  
+
   Cuenta(){
     this.router.navigateByUrl('cuenta');
 

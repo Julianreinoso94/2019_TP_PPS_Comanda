@@ -64,7 +64,7 @@ export class AltaEmpleadoPage implements OnInit {
           nombre: e.payload.doc.data()['nombre'],
           apellido: e.payload.doc.data()['apellido'],
           dni: e.payload.doc.data()['dni'],
-          cuil: e.payload.doc.data()['cuil'], 
+          cuil: e.payload.doc.data()['cuil'],
           foto: e.payload.doc.data()['foto'],
           perfil: e.payload.doc.data()['perfil'],
           email: e.payload.doc.data()['email'],
@@ -99,18 +99,18 @@ export class AltaEmpleadoPage implements OnInit {
       .then(() => {
         this.loading = false;
         this.mostrarToast("Se cargo el empleado con exito", "successToast");
-        if (perfil=="bartender")
-        {
-          alert("bartender");
-        }
-        if (perfil=="cocinero")
-        {
-          alert ("cocinero");
-        }
-        if (perfil=="Mozo")
-        {
-          alert("Mozo");
-        }
+        // if (perfil=="bartender")
+        // {
+        //   alert("bartender");
+        // }
+        // if (perfil=="cocinero")
+        // {
+        //   alert ("cocinero");
+        // }
+        // if (perfil=="Mozo")
+        // {
+        //   alert("Mozo");
+        // }
         this.router.navigateByUrl('/home');
         this.fotoService.photos = [];
       });
@@ -159,7 +159,7 @@ export class AltaEmpleadoPage implements OnInit {
   }
 
   cargarDatosDesdeDni(datos: any) {
-    alert(datos);
+    // alert(datos);
     let parsedData = datos.text.split('@');
     let nombrescan = parsedData[0].toString();
     let apellido = parsedData[1].toString();
@@ -180,7 +180,7 @@ export class AltaEmpleadoPage implements OnInit {
      this.barcodeScanner
        .scan()
        .then(barcodeData => {
-         alert("Barcode data " + JSON.stringify(barcodeData));
+         // alert("Barcode data " + JSON.stringify(barcodeData));
          this.scannedData = barcodeData;
          this.cargarDatosDesdeDni(this.scannedData);
        })

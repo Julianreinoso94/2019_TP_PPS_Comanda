@@ -37,8 +37,8 @@ export class ClienteCreatePage implements OnInit {
  Codigouid:any;
  nombre:String;
 
-  
-   
+
+
   constructor(
     private router: Router,   private empleadosService: EmpleadosService,
     private eventService: EventService,
@@ -47,7 +47,7 @@ export class ClienteCreatePage implements OnInit {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private formBuilder: FormBuilder
-  ) { 
+  ) {
 
     this.signupForm = this.formBuilder.group({
       email: [
@@ -75,7 +75,7 @@ export class ClienteCreatePage implements OnInit {
     dni
   ): void {
     this.nombre=nombre;
-   
+
       this.eventService
         .cargarCliente(nombre, apellido, dni, this.fotoService.photos)
         .then(() => {
@@ -84,20 +84,20 @@ export class ClienteCreatePage implements OnInit {
           this.loading = false;
         });
 
-        alert(this.nombre)
+        // alert(this.nombre)
         this.empleadosService.TraerClientePorNombre(this.nombre).subscribe(data => {
-          
+
           this.clientes = data.map(e => {
             return {
               codigo: e.payload.doc.id,
-              
-              
+
+
             };
           })
         });
-    
-  
-  } 
+
+
+  }
 
   Volver()
   {
@@ -107,10 +107,10 @@ export class ClienteCreatePage implements OnInit {
       this.codigo=element.codigo;
 
    });
-   
-   alert(this.codigo);
- 
-   
+
+   // alert(this.codigo);
+
+
   let record = {};
   record['nombre'] = "";
   record['LastName']="";
@@ -122,7 +122,7 @@ export class ClienteCreatePage implements OnInit {
   }
 
   async signupUser(record): Promise<void> {
-   
+
 
       this.authService.signupUserCliente( this.clienteName+"@gmail.com", "123456","Cliente",record,this.codigo).then(
         () => {
@@ -147,12 +147,12 @@ export class ClienteCreatePage implements OnInit {
     // ModificarCliente($nombre)
     // {
     //   console.log("entro");
-    
+
     //   return this.firestore.collection('Mesas', ref => ref.where('nombre', '>=', $nombre)
     //   .where('nombre', '<=', $nombre + '\uf8ff')).set
     //   .snapshotChanges();
-    
+
     // }
-  
+
 
 }

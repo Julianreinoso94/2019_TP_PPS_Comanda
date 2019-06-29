@@ -14,12 +14,12 @@ export class QrmesaPage implements OnInit {
 
   VerificarDisponibilidadMesa(idmesa)
   {
-    alert("entro a disponibilidad mesa");
+    // alert("entro a disponibilidad mesa");
   }
 
   VerificarEstadoDelPedido()
   {
-    alert("entro a estado del pedido");
+    // alert("entro a estado del pedido");
   }
 
 }

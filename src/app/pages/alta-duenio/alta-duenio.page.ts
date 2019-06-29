@@ -81,7 +81,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
      record['cuil'] = this.cuil;
      record['foto'] = this.foto;
      record['perfil'] = this.perfil;
-  
+
 
      this.crudService.create_NewStudent(record).then(resp => {
        this.nombre = "";
@@ -140,7 +140,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
 
                }, (err) => {
                  //  // Handle error
-            alert("error " + JSON.stringify(err))
+            // alert("error " + JSON.stringify(err))
                });
           //  this.obtenerURL2();
 
@@ -153,7 +153,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
            var source = "";
            var storage = firebase.storage();
            storage.ref("FotosSupervisor/"+this.filename).getDownloadURL().then(url => {
-            alert(url);
+            // alert(url);
             let record = {};
             record['nombre'] = this.nombre;
             record['apellido'] = this.apellido;
@@ -183,16 +183,16 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
         Volver()
         {
       /*+
-      
+
           this.clientes.forEach(element => {
             this.codigo=element.codigo;
-      
+
          });
-         
+
          alert(this.codigo);
          */
-       
-         
+
+
         let record = {};
         record['nombre'] = "";
         record['LastName']="";
@@ -200,12 +200,12 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
         record['foto']="";
         record['perfil']="Cliente";
            this.signupUser(record);
-      
+
         }
 
         async signupUser(record): Promise<void> {
           /*
-   
+
 
           this.authService.signupUserCliente( this.clienteName+"@gmail.com", "123456","Cliente",record,this.codigo).then(
             () => {
@@ -227,12 +227,12 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
          // await this.loading.present();
          */
         }
-    
+
 
 
 
 cargarDatosDesdeDni(datos: any) {
-  alert(datos);
+  // alert(datos);
   let parsedData = datos.text.split('@');
   let nombrescan = parsedData[0].toString();
   let apellido = parsedData[1].toString();
@@ -253,7 +253,7 @@ scanCodepag() {
    this.barcodeScanner
      .scan()
      .then(barcodeData => {
-       alert("Barcode data " + JSON.stringify(barcodeData));
+       // alert("Barcode data " + JSON.stringify(barcodeData));
        this.scannedData = barcodeData;
        this.cargarDatosDesdeDni(this.scannedData);
      })
@@ -263,7 +263,7 @@ scanCodepag() {
  }
 
  updateperfil(){
-  alert("actualizndo");
+  // alert("actualizndo");
      this.profileService.updateperfil("Supervisor");
  }
 

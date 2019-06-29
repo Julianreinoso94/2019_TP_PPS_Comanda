@@ -130,7 +130,7 @@ export class ProfilePage implements OnInit {
   //llamar a este metodo para roles
 
   updateperfil(perfil: string): void {
-   alert("actualizndo");
+   // alert("actualizndo");
 
     this.profileService.updateperfil(perfil);
   }
