@@ -101,8 +101,6 @@ export class ClienteCreatePage implements OnInit {
 
   Volver()
   {
-+
-
     this.clientes.forEach(element => {
       this.codigo=element.codigo;
 
