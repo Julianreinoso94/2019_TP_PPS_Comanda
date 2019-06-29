@@ -102,23 +102,23 @@ export class MesasService {
 
 
   TraerMesas() {
-    console.log("entro");
+    // console.log("entro");
     return this.firestore.collection('Mesas').snapshotChanges();
   }
 
   TraerMesasDisponibles()
 {
-  console.log("entro");
+  // console.log("entro");
 
-  return this.firestore.collection('Mesas', ref => ref.where('estado', '>=', 'Ocupado')
-  .where('estado', '<=', 'Ocupado' + '\uf8ff'))
+  return this.firestore.collection('Mesas', ref => ref.where('estado', '>=', 'Disponible')
+  .where('estado', '<=', 'Disponible' + '\uf8ff'))
   .snapshotChanges();
 
 }
 
 TraerMesaPorCodigo(codigo)
 {
-  console.log("entro");
+  // console.log("entro");
 
   return this.firestore.collection('Mesas', ref => ref.where('codigo', '==', codigo)
   .where('codigo', '==', codigo + '\uf8ff'))
@@ -133,7 +133,7 @@ TraerMesaPorCodigo(codigo)
   }
   */
   ModificarMesa(recordID,record){
-  this.firestore.doc('Mesas/' + recordID).update(record);
+    this.firestore.doc('Mesas/' + recordID).update(record);
   }
 
 
@@ -147,11 +147,11 @@ TraerMesaPorCodigo(codigo)
     this.firestore.doc('Mesas/' + id).update({monto: monto})
   }
 
-    ModificarEstadoDeunaMesa(id,estado)
+  ModificarEstadoDeunaMesa(id,estado)
   {
     //this.firestore.doc('Mesas/'+id).update({ monto: monto });
     this.firestore.doc('Mesas/' + id).update({estado: estado})
-    }
+  }
 
   EliminarMesa(record_id) {
   this.firestore.doc('Mesas/' + record_id).delete();
@@ -165,7 +165,7 @@ TraerMesaPorCodigo(codigo)
   }
 
 
- 
+
 
   //traer preciototal de mesa
   //editar preciototaldemesa
