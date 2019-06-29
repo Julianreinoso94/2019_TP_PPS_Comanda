@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComidasService } from '../../services/comidas/comidas.service';
-
+import { ProfileService } from '../../services/user/profile.service';
 @Component({
   selector: 'app-comida-list',
   templateUrl: './comida-list.page.html',
@@ -9,7 +9,12 @@ import { ComidasService } from '../../services/comidas/comidas.service';
 export class ComidaListPage implements OnInit {
 
   public comidasList: Array<any>;
-  constructor(private comidasService: ComidasService) {}
+  public userProfile: any;
+
+  constructor(
+    private comidasService: ComidasService,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit() {
     this.comidasService
@@ -27,6 +32,13 @@ export class ComidaListPage implements OnInit {
           });
           // return false;
         });
+      });
+
+    this.profileService
+      .getUserProfile()
+      .get()
+      .then( userProfileSnapshot => {
+        this.userProfile = userProfileSnapshot.data();
       });
   }
 

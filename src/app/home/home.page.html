@@ -68,16 +68,16 @@
   <ion-button expand="block" color="primary" routerLink="/encuesta-empleado">
     Encuesta Empleado
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/juego-postre">
+  <ion-button *ngIf="userProfile?.perfil=='cliente' "  expand="block" color="primary" routerLink="/juego-postre">
     Juego
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/juego-descuento">
+  <ion-button *ngIf="userProfile?.perfil=='cliente' "  expand="block" color="primary" routerLink="/juego-descuento">
     Juego Descuento
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/adivinar-numero">
+  <ion-button *ngIf="userProfile?.perfil=='cliente' "  expand="block" color="primary" routerLink="/adivinar-numero">
     Adivinar Numero
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/reserva-cliente">
+  <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/reserva-cliente">
     Reserva Cliente
   </ion-button>
   <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/ingreso">

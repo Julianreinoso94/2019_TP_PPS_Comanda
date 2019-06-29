@@ -14,7 +14,7 @@ export class HomePage  implements OnInit{
     public userProfile: any;
     public birthDate: Date;
     public perfil:string;
-    public valor="hola";
+    // public valor="hola";
     price: any = '';
 
 
@@ -34,7 +34,7 @@ export class HomePage  implements OnInit{
       .get()
       .then( userProfileSnapshot => {
         this.userProfile = userProfileSnapshot.data();
-        console.log(this.userProfile);
+        // console.log(this.userProfile);
         this.birthDate = userProfileSnapshot.data().birthDate;
         this.perfil= userProfileSnapshot.data().perfil;
       });

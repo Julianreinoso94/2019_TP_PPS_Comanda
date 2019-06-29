@@ -1,6 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>Comidas/Bebidas</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/comida-create">
@@ -12,9 +14,6 @@
 
 <ion-content padding>
   <ion-list>
-    <!-- <ion-list-header>
-      <ion-label>Your next events</ion-label>
-    </ion-list-header> -->
     <ion-item *ngFor="let comida of comidasList" >
       <ion-label>
         <h2>{{comida?.name}}</h2>
@@ -25,7 +24,7 @@
       <ion-button routerLink="/comida-detail/{{ comida.id }}">
         <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
       </ion-button>
-      <ion-button (click)="borrarComida( comida.id )">
+      <ion-button (click)="borrarComida( comida.id )"  *ngIf="(userProfile?.perfil=='cocinero' || userProfile?.perfil=='bartender') ">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
     </ion-item>
