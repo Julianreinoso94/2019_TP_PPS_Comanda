@@ -14,14 +14,48 @@
   <ion-card >
   
     <ion-item>
-      <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate">
+      <ion-label>ELIGE FECHA DE RESERVA (AÑO-MES-DIA)</ion-label>
+      <ion-datetime displayFormat="YYYY/MM/DD/" [(ngModel)]="myDate">
       </ion-datetime>
     </ion-item>
-<ion-item>
-  <ion-label>hh:mm </ion-label>
-  <ion-datetime [(ngModel)]="hora" displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>
+
+<ion-item><ion-label>Hora </ion-label>
+<select style="background-color: aqua; font-size: 46px;margin-left:260px" [(ngModel)]="horaselect" >
+    <option  value="{{item}}" *ngFor="let item of horareserva" >{{item}}</option>
+    
+  </select>
+  
 </ion-item>
+<ion-item><ion-label>Minuto </ion-label>
+  <select style="background-color: aqua; font-size: 46px;margin-left:260px" [(ngModel)]="minutoselect" >
+      <option  value="{{item}}" *ngFor="let item of minutoreserva" >{{item}}</option>
+      
+    </select>
+    
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Cantidad de personas</ion-label>
+      <ion-select [(ngModel)]="cantPersonas" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione cantidad de personas">
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+        <ion-select-option value="3">3</ion-select-option>
+        <ion-select-option value="4">4</ion-select-option>
+        <ion-select-option value="5">5</ion-select-option>
+        <ion-select-option value="6">6</ion-select-option>
+        <ion-select-option value="7">7</ion-select-option>
+        <ion-select-option value="8">8</ion-select-option>
+        <ion-select-option value="9">9</ion-select-option>
+        <ion-select-option value="10">10</ion-select-option>
+        <ion-select-option value="11">11</ion-select-option>
+        <ion-select-option value="12">12</ion-select-option>
+        <ion-select-option value="13">13</ion-select-option>
+        <ion-select-option value="14">14</ion-select-option>
+        <ion-select-option value="15">15</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
 
 <ion-button
 expand="block"
@@ -38,37 +72,6 @@ Guardar
         <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
     </ion-select>
 </ion-item>
-    <ion-item>
-      <ion-label>Cantidad de personas</ion-label>
-        <ion-select [(ngModel)]="cantPersonas" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione cantidad de personas">
-          <ion-select-option value="1">1</ion-select-option>
-          <ion-select-option value="2">2</ion-select-option>
-          <ion-select-option value="3">3</ion-select-option>
-          <ion-select-option value="4">4</ion-select-option>
-          <ion-select-option value="5">5</ion-select-option>
-          <ion-select-option value="6">6</ion-select-option>
-          <ion-select-option value="7">7</ion-select-option>
-          <ion-select-option value="8">8</ion-select-option>
-          <ion-select-option value="9">9</ion-select-option>
-          <ion-select-option value="10">10</ion-select-option>
-          <ion-select-option value="11">11</ion-select-option>
-          <ion-select-option value="12">12</ion-select-option>
-          <ion-select-option value="13">13</ion-select-option>
-          <ion-select-option value="14">14</ion-select-option>
-          <ion-select-option value="15">15</ion-select-option>
-        </ion-select>
-      </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Dia</ion-label>
-      <ion-input
-        [(ngModel)]="dia" 
-         id="date" type="date">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Horario</ion-label>
-      <ion-datetime  class="round" [(ngModel)]="hora" display-format="H:mm" placeholder="Seleccione Hora"></ion-datetime>
-    </ion-item>
 
   <ion-button
       expand="block"

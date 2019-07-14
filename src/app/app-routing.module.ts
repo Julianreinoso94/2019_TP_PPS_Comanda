@@ -63,6 +63,7 @@ const routes: Routes = [
   { path: 'cuenta', loadChildren: './pages/cuenta/cuenta.module#CuentaPageModule' },
   { path: 'juego-descuento', loadChildren: './pages/juego-descuento/juego-descuento.module#JuegoDescuentoPageModule' },
   { path: 'adivinar-numero', loadChildren: './pages/adivinar-numero/adivinar-numero.module#AdivinarNumeroPageModule' },
+  { path: 'vericarmesapedido', loadChildren: './pages/vericarmesapedido/vericarmesapedido.module#VericarmesapedidoPageModule' },
 
 
 ];

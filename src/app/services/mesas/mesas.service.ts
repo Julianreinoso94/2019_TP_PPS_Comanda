@@ -116,15 +116,26 @@ export class MesasService {
 
 }
 
-TraerMesaPorCodigo(codigo)
-{
-  // console.log("entro");
+// TraerMesaPorCodigo(codigo)
+// {
+//   // console.log("entro");
 
-  return this.firestore.collection('Mesas', ref => ref.where('codigo', '==', codigo)
-  .where('codigo', '==', codigo + '\uf8ff'))
-  .snapshotChanges();
+//   return this.firestore.collection('Mesas', ref => ref.where('codigo', '==', codigo)
+//   .where('codigo', '==', codigo + '\uf8ff'))
+//   .snapshotChanges();
 
-}
+// }
+TraerMesaPorCodigo($idProducto)
+  {
+    /*
+    var query = this.listaComidasRef.where("codigo", "==", $idProducto);
+    return query;
+    */
+
+      return this.firestore.collection('Mesas', ref => ref.where('codigo', '>=', $idProducto)
+      .where('codigo', '<=', $idProducto + '\uf8ff'))
+      .snapshotChanges();
+  }
 
 
   /*

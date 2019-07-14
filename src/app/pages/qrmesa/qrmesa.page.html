@@ -13,7 +13,7 @@
   <ion-button expand="block" color="primary"  (click)="VerificarDisponibilidadMesa()">
   Verificar Disponibilidad de Mesa
   </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/reserva-cliente">
+  <ion-button expand="block" color="primary"   (click)="reservarMesa()" routerLink="/reserva-cliente">
     Reservar la Mesa
   </ion-button>
   <ion-button expand="block" color="primary" (click)="VerificarEstadoDelPedido()">
@@ -22,5 +22,22 @@
   <ion-button expand="block" color="primary" routerLink="/encuesta-empleado">
    Acceder a Encuesta de Satisfaccion.
   </ion-button>
+
+    
+ 
+    <ion-list>
+      <ion-list-header> <ion-label>Estado de mesa</ion-label> </ion-list-header>
+      <ion-item
+        tappable
+        *ngFor="let event of mesas"
+        routerLink="/event-detail/{{ event.id }}"
+      >
+        <ion-label>
+            <p> Mesa escaneada <strong>{{event?.codigo}}</strong></p>
+          <p>Estado Mesa escaneada <strong>{{event?.estado}}</strong></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  
 
 </ion-content>
