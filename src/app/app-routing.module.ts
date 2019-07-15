@@ -64,6 +64,8 @@ const routes: Routes = [
   { path: 'juego-descuento', loadChildren: './pages/juego-descuento/juego-descuento.module#JuegoDescuentoPageModule' },
   { path: 'adivinar-numero', loadChildren: './pages/adivinar-numero/adivinar-numero.module#AdivinarNumeroPageModule' },
   { path: 'vericarmesapedido', loadChildren: './pages/vericarmesapedido/vericarmesapedido.module#VericarmesapedidoPageModule' },
+  { path: 'habilitar-reservas', loadChildren: './pages2/habilitar-reservas/habilitar-reservas.module#HabilitarReservasPageModule' },
+  { path: 'qr', loadChildren: './pages2/qr/qr.module#QrPageModule' },
 
 
 ];

@@ -19,17 +19,8 @@ export class HomePage  implements OnInit{
 
 
 
-    constructor(
-      private alertCtrl: AlertController,private route: ActivatedRoute,
-      private authService: AuthService,
-      private profileService: ProfileService,
-
-    ) {
-      this.price = this.route.snapshot.params['price'];
-
-    }
-  ngOnInit() {
-    this.profileService
+    ionViewWillEnter(){
+      this.profileService
       .getUserProfile()
       .get()
       .then( userProfileSnapshot => {
@@ -39,6 +30,19 @@ export class HomePage  implements OnInit{
         this.perfil= userProfileSnapshot.data().perfil;
       });
     //  console.log(this.userProfile.perfil);
+    }
+    constructor(
+      private alertCtrl: AlertController,private route: ActivatedRoute,
+      private authService: AuthService,
+      private profileService: ProfileService,
+
+    ) {
+      
+      this.price = this.route.snapshot.params['price'];
+
+    }
+  ngOnInit() {
+
 
   }
 

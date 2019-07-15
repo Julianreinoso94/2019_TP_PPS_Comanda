@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Habilitar Reservas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<ion-content>
+
+  <ion-card *ngFor="let item of reservas">
+    <span *ngIf="!item.isEdit; else elseBlock">
+      <ion-card-header>
+        <ion-card-title> Reserva {{item.codigo}} - {{item.tipo}} </ion-card-title>
+        <ion-card-subtitle>Fecha: {{item.fechareserva}}</ion-card-subtitle>
+        <ion-card-subtitle>Hora: {{item.horareserva}}</ion-card-subtitle>
+        <ion-card-subtitle>Usuario: {{item.usuario}}</ion-card-subtitle>
+        <ion-card-subtitle>Cantidad de Personas: {{item.usuario}}</ion-card-subtitle>
+        <ion-card-subtitle>Mesa: {{item.usuario}}</ion-card-subtitle>
+        <ion-card-subtitle>Estado: {{item.usuario}}</ion-card-subtitle>
+
+
+
+
+        <!-- <ion-card-subtitle>Estado: {{item.estado}}</ion-card-subtitle> -->
+
+      </ion-card-header>
+      <ion-card-content>
+          <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+              Habilitar
+            </ion-button>
+            <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+              Rechazar
+            </ion-button>
+      </ion-card-content>
+    </span>
+    <ng-template #elseBlock>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Editar Mesa
+              </ion-col>
+              <ion-col>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
+                  Confirmar
+                </ion-button>
+                <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
+                  Cancelar
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label><strong>Codigo</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditCodigo"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Tipo de mesa</ion-label>
+              <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo de mesa">
+                <ion-select-option value="Vip">Vip</ion-select-option>
+                <ion-select-option value="Fumadores">Fumadores</ion-select-option>
+                <ion-select-option value="Discapacitados">Discapacitados</ion-select-option>
+                <ion-select-option value="Normal">Normal</ion-select-option>
+              </ion-select>
+            </ion-item>
+    
+              <ion-item>
+                <ion-button (click)="fotoService.takePicture()">
+                  <ion-icon slot="icon-only" name="camera"></ion-icon>
+                </ion-button>
+              </ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="6" *ngFor="let photo of fotoService.photos">
+                    <img [src]="photo.data" />
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+      </ion-card-content>
+    </ng-template>
+  </ion-card>
+</ion-content>

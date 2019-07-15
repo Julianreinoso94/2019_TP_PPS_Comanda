@@ -33,7 +33,8 @@ export class ReservasService {
     return this.firestore.collection(`/Reservas/`).add({
       usuario: usuario,
       fechareserva: fechareserva,
-      horareserva: horareserva
+      horareserva: horareserva,
+      estado:"Pendiente de Aprobacion"
     
       
     })
