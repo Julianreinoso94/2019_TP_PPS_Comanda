@@ -137,6 +137,18 @@ TraerMesaPorCodigo($idProducto)
       .snapshotChanges();
   }
 
+  consultamesacliente($idProducto)
+  {
+    /*
+    var query = this.listaComidasRef.where("codigo", "==", $idProducto);
+    return query;
+    */
+
+      return this.firestore.collection('Mesas', ref => ref.where('cliente', '>=', $idProducto)
+      .where('cliente', '<=', $idProducto + '\uf8ff'))
+      .snapshotChanges();
+  }
+
 
   /*
   public TraerEmpleados(){
@@ -163,6 +175,7 @@ TraerMesaPorCodigo($idProducto)
     //this.firestore.doc('Mesas/'+id).update({ monto: monto });
     this.firestore.doc('Mesas/' + id).update({estado: estado})
   }
+
 
   EliminarMesa(record_id) {
   this.firestore.doc('Mesas/' + record_id).delete();

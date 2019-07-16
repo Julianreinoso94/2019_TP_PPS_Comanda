@@ -32,7 +32,7 @@ export class AppComponent {
           this.fcm.getToken().then(token => {
             console.log(token);
           });
-
+//Agregue esta función para recibir notificaciones push de Firebase Cloud Messaging.
           this.fcm.onNotification().subscribe(data => {
             console.log(data);
             if (data.wasTapped) {

@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class EventService {
   public clienteListRef: firebase.firestore.CollectionReference;
   public encuestaEmpleadoRef: firebase.firestore.CollectionReference;
   public listaEspera: firebase.firestore.CollectionReference;
-  constructor() {
+  constructor(private firestore: AngularFirestore) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.idUsuarioLogeado = user.uid;
@@ -225,7 +226,20 @@ export class EventService {
     });
   }
 
-  getListaEspera(): firebase.firestore.CollectionReference {
-    return this.listaEspera;
+  getListaEspera(){
+   // return this.listaEspera;
+    return this.firestore.collection('listaEspera').snapshotChanges();
+
+  }
+
+  AceptarClientelistaEspera(id,estado)
+  {
+    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+    this.firestore.doc('listaEspera/' + id).update({estado: estado})
+  }
+  EliminarClientelistaEspera(id)
+  {
+    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+    this.firestore.doc('listaEspera/' + id).delete();
   }
 }

@@ -66,12 +66,7 @@ Guardar
    </ion-card>
 
 
-  <ion-item>
-    <ion-label>Mesa</ion-label>
-    <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
-        <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
-    </ion-select>
-</ion-item>
+
 
   <ion-button
       expand="block"

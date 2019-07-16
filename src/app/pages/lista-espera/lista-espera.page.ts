@@ -6,26 +6,29 @@ import { EventService } from '../../services/event/event.service';
   styleUrls: ['./lista-espera.page.scss'],
 })
 export class ListaEsperaPage implements OnInit {
+  ngOnInit(): void {
+    throw new Error("Method not implemented.");
+  }
 
   public listaEspera: Array<any>;
   constructor(private eventService: EventService) {}
 
-  ngOnInit() {
-    this.eventService
-      .getListaEspera()
-      .get()
-      .then(listaEsperaSnapshot => {
-        this.listaEspera = [];
-        listaEsperaSnapshot.forEach(snap => {
-          this.listaEspera.push({
-            id: snap.id,
-            uid: snap.data().uid,
-            estado: snap.data().estado,
-            status: snap.data().status,
-          });
-          return false;
-        });
-      });
-  }
+  // ionViewDidLoad(){
+  //     this.eventService
+  //     .getListaEspera()
+  //     .get()
+  //     .then(listaEsperaSnapshot => {
+  //       this.listaEspera = [];
+  //       listaEsperaSnapshot.forEach(snap => {
+  //         this.listaEspera.push({
+  //           id: snap.id,
+  //           uid: snap.data().uid,
+  //           estado: snap.data().estado,
+  //           status: snap.data().status,
+  //         });
+  //         return false;
+  //       });
+  //     });
+  // }
 
 }

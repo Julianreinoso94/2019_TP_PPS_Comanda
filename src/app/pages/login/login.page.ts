@@ -94,14 +94,22 @@ export class LoginPage implements OnInit {
          console.log('Play clicked');
        }
      }, {
-       text: 'Anonimo',
+       text: 'Cliente2',
        icon: 'heart',
        handler: () => {
-         this.email="Anonimo@anonimo.com";
+         this.email="mario@gmail.com";
          this.password="123456";
          console.log('Favorite clicked');
        }
-     },
+     },{
+      text: 'Anonimo',
+      icon: 'heart',
+      handler: () => {
+        this.email="Anonimo@anonimo.com";
+        this.password="123456";
+        console.log('Favorite clicked');
+      }
+    },
      {
        text: 'Cocinero',
        icon: 'heart',

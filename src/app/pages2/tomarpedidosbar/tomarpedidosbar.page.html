@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Tomar Pedidos Bar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+ 
+  
+    <ion-card *ngFor="let item of pedidos">
+      <span *ngIf="!item.isEdit; else elseBlock">
+        <ion-card-header>
+          <ion-card-title> Pedido {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
+          <ion-card-subtitle>Estado: {{item.estadoPedido}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+                <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
+              </ion-button>
+              <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+                <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+        </ion-card-content>
+      </span>
+      <ng-template #elseBlock>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  Editar Pedido
+                </ion-col>
+                <ion-col>
+                </ion-col>
+                <ion-col>
+                  <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
+                    Confirmar
+                  </ion-button>
+                  <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
+                    Cancelar
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label><strong>Codigo</strong></ion-label>
+            <ion-input type="text" [(ngModel)]="item.EditCodigo"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Tiempo</ion-label>
+                <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Tiempo:">
+                    <ion-select-option value="5">5 minutos</ion-select-option>
+                    <ion-select-option value="10">10 minutos</ion-select-option>
+                    <ion-select-option value="15">15 minutos</ion-select-option>
+                    <ion-select-option value="20">20 minutos</ion-select-option>
+                    <ion-select-option value="30">30 minutos</ion-select-option>
+                    <ion-select-option value="40">40 minutos</ion-select-option>
+                    <ion-select-option value="50">50 minutos</ion-select-option>
+                    <ion-select-option value="60">1 hs</ion-select-option>
+                             </ion-select>
+              </ion-item>
+  
+              <ion-item>
+              <ion-label>Estado</ion-label>
+              <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione estado de pedido">
+                <ion-select-option value="Realizado">Realizado</ion-select-option>
+              </ion-select>
+            </ion-item>
+  
+        </ion-card-content>
+      </ng-template>
+    </ion-card>
+  
+  
+  </ion-content>

@@ -47,11 +47,11 @@ export class HabilitarReservasPage implements OnInit {
   }
 
   EditRecord(record) {
-    record.isEdit = true;
-    record.EditCodigo = record.codigo;
-    record.EditEstado = record.estado;
-    record.EditTipo = record.tipo;
-    record.EditCliente = record.cliente;
+    let codigo = record;
+    this.reservaserv.AceptarReservaPendiente(codigo,"aprobada");
+    this.mostrarToast("Se habilito con exito la reserva.", "successToast");
+
+    this.router.navigateByUrl('/home');
   }
   UpdateRecord(recordRow) {
     let record = {};
@@ -61,13 +61,12 @@ export class HabilitarReservasPage implements OnInit {
     record['cliente'] = recordRow.EditCliente;
    // this.mesasService.ModificarMesa(recordRow.id, record);
     recordRow.isEdit = false;
-    this.mostrarToast("Se editó la mesa con exito", "successToast");
-    this.router.navigateByUrl('/alta-mesa');
+    this.router.navigateByUrl('/home');
   }
 
 
   RemoveRecord(rowID) {
- //   this.mesasService.EliminarMesa(rowID);
+    this.reservaserv.EliminarReserva(rowID);
     this.mostrarToast("Se eliminó la Reserva con exito", "successToast");
     this.router.navigateByUrl('/alta-mesa');
   }
@@ -83,6 +82,7 @@ export class HabilitarReservasPage implements OnInit {
     });
     return await toast.present();
   }
+  
 
 
 }

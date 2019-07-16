@@ -52,6 +52,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
      showFlipCameraButton: true
  }
 }
+
    ngOnInit() {
      this.crudService.read_Students().subscribe(data => {
 

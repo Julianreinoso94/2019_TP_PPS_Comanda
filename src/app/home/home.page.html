@@ -9,6 +9,9 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-button  expand="block" color="warning" (click)="mesa()" >
+    prueba botones
+      </ion-button>
 <ion-content>
     <img class = "icon" src="assets/icon/home1.png">
 
@@ -65,7 +68,7 @@
    <ion-button  *ngIf=" userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/alta-pedido">
      Alta Pedido
    </ion-button>
-  <ion-button expand="block" color="primary" routerLink="/encuesta-empleado">
+  <ion-button  *ngIf="userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/encuesta-empleado">
     Encuesta Empleado
   </ion-button>
   <ion-button *ngIf="userProfile?.perfil=='cliente' "  expand="block" color="primary" routerLink="/juego-postre">
@@ -83,12 +86,22 @@
   <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/ingreso">
    Listado Ingreso
   </ion-button>
-  <ion-button *ngIf="userProfile?.perfil=='cocinero' || userProfile?.perfil=='bartender' " expand="block" color="primary" routerLink="/tomarpedidococina">
-  Pedido Cocinero
+  <ion-button *ngIf="userProfile?.perfil=='cocinero' " expand="block" color="primary" routerLink="/tomarpedidococina">
+  Tomar Pedidos Cocina
   </ion-button>
-  <ion-button *ngIf="userProfile?.perfil=='cocinero' || userProfile?.perfil=='bartender' " expand="block" color="primary" routerLink="/carta">
-   Carta
+  <ion-button *ngIf="userProfile?.perfil=='bartender'  " expand="block" color="primary" routerLink="/tomarpedidosbar">
+    Tomar Pedidos Bar
     </ion-button>
 
 
+  <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/carta">
+   Carta
+    </ion-button>
+    <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" (click)="scanCodepag()" >
+      Escanea tu Codigo!
+       </ion-button>
+       <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"  routerLink="/habilitar-reservas"  >
+        Habilitar Reservas
+           </ion-button>     
+       
 </ion-content>

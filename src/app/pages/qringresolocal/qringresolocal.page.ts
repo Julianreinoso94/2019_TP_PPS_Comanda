@@ -25,14 +25,7 @@ export class QringresolocalPage implements OnInit {
   }
 
   VerificarDisponibilidadMesa() {
-     this.barcodeScanner
-       .scan(this.barcodeScannerOptions)
-       .then(barcodeData => {
-         this.eventService.guardarListaEspera();
-       })
-       .catch(err => {
-         console.log("Error", err);
-       });
+  
    }
 
    // cargarQrIngreso(datos: any) {

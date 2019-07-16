@@ -39,6 +39,12 @@ export class ReservasService {
       
     })
   }
+  AceptarReservaPendiente(id,monto)
+{
+  //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+  this.firestore.doc('Mesas/' + id).update({monto: monto})
+}
+
   TraerReservas() {
     // console.log("entro");
     return this.firestore.collection('Reservas').snapshotChanges();
@@ -63,6 +69,8 @@ TraerMesaPorCodigo($idProducto)
     return this.listaMesasRef.doc(mesaid);
   }
 //ModificarMontoDeunaMesa
+
+
   ModificarMontoDeunaMesa(id,monto)
   {
     //this.firestore.doc('Mesas/'+id).update({ monto: monto });
