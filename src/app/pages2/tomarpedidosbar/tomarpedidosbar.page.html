@@ -3,26 +3,25 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title>Tomar Pedidos Bar</ion-title>
+      <ion-title>Tomar Pedidos Bartender</ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content padding>
  
   
-    <ion-card *ngFor="let item of pedidos">
-      <span *ngIf="!item.isEdit; else elseBlock">
+    <ion-card *ngFor="let item of pedidos"  >
+      <div *ngIf="item?.tipoPedido =='bebida' " >
+            <span *ngIf="!item.isEdit; else elseBlock" >
         <ion-card-header>
           <ion-card-title> Pedido {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
           <ion-card-subtitle>Estado: {{item.estadoPedido}}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content  >
             <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
                 <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
               </ion-button>
-              <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
-                <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
-              </ion-button>
+             
         </ion-card-content>
       </span>
       <ng-template #elseBlock>
@@ -75,6 +74,8 @@
   
         </ion-card-content>
       </ng-template>
+    </div>
+  
     </ion-card>
   
   

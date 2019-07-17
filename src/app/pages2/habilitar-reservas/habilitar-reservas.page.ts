@@ -47,8 +47,8 @@ export class HabilitarReservasPage implements OnInit {
   }
 
   EditRecord(record) {
-    let codigo = record;
-    this.reservaserv.AceptarReservaPendiente(codigo,"aprobada");
+    // let codigo = record;
+    this.reservaserv.AceptarReservaPendiente(record,"aprobada");
     this.mostrarToast("Se habilito con exito la reserva.", "successToast");
 
     this.router.navigateByUrl('/home');
@@ -68,7 +68,7 @@ export class HabilitarReservasPage implements OnInit {
   RemoveRecord(rowID) {
     this.reservaserv.EliminarReserva(rowID);
     this.mostrarToast("Se eliminó la Reserva con exito", "successToast");
-    this.router.navigateByUrl('/alta-mesa');
+    this.router.navigateByUrl('/home');
   }
   async mostrarToast(miMsj:string,color:string)
   {

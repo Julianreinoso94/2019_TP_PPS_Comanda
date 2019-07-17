@@ -188,7 +188,24 @@ TraerMesaPorCodigo($idProducto)
     this.firestore.doc('Mesas/' + id).update({descuento10: valor})
   }
 
+  AgregarDescBebida(id, valor)
+  {
+    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+    this.firestore.doc('Mesas/' + id).update({descuentoBebida: valor})
+  }
 
+  AgregarDescPostre(id, valor)
+  {
+    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+    this.firestore.doc('Mesas/' + id).update({descuentoPostre: valor})
+  }
+
+  
+  Agregapropina(id, valor)
+  {
+    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+    this.firestore.doc('Mesas/' + id).update({propina: valor})
+  }
 
 
   //traer preciototal de mesa

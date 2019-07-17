@@ -16,14 +16,14 @@
 
     <ion-item>
         <ion-label>Mesa</ion-label>
-        <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
+        <ion-select [(ngModel)]="mimesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
             <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Monto Acumulado Mesa</ion-label>
       <ion-input
-        [(ngModel)]="montoTotal" value={{mesaActual?.monto}}
+        [(ngModel)]="montoTotal" value={{monto}}
         type="text"
        >
       </ion-input>
@@ -75,13 +75,13 @@
       </ion-card-title>
     </ion-card-header>
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label>Tipo de pedido</ion-label>
         <ion-select [(ngModel)]="tipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo de pedido">
           <ion-select-option value="Bebida">Bebida</ion-select-option>
           <ion-select-option value="Cocina">Comida</ion-select-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
 
     <ion-item>
       <ion-label position="stacked">Precio total Pedido</ion-label>
@@ -93,13 +93,13 @@
     </ion-item>
 
 
-
+<!-- 
   <ion-item>
     <ion-label>Seleccionar Mozo</ion-label>
     <ion-select [(ngModel)]="idMozo" ok-text="Seleccionar" cancel-text="Cancelar" >
         <ion-select-option *ngFor="let item of  empleados" value="{{item.id}}">{{item.apellido}}</ion-select-option>
     </ion-select>
-</ion-item>
+</ion-item> -->
 
 
     <ion-button

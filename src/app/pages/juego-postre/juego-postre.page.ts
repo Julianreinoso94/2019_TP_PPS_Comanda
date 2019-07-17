@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
+
+import { Injectable } from '@angular/core';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import { MesasService } from 'src/app/services/mesas/mesas.service';
+// import { EventService } from '../services/event/event.service';
 @Component({
   selector: 'app-juego-postre',
   templateUrl: './juego-postre.page.html',
@@ -9,6 +17,13 @@ import { Router } from '@angular/router';
 
 // Clase de Juegos
 export class JuegoPostrePage implements OnInit {
+
+  
+  public currentUser: firebase.User;
+  uidUsuario:any;
+
+
+
   private startDelay = 1000;
   private lightDuration = 500;
   private lightDelay = 1000;
@@ -22,6 +37,8 @@ export class JuegoPostrePage implements OnInit {
   private msg: string;
   private jugando: boolean;
   private audio: any[];
+  codigoMesa:any;
+  mesas : any;
 
   // NO CAMBIAR LA LÓGICA DEL JUEGO
   // ES UN JUEGO A 11 VUELTAS CONSECUTIVAS PARA GANAR
@@ -31,7 +48,32 @@ export class JuegoPostrePage implements OnInit {
 
 
   // Constructor
-  constructor(private router: Router) {
+  constructor(private router: Router, private mesasService: MesasService) {  
+    this.mesasService.TraerMesas().subscribe(data => {
+
+      this.mesas = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          codigo: e.payload.doc.data()['codigo'],
+          estado: e.payload.doc.data()['estado'],
+          tipo: e.payload.doc.data()['tipo'],
+          cantPersonas: e.payload.doc.data()['cantPersonas'],
+          cliente: e.payload.doc.data()['cliente'],
+          monto: e.payload.doc.data()['monto'],
+          propina: e.payload.doc.data()['propina'],
+          descuento10: e.payload.doc.data()['descuento10'],
+          descuentoBebida: e.payload.doc.data()['descuentoBebida'],
+          descuentoPostre: e.payload.doc.data()['descuentoPostre'],
+        };
+      })
+      console.log(this.mesas);
+    });
+    firebase.auth().onAuthStateChanged(user => {
+ 
+      this.currentUser = user;
+      this.uidUsuario = user.uid});
+    
 
     this.game = new Game();
     this.isStrict = false;
@@ -164,16 +206,34 @@ export class JuegoPostrePage implements OnInit {
     if (this.game.getPlayer().join(' ') === this.game.getHistory().join(' ')) {
       // Check Win 20 levels
       // CAMBIADO AL NIVEL 11
-      if (this.game.getHistory().length === 11) {
+      if (this.game.getHistory().length === 3) {
         setTimeout(() => {
           // GANASTE EL JUEGO - Julián
+         alert("Felicitaciones Ganaste! Tenes un postre gratis!!!");
+
           this.msg = 'Excelente. Ganaste!';
           this.isStart = true;
+
+          ////////////////////////////////////////////////////////////////////////hacer el alta
+          this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN ALGUNA MESA
+            if (element.cliente == this.uidUsuario)
+            { 
+              this.codigoMesa=element.id;
+              
+            }
+            
+          });
+          this.mesasService.AgregarDescPostre(this.codigoMesa, true);
+
+          this.router.navigateByUrl('home');
+
         }, delay + 500);
       } else {
         // Right -> Next level
         setTimeout(() => {
           this.msg = 'Right answer';
+         // this.router.navigateByUrl('home');
+
         }, delay + 500);
 
         setTimeout(() => {
@@ -205,7 +265,7 @@ export class JuegoPostrePage implements OnInit {
 
           // PERDISTE
           // ACA SE SALE DEL JUEGO - Julián
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('home');
         }, 3000);
 
       }
@@ -268,4 +328,6 @@ export class Game {
   setWin(param: boolean) {
     this.isWin = param;
   }
+
+   
 }

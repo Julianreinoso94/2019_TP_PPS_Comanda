@@ -27,6 +27,7 @@ export class TomarpedidococinaPage implements OnInit {
       public perfil:string;
       public valor="hola";
       price: any = '';
+      mimesa:Array<any>;
 
 
   constructor(    public toastCtrl: ToastController,
@@ -54,6 +55,13 @@ export class TomarpedidococinaPage implements OnInit {
             console.log(this.pedidos);
           });
         
+    this.pedidos.forEach(element => {//TRAE MESA DEL USUARIO
+      if(element.tipoPedido == "bebida")
+      {
+        this.mimesa = element.id
+      }
+    });
+
           this.profileService
             .getUserProfile()
             .get()
@@ -66,6 +74,7 @@ export class TomarpedidococinaPage implements OnInit {
             });
           //  console.log(this.userProfile.perfil);
   }
+
 
   async mostrarToast(miMsj:string,color:string)
   {
@@ -90,7 +99,7 @@ export class TomarpedidococinaPage implements OnInit {
 
   UpdateRecord(recordRow) {
     let record = {};
-    record['estadoPedido'] = recordRow.EditEstado;
+    record['estadoPedido'] ="ListoParaentregar";
     record['tiempoEstimado'] = recordRow.EditTipo;
     this.pedidosService.ModificarPedido(recordRow.id, record);
     recordRow.isEdit = false;

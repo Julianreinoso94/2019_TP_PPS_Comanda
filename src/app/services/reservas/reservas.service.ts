@@ -28,13 +28,16 @@ export class ReservasService {
     usuario: string,
     fechareserva: string,
     horareserva: string,
+    cantidad:string
 
       ): Promise<firebase.firestore.DocumentReference> {
     return this.firestore.collection(`/Reservas/`).add({
       usuario: usuario,
       fechareserva: fechareserva,
       horareserva: horareserva,
-      estado:"Pendiente de Aprobacion"
+      estado:"Pendiente de Aprobacion",
+      cantidad:cantidad,
+      mesa:""
     
       
     })
@@ -42,7 +45,7 @@ export class ReservasService {
   AceptarReservaPendiente(id,monto)
 {
   //this.firestore.doc('Mesas/'+id).update({ monto: monto });
-  this.firestore.doc('Mesas/' + id).update({monto: monto})
+  this.firestore.doc('Reservas/' + id).update({estado: monto})
 }
 
   TraerReservas() {
@@ -50,7 +53,7 @@ export class ReservasService {
     return this.firestore.collection('Reservas').snapshotChanges();
   }
   EliminarReserva(record_id) {
-    this.firestore.doc('Mesas/' + record_id).delete();
+    this.firestore.doc('Reservas/' + record_id).delete();
     }
 
 TraerMesaPorCodigo($idProducto)

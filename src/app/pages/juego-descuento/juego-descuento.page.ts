@@ -1,17 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { MesasService } from '../../services/mesas/mesas.service';
-
+import { Injectable } from '@angular/core';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import { MesasService } from 'src/app/services/mesas/mesas.service';
+import { Router } from '@angular/router';
+// import { EventService } from '../services/event/event.service';
 @Component({
   selector: 'app-juego-descuento',
   templateUrl: './juego-descuento.page.html',
   styleUrls: ['./juego-descuento.page.scss'],
 })
 export class JuegoDescuentoPage implements OnInit {
+  public currentUser: firebase.User;
+  uidUsuario:any;
 
     // Definimos las variables
     letra: string = '';
-    nombres: any = ['CERVEZA', 'COMANDA', 'MILANESA', 'COCINA', 'VINO'];
+    nombres: any = [ 'VINO'];
     nombreSecreto: any = this.palabraAleatoria(0, (this.nombres.length - 1));
     palabra: any = '';
     muestraHuecos: any = this.muestraHuecosPalabra();
@@ -28,7 +35,12 @@ export class JuegoDescuentoPage implements OnInit {
     // Creamos un array para guardar las letras que se van seleccionando.
     controlLetras = new Array;
   
-    constructor(public navCtrl: NavController, private mesasService: MesasService) {  
+    constructor(public navCtrl: NavController,private router: Router, private mesasService: MesasService) {  
+
+      firebase.auth().onAuthStateChanged(user => {
+ 
+        this.currentUser = user;
+        this.uidUsuario = user.uid});
       this.mesasService.TraerMesas().subscribe(data => {
 
         this.mesas = data.map(e => {
@@ -59,9 +71,7 @@ export class JuegoDescuentoPage implements OnInit {
   
     // Método que valida la letra seleccionada.	
     public compruebaLetra() {
-      console.log(this.codigoMesa);
 
-      if(this.codigoMesa  != undefined)
       {
       // Formateamos a mayúsculas para mejorar la legibilidad.
       let letraMayusculas = this.letra.toUpperCase();
@@ -146,10 +156,7 @@ export class JuegoDescuentoPage implements OnInit {
         this.mensaje = 'Seleccione una letra del listado.';
       }
     }
-    else
-    {
-      this.mensaje = 'Seleccione una mesa para poder jugar';
-    }
+   
     }
   
     public muestraHuecosPalabra() {
@@ -185,6 +192,14 @@ export class JuegoDescuentoPage implements OnInit {
   
       // Ganador
       if (valor == 'gana') { 
+        this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN ALGUNA MESA
+          if (element.cliente == this.uidUsuario)
+          { 
+            this.codigoMesa=element.id;
+            
+          }
+          
+        });
         this.mensaje = 'Enhorabuena!, Has acertado la palabra secreta. Has conseguido un 10% de descuento en tu cuenta.';
         this.ganador = 1;
 //        console.log("codigo mesa:" + this.codigo);
@@ -192,6 +207,9 @@ export class JuegoDescuentoPage implements OnInit {
         
         //console.log(this.mesasService.TraerMesaPorCodigo(this.codigo));
         this.mesasService.AgregarDesc10(this.codigoMesa, this.valor);
+        this.router.navigateByUrl('home');
+
+        this
 
       }		
     }

@@ -20,6 +20,7 @@ import { ProfileService } from '../../services/user/profile.service';
 export class TomarpedidosPage implements OnInit {
 
   pedidos : any;
+  pedidosentregar: any;
 
       public userProfile: any;
       public birthDate: Date;
@@ -32,8 +33,9 @@ export class TomarpedidosPage implements OnInit {
       private pedidosService: PedidosService, private authService: AuthService,
           private profileService: ProfileService) { }
 
-  ngOnInit() {
-    this.pedidosService.TraerPedidosPorTipoBebida().subscribe(data => {
+          ngOnInit() {
+            
+    this.pedidosService.confirmarpedidosclientes().subscribe(data => {
 
             this.pedidos = data.map(e => {
               return {
@@ -52,17 +54,35 @@ export class TomarpedidosPage implements OnInit {
             })
             console.log(this.pedidos);
           });
-        
-          this.profileService
-            .getUserProfile()
-            .get()
-            .then( userProfileSnapshot => {
-              this.userProfile = userProfileSnapshot.data();
-              console.log(this.userProfile);
-              this.birthDate = userProfileSnapshot.data().birthDate;
-              this.perfil= userProfileSnapshot.data().perfil;
-              //alert(this.perfil)
-            });
+          this.pedidosService.TraerPedidosListoParaentregar().subscribe(data => {
+
+            this.pedidosentregar = data.map(e => {
+              return {
+                id: e.payload.doc.id,
+                isEdit: false,
+                codigoPedido: e.payload.doc.data()['codigoPedido'],
+                codigoProducto: e.payload.doc.data()['codigoProducto'],
+                codigoMesa: e.payload.doc.data()['codigoMesa'],
+                detallePedido: e.payload.doc.data()['detallePedido'],
+                estadoPedido: e.payload.doc.data()['estadoPedido'],
+                tipoPedido: e.payload.doc.data()['tipoPedido'],
+                cantidad: e.payload.doc.data()['cantidad'],
+                monto: e.payload.doc.data()['monto'],
+                idMozo: e.payload.doc.data()['idEmpleado']
+              };
+            })
+            console.log(this.pedidos);
+          });
+          // this.profileService
+          //   .getUserProfile()
+          //   .get()
+          //   .then( userProfileSnapshot => {
+          //     this.userProfile = userProfileSnapshot.data();
+          //     console.log(this.userProfile);
+          //     this.birthDate = userProfileSnapshot.data().birthDate;
+          //     this.perfil= userProfileSnapshot.data().perfil;
+          //     //alert(this.perfil)
+          //   });
           //  console.log(this.userProfile.perfil);
   }
 
@@ -84,6 +104,27 @@ export class TomarpedidosPage implements OnInit {
     record.isEdit = true;
     record.EditEstado = record.estado;
     record.EditTipo = record.tipo;
+
+  }
+
+
+  entregarPedido(id)
+
+  {
+    alert("entregar");
+    this.pedidosService.entregarpedido(id, "Entregado");
+
+  }
+  rechazarPedido(id)
+
+  {
+    this.pedidosService.entregarpedido(id, "Rechazado");
+
+  }
+  PedidoAprobado(id)
+
+  {
+    this.pedidosService.entregarpedido(id, "EnProceso");
 
   }
 

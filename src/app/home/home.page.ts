@@ -158,8 +158,7 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
         console.log("Error", err);
       });
   }
- 
- 
+
   cargarDatosqr(datos: any) {
     // alert(datos);
     let parsedData = datos.text.split('@');
@@ -180,27 +179,48 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
 
         this.listaespera();
         break;
+        case "juego":
+          this.cargarqrJuegos(segundodato);
+          break;
       case "Propina":
         alert("propina");
+       let mesaClienteSentado;
+        this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN ALGUNA MESA
+          if (element.cliente == this.uidUsuario)
+          { 
+            mesaClienteSentado=element.id;
+            
+          }
+          
+        });
+       
 
         if(segundodato == "cero")
         {
+
           alert(" propina cero");
+          this.mesasService.Agregapropina(mesaClienteSentado,"cero")
         }
         if(segundodato == "diez")
         {
+          this.mesasService.Agregapropina(mesaClienteSentado,"diez");
+          
           alert(" propina diez");
         }
         if (segundodato == "cinco")
         {
-          alert(" propina cinco");
+          this.mesasService.Agregapropina(mesaClienteSentado,"cinco");
         }
         if(segundodato == "quince")
         {
-          alert("propina quince")
+          alert("propina quince");
+          this.mesasService.Agregapropina(mesaClienteSentado,"quince")
+
         }
         if(segundodato=="veinte")
         {
+          this.mesasService.Agregapropina(mesaClienteSentado,"veinte")
+
           alert("propina veinte");
         }
 
@@ -338,6 +358,80 @@ let estasinreserva=true;
        
    
     }
+
+     
+ cargarqrJuegos(tipojuego: string)
+ {
+   let postre=false;
+   let descuento10=false;
+   let bebida=false;
+   let estasentado=false;
+  this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN ALGUNA MESA
+    if (element.cliente == this.uidUsuario)
+    { 
+      postre:element.descuentoPostre;
+      descuento10=element.descuento10;
+      bebida=element.bebida;
+      estasentado=true;
+      
+    }
+    
+  });
+
+  if(!estasentado)
+  {
+    this.mostrarToast("Para jugar debe estar sentado en una mesa", "successToast");
+
+  }
+
+
+  if( tipojuego == "bebidagratis" && estasentado)
+  {
+    if(!bebida)
+    {
+      this.router.navigateByUrl('juego-descuento');
+
+
+    }
+    else
+    {
+
+      this.mostrarToast("No puede participar nuevamente.Disculpe", "successToast");
+      this.router.navigateByUrl('home');
+
+    }
+  }
+  if(tipojuego =="postregratis" && estasentado)
+  {
+    if(!postre)
+    {
+      this.router.navigateByUrl('juego-postre');
+      this.router.navigateByUrl('home');
+
+    }
+    else
+    {
+      this.mostrarToast("No puede participar nuevamente.Disculpe", "successToast");
+
+    }
+
+  }
+  if(tipojuego =="diezdescuento" && estasentado)
+  {
+    if(!descuento10)
+    {
+      this.router.navigateByUrl('adivinar-numero');
+
+    }
+    else
+    {
+      this.mostrarToast("No puede participar nuevamente.Disculpe", "successToast");
+      this.router.navigateByUrl('home');
+
+    }
+    
+  }
+ }
 
   async mostrarToast(miMsj:string,color:string)
   {

@@ -8,10 +8,16 @@ import { ComidasService } from '../services/comidas.service';
 import { and } from '@angular/router/src/utils/collection';
 
 
+import 'firebase/auth';
+import 'firebase/firestore';
+
 @Injectable({
   providedIn: 'root'
 })
 export class PedidosService {
+  uidcliente:any;
+  public currentUser: firebase.User;
+
 
   public fecha =  new Date();
 
@@ -25,14 +31,20 @@ export class PedidosService {
           .collection('/Pedidos');
       }
     });
+
+    firebase.auth().onAuthStateChanged(user => {
+ 
+      this.currentUser = user;
+      this.uidcliente = user.uid});
+    
   }
 
 
   crearPedido(
     codigoPedido: number,
-    codigoMesa: number,
-    codigoProducto: number,
-        tipoPedido: string,
+    codigoMesa: string,
+    codigoProducto: string,
+    tipoproducto: string,
         estadoPedido: string,
     cantidad: number,
     idEmpleadomozo: number,
@@ -46,11 +58,12 @@ export class PedidosService {
       codigoPedido: codigoPedido,
       codigoMesa: codigoMesa,
       codigoProducto: codigoProducto,
-      tipoPedido: tipoPedido,
+      tipoPedido: tipoproducto,
       estadoPedido: estadoPedido,
       cantidad: cantidad,
       idEmpleadomozo: idEmpleadomozo,      //horaEntrega: mesaCliente,
       monto:preciototalpedido,
+      idCliente:this.uidcliente,
       tiempoEstimado: this.fecha
       //propina: propina
     });
@@ -96,23 +109,9 @@ export class PedidosService {
       .snapshotChanges();
     }
 
-    TraerPedidosPorTipoCocina()
-    {
-      return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Cocina")
-      .where('tipoPedido', '<=', "Cocina" + '\uf8ff'))
-      .snapshotChanges();
-    }
 
 
-    TraerPedidosPorTipoBebida()
-    {
-      return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Bebida")
-      .where('tipoPedido', '<=', "Bebida" + '\uf8ff'))&&
-      this.firestore.collection('Pedidos', ref => ref.where('estadoPedido', '>=', "Pendiente")
-      .where('estadoPedido', '<=', "Pendiente" + '\uf8ff'))
-  
-      .snapshotChanges();
-    }
+    
    
     //traer pedidos  por mesa
   TraerPedidosPorMesa($id)
@@ -138,7 +137,70 @@ export class PedidosService {
     }
 
 
+   //PARA MOZO///////////////////////////////////////////////////////////////////////////////////////
+   
+   confirmarpedidosclientes()
+   {
+     return this.firestore.collection('Pedidos', ref => ref.where('estadoPedido', '>=', "PendienteDeAprobacion")
+     .where('estadoPedido', '<=', "PendienteDeAprobacion" + '\uf8ff'))
+ 
+     .snapshotChanges();
+   }
 
+   TraerPedidosListoParaentregar()
+   {
+     return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Bebida")
+     .where('tipoPedido', '<=', "Bebida" + '\uf8ff'))&&
+     this.firestore.collection('Pedidos', ref => ref.where('estadoPedido', '>=', "ListoParaentregar")
+     .where('estadoPedido', '<=', "ListoParaentregar" + '\uf8ff'))
+ 
+     .snapshotChanges();
+   }
+//cocinero o barman
+   TraerPedidosPorTipoCocina()
+   {
+     return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Cocina")
+     .where('tipoPedido', '<=', "Cocina" + '\uf8ff'))
+     .snapshotChanges();
+   }
+
+
+   TraerPedidosPorTipoBebida()
+   {
+     return this.firestore.collection('Pedidos', ref => ref.where('tipoPedido', '>=', "Bebida")
+     .where('tipoPedido', '<=', "Bebida" + '\uf8ff'))&&
+     this.firestore.collection('Pedidos', ref => ref.where('estadoPedido', '>=', "EnProceso")
+     .where('estadoPedido', '<=', "EnProceso" + '\uf8ff'))
+ 
+     .snapshotChanges();
+
+    // return this.listaPedidosRef.where('tipoPedido', '==', 'cocina').where('estadoPedido', '==', 'Enproceso')
+
+   }
+
+   entregarpedido(id,estado)
+   {
+     //this.firestore.doc('Mesas/'+id).update({ monto: monto });
+     this.firestore.doc('Pedidos/' + id).update({estadoPedido: estado})
+   }
+
+   //CLIENTE CONFIRMA RECEPCION
+   
+   confirmarRecepcion(id)
+   {
+     return this.firestore.collection('Pedidos', ref => ref.where('idCliente', '>=', id)
+     .where('idCliente', '<=',id + '\uf8ff'))
+ 
+     .snapshotChanges();
+   }
+   
+
+   probando()
+   {
+    
+    return this.listaPedidosRef.where('tipoPedido', '==', 'Bebida').where('estadoPedido', '==', 'Enproceso')
+
+   }
 
 
 

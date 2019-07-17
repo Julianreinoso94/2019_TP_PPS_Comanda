@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Te llegaron los siguientes pedidos?</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+      <h1>Pedidos Pendientes de Aprobacion</h1>
+
+  
+    <ion-card *ngFor="let item of pedidos"  >
+        <div *ngIf="item?.estadoPedido =='Entregado'">
+
+      <span *ngIf="!item.isEdit; else elseBlock" >
+        <ion-card-header > 
+          <ion-card-title> Pedido {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
+          <ion-card-subtitle>Estado: {{item.estadoPedido}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content  >
+            <ion-button shape="round" color="secondary" size="small" (click)="
+            confirmado(item.id)">
+            Confirmado
+            </ion-button>
+           
+        </ion-card-content>
+      </span>
+    </div>
+
+    </ion-card>
+  </ion-content>
+  
