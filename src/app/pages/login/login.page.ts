@@ -79,7 +79,6 @@ export class LoginPage implements OnInit {
        }
      }, {
        text: 'Bartender',
-       icon: 'share',
        handler: () => {
          this.email="bartender@bartender.com";
          this.password="123456";
@@ -87,7 +86,6 @@ export class LoginPage implements OnInit {
        }
      }, {
        text: 'Cliente',
-       icon: 'arrow-dropright-circle',
        handler: () => {
          this.email="cliente@cliente.com";
          this.password="123456";
@@ -95,7 +93,6 @@ export class LoginPage implements OnInit {
        }
      }, {
        text: 'Cliente2',
-       icon: 'heart',
        handler: () => {
          this.email="mario@gmail.com";
          this.password="123456";
@@ -103,7 +100,6 @@ export class LoginPage implements OnInit {
        }
      },{
       text: 'Anonimo',
-      icon: 'heart',
       handler: () => {
         this.email="Anonimo@anonimo.com";
         this.password="123456";
@@ -112,7 +108,6 @@ export class LoginPage implements OnInit {
     },
      {
        text: 'Cocinero',
-       icon: 'heart',
        handler: () => {
          this.email="cocinero@cocinero.com";
          this.password="123456";

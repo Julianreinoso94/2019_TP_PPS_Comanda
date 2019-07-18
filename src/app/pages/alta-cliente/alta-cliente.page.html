@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cargar Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <img class = "icon" src="assets/icon/empleados2.png">
+
+  <div class="" *ngIf="loading">
+    <ion-spinner name="dots" color="dark" ></ion-spinner>
+  </div>
+
+
+<div class="" *ngIf="!loading">
+
+<ion-item>
+  <ion-label position="stacked">Nombre</ion-label>
+    <ion-input
+      [(ngModel)]="unUsuario.nombre"
+      type="text"
+      name="nombre"
+      placeholder="Nombre"
+    >
+  </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="stacked">Apellido</ion-label>
+    <ion-input
+      [(ngModel)]="unUsuario.apellido"
+      type="text"
+      placeholder="Apellido"
+      name="apellido"
+    >
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="stacked">DNI</ion-label>
+    <ion-input
+      [(ngModel)]="unUsuario.dni"
+      type="text"
+      placeholder="Ingresa dni"
+      name="dni"
+    >
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label position="stacked">Correo</ion-label>
+      <ion-input
+        [(ngModel)]="unUsuario.email"
+        type="text"
+        placeholder="Ingresa correo"
+        name="correo"
+      >
+      </ion-input>
+</ion-item>
+
+<ion-item>
+      <ion-label position="stacked">Clave</ion-label>
+        <ion-input
+          [(ngModel)]="unUsuario.clave"
+          type="text"
+          placeholder="Ingresa clave"
+          name="clave"
+        >
+      </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-button (click)="SacarFoto()">
+      <ion-icon slot="icon-only" name="camera"></ion-icon>
+    </ion-button>
+</ion-item>
+
+<ion-button
+  expand="block"
+  (click)="scanear()"
+  >
+  Scannear DNI
+</ion-button>
+
+<ion-button
+  expand="block"
+  (click)="enviar()"
+  >
+  Guardar
+</ion-button>
+
+</div>
+</ion-content>

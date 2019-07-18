@@ -67,6 +67,8 @@ const routes: Routes = [
   { path: 'habilitar-reservas', loadChildren: './pages2/habilitar-reservas/habilitar-reservas.module#HabilitarReservasPageModule' },
   { path: 'qr', loadChildren: './pages2/qr/qr.module#QrPageModule' },
   { path: 'second/:price', loadChildren: './pages2/second/second.module#SecondPageModule' },  { path: 'tomarpedidosbar', loadChildren: './pages2/tomarpedidosbar/tomarpedidosbar.module#TomarpedidosbarPageModule' },
+  { path: 'tipo-registro', loadChildren: './pages/tipo-registro/tipo-registro.module#TipoRegistroPageModule' },
+  { path: 'alta-cliente', loadChildren: './pages/alta-cliente/alta-cliente.module#AltaClientePageModule' },
 
 
 

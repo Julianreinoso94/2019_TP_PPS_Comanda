@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>tipo-registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <br>
+    <img class = "icon" src="assets/icon/empleados2.png">
+  <div class="" *ngIf="loading">
+      <ion-spinner name="dots" color="dark" ></ion-spinner>
+  </div>
+
+  <br>
+  <ion-button
+  expand="block"
+  routerLink="/alta-cliente"
+  >
+  Cliente Registrado
+  </ion-button>
+<br>
+  <ion-button
+  expand="block"
+  routerLink="/cliente-create"
+  >
+  Cliente Anonimo
+  </ion-button>
+
+
+</ion-content>

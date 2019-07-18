@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import {EmpleadosService} from '../../services/empleados/empleados.service';
+import { AngularFirestore } from "@angular/fire/firestore";
 
 
 @Injectable({
@@ -13,6 +14,7 @@ export class AuthService {
 public userProfile: firebase.firestore.DocumentReference;
 
   constructor(    private empleadosService: EmpleadosService,
+    private db : AngularFirestore
     ) { }
 
   loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
@@ -91,4 +93,47 @@ public userProfile: firebase.firestore.DocumentReference;
   logoutUser(): Promise<void> {
     return firebase.auth().signOut();
   }
+
+  registerUser(email:string, password:string){
+    return firebase.auth().createUserWithEmailAndPassword( email, password)
+    .then((res)=>{
+     console.log("el usuario se ha creado exitosamente")
+    })
+    .catch(err=>Promise.reject(err))
+ }
+
+ //this.unUsuario.email,this.unUsuario.clave, this.unUsuario.dni, this.unUsuario.nombre
+ register(email : string, password : string, dni: string, nombre: string, apellido: string, foto:string){
+
+  return new Promise ((resolve, reject) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then( res =>{
+        // console.log(res.user.uid);
+      const uid = res.user.uid;
+        this.db.collection('cliente').doc(uid).set({
+          //name : name,
+          uid : uid,
+          nombre: nombre,
+          perfil: "Cliente",
+          dni: dni,
+          email: email,
+          clave: password,
+          apellido: apellido, 
+          foto: foto
+        })
+
+        this.db.collection('userProfile').doc(uid).set({
+          //name : name,
+          uid : uid,
+          //nombre: nombre,
+          perfil: "cliente",
+          //dni: dni,
+          email: email,
+          //clave: password
+        })
+      
+      resolve(res)
+    }).catch( err => reject(err))
+  })
+}
+
 }

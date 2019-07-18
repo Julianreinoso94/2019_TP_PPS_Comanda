@@ -153,15 +153,22 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
            //this.urlwpa="";
            var source = "";
            var storage = firebase.storage();
-           storage.ref("FotosSupervisor/"+this.filename).getDownloadURL().then(url => {
-            // alert(url);
-            let record = {};
-            record['nombre'] = this.nombre;
-            record['apellido'] = this.apellido;
-            record['dni'] = this.dni;
-            record['cuil'] = this.cuil;
-            record['foto'] =url;
-            record['perfil'] = this.filename;
+
+           let record = {};
+           record['nombre'] = this.nombre;
+           record['apellido'] = this.apellido;
+           record['dni'] = this.dni;
+           record['cuil'] = this.cuil;
+           record['foto'] ="";
+           record['perfil'] = this.perfil;
+
+           if(this.filename != undefined){
+
+            storage.ref("FotosSupervisor/"+this.filename).getDownloadURL().then(url => {
+              // alert(url);
+              record['foto'] =url;
+            });
+          }
 
             this.crudService.create_NewStudent(record).then(resp => {
               this.nombre = "";
@@ -176,9 +183,6 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
               .catch(error => {
                 console.log(error);
               });
-
-          });
-
         }//fin metodo
 
         Volver()

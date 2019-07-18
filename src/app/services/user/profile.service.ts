@@ -36,9 +36,7 @@ public currentUser: firebase.User;
     return this.userProfile.update({ birthDate });
   }
 
-
-
-
+  
   updateEmail(newEmail: string, password: string): Promise<any> {
     const credential: firebase.auth.AuthCredential = firebase.auth.EmailAuthProvider.credential(
       this.currentUser.email,
