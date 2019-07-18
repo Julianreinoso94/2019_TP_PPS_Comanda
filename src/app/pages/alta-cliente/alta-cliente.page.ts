@@ -67,7 +67,7 @@ export class AltaClientePage implements OnInit {
     console.log(this.unUsuario);
     var storage = firebase.storage();
 
-    if(this.filename != undefined || this.filename != ""){
+    if(this.filename != undefined && this.filename != ""){
 
       storage.ref("FotosCliente/"+this.foto).getDownloadURL().then(url => {
         // alert(url);

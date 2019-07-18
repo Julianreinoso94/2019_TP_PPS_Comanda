@@ -9,9 +9,15 @@ import {AuthService} from "../../services/user/auth.service";
 import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 //import { FCM } from '@ionic-native/fcm/ngx';//AGREGADO PUSH NOTIF
 import {EmpleadosService} from '../../services/empleados/empleados.service';
-
-
 import { ProfileService } from '../../services/user/profile.service';
+import { Usuario } from './../../clases/usuario';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-alta-duenio',
@@ -24,9 +30,9 @@ export class AltaDuenioPage implements OnInit {
    apellido: string;
    dni: any;
    cuil:string;
-   foto:string;
+  
    perfil:string;
-   filename:string;
+  
    codigoUid:string="";
 
    datosEscaneados: any;
@@ -39,21 +45,40 @@ export class AltaDuenioPage implements OnInit {
  barcodeScannerOptions: BarcodeScannerOptions;
  //////////
 
+ unUsuario: Usuario;
+ items: Observable<any[]>;
+ foto: string;
+ filename:string = "";
 
 
-   constructor(    private scanner: BarcodeScanner,private barcodeScanner: BarcodeScanner,
-       private profileService: ProfileService,
-private crudService: CrudService,private storage: AngularFireStorage,private camera: Camera,	private alertController: AlertController,private user:AuthService)
-//,private fcm: FCM)
+   constructor(
+     private scanner: BarcodeScanner,
+     private barcodeScanner: BarcodeScanner,
+     private profileService: ProfileService,
+     private crudService: CrudService,
+     private storage: AngularFireStorage,
+     private camera: Camera,	
+     private alertController: AlertController,
+     private user:AuthService,
+     private db: AngularFirestore,
+     public toastCtrl: ToastController,
+     private auth : AuthService,
+     private router: Router
+     )
+
 {
   //Options
    this.barcodeScannerOptions = {
      showTorchButton: true,
      showFlipCameraButton: true
  }
+
+ this.unUsuario = new Usuario();
+ this.items = db.collection('Supervisor').valueChanges();
 }
 
    ngOnInit() {
+     /*
      this.crudService.read_Students().subscribe(data => {
 
        this.students = data.map(e => {
@@ -72,6 +97,7 @@ private crudService: CrudService,private storage: AngularFireStorage,private cam
        console.log(this.students);
 
      });
+     */
    }
 
    CreateRecord() {
@@ -271,6 +297,47 @@ scanCodepag() {
   // alert("actualizndo");
      this.profileService.updateperfil("Supervisor");
  }
+
+
+ enviar()
+ {
+   console.log(this.unUsuario);
+   var storage = firebase.storage();
+
+   if(this.filename != undefined && this.filename != ""){
+
+     storage.ref("FotosSupervisor/"+this.foto).getDownloadURL().then(url => {
+       // alert(url);
+       this.foto = url;
+     });
+   }
+
+   this.auth.registerSupervisor(this.unUsuario.email,"111111", this.unUsuario.dni, this.unUsuario.nombre, this.unUsuario.apellido, this.unUsuario.cuil, this.unUsuario.perfil, this.filename)
+   .then((res) => {  
+    console.log("Alta exitosa");
+    this.mostrarToast("Se cargo el supervisor/dueño con exito", "successToast");
+    this.router.navigate(['login']);
+     })
+     .catch(function(error) {
+       //alert("Error al guardar perfil")
+       this.mostrarToast("Error al escribir el usuario", "dangerToast");
+       console.error("Error al escribir el usuario", error);
+     });
+ }
+
+ async mostrarToast(miMsj:string,color:string)
+ {
+   let toast = await this.toastCtrl.create({
+     showCloseButton: true,
+     closeButtonText:"cerrar",
+     cssClass: color,
+     message: miMsj,
+     duration: 3000,
+     position: 'top'
+   });
+   return await toast.present();
+ }
+
 
 
  }

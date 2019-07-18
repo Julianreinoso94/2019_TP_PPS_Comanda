@@ -1,7 +1,7 @@
 import { Component, OnInit,  ViewChild } from '@angular/core';
 //import { IonicPage, NavController, NavParams, Slides, LoadingController,Loading } from 'ionic-angular';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import {Camera, CameraOptions} from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 //import { AngularFireAuth } from 'angularfire2/auth';
 import { IUsuario } from '../../clases/usuario';
@@ -13,6 +13,15 @@ import { Router } from '@angular/router';
 import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 import { ToastController } from '@ionic/angular';
 import { ProfileService } from '../../services/user/profile.service';
+import { Usuario } from './../../clases/usuario';
+import { Observable } from 'rxjs';
+import {AngularFireStorage} from '@angular/fire/storage';
+import { AuthService} from '../../services/user/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 
 @Component({
   selector: 'app-alta-empleado',
@@ -34,16 +43,24 @@ export class AltaEmpleadoPage implements OnInit {
   email:string;
   */
   public fotoMesa: string = null;
-  loading = false;
+ // loading = false;
   encodeData: any;
   scannedData: {};
   barcodeScannerOptions: BarcodeScannerOptions;
 
+
+  unUsuario: Usuario;
+  items: Observable<any[]>;
+  foto: string;
+  filename:string = "";
+
   constructor(
-    private empleadosService: EmpleadosService,
+   // private empleadosService: EmpleadosService,
     private router: Router,
-    // private camara: Camera,
-    public fotoService: FotosService,
+    private db: AngularFirestore,
+    private camera: Camera, 
+    private storage: AngularFireStorage, 
+    private auth : AuthService,    
     private scanner: BarcodeScanner,
     private barcodeScanner: BarcodeScanner,
     public toastCtrl: ToastController) {
@@ -52,9 +69,13 @@ export class AltaEmpleadoPage implements OnInit {
         showTorchButton: true,
         showFlipCameraButton: true
       }
+
+      this.unUsuario = new Usuario();
+      this.items = db.collection('Empleado').valueChanges();
     }
 
   ngOnInit() {
+    /*
     this.empleadosService.TraerEmpleados().subscribe(data => {
 
       this.empleados = data.map(e => {
@@ -72,8 +93,10 @@ export class AltaEmpleadoPage implements OnInit {
       })
       console.log(this.empleados);
     });
+    */
   }
 
+  /*
   cargarEmpleado(
     nombre: string,
     apellido: string,
@@ -116,6 +139,64 @@ export class AltaEmpleadoPage implements OnInit {
       });
   }
 
+  */
+
+ enviar()
+ {
+   console.log(this.unUsuario);
+   var storage = firebase.storage();
+
+   if(this.filename != undefined && this.filename != ""){
+
+     storage.ref("FotosEmpleado/"+this.foto).getDownloadURL().then(url => {
+       // alert(url);
+       this.foto = url;
+     });
+   }
+
+   this.auth.registerEmpleado(this.unUsuario.email,"111111", this.unUsuario.dni, this.unUsuario.nombre, this.unUsuario.apellido, this.unUsuario.cuil, this.unUsuario.perfil, this.filename)
+   .then((res) => {  
+    console.log("Alta exitosa");
+    this.mostrarToast("Se cargo el empleado con exito", "successToast");
+    this.router.navigate(['login']);
+     })
+     .catch(function(error) {
+       //alert("Error al guardar perfil")
+       this.mostrarToast("Se cargo el empleado con exito", "dangerToast");
+       console.error("Error al escribir el usuario", error);
+     });
+ }
+
+
+   //FOTO
+
+   SacarFoto() {
+    this.filename = Math.random().toString(36).substring(2);
+    const options: CameraOptions = {
+      quality: 50,
+      targetHeight: 600,
+      targetWidth: 600,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+    // this.foto = "data:image/jpeg;base64," + imageData;
+     this.foto='data:image/jpeg;base64,' + imageData;
+     this.storage.ref('/FotosEmpleado/').child(this.filename).putString(this.foto, 'data_url', {contentType:'image/jpeg'});
+
+            }, (err) => {
+              //  // Handle error
+         // alert("error " + JSON.stringify(err))
+            });
+       //  this.obtenerURL2();
+
+   }
+
+
+
   async mostrarToast(miMsj:string,color:string)
   {
     let toast = await this.toastCtrl.create({
@@ -129,7 +210,7 @@ export class AltaEmpleadoPage implements OnInit {
     return await toast.present();
   }
 
-
+/*
   EditRecord(record) {
     record.isEdit = true;
     record.EditNombre = record.nombre;
@@ -157,6 +238,7 @@ export class AltaEmpleadoPage implements OnInit {
   RemoveRecord(rowID) {
     this.empleadosService.EliminarEmpleado(rowID);
   }
+  */
 
   cargarDatosDesdeDni(datos: any) {
     // alert(datos);

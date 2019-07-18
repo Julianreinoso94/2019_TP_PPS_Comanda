@@ -21,7 +21,8 @@ export class Usuario
     public clave: string;
     public dni: string;
     public apellido: string;
-  
+    public cuil: string;
+    public perfil: string;
 }
 
 
