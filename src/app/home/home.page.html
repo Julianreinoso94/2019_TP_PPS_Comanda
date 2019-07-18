@@ -47,15 +47,7 @@
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/cliente-create">
     Cargar Cliente
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor'|| userProfile?.perfil=='cliente' " expand="block" color="secondary" routerLink="/qrmesa">
-    QRMesa
-  </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor'|| userProfile?.perfil=='cliente' " expand="block" color="secondary" routerLink="/qrpropina">
-    QRPropina
-  </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor'|| userProfile?.perfil=='cliente' " expand="block" color="secondary" routerLink="/qringresolocal">
-    QRIngresoLocal
-  </ion-button>
+
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo'  " expand="block" color="primary" routerLink="/abrir-mesa">
     Abrir o Reservar Mesa
   </ion-button>
@@ -66,20 +58,12 @@
    Tomar Pedido
    </ion-button>
    <ion-button  *ngIf=" userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/alta-pedido">
-     Alta Pedido
+     Crea tu Pedido!
    </ion-button>
   <ion-button  *ngIf="userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/encuesta-empleado">
     Encuesta Empleado
   </ion-button>
-  <ion-button *ngIf="userProfile?.perfil=='cliente' "  expand="block" color="primary" routerLink="/juego-postre">
-    Juego
-  </ion-button>
-  <ion-button *ngIf="userProfile?.perfil=='cliente' "  expand="block" color="primary" routerLink="/juego-descuento">
-    Juego Descuento
-  </ion-button>
-  <ion-button *ngIf="userProfile?.perfil=='cliente' "  expand="block" color="primary" routerLink="/adivinar-numero">
-    Adivinar Numero
-  </ion-button>
+
   <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/reserva-cliente">
     Reserva Cliente
   </ion-button>
@@ -103,5 +87,9 @@
        <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"  routerLink="/habilitar-reservas"  >
         Habilitar Reservas
            </ion-button>     
+
+           <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary"  routerLink="/clienteconfirmapedido"  >
+            Confirmanos que tu pedido llego!
+               </ion-button>    
        
 </ion-content>

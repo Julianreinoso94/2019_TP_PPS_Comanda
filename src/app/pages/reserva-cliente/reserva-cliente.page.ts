@@ -31,6 +31,8 @@ import 'firebase/firestore';
   styleUrls: ['./reserva-cliente.page.scss'],
 })
 export class ReservaClientePage implements OnInit {
+
+  cantPersonas:string;
   primero: string;
   segundo: string;
   tercero: string;
@@ -221,16 +223,17 @@ export class ReservaClientePage implements OnInit {
     codigoMesa: number,
 
   ): void {
-    alert("Entro a hacer reserva");
-    alert(codigoMesa);
+    // alert("Entro a hacer reserva");
+    // alert(codigoMesa);
 
     this.loading = true;
 
 
-this.reserva.crearReserva(this.uidUsuario,this.fechaconcatenada, this.horayminutoconcatenadasIngreso)
-    this.mesasService.ModificarEstadoDeunaMesa(codigoMesa, "Pendiente");
-    alert("actualizomeza");
+this.reserva.crearReserva(this.uidUsuario,this.fechaconcatenada, this.horayminutoconcatenadasIngreso,this.cantPersonas)
+   // this.mesasService.ModificarEstadoDeunaMesa(codigoMesa, "Pendiente");
+    //alert("actualizomeza");
     this.spinner = true;
+    this.router.navigateByUrl('/home');
 
   }
 

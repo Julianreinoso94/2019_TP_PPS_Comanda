@@ -9,6 +9,13 @@ import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
 import { ComidasService } from 'src/app/services/comidas/comidas.service';
 
+import { Injectable } from '@angular/core';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import { EventService } from '../../services/event/event.service';
+//import { threadId } from 'worker_threads';
+
 @Component({
   selector: 'app-alta-pedido',
   templateUrl: './alta-pedido.page.html',
@@ -19,8 +26,10 @@ export class AltaPedidoPage implements OnInit {
   public comidaActual: any = {};
   public mesaActual: any = {};
 
+  public currentUser: firebase.User;
+  uidUsuario:any;
 
-
+mimesa:any;
   loading = false;
   pedidos : any;
   cantidad = 1;
@@ -43,6 +52,19 @@ export class AltaPedidoPage implements OnInit {
     public toastCtrl: ToastController,
     private pedidosService: PedidosService
   ) {
+
+    firebase.auth().onAuthStateChanged(user => {
+ 
+      this.currentUser = user;
+      this.uidUsuario = user.uid});
+    
+  
+
+
+   }
+
+   ionViewWillEnter(){
+    //  alert(this.uidUsuario);
     this.mesasService.TraerMesas().subscribe(data => {
 
       this.mesas = data.map(e => {
@@ -63,12 +85,30 @@ export class AltaPedidoPage implements OnInit {
       })
       console.log(this.mesas);
     });
+
+    this.mesas.forEach(element => {//TRAE MESA DEL USUARIO
+      if(element.cliente == this.uidUsuario)
+      {
+        this.mimesa = element.id
+      }
+      
+    });
+    // alert(this.mimesa);
+    this.mesas.forEach(element => {
+      if(element.id ==this.mimesa)
+      {
+        this.montoTotal=element.monto;
+      }
+    });
+
+    alert(this.montoTotal)
+
    }
 
 
    montoMesa()
    {
-    this.pedidosService.TraerPedidosPorMesa(this.codigoMesa).subscribe(data => {
+    this.pedidosService.TraerPedidosPorMesa(this.mimesa).subscribe(data => {
 
       this.pedidos = data.map(e => {
         return {
@@ -134,6 +174,8 @@ export class AltaPedidoPage implements OnInit {
           description: snap.data().description,
           price: snap.data().price,
           time: snap.data().time,
+          tipo: snap.data().tipo,
+
         });
         // return false;
       });
@@ -240,9 +282,8 @@ private decrement () {
 
   cargarPedido(
    // codigoPedido: number,
-    codigoMesa: number,
-    codigoProducto: number,
-    cantidad: number,
+    codigoProducto: string,
+    cantidad: string,
     tipoPedido: string,
     detalle: string,
     idEmpleado: number,
@@ -252,45 +293,50 @@ private decrement () {
   montoTotal:number,
 
   ): void {
- alert ("cargarPedido");
     if (
      // codigoPedido === undefined ||
-      codigoMesa === undefined ||
-      codigoProducto === undefined ||
-      cantidad === undefined ||
-      tipoPedido === undefined ||
-      idEmpleado === undefined ||
-     preciototalpedido == undefined
-    ) {
-      // alert(codigoPedido);
-      //  alert(codigoMesa);
-      //  alert(codigoProducto);
-      //  alert(cantidad);
-      //  alert(tipoPedido);
-      //  alert(detalle);
-      //  alert(idEmpleado);
-      //  alert(preciototalpedido);
 
+      this.codigoProducto == undefined ||
+      this.cantidad == undefined     ) {
+      // alert(codigoProducto);
+      // alert(cantidad);
       return;
     }
+
+    alert ("cargarPedido");
+
     this.loading = true;
+    let tipoproducto:any
+    console.log(this.comidasList);
+    console.log(this.codigoProducto);
+   this.comidasList.forEach(element => {
+     if(element.id == this.codigoProducto)
+     {
+       alert("ntyto");
+       tipoproducto=element.tipo;
+     }
+   });
+alert(tipoproducto);
     this.pedidosService
-      .crearPedido(1, codigoMesa, codigoProducto, tipoPedido, 'Pendiente',cantidad, idEmpleado,preciototalpedido)
+      .crearPedido(1, this.mimesa, this.codigoProducto, tipoproducto, 'Pendiente',this.cantidad,0,this.preciototalpedido)
       .then(() => {
-       // this.loading = false;
+       this.loading = false;
         this.mostrarToast("Se cargo el pedido con exito", "successToast");
-        this.router.navigateByUrl('/alta-pedido')
       });
 
       //actualizar el monto total
 
       // alert(this.preciototalpedido);
-
+  alert(this.preciototalpedido);
+  alert(this.montoTotal);
       this.ActualizarmontoTotalmesa= +this.montoTotal + +this.preciototalpedido;
       // alert("el monto de la mesa es"+this.ActualizarmontoTotalmesa);
-
-      this.mesasService.ModificarMontoDeunaMesa(this.codigoMesa,this.ActualizarmontoTotalmesa);
+alert(this.ActualizarmontoTotalmesa);
+      this.mesasService.ModificarMontoDeunaMesa(this.mimesa,this.ActualizarmontoTotalmesa);
       // alert("actualizomeza");
+
+      this.router.navigateByUrl('/home')
+
   }
 
   async mostrarToast(miMsj:string,color:string)

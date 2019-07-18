@@ -1,32 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { ProfileService } from 'src/app/services/user/profile.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { AuthService } from 'src/app/services/user/auth.service';
-import { ProfileService } from 'src/app/services/user/profile.service';
 
+
+
+import { Injectable } from '@angular/core';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 @Component({
-  selector: 'app-tomarpedidosbar',
-  templateUrl: './tomarpedidosbar.page.html',
-  styleUrls: ['./tomarpedidosbar.page.scss'],
+  selector: 'app-clienteconfirmapedido',
+  templateUrl: './clienteconfirmapedido.page.html',
+  styleUrls: ['./clienteconfirmapedido.page.scss'],
 })
-export class TomarpedidosbarPage implements OnInit {
+export class ClienteconfirmapedidoPage implements OnInit {
+  public currentUser: firebase.User;
+  uidUsuario:any;
 
   pedidos : any;
+  pedidosentregar: any;
 
       public userProfile: any;
       public birthDate: Date;
       public perfil:string;
       public valor="hola";
       price: any = '';
-      mimesa:Array<any>;
 
 
   constructor(    public toastCtrl: ToastController,
       private pedidosService: PedidosService, private authService: AuthService,
-          private profileService: ProfileService) { }
+          private profileService: ProfileService) {
+            firebase.auth().onAuthStateChanged(user => {
+ 
+              this.currentUser = user;
+              this.uidUsuario = user.uid});
+           }
 
-  ngOnInit() {
-    this.pedidosService.TraerPedidosPorTipoBebida().subscribe(data => {
+          ngOnInit() {
+            
+    this.pedidosService.confirmarRecepcion(this.uidUsuario).subscribe(data => {
 
             this.pedidos = data.map(e => {
               return {
@@ -45,27 +59,9 @@ export class TomarpedidosbarPage implements OnInit {
             })
             console.log(this.pedidos);
           });
-        
-    this.pedidos.forEach(element => {//TRAE MESA DEL USUARIO
-      if(element.tipoPedido == "bebida")
-      {
-        this.mimesa = element.id
-      }
-    });
-
-          this.profileService
-            .getUserProfile()
-            .get()
-            .then( userProfileSnapshot => {
-              this.userProfile = userProfileSnapshot.data();
-              console.log(this.userProfile);
-              this.birthDate = userProfileSnapshot.data().birthDate;
-              this.perfil= userProfileSnapshot.data().perfil;
-              //alert(this.perfil)
-            });
-          //  console.log(this.userProfile.perfil);
+         
+      
   }
-
 
   async mostrarToast(miMsj:string,color:string)
   {
@@ -88,14 +84,29 @@ export class TomarpedidosbarPage implements OnInit {
 
   }
 
+
+  confirmado(id)
+
+  {
+    alert("entregar");
+    this.pedidosService.entregarpedido(id, "Confirmado");
+
+  }
+
+
   UpdateRecord(recordRow) {
     let record = {};
-    record['estadoPedido'] ="ListoParaentregar";
-    record['tiempoEstimado'] = recordRow.EditTipo;
+    record['estadoPedido'] = recordRow.EditEstado;
+    record['tipoPedido'] = recordRow.EditTipo;
     this.pedidosService.ModificarPedido(recordRow.id, record);
     recordRow.isEdit = false;
     this.mostrarToast("Se editó el pedido con exito", "successToast");
    // this.router.navigateByUrl('/alta-pedido');
   }
 
+
+
 }
+
+
+
