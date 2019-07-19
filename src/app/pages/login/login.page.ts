@@ -4,11 +4,12 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/user/auth.service';
 import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
-import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-//import {EmpleadosService} from '../../services/empleados/empleados.service';
-import { AngularFirestore } from "@angular/fire/firestore";
+import 'firebase/storage';
+import * as firebase from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ClienteService } from 'src/app/services/clientes/cliente.service';
 import { ToastController } from '@ionic/angular';
 
 
@@ -21,6 +22,8 @@ export class LoginPage implements OnInit {
   public loginForm: FormGroup;
   email:string;
   password:string;
+  clientes: any;
+  verificado: boolean = true;
 
   public loading: HTMLIonLoadingElement;
   constructor (
@@ -28,10 +31,11 @@ export class LoginPage implements OnInit {
     public actionSheetController: ActionSheetController,
     public alertCtrl: AlertController,
     private authService: AuthService,
-    private router: Router,
-    private formBuilder: FormBuilder,
+    public router: Router,
+    private formBuilder: FormBuilder, 
+    private firestore: AngularFirestore,
+    private clienteService: ClienteService,
     public toastCtrl: ToastController
-    
   ) {
       this.loginForm = this.formBuilder.group({
         email: ['',
@@ -44,45 +48,76 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.clienteService.TraerClientes().subscribe(data => {
+
+      this.clientes = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          email: e.payload.doc.data()['email'],
+        
+          };
+      })
+      //console.log(this.clientes);
+    });
+    
   }
 
+  
   async loginUser(loginForm: FormGroup): Promise<void> {
+
+    
     if (!loginForm.valid) {
       console.log('Form is not valid yet, current value:', loginForm.value);
-    } else {
+    } 
+    else {
       this.loading = await this.loadingCtrl.create();
       await this.loading.present();
 
       const email = loginForm.value.email;
       const password = loginForm.value.password;
+      let verificadoo = true;
 
+      this.clientes.forEach(function (value) 
+      {
+        if(value.email == email)
+        {
+          console.log("Email" + value.email);
+
+          firebase.auth().onAuthStateChanged(function(user)
+          {
+              var email = user.email;
+              console.log("entromail" + email);
+              console.log("verificado=" + user.emailVerified);
+
+             if(user.emailVerified == false)
+             {
+               console.log("no verificado!"); 
+               //this.router.navigate(['/login']);
+               verificadoo = false;
+               console.log("guardo" + verificadoo);
+         
+             }
+           
+          });
+
+        }   
+    });
+     
       this.authService.loginUser(email, password).then(() => {
           this.loading.dismiss().then(() => {
 
-            let clientesRef = firebase.database().ref("cliente");
-            console.log("clientes" + clientesRef);
+            console.log("verif"+ verificadoo);
 
-            clientesRef.once("value", (snap) => {
-
-              let data = snap.val();
-
-              for (let item in data) {
-
-                if (data[item].email == this.email.toLowerCase()) {
-                  console.log("entroooo!");
-                
-                  if( !firebase.auth().currentUser.emailVerified)
-                  {
-                    this.mostrarToast("No se ha verificado el correo electrónico todavía", "dangerToast");
-                    this.router.navigateByUrl('login');
-                    return;
-                  }
-                }
-
-              }
-            });
-
+            if(verificadoo == true)
+            {
+      
             this.router.navigateByUrl('home');
+            }
+            else{
+              this.router.navigateByUrl('login');
+              this.mostrarToast("Pendiente de activación. Revise su mail o vuelva a ingresar", "Danger Toast");
+            }
           });
         },
         error => {
@@ -96,7 +131,9 @@ export class LoginPage implements OnInit {
         }
       );
     }
+    
   }
+  
 
 
   async elegirusuario() {
@@ -172,7 +209,7 @@ export class LoginPage implements OnInit {
 
 
 
- async mostrarToast(miMsj:string,color:string)
+ public async mostrarToast(miMsj:string,color:string)
  {
    let toast = await this.toastCtrl.create({
      showCloseButton: true,
@@ -184,6 +221,8 @@ export class LoginPage implements OnInit {
    });
    return await toast.present();
  }
+
+
 
 
 }

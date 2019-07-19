@@ -18,6 +18,7 @@ public userProfile: firebase.firestore.DocumentReference;
     ) { }
 
   loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
+
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
@@ -211,6 +212,7 @@ registerSupervisor(email : string, password : string, dni: string, nombre: strin
     }).catch( err => reject(err))
   })
 }
+
 
 
 }
