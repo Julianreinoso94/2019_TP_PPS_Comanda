@@ -15,6 +15,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import { EventService } from '../services/event/event.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,14 @@ import { EventService } from '../services/event/event.service';
 export class HomePage  implements OnInit{
   public currentUser: firebase.User;
   uidUsuario:any;
+  fechaconcatenada:any;
+  horaselect: any;
+  minutoselect: any;
+  public fechaActual = formatDate(new Date(), 'yyyy/MM/dd', 'en');
+  public horaActual = formatDate(new Date(), 'h:mm a', 'en');
+  horayminutoconcatenadasIngreso: any;
+  dateStart: String;
+  hora = formatDate(new Date(), 'h:mm a', 'en');
 
     public userProfile: any;
     public birthDate: Date;
@@ -31,9 +40,13 @@ export class HomePage  implements OnInit{
     // public valor="hola";
     price: any = '';
     public mesas:any;
-
+    primero: string;
+    segundo: string;
+    tercero: string;
+    public split: string;
     listareservas : any;
     listadeespera : any;
+    myDate: Date;
 
     datosEscaneados: any;
     datos: any;
@@ -86,6 +99,7 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
         return {
           id: e.payload.doc.id,
           isEdit: false,
+          mesa: e.payload.doc.data()['mesa'],
           usuario: e.payload.doc.data()['usuario'],
           horareserva: e.payload.doc.data()['horareserva'],
           fechareserva: e.payload.doc.data()['fechareserva'],
@@ -234,6 +248,8 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
 
   mesa(codigo: string){
     //buscar mesa si esta libre 
+
+    let codigo1="Os2GUPsKba7oNnKLXnAv"
 let estado:string;
  let existe: any;
  let  pedidos : any;
@@ -242,21 +258,13 @@ let estado:string;
  let codigomesa="BVtETGAAmETdzVTwFnUC"; //mesa2
 let estasinreserva=true;
  let mesaClienteSentado="parado";
- alert(this.uidUsuario);
+ let estaSentadoenEstaMesa=false;
+ let usuarioreservacion=true;
+let eselusuarioquereservo=false;
+ let fechareserva;
+let horareserva; 
 
- //////////////////////////////////LISTA DE RESERS
- this.listareservas.forEach(element => {
-  if(element.usuario == this.uidUsuario && element.estado == "aprobada")
-  {
-
-
-
-    estadoenlistadeespera=element.estado;
-  }
-   
- });
-
- this.listadeespera.forEach(element => { //LISTA DE ESPERA/////////////////////////
+this.listadeespera.forEach(element => { //LISTA DE ESPERA/////////////////////////
   if(element.cliente == this.uidUsuario)
   {
     estadoenlistadeespera=element.estado;
@@ -264,63 +272,102 @@ let estasinreserva=true;
    
  });
 
+ 
+ this.mesas.forEach(element => {
+  if (element.id ==  codigomesa)
+  {
+   estadomimesa= element.estado;
+    
+  }
+  
+});
 
-    /////////////////////VERIFICA ESTADO DE LA MESA 
-    this.mesas.forEach(element => {
-      if (element.id ==  codigomesa)
-      {
-       estadomimesa= element.estado;
-        
-      }
-      
-    });
-    this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN ALGUNA MESA
-      if (element.cliente == this.uidUsuario)
-      { 
-        mesaClienteSentado=element.id;
-        
-      }
-      
-    });
+this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN esta mesa
+  if (element.id == codigomesa)
+  { 
+    if(element.cliente == this.uidUsuario)
+    {
+    estaSentadoenEstaMesa=true;
+    }
+  }
+  
+});
+this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN ALGUNA MESA
+  if (element.cliente == this.uidUsuario)
+  { 
+    mesaClienteSentado=element.id;
+    
+  }
+  
+});
+ //////////////////////////////////LISTA DE RESERS//////////////////////////////////
 
-    if(estadomimesa == "Disponible")
+ alert(this.uidUsuario);
+ this.listareservas.forEach(element => {
+   console.log("imprime element.usuario"+ element.usuario );
+   console.log("imprime element.mesa"+ element.mesa );
+
+  if( codigo == element.mesa )/////////////////////////////////////0 SI ESTA MESA ESTA RESERVADA
+  {
+    
+    this.fechaconcatenada=element.fechareserva;
+    this.horayminutoconcatenadasIngreso=element.horareserva;
+    if( element.usuario ==this.uidUsuario)
+    {
+    eselusuarioquereservo=true;
+    }
+
+   // estadoenlistadeespera=element.estado;
+  }
+   
+ });
+
+ if(eselusuarioquereservo && estadomimesa == "Disponible")
+ {
+  this.mostrarToast("Se le ha asignado esta mesa Reservada .Ya puede sentarse..", "successToast");
+  this.mesasService.AsignarClienteaMesa(codigo,this.uidUsuario,"Ocupada");
+ //eliminar reserva
+ }
+
+ let numero =this.diferencia();
+ alert("tiempo es:"+numero);
+ //calcular los minutos
+ if( numero<5 && !eselusuarioquereservo)
+ {
+  // usuarioreservacion=false;
+
+  this.mostrarToast("Esta mesa esta Reservada", "successToast");
+  this.router.navigateByUrl('home');
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////71111111
+if(estadomimesa == "Disponible" &&  mesaClienteSentado=="parado" && estadoenlistadeespera=="asignandomesa" )
     {                                     //LA MESA ESTA DISPONIBLE
     alert (estadomimesa);
+    this.mostrarToast("Se le ha asignado esta mesa.Ya puede sentarse..", "successToast");
+   this.mesasService.AsignarClienteaMesa(codigo,this.uidUsuario,"Ocupada");
     }
     else
     {
-      this.mostrarToast("La mesa esta ocupada,intente luego..", "successToast");
+      this.mostrarToast("No se le puede asignar esta mesa por el momento", "successToast");
 
     }
-
-     if( estadoenlistadeespera =="asignandomesa")
-     {    
-                      if (mesaClienteSentado== "parado")// SI ES PARADO QUIERE DECIR QUE PUEDE TOMAR ESA MESA
-                      {
-                          alert("tomar mesa");
-                      }
-                      else
-                      { 
-                        if (mesaClienteSentado == codigomesa)
-                        {
-                          this.router.navigateByUrl('home');
-
-                            alert("estado de pedidos");
-
-                        }
-                        else
-                        {
-                          this.mostrarToast("usted ya esta sentado en otra mesa,Escanee el codigo de su mesa..", "successToast");
-
-                        }
-                      }//END IF (mesaClienteSentado== "parado")
-      }
-    else
+    //////////////////////////////////////////////////////////////////////////////////////////////////////2222
+    if( estaSentadoenEstaMesa)
     {
-      this.mostrarToast("Usted primero debe pasar por la lista de espera ", "successToast");
+      this.mostrarToast("Estado de sus Pedidos", "successToast");
+
+      this.router.navigateByUrl('vericarmesapedido');
 
     }
-    console.log( mesaClienteSentado);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////333
+    if (estadoenlistadeespera=="asignandomesa" && mesaClienteSentado != codigo)
+    {
+      this.mostrarToast("No se le puede asignar esta mesa por el momento, usted esta sentado en otra mesa..", "successToast");
+
+    }
+
+
 
  
     }//FIN QR MESA ///////////////////////////////////////////////////////////////////////////////
@@ -338,7 +385,7 @@ let estasinreserva=true;
     
   });
 
-    this.listadeespera.forEach(element => {
+    this.listadeespera.forEach(element => {//VALIDA QUE NO ESTE EN LISTA DE ESPERA
        if(element.cliente == this.uidUsuario)
        {
         elclientenoestaenlistadeespera=false;
@@ -354,8 +401,8 @@ let estasinreserva=true;
         this.mostrarToast("Usted no puede ingresar a la lista de espera ", "successToast");
 
       }
- 
-       
+ ///////////////////////////NUEVO///////////////////////
+      
    
     }
 
@@ -446,5 +493,51 @@ let estasinreserva=true;
     return await toast.present();
   }
   
+
+  diferencia():number {
+    // this.horayminutoconcatenadasIngreso = this.horaselect + ":" + this.minutoselect;
+
+    // this.dateStart = this.myDate.toString();
+    // let toArray = this.dateStart.split("-");
+    // this.primero = toArray[0] + "/";
+
+    // this.segundo = toArray[1] + "/";
+    // this.tercero = toArray[2];
+    // this.split = this.primero.toString() + "/" + this.segundo.toString() + "/" + this.tercero.toString();
+
+    // let toArray2 = this.dateStart.split("T");
+    // let horatomada = toArray2.toString()
+    // let horareserva = horatomada.split("-");
+    // let horareservada = horareserva[0];
+    // let horareservada1 = horareserva[1];
+    // let horareservada2 = horareserva[2];
+    // let diares = horareservada2.split(",");
+    // let dt = diares[0].toString();
+
+
+    // let horaa = this.hora.toString();
+    // let horacortada = horaa.split(":");
+
+    // let horacortada1 = horacortada[0];
+    // let vy = horacortada1.toString().split("T");
+    // let horacortada2 = horacortada[1];
+
+
+    // this.fechaconcatenada = horareservada + "/" + horareservada1 + "/" + dt;
+
+    var startTime = new Date(this.fechaconcatenada + " " + this.horayminutoconcatenadasIngreso
+    );
+
+    //EN HTML APARECE AÑO MES DIA
+    var endTime = new Date(this.fechaActual + " " + this.horaActual);
+    var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
+    var resultInMinutes = Math.round(difference / 60000);
+    alert("resultado:" + resultInMinutes);
+
+    // setTimeout(() => this.spinner = false, 3000);
+
+    // this.mostrarToast("Su reserva fue guardada con exito.");
+   return resultInMinutes;
+  }//////////////////////////////////////////////////FIN METODO DIFERENCIA
  
 }

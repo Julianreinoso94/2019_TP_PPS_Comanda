@@ -17,9 +17,15 @@
         <ion-card-subtitle>Fecha: {{item.fechareserva}}</ion-card-subtitle>
         <ion-card-subtitle>Hora: {{item.horareserva}}</ion-card-subtitle>
         <ion-card-subtitle>Usuario: {{item.usuario}}</ion-card-subtitle>
-        <ion-card-subtitle>Cantidad de Personas: {{item.usuario}}</ion-card-subtitle>
+        <ion-card-subtitle>Cantidad de Personas: {{item.cantidad}}</ion-card-subtitle>
         <ion-card-subtitle>Mesa: {{item.usuario}}</ion-card-subtitle>
-        <ion-card-subtitle>Estado: {{item.usuario}}</ion-card-subtitle>
+        <ion-card-subtitle>Estado: {{item.estado}}</ion-card-subtitle>
+        <ion-item>
+            <ion-label>Mesa</ion-label>
+            <ion-select  [(ngModel)]="mesaelegida" ok-text="Seleccionar"  cancel-text="Cancelar" >
+                <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+            </ion-select>
+        </ion-item>
 
 
 

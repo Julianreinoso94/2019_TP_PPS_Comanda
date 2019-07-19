@@ -42,10 +42,10 @@ export class ReservasService {
       
     })
   }
-  AceptarReservaPendiente(id,monto)
+  AceptarReservaPendiente(id,monto,mesa)
 {
   //this.firestore.doc('Mesas/'+id).update({ monto: monto });
-  this.firestore.doc('Reservas/' + id).update({estado: monto})
+  this.firestore.doc('Reservas/' + id).update({estado: monto,mesa:mesa})
 }
 
   TraerReservas() {

@@ -51,8 +51,8 @@ export class ComidasService {
     });
   }
 
-  getComidasList(): firebase.firestore.CollectionReference {
-    return this.listaComidasRef;
+  getComidasList(){
+    return this.firestore.collection('listaComida').snapshotChanges();
   }
 
   getDetalleComida(eventId: string): firebase.firestore.DocumentReference {

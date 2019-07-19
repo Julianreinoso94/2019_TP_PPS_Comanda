@@ -84,12 +84,30 @@
     <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" (click)="scanCodepag()" >
       Escanea tu Codigo!
        </ion-button>
+       <!-- <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" (click)="mesa('a')" >
+          Escanea tu Codigo!
+           </ion-button> -->
        <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"  routerLink="/habilitar-reservas"  >
         Habilitar Reservas
+           </ion-button>  
+              <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"  routerLink="/supervisor-delivery"  >
+        Habilitar Pedido delivery
            </ion-button>     
+ 
 
            <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary"  routerLink="/clienteconfirmapedido"  >
             Confirmanos que tu pedido llego!
                </ion-button>    
        
+               <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary"  routerLink="/delivery"  >
+                Hace tu delivery!
+                   </ion-button>    
+
+                   <ion-button *ngIf="userProfile?.perfil=='delivery' " expand="block" color="primary"  routerLink="/supervisor-delivery"  >
+                    Enviar Pedido
+                       </ion-button>     
+                       <ion-button *ngIf="userProfile?.perfil=='delivery' " expand="block" color="primary"  routerLink="/supervisor-delivery"  >
+                    Chat
+                      </ion-button>   
+               
 </ion-content>

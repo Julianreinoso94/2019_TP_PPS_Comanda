@@ -101,7 +101,7 @@ mimesa:any;
       }
     });
 
-    alert(this.montoTotal)
+    // alert(this.montoTotal)
 
    }
 
@@ -303,8 +303,9 @@ private decrement () {
       return;
     }
 
-    alert ("cargarPedido");
 
+    
+    
     this.loading = true;
     let tipoproducto:any
     console.log(this.comidasList);
@@ -318,7 +319,7 @@ private decrement () {
    });
 alert(tipoproducto);
     this.pedidosService
-      .crearPedido(1, this.mimesa, this.codigoProducto, tipoproducto, 'Pendiente',this.cantidad,0,this.preciototalpedido)
+      .crearPedido(1, this.mimesa, this.codigoProducto, tipoproducto, 'PendienteDeAprobacion',this.cantidad,0,this.preciototalpedido)
       .then(() => {
        this.loading = false;
         this.mostrarToast("Se cargo el pedido con exito", "successToast");

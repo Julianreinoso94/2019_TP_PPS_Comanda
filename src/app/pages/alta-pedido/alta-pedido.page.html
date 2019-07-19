@@ -16,13 +16,13 @@
 
     <ion-item>
         <ion-label>Mesa</ion-label>
-        <ion-select [(ngModel)]="mimesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
+        <ion-select  disabled ="{{isEnabled}}"  [(ngModel)]="mimesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
             <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Monto Acumulado Mesa</ion-label>
-      <ion-input
+      <ion-input readonly=true
         [(ngModel)]="montoTotal" value={{monto}}
         type="text"
        >
@@ -86,9 +86,9 @@
     <ion-item>
       <ion-label position="stacked">Precio total Pedido</ion-label>
       <ion-input
-        [(ngModel)]="preciototalpedido"
+        [(ngModel)]="preciototalpedido" readonly=true
         type="text"
-        placeholder="Precio">
+        >
       </ion-input>
     </ion-item>
 

@@ -18,11 +18,32 @@ import { DatePipe } from '@angular/common';
 })
 export class HabilitarReservasPage implements OnInit {
   reservas : any;
-
-  constructor(public reservaserv:ReservasService,    public toastCtrl: ToastController ,private router: Router,private datePipe: DatePipe
+  mesaelegida:any;
+  mesas:any;
+  constructor(public reservaserv:ReservasService, public mesasService:MesasService,   public toastCtrl: ToastController ,private router: Router,private datePipe: DatePipe
     ) { }
 
   ngOnInit() {
+    this.mesasService.TraerMesas().subscribe(data => {
+
+      this.mesas = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          codigo: e.payload.doc.data()['codigo'],
+          estado: e.payload.doc.data()['estado'],
+          tipo: e.payload.doc.data()['tipo'],
+          cantPersonas: e.payload.doc.data()['cantPersonas'],
+          cliente: e.payload.doc.data()['cliente'],
+          monto: e.payload.doc.data()['monto'],
+          propina: e.payload.doc.data()['propina'],
+          descuento10: e.payload.doc.data()['descuento10'],
+          descuentoBebida: e.payload.doc.data()['descuentoBebida'],
+          descuentoPostre: e.payload.doc.data()['descuentoPostre'],
+        };
+      })
+      console.log(this.mesas);
+    });
     this.reservaserv.TraerReservas().subscribe(data => {
 
       this.reservas = data.map(e => {
@@ -30,6 +51,10 @@ export class HabilitarReservasPage implements OnInit {
           id: e.payload.doc.id,
           isEdit: false,
           usuario: e.payload.doc.data()['usuario'],
+          cantidad: e.payload.doc.data()['cantidad'],
+          estado: e.payload.doc.data()['estado'],
+
+
           horareserva: e.payload.doc.data()['horareserva'],
           fechareserva: e.payload.doc.data()['fechareserva'],
           // cantPersonas: e.payload.doc.data()['cantPersonas'],
@@ -44,11 +69,12 @@ export class HabilitarReservasPage implements OnInit {
       })
       //console.log(this.mesas);
     });
+
   }
 
   EditRecord(record) {
     // let codigo = record;
-    this.reservaserv.AceptarReservaPendiente(record,"aprobada");
+    this.reservaserv.AceptarReservaPendiente(record,"aprobada",this.mesaelegida);
     this.mostrarToast("Se habilito con exito la reserva.", "successToast");
 
     this.router.navigateByUrl('/home');

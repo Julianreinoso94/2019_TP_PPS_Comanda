@@ -9,15 +9,33 @@ import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
 import { ComidasService } from 'src/app/services/comidas/comidas.service';
 
+
+
+import { Injectable } from '@angular/core';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import { EventService } from '../../services/event/event.service';
+
 @Component({
   selector: 'app-cuenta',
   templateUrl: './cuenta.page.html',
   styleUrls: ['./cuenta.page.scss'],
 })
 export class CuentaPage implements  OnInit {
+ 
+
+  public currentUser: firebase.User;
+  uidUsuario:any;
+  mimesa:any;
+
   empleados: any;
   public comidaActual: any = {};
   public mesaActual: any = {};
+  public preciounabebida=0;
+  public preciounpostre=0;
+  public preciocondescuento10;
+  public propinadada;
 
   
 
@@ -33,7 +51,9 @@ export class CuentaPage implements  OnInit {
   preciototalpedido:number;
   montoTotal:number;
    a:String;
-
+   valorpropina;
+   pagarpropina=0;
+   
 
   constructor(private comidaService: ComidasService,
     private router: Router,  private empleadosService: EmpleadosService,
@@ -43,6 +63,16 @@ export class CuentaPage implements  OnInit {
     public toastCtrl: ToastController,
     private pedidosService: PedidosService
   ) {
+    firebase.auth().onAuthStateChanged(user => {
+ 
+      this.currentUser = user;
+      this.uidUsuario = user.uid});
+    
+ 
+   }
+
+
+   ngOnInit() {
     this.mesasService.TraerMesas().subscribe(data => {
 
       this.mesas = data.map(e => {
@@ -55,7 +85,7 @@ export class CuentaPage implements  OnInit {
           cantPersonas: e.payload.doc.data()['cantPersonas'],
           cliente: e.payload.doc.data()['cliente'],
           monto: e.payload.doc.data()['monto'],
-          propina: e.payload.doc.data()['propina'],
+          valorpropina: e.payload.doc.data()['propina'],
           descuento10: e.payload.doc.data()['descuento10'],
           descuentoBebida: e.payload.doc.data()['descuentoBebida'],
           descuentoPostre: e.payload.doc.data()['descuentoPostre'],
@@ -63,11 +93,6 @@ export class CuentaPage implements  OnInit {
       })
       console.log(this.mesas);
     });
-   }
-   
-
-   montoMesa()
-   {
     this.pedidosService.TraerPedidosPorMesa(this.codigoMesa).subscribe(data => {
 
       this.pedidos = data.map(e => {
@@ -87,40 +112,80 @@ export class CuentaPage implements  OnInit {
       })
       console.log(this.pedidos);
     });
-     this.mesasService.getDetalleMesa(this.codigoMesa)
-     .get()
-     .then(eventSnapshot => {
 
-      this.mesaActual = eventSnapshot.data();
-      this.mesaActual.id = eventSnapshot.id;
-    });
+    // this.propina()
+
+    // this.mesas.forEach(element => {//TRAE MESA DEL USUARIO
+    //   console.log(element.cliente);
+    //   console.log("usu"+this.uidUsuario);
+    //   if(element.cliente == this.uidUsuario)
+    //   {
+    //     this.mimesa = element.id
+    //     alert("entro");
+    //   }
+      
+    // });
+
+
+
+
   
-   }
 
-  calcularprecio()
-  {
-    this.comidaService
-      .getDetalleComida(this.codigoProducto)
-      .get()
-      .then(eventSnapshot => {
+    // this.empleadosService.TraerMozos().subscribe(data => {
 
-        this.comidaActual = eventSnapshot.data();
-        this.comidaActual.id = eventSnapshot.id;
-      });
-// this.preciototalpedido=0;
- this.cantidad=1;
+    //   this.empleados = data.map(e => {
+    //     return {
+    //       id: e.payload.doc.id,
+    //       isEdit: false,
+    //       nombre: e.payload.doc.data()['nombre'],
+    //       apellido: e.payload.doc.data()['apellido'],
+    //       dni: e.payload.doc.data()['dni'],
+    //       cuil: e.payload.doc.data()['cuil'],
+    //       foto: e.payload.doc.data()['foto'],
+    //       perfil: e.payload.doc.data()['perfil'],
+    //       email: e.payload.doc.data()['email'],
+    //     };
+    //   })
+    //   console.log(this.empleados);
+    // });
 
+    // this.pedidosService.TraerPedidosPorMesa(this.codigoMesa).subscribe(data => {
+
+    //         this.pedidos = data.map(e => {
+    //           return {
+    //             id: e.payload.doc.id,
+    //             isEdit: false,
+    //             codigoPedido: e.payload.doc.data()['codigoPedido'],
+    //             codigoProducto: e.payload.doc.data()['codigoProducto'],
+    //             codigoMesa: e.payload.doc.data()['codigoMesa'],
+    //             detallePedido: e.payload.doc.data()['detallePedido'],
+    //             estadoPedido: e.payload.doc.data()['estadoPedido'],
+    //             tipoPedido: e.payload.doc.data()['tipoPedido'],
+    //             cantidad: e.payload.doc.data()['cantidad'],
+    //             monto: e.payload.doc.data()['monto'],
+    //             idMozo: e.payload.doc.data()['idEmpleado']
+    //           };
+    //         })
+    //         console.log(this.pedidos);
+    //       });
+
+    //       this.mesas.forEach(element => {//TRAE MESA DEL USUARIO
+    //         console.log(element.cliente);
+    //         console.log("usu"+this.uidUsuario);
+    //         if(element.cliente == this.uidUsuario)
+    //         {
+    //           this.mimesa = element.id
+    //           alert("entro");
+    //         }
+            
+    //       });
+          
 
   }
-  cambioproducto()
-  {
-    this.preciototalpedido=this.precioUnitario;
 
-  }
-
-  ngOnInit() {
-
-
+  
+  ionViewWillEnter(){
+    //  alert(this.uidUsuario);
     //trae todas la lista comidas
     this.comidaService
     .getComidasList().orderBy('name', 'asc')
@@ -160,62 +225,152 @@ export class CuentaPage implements  OnInit {
       console.log(this.mesas);
     });
 
-    this.empleadosService.TraerMozos().subscribe(data => {
+    this.mesas.forEach(element => {//TRAE MESA DEL USUARIO
+      if(element.cliente == this.uidUsuario)
+      {
+        this.mimesa = element.id
+      }
+      
+    });
+    // alert(this.mimesa);
+    this.mesas.forEach(element => {
+      if(element.id ==this.mimesa)
+      {
+        this.montoTotal=element.monto;
+        this.valorpropina=element.propina;
+        // alert(this.valorpropina);
 
-      this.empleados = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          isEdit: false,
-          nombre: e.payload.doc.data()['nombre'],
-          apellido: e.payload.doc.data()['apellido'],
-          dni: e.payload.doc.data()['dni'],
-          cuil: e.payload.doc.data()['cuil'],
-          foto: e.payload.doc.data()['foto'],
-          perfil: e.payload.doc.data()['perfil'],
-          email: e.payload.doc.data()['email'],
-        };
-      })
-      console.log(this.empleados);
+      }
     });
 
-    this.pedidosService.TraerPedidosPorMesa(this.codigoMesa).subscribe(data => {
+// alert(this.valorpropina);
+    // this.pagarpropina=    this.propina(this.valorpropina)
 
-            this.pedidos = data.map(e => {
-              return {
-                id: e.payload.doc.id,
-                isEdit: false,
-                codigoPedido: e.payload.doc.data()['codigoPedido'],
-                codigoProducto: e.payload.doc.data()['codigoProducto'],
-                codigoMesa: e.payload.doc.data()['codigoMesa'],
-                detallePedido: e.payload.doc.data()['detallePedido'],
-                estadoPedido: e.payload.doc.data()['estadoPedido'],
-                tipoPedido: e.payload.doc.data()['tipoPedido'],
-                cantidad: e.payload.doc.data()['cantidad'],
-                monto: e.payload.doc.data()['monto'],
-                idMozo: e.payload.doc.data()['idEmpleado']
-              };
-            })
-            console.log(this.pedidos);
-          });
+
+    
+    // alert(this.montoTotal)
+
+   }
+   
+
+  montoMesa()
+  {
+   this.pedidosService.TraerPedidosPorMesa(this.mimesa).subscribe(data => {
+
+     this.pedidos = data.map(e => {
+       return {
+         id: e.payload.doc.id,
+         isEdit: false,
+         codigoPedido: e.payload.doc.data()['codigoPedido'],
+         codigoProducto: e.payload.doc.data()['codigoProducto'],
+         codigoMesa: e.payload.doc.data()['codigoMesa'],
+         detallePedido: e.payload.doc.data()['detallePedido'],
+         estadoPedido: e.payload.doc.data()['estadoPedido'],
+         tipoPedido: e.payload.doc.data()['tipoPedido'],
+         cantidad: e.payload.doc.data()['cantidad'],
+         monto: e.payload.doc.data()['monto'],
+         idMozo: e.payload.doc.data()['idEmpleado']
+       };
+     })
+     console.log(this.pedidos);
+   });
+    this.mesasService.getDetalleMesa(this.mimesa)
+    .get()
+    .then(eventSnapshot => {
+
+     this.mesaActual = eventSnapshot.data();
+     this.mesaActual.id = eventSnapshot.id;
+   });
+ 
   }
 
 
+  Descuentos()
+  {
+    
+  
+    var bandera=true;
+    var bandera2=true;
 
+    if("descuwnto 10% es true")
+    {
+      this.preciocondescuento10= ( this.montoTotal*10)/100;
 
- Pagar()
+      this.pedidos.forEach(element => {
+        if( element.tipoPedido=="bebida" && bandera)
+        this.preciounabebida  = element.monto/element.cantidad;
+        bandera=false;
+    
+        
+      });
+
+      this.pedidos.forEach(element => {
+        if( element.tipoPedido=="postre" && bandera2)
+        {
+          this.preciounpostre= element.monto/element.cantidad;
+          bandera2=false;
+      
+
+        }
+        
+      });
+    }
+    this.propina()
+  }
+
+  propina():number
+  {
+   let propina= this.valorpropina;
+    let propinadada =0;
+    if (propina =="20")
+    {
+      propinadada= (this.montoTotal*20)/100;
+    }
+    if(propina =="15")
+    {
+         propinadada =(this.montoTotal*15)/100;
+    }
+    if(propina =="10")
+    {
+      propinadada =(this.montoTotal*10)/100;
+
+    }
+    if(propina == "5")
+    {
+      propinadada =(this.montoTotal*5)/100;
+
+    }
+    if( propina =="0")
+    {
+      propinadada =(this.montoTotal*0)/100;
+
+    }
+    return propinadada;
+  }
+
+ calcularprecio()
  {
-   //Limpiar mesa
-   this.ResetearMesa();
-   
-   //eliminar pedidos
-   this.eliminarPedidos();
+   this.comidaService
+     .getDetalleComida(this.codigoProducto)
+     .get()
+     .then(eventSnapshot => {
 
+       this.comidaActual = eventSnapshot.data();
+       this.comidaActual.id = eventSnapshot.id;
+     });
+// this.preciototalpedido=0;
+this.cantidad=1;
 
-   //cliente pueda volver a poner en la lista de ingresantes
- 
-   
 
  }
+ cambioproducto()
+ {
+   this.preciototalpedido=this.precioUnitario;
+
+ }
+
+
+
 
   ResetearMesa() {
    

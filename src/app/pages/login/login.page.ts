@@ -77,7 +77,17 @@ export class LoginPage implements OnInit {
          this.password="123456";
          console.log('Delete clicked');
        }
-     }, {
+     }, 
+     {
+      text: 'Delivery',
+      role: 'destructive',
+      handler: () => {
+        this.email="delivery@gmail.com";
+        this.password="123456";
+        console.log('Delete clicked');
+      }
+    },
+     {
        text: 'Bartender',
        handler: () => {
          this.email="bartender@bartender.com";

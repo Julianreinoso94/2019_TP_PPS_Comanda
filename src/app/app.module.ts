@@ -23,9 +23,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FCM } from '@ionic-native/fcm/ngx';//PLUGIN PUSH NOTIFICATION
 import { Calendar } from '@ionic-native/calendar/ngx';
 import {DateFnsModule} from 'ngx-date-fns';
+import { SupervisorDeliveryPipe } from './pages2/supervisor-delivery.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SupervisorDeliveryPipe],
   entryComponents: [],
   imports: [BrowserModule,    DateFnsModule.forRoot(),AngularFireModule.initializeApp(environment.firebase),
 AngularFirestoreModule,    AngularFireStorageModule,

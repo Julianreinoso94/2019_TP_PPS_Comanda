@@ -13,16 +13,44 @@
         <ion-spinner name="dots" color="dark" ></ion-spinner>
     </div>
     <div class="" *ngIf="!loading">
-  
+ 
+
       <ion-item>
           <ion-label>Mesa</ion-label>
-          <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
+          <ion-select disabled ="{{isEnabled}}"  [(ngModel)]="mimesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
               <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
           </ion-select>
       </ion-item>
-
+      <ion-item>
+        <ion-label readonly=true
+        position="stacked">Descuento Postre</ion-label>
+        <ion-input
+          [(ngModel)]="preciounpostre"
+          type="text"
+          placeholder="Precio">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label readonly=true
+        position="stacked">Descuento 10%</ion-label>
+        <ion-input
+          [(ngModel)]="preciocondescuento10"
+          type="text"
+          placeholder="Precio">
+        </ion-input>
+      </ion-item>
       <ion-item>
         <ion-label readonly=false
+        position="stacked">Descuento Bebida gratis</ion-label>
+        <ion-input
+          [(ngModel)]="preciounabebida"
+          type="text"
+          placeholder="Precio">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label readonly=true
         position="stacked">Descuento</ion-label>
         <ion-input
           [(ngModel)]="preciototalpedido"
@@ -31,13 +59,22 @@
         </ion-input>
       </ion-item>
       <ion-item>
-          <ion-label readonly=false position="stacked">Precio Sin Descuento</ion-label>
+          <ion-label readonly=true position="stacked">Precio Sin Descuento</ion-label>
           <ion-input 
             [(ngModel)]="montoTotal" value={{mesaActual?.monto}}
             type="text"
            >
           </ion-input>
         </ion-item>
+        <ion-item>
+            <ion-label readonly=true
+            position="stacked">Mi propina</ion-label>
+            <ion-input
+              [(ngModel)]="propinada"
+              type="text"
+              placeholder="Precio">
+            </ion-input>
+          </ion-item>
   
       <ion-button
         expand="block"
@@ -46,13 +83,19 @@
       </ion-button>
       <ion-button
       expand="block"
-      (click)="Detalle()">
+      (click)="montoMesa()">
       Detalle
     </ion-button>
+    <ion-button
+    expand="block"
+    (click)="Descuentos()">
+    Descuentos
+  </ion-button>
     </div>
   
     <ion-card *ngFor="let item of pedidos">
-      <span *ngIf="!item.isEdit; else elseBlock">
+      <!-- <span *ngIf="!item.isEdit; else elseBlock"> -->
+        <span>
         <ion-card-header>
           <ion-card-title> Pedido {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
           <ion-card-subtitle>Cantidad: {{item.cantidad}}</ion-card-subtitle>

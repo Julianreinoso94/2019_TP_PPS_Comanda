@@ -97,7 +97,7 @@ export class PedidosService {
 
 
   TraerPedidos() {
-    console.log("entro");
+    // console.log("entro");
     return this.firestore.collection('Pedidos').snapshotChanges();
   }
 
@@ -143,6 +143,13 @@ export class PedidosService {
    {
      return this.firestore.collection('Pedidos', ref => ref.where('estadoPedido', '>=', "PendienteDeAprobacion")
      .where('estadoPedido', '<=', "PendienteDeAprobacion" + '\uf8ff'))
+ 
+     .snapshotChanges();
+   }
+   confirmarpedidosdelivery()
+   {
+     return this.firestore.collection('Pedidos', ref => ref.where('estadoPedido', '>=', "PendienteDelivery")
+     .where('estadoPedido', '<=', "PendienteDelivery" + '\uf8ff'))
  
      .snapshotChanges();
    }
