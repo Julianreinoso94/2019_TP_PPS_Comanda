@@ -22,50 +22,27 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-alta-cliente',
-  templateUrl: './alta-cliente.page.html',
-  styleUrls: ['./alta-cliente.page.scss'],
+  selector: 'app-alta-anonimo',
+  templateUrl: './alta-anonimo.page.html',
+  styleUrls: ['./alta-anonimo.page.scss'],
 })
-export class AltaClientePage implements OnInit {
+export class AltaAnonimoPage implements OnInit {
 
-  
   unUsuario: Usuario;
   items: Observable<any[]>;
   foto: string;
   filename:string = "";
-
 
   constructor(
     private db: AngularFirestore, 
     private camera: Camera, 
     private storage: AngularFireStorage, 
     private auth : AuthService,  
-    private router : Router) 
-  {
+    private router : Router
+  ) { 
     this.unUsuario = new Usuario();
-    this.items = db.collection('cliente').valueChanges();
+    this.items = db.collection('anonimo').valueChanges();
   }
-
-  ngOnInit() {
-  }
-
-
-  /*
-    register(email : string, password : string, name : string){
-
-    return new Promise ((resolve, reject) => {
-      this.AFauth.auth.createUserWithEmailAndPassword(email, password).then( res =>{
-          // console.log(res.user.uid);
-        const uid = res.user.uid;
-          this.db.collection('users').doc(uid).set({
-            name : name,
-            uid : uid
-          })
-        
-        resolve(res)
-      }).catch( err => reject(err))
-    })
-  */
 
   enviar()
   {
@@ -74,13 +51,13 @@ export class AltaClientePage implements OnInit {
 
     if(this.filename != undefined && this.filename != ""){
 
-      storage.ref("FotosAnonimo/"+this.foto).getDownloadURL().then(url => {
+      storage.ref("FotosCliente/"+this.foto).getDownloadURL().then(url => {
         // alert(url);
         this.foto = url;
       });
     }
 
-    this.auth.register(this.unUsuario.email,this.unUsuario.clave, this.unUsuario.dni, this.unUsuario.nombre, this.unUsuario.apellido, this.filename)
+    this.auth.registerAnonimo(this.unUsuario.email,this.unUsuario.clave, this.unUsuario.nombre, this.filename)
     .then((res) => {  
      console.log("Alta exitosa");
      this.router.navigate(['login']);
@@ -91,33 +68,35 @@ export class AltaClientePage implements OnInit {
       });
   }
 
+    //FOTO
+
+    SacarFoto() {
+      this.filename = Math.random().toString(36).substring(2);
+      const options: CameraOptions = {
+        quality: 50,
+        targetHeight: 600,
+        targetWidth: 600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true
+      }
   
-  //FOTO
-
-  SacarFoto() {
-    this.filename = Math.random().toString(36).substring(2);
-    const options: CameraOptions = {
-      quality: 50,
-      targetHeight: 600,
-      targetWidth: 600,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-    // this.foto = "data:image/jpeg;base64," + imageData;
-     this.foto='data:image/jpeg;base64,' + imageData;
-     this.storage.ref('/FotosAnonimo/').child(this.filename).putString(this.foto, 'data_url', {contentType:'image/jpeg'});
-
-            }, (err) => {
-              //  // Handle error
-         // alert("error " + JSON.stringify(err))
-            });
-       //  this.obtenerURL2();
-
-   }
-
+      this.camera.getPicture(options).then((imageData) => {
+      // this.foto = "data:image/jpeg;base64," + imageData;
+       this.foto='data:image/jpeg;base64,' + imageData;
+       this.storage.ref('/FotosCliente/').child(this.filename).putString(this.foto, 'data_url', {contentType:'image/jpeg'});
   
+              }, (err) => {
+                //  // Handle error
+           // alert("error " + JSON.stringify(err))
+              });
+         //  this.obtenerURL2();
+  
+     }
+
+
+  ngOnInit() {
+  }
+
 }

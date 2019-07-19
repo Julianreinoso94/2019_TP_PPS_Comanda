@@ -58,7 +58,7 @@
    Tomar Pedido
    </ion-button>
    <ion-button  *ngIf=" userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/alta-pedido">
-     Crea tu Pedido!
+     Crea tu Pedido
    </ion-button>
   <ion-button  *ngIf="userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/encuesta-empleado">
     Encuesta Empleado
@@ -81,7 +81,7 @@
   <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/carta">
    Carta
     </ion-button>
-    <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" (click)="scanCodepag()" >
+    <ion-button *ngIf="userProfile?.perfil=='cliente' || userProfile?.perfil=='anonimo' " expand="block" color="primary" (click)="scanCodepag()" >
       Escanea tu Codigo!
        </ion-button>
        <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"  routerLink="/habilitar-reservas"  >

@@ -73,7 +73,7 @@
 
         <ion-item>
             <ion-label>Tipo de empleado</ion-label>
-            <ion-select [(ngModel)]="unUsuario.perfil" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione cantidad de personas">
+            <ion-select [(ngModel)]="unUsuario.perfil" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo">
               <ion-select-option value="Supervisor">Supervisor</ion-select-option>
               <ion-select-option value="Dueño">Dueño</ion-select-option>
             </ion-select>
@@ -102,4 +102,19 @@
     </div>
 
 
+    <ion-card *ngFor="let item of duenios">
+        <span *ngIf="!item.isEdit; else elseBlock">
+          <ion-card-header>
+            <ion-card-title> Dueño/Supervisor {{item.nombre}} - {{item.apellido}} </ion-card-title>
+            <ion-card-subtitle>Perfil: {{item.perfil}} - DNI: {{item.dni}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+                <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+                  <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
+                </ion-button>
+          </ion-card-content>
+        </span>
+        
+      </ion-card>
+    
 </ion-content>

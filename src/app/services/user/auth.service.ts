@@ -139,6 +139,39 @@ public userProfile: firebase.firestore.DocumentReference;
   })
 }
 
+//ANONIMO
+
+registerAnonimo(email : string, password : string, nombre: string, foto:string){
+
+  return new Promise ((resolve, reject) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then( res =>{
+        // console.log(res.user.uid);
+      const uid = res.user.uid;
+        this.db.collection('anonimo').doc(uid).set({
+          //name : name,
+          uid : uid,
+          nombre: nombre,
+          perfil: "anonimo",
+          email: email,
+          clave: password, 
+          foto: foto
+        })
+
+        this.db.collection('userProfile').doc(uid).set({
+          //name : name,
+          uid : uid,
+          //nombre: nombre,
+          perfil: "anonimo",
+          //dni: dni,
+          email: email,
+          //clave: password
+        })
+      
+      resolve(res)
+    }).catch( err => reject(err))
+  })
+}
+
 //EMPLEADO
 
 registerEmpleado(email : string, password : string, dni: string, nombre: string, apellido: string, cuil: string, perfil: string, foto:string){

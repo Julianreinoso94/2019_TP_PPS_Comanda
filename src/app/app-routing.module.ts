@@ -70,7 +70,8 @@ const routes: Routes = [
   { path: 'tomarpedidosbar', loadChildren: './pages2/tomarpedidosbar/tomarpedidosbar.module#TomarpedidosbarPageModule' },
   { path: 'tipo-registro', loadChildren: './pages/tipo-registro/tipo-registro.module#TipoRegistroPageModule' },
   { path: 'alta-cliente', loadChildren: './pages/alta-cliente/alta-cliente.module#AltaClientePageModule' },
-  { path: 'clienteconfirmapedido', loadChildren: './pages2/clienteconfirmapedido/clienteconfirmapedido.module#ClienteconfirmapedidoPageModule' },
+  { path: 'clienteconfirmapedido', loadChildren: './pages2/clienteconfirmapedido/clienteconfirmapedido.module#ClienteconfirmapedidoPageModule' },  { path: 'alta-anonimo', loadChildren: './pages/alta-anonimo/alta-anonimo.module#AltaAnonimoPageModule' },
+
 
 
 

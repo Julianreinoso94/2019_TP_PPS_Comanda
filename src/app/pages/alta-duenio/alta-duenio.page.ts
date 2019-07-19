@@ -17,6 +17,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 import { ToastController } from '@ionic/angular';
+import { SupervisorService } from '../../services/supervisores/supervisor.service';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class AltaDuenioPage implements OnInit {
  items: Observable<any[]>;
  foto: string;
  filename:string = "";
-
+ duenios : any;
 
    constructor(
      private scanner: BarcodeScanner,
@@ -63,7 +64,8 @@ export class AltaDuenioPage implements OnInit {
      private db: AngularFirestore,
      public toastCtrl: ToastController,
      private auth : AuthService,
-     private router: Router
+     private router: Router,
+     private supervisorServ: SupervisorService
      )
 
 {
@@ -78,26 +80,27 @@ export class AltaDuenioPage implements OnInit {
 }
 
    ngOnInit() {
-     /*
-     this.crudService.read_Students().subscribe(data => {
 
-       this.students = data.map(e => {
-         return {
-           id: e.payload.doc.id,
-           isEdit: false,
-           nombre: e.payload.doc.data()['nombre'],
-           apellido: e.payload.doc.data()['apellido'],
-           dni: e.payload.doc.data()['dni'],
-           cuil: e.payload.doc.data()['cuil'],
-           foto: e.payload.doc.data()['foto'],
-           perfil: e.payload.doc.data()['perfil'],
+    this.supervisorServ.TraerSupervisores().subscribe(data => {
 
-         };
-       })
-       console.log(this.students);
+      this.duenios = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          apellido: e.payload.doc.data()['apellido'],
+          clave: e.payload.doc.data()['clave'],
+          cuil: e.payload.doc.data()['cuil'],
+          dni: e.payload.doc.data()['dni'],
+          email: e.payload.doc.data()['email'],
+          foto: e.payload.doc.data()['foto'],
+          nombre: e.payload.doc.data()['nombre'],
+          perfil: e.payload.doc.data()['perfil'],
+          };
+      })
+      console.log(this.duenios);
+    });
 
-     });
-     */
+     
    }
 
    CreateRecord() {
@@ -125,9 +128,14 @@ export class AltaDuenioPage implements OnInit {
        });
    }
 
+
+
+
    RemoveRecord(rowID) {
-     this.crudService.delete_Student(rowID);
-   }
+    this.supervisorServ.EliminarSupervisor(rowID);
+    this.mostrarToast("Se eliminó el supervisor con exito", "successToast");
+    this.router.navigateByUrl('/alta-duenio');
+  }
 
    EditRecord(record) {
      record.isEdit = true;

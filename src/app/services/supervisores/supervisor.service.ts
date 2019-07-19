@@ -5,22 +5,22 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteService {
+export class SupervisorService {
 
-  public listaClientesRef: firebase.firestore.CollectionReference;
+
+  public listaSupervisorRef: firebase.firestore.CollectionReference;
   public listaUsuariosRef: firebase.firestore.CollectionReference;
 
-  constructor(
-    private firestore: AngularFirestore
-  ) {
+  constructor(private firestore: AngularFirestore) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.listaClientesRef = firebase
+        this.listaSupervisorRef = firebase
           .firestore()
-          .collection('/cliente');
+          .collection('/Supervisor');
       }
       if (user)
       {
@@ -29,20 +29,20 @@ export class ClienteService {
         .collection('/userProfile');
       }
     });
-   }
-
-   TraerClientes() {
-    return this.firestore.collection('cliente').snapshotChanges();
-  }
-
-  ConfirmarCliente(email,estado)
-  {
-    //this.firestore.doc('Mesas/'+id).update({ monto: monto });
-    this.firestore.doc('cliente/' + email).update({activado: estado})
   }
 
 
-
-  
-  
+    
+  TraerSupervisores() {
+    console.log("entro");
+    return this.firestore.collection('Supervisor').snapshotChanges();
   }
+
+  EliminarSupervisor(record_id) {
+    this.firestore.doc('Supervisor/' + record_id).delete();
+    }
+
+
+
+}
+
