@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{comidaActual?.name}}</ion-title>
+    <ion-title> {{comidaActual?.name}}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,4 +21,26 @@
       <p>Tiempo: <strong>{{comidaActual?.time}}</strong></p>
     </ion-card-content>
   </ion-card>
+  <br>
+
+  <ion-slides pager="true" [options]="slideOpts" >
+      <ion-slide *ngFor="let img of listaImagenes">
+        
+        <ion-card *ngIf="img.producto == comidaActual?.name">
+            <ion-card-header>
+              <ion-card-title></ion-card-title>
+            </ion-card-header>
+        
+            <ion-card-content>
+                <ion-img [src]="img.imgbase64" >
+
+                </ion-img>
+                <p>Foto de producto: {{img.producto}}</p>
+                
+            </ion-card-content>
+        </ion-card>
+      </ion-slide>        
+    </ion-slides>
+
+
 </ion-content>

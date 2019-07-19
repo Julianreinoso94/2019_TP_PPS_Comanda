@@ -128,9 +128,6 @@ export class AltaDuenioPage implements OnInit {
        });
    }
 
-
-
-
    RemoveRecord(rowID) {
     this.supervisorServ.EliminarSupervisor(rowID);
     this.mostrarToast("Se eliminó el supervisor con exito", "successToast");

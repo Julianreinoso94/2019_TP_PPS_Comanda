@@ -23,3 +23,11 @@ npm install --save date-fns@1.29.0
 
 npm i ngx-date-fns
 npm install @ionic-native/fcm
+
+//////////////////////////////
+
+ionic cordova plugin add cordova-plugin-ionic-webview
+npm install @ionic-native/ionic-webview
+npm install @ionic/storage
+ionic cordova plugin add com-badrit-base64
+npm install @ionic-native/base64
