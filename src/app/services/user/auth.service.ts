@@ -18,6 +18,7 @@ public userProfile: firebase.firestore.DocumentReference;
     ) { }
 
   loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
+
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
@@ -102,7 +103,7 @@ public userProfile: firebase.firestore.DocumentReference;
     .catch(err=>Promise.reject(err))
  }
 
- //this.unUsuario.email,this.unUsuario.clave, this.unUsuario.dni, this.unUsuario.nombre
+ 
  register(email : string, password : string, dni: string, nombre: string, apellido: string, foto:string){
 
   return new Promise ((resolve, reject) => {
@@ -113,7 +114,7 @@ public userProfile: firebase.firestore.DocumentReference;
           //name : name,
           uid : uid,
           nombre: nombre,
-          perfil: "Cliente",
+          perfil: "cliente",
           dni: dni,
           email: email,
           clave: password,
@@ -130,10 +131,121 @@ public userProfile: firebase.firestore.DocumentReference;
           email: email,
           //clave: password
         })
+
+        firebase.auth().currentUser.sendEmailVerification();
       
       resolve(res)
     }).catch( err => reject(err))
   })
 }
+
+//ANONIMO
+
+registerAnonimo(email : string, password : string, nombre: string, foto:string){
+
+  return new Promise ((resolve, reject) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then( res =>{
+        // console.log(res.user.uid);
+      const uid = res.user.uid;
+        this.db.collection('anonimo').doc(uid).set({
+          //name : name,
+          uid : uid,
+          nombre: nombre,
+          perfil: "anonimo",
+          email: email,
+          clave: password, 
+          foto: foto
+        })
+
+        this.db.collection('userProfile').doc(uid).set({
+          //name : name,
+          uid : uid,
+          //nombre: nombre,
+          perfil: "anonimo",
+          //dni: dni,
+          email: email,
+          //clave: password
+        })
+      
+      resolve(res)
+    }).catch( err => reject(err))
+  })
+}
+
+//EMPLEADO
+
+registerEmpleado(email : string, password : string, dni: string, nombre: string, apellido: string, cuil: string, perfil: string, foto:string){
+
+  return new Promise ((resolve, reject) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then( res =>{
+        // console.log(res.user.uid);
+      const uid = res.user.uid;
+        this.db.collection('Empleado').doc(uid).set({
+          //name : name,
+          uid : uid,
+          nombre: nombre,
+          perfil: perfil,
+          dni: dni,
+          email: email,
+          clave: password,
+          apellido: apellido, 
+          foto: foto,
+          cuil: cuil
+        })
+
+        this.db.collection('userProfile').doc(uid).set({
+          //name : name,
+          uid : uid,
+          //nombre: nombre,
+          perfil: perfil,
+          //dni: dni,
+          email: email,
+          //clave: password
+        })
+      
+      resolve(res)
+    }).catch( err => reject(err))
+  })
+}
+
+
+//SUPERVISOR
+
+registerSupervisor(email : string, password : string, dni: string, nombre: string, apellido: string, cuil: string, perfil: string, foto:string){
+
+  return new Promise ((resolve, reject) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then( res =>{
+        // console.log(res.user.uid);
+      const uid = res.user.uid;
+        this.db.collection('Supervisor').doc(uid).set({
+          //name : name,
+          uid : uid,
+          nombre: nombre,
+          perfil: perfil,
+          dni: dni,
+          email: email,
+          clave: password,
+          apellido: apellido, 
+          foto: foto,
+          cuil: cuil
+        })
+
+        this.db.collection('userProfile').doc(uid).set({
+          //name : name,
+          uid : uid,
+          //nombre: nombre,
+          perfil: perfil,
+          //dni: dni,
+          email: email,
+          //clave: password
+        })
+
+      
+      resolve(res)
+    }).catch( err => reject(err))
+  })
+}
+
+
 
 }

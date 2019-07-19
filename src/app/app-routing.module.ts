@@ -70,11 +70,11 @@ const routes: Routes = [
   { path: 'tomarpedidosbar', loadChildren: './pages2/tomarpedidosbar/tomarpedidosbar.module#TomarpedidosbarPageModule' },
   { path: 'tipo-registro', loadChildren: './pages/tipo-registro/tipo-registro.module#TipoRegistroPageModule' },
   { path: 'alta-cliente', loadChildren: './pages/alta-cliente/alta-cliente.module#AltaClientePageModule' },
-  { path: 'clienteconfirmapedido', loadChildren: './pages2/clienteconfirmapedido/clienteconfirmapedido.module#ClienteconfirmapedidoPageModule' },  { path: 'delivery', loadChildren: './pages2/delivery/delivery.module#DeliveryPageModule' },
+  { path: 'clienteconfirmapedido', loadChildren: './pages2/clienteconfirmapedido/clienteconfirmapedido.module#ClienteconfirmapedidoPageModule' },
+  { path: 'delivery', loadChildren: './pages2/delivery/delivery.module#DeliveryPageModule' },
   { path: 'supervisor-delivery', loadChildren: './pages2/supervisor-delivery/supervisor-delivery.module#SupervisorDeliveryPageModule' },
   { path: 'tomar-pedido-delivery', loadChildren: './pages2/tomar-pedido-delivery/tomar-pedido-delivery.module#TomarPedidoDeliveryPageModule' },
-
-
+  { path: 'alta-anonimo', loadChildren: './pages/alta-anonimo/alta-anonimo.module#AltaAnonimoPageModule' },
 
 
 ];

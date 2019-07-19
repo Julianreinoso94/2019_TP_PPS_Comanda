@@ -3,13 +3,16 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComidasService {
   public listaComidasRef: firebase.firestore.CollectionReference;
-  constructor() {
+  constructor(
+    public toastCtrl: ToastController
+  ) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.listaComidasRef = firebase
@@ -25,7 +28,7 @@ export class ComidasService {
     comidaDescription: string,
     comidaPrice: number,
     comidaTime: number,
-    comidaPicture: any = null,
+    //comidaPicture: any = null,
     tipo: string
   ): Promise<firebase.firestore.DocumentReference> {
     return this.listaComidasRef.add({
@@ -35,19 +38,21 @@ export class ComidasService {
       price: comidaPrice,
       time: comidaTime,
       tipo:tipo
-    }).then( ( newComida ) => {
-
-      if (comidaPicture != null) {
-        // return firebase.firestore().runTransaction(transaction => {
-
-          // return transaction.get(this.listaComidasRef.doc(newComida.id)).then(comidaDoc => {
-
-              return this.cargarFoto(comidaPicture, newComida.id);
-
-            // });
-          // });
-      }
     });
+    this.mostrarToast("Comida cargada!", "Danger Toast");
+  }
+
+  public async mostrarToast(miMsj:string,color:string)
+  {
+    let toast = await this.toastCtrl.create({
+      showCloseButton: true,
+      closeButtonText:"cerrar",
+      cssClass: color,
+      message: miMsj,
+      duration: 3000,
+      position: 'top'
+    });
+    return await toast.present();
   }
 
   getComidasList(): firebase.firestore.CollectionReference {
@@ -84,7 +89,6 @@ export class ComidasService {
     }
 
     return promise;
-
 
   }
 }
