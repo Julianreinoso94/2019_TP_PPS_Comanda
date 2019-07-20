@@ -52,7 +52,7 @@ export class EncuestaEmpleadoCreatePage implements OnInit {
       this.eventService
         .cargarEncuesta( unidad, select, porcentaje, cantidad, texto, this.fotoService.fotoUnica )
         .then(() => {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('home');
           this.fotoService.fotoUnica = null;
           this.loading = false;
         });

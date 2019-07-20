@@ -111,7 +111,6 @@ export class LoginPage implements OnInit {
 
             if(verificadoo == true)
             {
-      
             this.router.navigateByUrl('home');
             }
             else{

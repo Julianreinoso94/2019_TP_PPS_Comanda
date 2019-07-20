@@ -190,45 +190,17 @@ export class AltaEmpleadoPage implements OnInit {
     return true;
   }
 
-/*
-  EditRecord(record) {
-    record.isEdit = true;
-    record.EditNombre = record.nombre;
-    record.EditApellido = record.apellido;
-    record.EditDni = record.dni;
-    record.EditCuil = record.cuil;
-    //record.EditFoto = record.foto;
-    record.EditPerfil = record.perfil;
-    record.EditEmail = record.email;
-  }
 
-  UpdateRecord(recordRow) {
-    let record = {};
-    record['nombre'] = recordRow.EditNombre;
-    record['apellido'] = recordRow.EditApellido;
-    record['dni'] = recordRow.EditDni;
-    record['cuil'] = recordRow.EditCuil;
-   // record['foto'] = recordRow.EditFoto;
-    record['perfil'] = recordRow.EditPerfil;
-    record['email'] = recordRow.EditEmail;
-    this.empleadosService.ModificarEmpleado(recordRow.id, record);
-    recordRow.isEdit = false;
-  }
-
-  RemoveRecord(rowID) {
-    this.empleadosService.EliminarEmpleado(rowID);
-  }
-  */
 
   cargarDatosDesdeDni(datos: any) {
     // alert(datos);
     let parsedData = datos.text.split('@');
     let nombrescan = parsedData[0].toString();
     let apellido = parsedData[1].toString();
-    let dniscan: number = +parsedData[2];
-    this.nombre=nombrescan;
-    this.apellido=apellido;
-    this.dni=dniscan;
+    let dniscan = parsedData[2];
+    this.unUsuario.nombre=nombrescan;
+    this.unUsuario.apellido=apellido;
+    this.unUsuario.dni=dniscan;
 
 
     // this.guardardatosDeDueSup(datos);

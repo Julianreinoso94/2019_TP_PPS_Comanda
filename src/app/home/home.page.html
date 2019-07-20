@@ -46,7 +46,6 @@
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' "expand="block" color="primary" routerLink="/alta-empleado">
     Alta de Empleado
   </ion-button>
-
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/alta-cliente">
     Cargar Cliente
   </ion-button>
@@ -67,10 +66,9 @@
    <ion-button  *ngIf=" userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/alta-pedido">
      Crea tu Pedido
    </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/encuesta-empleado">
+  <ion-button  *ngIf="userProfile?.perfil=='mozo' || userProfile?.perfil=='cocinero' || userProfile?.perfil=='bartender'" expand="block" color="primary" routerLink="/encuesta-empleado">
     Encuesta Empleado
   </ion-button>
-
   <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/reserva-cliente">
     Reserva Cliente
   </ion-button>

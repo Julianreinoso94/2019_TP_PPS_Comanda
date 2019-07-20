@@ -24,6 +24,7 @@ import { EventService } from '../services/event/event.service';
 export class HomePage  implements OnInit{
   public currentUser: firebase.User;
   uidUsuario:any;
+  public emaili;
 
     public userProfile: any;
     public birthDate: Date;
@@ -123,7 +124,9 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
       })
       console.log(this.mesas);
     });
+
     }
+
     constructor(private resevas:ReservasService,private mesasService: MesasService,private storage: AngularFireStorage,
       private alertCtrl: AlertController,private route: ActivatedRoute, private serviciolistadeespera: EventService,
       private authService: AuthService,   private scanner: BarcodeScanner,private barcodeScanner: BarcodeScanner,
@@ -135,14 +138,17 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
       firebase.auth().onAuthStateChanged(user => {
  
         this.currentUser = user;
-        this.uidUsuario = user.uid});
+        this.uidUsuario = user.uid;});
       
       this.price = this.route.snapshot.params['price'];
 
+      
+
     }
+
   ngOnInit() {
 
-
+    
   }
 
 
