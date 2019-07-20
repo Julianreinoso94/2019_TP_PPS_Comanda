@@ -38,7 +38,8 @@ export class AltaAnonimoPage implements OnInit {
     private camera: Camera, 
     private storage: AngularFireStorage, 
     private auth : AuthService,  
-    private router : Router
+    private router : Router,
+    public toastCtrl: ToastController
   ) { 
     this.unUsuario = new Usuario();
     this.items = db.collection('anonimo').valueChanges();
@@ -57,6 +58,18 @@ export class AltaAnonimoPage implements OnInit {
       });
     }
 
+    if(this.unUsuario.nombre == null || this.unUsuario.email == null || this.unUsuario.clave == null)
+     {
+       this.mostrarToast("Todos los campos son obligatorios", "color");
+     }
+     else{
+       if(this.unUsuario.clave.length < 6)
+       {
+        this.mostrarToast("Clave debe ser mayor a 6 caracteres", "color");
+       }
+       else{
+ 
+
     this.auth.registerAnonimo(this.unUsuario.email,this.unUsuario.clave, this.unUsuario.nombre, this.filename)
     .then((res) => {  
      console.log("Alta exitosa");
@@ -66,6 +79,8 @@ export class AltaAnonimoPage implements OnInit {
         alert("Error al guardar perfil")
         console.error("Error al escribir el usuario", error);
       });
+    }
+  }
   }
 
     //FOTO
@@ -97,6 +112,19 @@ export class AltaAnonimoPage implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  async mostrarToast(miMsj:string,color:string)
+  {
+    let toast = await this.toastCtrl.create({
+      showCloseButton: true,
+      closeButtonText:"cerrar",
+      cssClass: color,
+      message: miMsj,
+      duration: 3000,
+      position: 'top'
+    });
+    return await toast.present();
   }
 
 }

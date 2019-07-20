@@ -305,7 +305,7 @@ scanCodepag() {
 
 
  enviar()
- {
+ {    
    console.log(this.unUsuario);
    var storage = firebase.storage();
 
@@ -317,17 +317,42 @@ scanCodepag() {
      });
    }
 
+   if(this.unUsuario.nombre == null || this.unUsuario.apellido == null || this.unUsuario.dni == null || this.unUsuario.cuil == null ||
+    this.unUsuario.perfil == null || this.unUsuario.email == null)
+    {
+      this.mostrarToast("Todos los campos son obligatorios", "color");
+    }
+    else{
+
+
+   if(!this.ValidarNumero(this.unUsuario.dni))
+   {
+     this.mostrarToast("DNI no valido", "color");
+   }
+   else{
+
+    if(!this.ValidarNumero(this.unUsuario.cuil))
+    {
+      this.mostrarToast("CUIL no valido", "color");
+    }
+    else
+    {
+
    this.auth.registerSupervisor(this.unUsuario.email,"111111", this.unUsuario.dni, this.unUsuario.nombre, this.unUsuario.apellido, this.unUsuario.cuil, this.unUsuario.perfil, this.filename)
    .then((res) => {  
     console.log("Alta exitosa");
     this.mostrarToast("Se cargo el supervisor/dueño con exito", "successToast");
-    this.router.navigate(['login']);
+    this.router.navigate(['home']);
      })
      .catch(function(error) {
        //alert("Error al guardar perfil")
        this.mostrarToast("Error al escribir el usuario", "dangerToast");
        console.error("Error al escribir el usuario", error);
      });
+    }
+  }
+  }
+  
  }
 
  async mostrarToast(miMsj:string,color:string)
@@ -343,6 +368,19 @@ scanCodepag() {
    return await toast.present();
  }
 
+
+ ValidarNumero(numero: string) 
+ {
+   let arrayNumero = numero.split("");
+   for (let caracter of arrayNumero) 
+   {
+     if (isNaN(parseInt(caracter))) 
+     {
+       return false;
+      }
+    }
+    return true;
+  }
 
 
  }

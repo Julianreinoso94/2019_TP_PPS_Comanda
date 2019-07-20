@@ -22,6 +22,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ClienteService} from '../../services/clientes/cliente.service';
 
+
 @Component({
   selector: 'app-alta-cliente',
   templateUrl: './alta-cliente.page.html',
@@ -42,7 +43,8 @@ export class AltaClientePage implements OnInit {
     private storage: AngularFireStorage, 
     private auth : AuthService,  
     private router : Router,
-    private clienteService: ClienteService) 
+    private clienteService: ClienteService,
+    public toastCtrl: ToastController) 
   {
     this.unUsuario = new Usuario();
     this.items = db.collection('cliente').valueChanges();
@@ -82,15 +84,43 @@ export class AltaClientePage implements OnInit {
       });
     }
 
+    if(this.unUsuario.nombre == null || this.unUsuario.apellido == null || this.unUsuario.dni == null || 
+       this.unUsuario.email == null || this.unUsuario.clave == null)
+      {
+        this.mostrarToast("Todos los campos son obligatorios", "color");
+      }
+      else{
+  
+  
+     if(!this.ValidarNumero(this.unUsuario.dni))
+     {
+       this.mostrarToast("DNI no valido", "color");
+     }
+     
+      else
+      {
+        if(this.unUsuario.clave.length < 6)
+       {
+        this.mostrarToast("Clave debe ser mayor a 6 caracteres", "color");
+       }
+       else{
+  
+
     this.auth.register(this.unUsuario.email,this.unUsuario.clave, this.unUsuario.dni, this.unUsuario.nombre, this.unUsuario.apellido, this.filename)
     .then((res) => {  
      console.log("Alta exitosa");
+     this.mostrarToast("Alta Exitosa", "color");
      this.router.navigate(['login']);
       })
       .catch(function(error) {
-        alert("Error al guardar perfil")
+        this.mostrarToast("Error al escribir el usuario", "color");
         console.error("Error al escribir el usuario", error);
       });
+
+    }
+  }
+}
+
   }
 
   
@@ -120,6 +150,33 @@ export class AltaClientePage implements OnInit {
        //  this.obtenerURL2();
 
    }
+
+   async mostrarToast(miMsj:string,color:string)
+   {
+     let toast = await this.toastCtrl.create({
+       showCloseButton: true,
+       closeButtonText:"cerrar",
+       cssClass: color,
+       message: miMsj,
+       duration: 3000,
+       position: 'top'
+     });
+     return await toast.present();
+   }
+  
+  
+   ValidarNumero(numero: string) 
+   {
+     let arrayNumero = numero.split("");
+     for (let caracter of arrayNumero) 
+     {
+       if (isNaN(parseInt(caracter))) 
+       {
+         return false;
+        }
+      }
+      return true;
+    }
 
   
 }
