@@ -343,9 +343,11 @@ this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN
 /////////////////////////////////////////////////////////////////////////////////////////////////////71111111
 if(estadomimesa == "Disponible" &&  mesaClienteSentado=="parado" && estadoenlistadeespera=="asignandomesa" )
     {                                     //LA MESA ESTA DISPONIBLE
-    alert (estadomimesa);
-    this.mostrarToast("Se le ha asignado esta mesa.Ya puede sentarse..", "successToast");
+    // alert (estadomimesa);
    this.mesasService.AsignarClienteaMesa(codigo,this.uidUsuario,"Ocupada");
+   this.mostrarToast("Se le ha asignado esta mesa.Ya puede sentarse..", "successToast");
+   this.router.navigateByUrl('home');
+
     }
     else
     {
@@ -363,7 +365,7 @@ if(estadomimesa == "Disponible" &&  mesaClienteSentado=="parado" && estadoenlist
     ////////////////////////////////////////////////////////////////////////////////////////////////////333
     if (estadoenlistadeespera=="asignandomesa" && mesaClienteSentado != codigo)
     {
-      this.mostrarToast("No se le puede asignar esta mesa por el momento, usted esta sentado en otra mesa..", "successToast");
+      // this.mostrarToast("No se le puede asignar esta mesa por el momento, usted esta sentado en otra mesa..", "successToast");
 
     }
 

@@ -17,6 +17,10 @@ export class CerrarMesaPage implements OnInit {
 
   loading = false;
   mesas : any;
+  reservas: any;
+  reservaserv: any;
+  listaEspera: any;
+  eventService: any;
 
   constructor(
     private router: Router,
@@ -24,7 +28,58 @@ export class CerrarMesaPage implements OnInit {
     // private camara: Camera,
     public fotoService: FotosService,
     public toastCtrl: ToastController
-  ) { }
+  ) {
+    this.eventService.getListaEspera().subscribe(data => {
+
+      this.listaEspera = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+         // isEdit: false,
+          estado: e.payload.doc.data()['estado'],
+          uid: e.payload.doc.data()['uid'],
+        //  fechareserva: e.payload.doc.data()['fechareserva'],
+          // cantPersonas: e.payload.doc.data()['cantPersonas'],
+          // cliente: e.payload.doc.data()['cliente'],
+          // monto: e.payload.doc.data()['monto'],
+          // propina: e.payload.doc.data()['propina'],
+          // descuento10: e.payload.doc.data()['descuento10'],
+          // descuentoBebida: e.payload.doc.data()['descuentoBebida'],
+          // descuentoPostre: e.payload.doc.data()['descuentoPostre'],
+          // estadobool:false,
+          };
+      })
+     // console.log(this.listadeespera);
+    });
+    this.reservaserv.TraerReservas().subscribe(data => {
+
+      this.reservas = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          usuario: e.payload.doc.data()['usuario'],
+          cantidad: e.payload.doc.data()['cantidad'],
+          estado: e.payload.doc.data()['estado'],
+
+
+          horareserva: e.payload.doc.data()['horareserva'],
+          fechareserva: e.payload.doc.data()['fechareserva'],
+          // cantPersonas: e.payload.doc.data()['cantPersonas'],
+          // cliente: e.payload.doc.data()['cliente'],
+          // monto: e.payload.doc.data()['monto'],
+          // propina: e.payload.doc.data()['propina'],
+          // descuento10: e.payload.doc.data()['descuento10'],
+          // descuentoBebida: e.payload.doc.data()['descuentoBebida'],
+          // descuentoPostre: e.payload.doc.data()['descuentoPostre'],
+          // estadobool:false,
+          };
+      })
+      //console.log(this.mesas);
+    });
+   }
+
+  ionViewWillEnter(){
+
+  }
 
   ngOnInit() {
 
@@ -51,14 +106,19 @@ export class CerrarMesaPage implements OnInit {
   }
 
   CerrarMesaaa(record) {
-    record.isEdit = true;
-    record.EditEstado = record.estado;
-    record.EditCliente = record.cliente;
-    record.Editdescuento10 = record.descuento10;
-    record.EditdescuentoBebida = record.descuentoBebida;
-    record.EditdescuentoPostre = record.descuentoPostre;
-    record.EditPropina = record.propina;
-    record.EditMonto = record.monto;
+    
+    let mesa = {};
+    mesa['estado'] = "Disponible";
+    mesa['propina'] = 0;
+    mesa['descuentoBebida'] = false;
+    mesa['descuentoPostre'] = false;
+    mesa['descuento10'] = false;
+    mesa['monto'] = 0;
+
+     this.mesasService.ModificarMesa( record.id, mesa);
+    //limpiar
+    this.mostrarToast("Se cerró la mesa con exito", "successToast");
+
   }
 
   CerrarMesa(recordRow) {
@@ -73,6 +133,8 @@ export class CerrarMesaPage implements OnInit {
 
     this.mesasService.ModificarMesa(recordRow.id, record);
     recordRow.isEdit = false;
+
+    
     this.mostrarToast("Se cerró la mesa con exito", "successToast");
     this.router.navigateByUrl('/cerrar-mesa');
   }
