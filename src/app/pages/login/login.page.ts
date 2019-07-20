@@ -186,7 +186,6 @@ export class LoginPage implements OnInit {
      },
      {
       text: 'Mozo',
-      icon: 'heart',
       handler: () => {
         this.email="mozo@mozo.com";
         this.password="123456";

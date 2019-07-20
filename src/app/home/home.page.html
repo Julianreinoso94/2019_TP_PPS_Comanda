@@ -44,8 +44,13 @@
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' "expand="block" color="primary" routerLink="/alta-empleado">
     Alta de Empleado
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/cliente-create">
+
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/alta-cliente">
     Cargar Cliente
+  </ion-button>
+
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/lista-clientes">
+    Listado Clientes
   </ion-button>
 
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo'  " expand="block" color="primary" routerLink="/abrir-mesa">
