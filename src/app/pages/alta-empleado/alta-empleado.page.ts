@@ -23,6 +23,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
+
 @Component({
   selector: 'app-alta-empleado',
   templateUrl: './alta-empleado.page.html',
@@ -110,6 +111,26 @@ export class AltaEmpleadoPage implements OnInit {
      });
    }
 
+   if(this.unUsuario.nombre == null || this.unUsuario.apellido == null || this.unUsuario.dni == null || this.unUsuario.cuil == null ||
+    this.unUsuario.perfil == null || this.unUsuario.email == null)
+    {
+      this.mostrarToast("Todos los campos son obligatorios", "color");
+    }
+    else{
+
+      if(!this.ValidarNumero(this.unUsuario.dni))
+      {
+        this.mostrarToast("DNI no valido", "color");
+      }
+      else{
+
+        if(!this.ValidarNumero(this.unUsuario.cuil))
+        {
+          this.mostrarToast("CUIL no valido", "color");
+        }
+        else
+        {
+
    this.auth.registerEmpleado(this.unUsuario.email,"111111", this.unUsuario.dni, this.unUsuario.nombre, this.unUsuario.apellido, this.unUsuario.cuil, this.unUsuario.perfil, this.filename)
    .then((res) => {  
     console.log("Alta exitosa");
@@ -118,9 +139,12 @@ export class AltaEmpleadoPage implements OnInit {
      })
      .catch(function(error) {
        //alert("Error al guardar perfil")
-       this.mostrarToast("Se cargo el empleado con exito", "dangerToast");
+       this.mostrarToast("Error al cargar empleado", "dangerToast");
        console.error("Error al escribir el usuario", error);
      });
+    }
+  }
+}
  }
 
 
@@ -153,17 +177,17 @@ export class AltaEmpleadoPage implements OnInit {
 
 
 
-  async mostrarToast(miMsj:string,color:string)
-  {
-    let toast = await this.toastCtrl.create({
-      showCloseButton: true,
-      closeButtonText:"cerrar",
-      cssClass: color,
-      message: miMsj,
-      duration: 3000,
-      position: 'top'
-    });
-    return await toast.present();
+  ValidarNumero(numero: string) 
+ {
+   let arrayNumero = numero.split("");
+   for (let caracter of arrayNumero) 
+   {
+     if (isNaN(parseInt(caracter))) 
+     {
+       return false;
+      }
+    }
+    return true;
   }
 
 /*
@@ -230,6 +254,19 @@ export class AltaEmpleadoPage implements OnInit {
    RemoveRecord(rowID) {
     this.empleadosService.EliminarEmpleado(rowID);
     this.mostrarToast("Se eliminó el empleado con exito", "color: Success");
+  }
+
+  async mostrarToast(miMsj:string,color:string)
+  {
+    let toast = await this.toastCtrl.create({
+      showCloseButton: true,
+      closeButtonText:"cerrar",
+      cssClass: color,
+      message: miMsj,
+      duration: 3000,
+      position: 'top'
+    });
+    return await toast.present();
   }
 
 }
