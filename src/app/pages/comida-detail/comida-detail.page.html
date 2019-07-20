@@ -18,28 +18,12 @@
       <p>Precio: <strong>{{comidaActual?.price | currency}}</strong></p>
       <p>Tiempo: <strong>{{comidaActual?.time}} minutos</strong></p>
 
-      <ion-slides pager="true" [options]="slideOpts" >
-          <ion-slide *ngFor="let img of listaImagenes">
-            
-            <ion-card *ngIf="img.producto == comidaActual?.name">
-                <ion-card-header>
-                  <ion-card-title></ion-card-title>
-                </ion-card-header>
-            
-                <ion-card-content>
-                    <ion-img [src]="img.imgbase64" >
-    
-                    </ion-img>
-                    <p>Foto de producto: {{img.producto}}</p>
-                    
-                </ion-card-content>
-            </ion-card>
-          </ion-slide>        
-        </ion-slides>
-
     </ion-card-content>
   </ion-card>
-  <br>
 
+  <ion-card *ngFor="let img of listaImagenes">
+    <ion-img *ngIf="img.producto == comidaActual?.name" [src]="img.imgbase64">
+    </ion-img>
+  </ion-card>
 
 </ion-content>
