@@ -20,6 +20,7 @@ import { AuthService} from '../../services/user/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 //para poder hacer las validaciones
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {ClienteService} from '../../services/clientes/cliente.service';
 
 @Component({
   selector: 'app-alta-cliente',
@@ -28,11 +29,11 @@ import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 })
 export class AltaClientePage implements OnInit {
 
-  
   unUsuario: Usuario;
   items: Observable<any[]>;
   foto: string;
   filename:string = "";
+  clientes: any;
 
 
   constructor(
@@ -40,32 +41,33 @@ export class AltaClientePage implements OnInit {
     private camera: Camera, 
     private storage: AngularFireStorage, 
     private auth : AuthService,  
-    private router : Router) 
+    private router : Router,
+    private clienteService: ClienteService) 
   {
     this.unUsuario = new Usuario();
     this.items = db.collection('cliente').valueChanges();
   }
 
   ngOnInit() {
+    this.clienteService.TraerClientes().subscribe(data => {
+
+      this.clientes = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          nombre: e.payload.doc.data()['nombre'],
+          apellido: e.payload.doc.data()['apellido'],
+          dni: e.payload.doc.data()['dni'],
+          foto: e.payload.doc.data()['foto'],
+          perfil: e.payload.doc.data()['perfil'],
+          email: e.payload.doc.data()['email'],
+        };
+      })
+      console.log(this.clientes);
+    });
+
   }
 
-
-  /*
-    register(email : string, password : string, name : string){
-
-    return new Promise ((resolve, reject) => {
-      this.AFauth.auth.createUserWithEmailAndPassword(email, password).then( res =>{
-          // console.log(res.user.uid);
-        const uid = res.user.uid;
-          this.db.collection('users').doc(uid).set({
-            name : name,
-            uid : uid
-          })
-        
-        resolve(res)
-      }).catch( err => reject(err))
-    })
-  */
 
   enviar()
   {

@@ -35,9 +35,6 @@
   <ion-button    expand="block" color="primary" routerLink="/comida-list">
     Listado de comidas
   </ion-button>
-  <ion-button    expand="block" color="primary" routerLink="/comida-list">
-    Cargar Comida
-  </ion-button>
   <ion-button expand="block"  *ngIf="userProfile?.perfil=='Supervisor'  " color="primary" routerLink="/alta-duenio">
     Alta Dueño/Supervisor
   </ion-button>
@@ -47,8 +44,13 @@
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' "expand="block" color="primary" routerLink="/alta-empleado">
     Alta de Empleado
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/cliente-create">
+
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/alta-cliente">
     Cargar Cliente
+  </ion-button>
+
+  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/lista-clientes">
+    Listado Clientes
   </ion-button>
 
   <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo'  " expand="block" color="primary" routerLink="/abrir-mesa">
@@ -80,10 +82,6 @@
     Tomar Pedidos Bar
     </ion-button>
 
-
-  <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/carta">
-   Carta
-    </ion-button>
     <ion-button *ngIf="userProfile?.perfil=='cliente' || userProfile?.perfil=='anonimo' " expand="block" color="primary" (click)="scanCodepag()" >
       Escanea tu Codigo!
        </ion-button>

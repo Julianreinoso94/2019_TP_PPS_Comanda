@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+        <ion-back-button defaultHref="/comida-list"></ion-back-button>
     </ion-buttons>
-    <ion-title> {{comidaActual?.name}}
+    <ion-title> Descripción
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,36 +11,19 @@
 <ion-content padding>
   <ion-card>
     <ion-card-header>
-      Descripción:
-      <span [class.profitable]="1 > 0">
-        {{comidaActual?.description}}
-      </span>
+      <ion-card-title>{{comidaActual?.name}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>Precio: <strong>${{comidaActual?.price | currency}}</strong></p>
-      <p>Tiempo: <strong>{{comidaActual?.time}}</strong></p>
+      <p>Descripcion: <strong>{{comidaActual?.description}}</strong></p>
+      <p>Precio: <strong>{{comidaActual?.price | currency}}</strong></p>
+      <p>Tiempo: <strong>{{comidaActual?.time}} minutos</strong></p>
+
     </ion-card-content>
   </ion-card>
-  <br>
 
-  <ion-slides pager="true" [options]="slideOpts" >
-      <ion-slide *ngFor="let img of listaImagenes">
-        
-        <ion-card *ngIf="img.producto == comidaActual?.name">
-            <ion-card-header>
-              <ion-card-title></ion-card-title>
-            </ion-card-header>
-        
-            <ion-card-content>
-                <ion-img [src]="img.imgbase64" >
-
-                </ion-img>
-                <p>Foto de producto: {{img.producto}}</p>
-                
-            </ion-card-content>
-        </ion-card>
-      </ion-slide>        
-    </ion-slides>
-
+  <ion-card *ngFor="let img of listaImagenes">
+    <ion-img *ngIf="img.producto == comidaActual?.name" [src]="img.imgbase64">
+    </ion-img>
+  </ion-card>
 
 </ion-content>

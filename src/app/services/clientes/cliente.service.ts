@@ -41,6 +41,10 @@ export class ClienteService {
     this.firestore.doc('cliente/' + email).update({activado: estado})
   }
 
+  EliminarCliente(record_id) {
+    this.firestore.doc('cliente/' + record_id).delete();
+    }
+
 
 
   

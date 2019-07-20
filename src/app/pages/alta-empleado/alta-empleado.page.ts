@@ -55,7 +55,7 @@ export class AltaEmpleadoPage implements OnInit {
   filename:string = "";
 
   constructor(
-   // private empleadosService: EmpleadosService,
+    private empleadosService: EmpleadosService,
     private router: Router,
     private db: AngularFirestore,
     private camera: Camera, 
@@ -75,7 +75,7 @@ export class AltaEmpleadoPage implements OnInit {
     }
 
   ngOnInit() {
-    /*
+    
     this.empleadosService.TraerEmpleados().subscribe(data => {
 
       this.empleados = data.map(e => {
@@ -93,54 +93,10 @@ export class AltaEmpleadoPage implements OnInit {
       })
       console.log(this.empleados);
     });
-    */
+    
   }
 
-  /*
-  cargarEmpleado(
-    nombre: string,
-    apellido: string,
-    email: string,
-    dni: number,
-    cuil: number,
-    perfil: string
-  ): void {
-
-    if (
-      nombre === undefined ||
-      apellido === undefined ||
-      email === undefined ||
-      dni === undefined ||
-      cuil === undefined ||
-      perfil === undefined
-    ) {
-      return;
-    }
-    this.loading = true;
-    this.empleadosService
-      .crearEmpleado(nombre, apellido, email, dni, cuil, perfil, this.fotoService.photos)
-      .then(() => {
-        this.loading = false;
-        this.mostrarToast("Se cargo el empleado con exito", "successToast");
-        // if (perfil=="bartender")
-        // {
-        //   alert("bartender");
-        // }
-        // if (perfil=="cocinero")
-        // {
-        //   alert ("cocinero");
-        // }
-        // if (perfil=="Mozo")
-        // {
-        //   alert("Mozo");
-        // }
-        this.router.navigateByUrl('/home');
-        this.fotoService.photos = [];
-      });
-  }
-
-  */
-
+  
  enviar()
  {
    console.log(this.unUsuario);
@@ -270,5 +226,10 @@ export class AltaEmpleadoPage implements OnInit {
          console.log("Error", err);
        });
    }
+
+   RemoveRecord(rowID) {
+    this.empleadosService.EliminarEmpleado(rowID);
+    this.mostrarToast("Se eliminó el empleado con exito", "color: Success");
+  }
 
 }

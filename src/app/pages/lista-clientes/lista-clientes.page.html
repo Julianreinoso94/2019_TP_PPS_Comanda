@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Listado de Clientes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+
+    <ion-card *ngFor="let item of clientes">
+        <span *ngIf="!item.isEdit; else elseBlock">
+          <ion-card-header>
+            <ion-card-title> Cliente {{item.nombre}} - {{item.apellido}} </ion-card-title>
+            <ion-card-subtitle>Perfil: {{item.perfil}} - DNI: {{item.dni}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+                <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+                  <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
+                </ion-button>
+          </ion-card-content>
+        </span>
+        
+      </ion-card>
+
+</ion-content>
