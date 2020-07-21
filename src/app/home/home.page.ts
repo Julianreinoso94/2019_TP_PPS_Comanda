@@ -23,6 +23,9 @@ import { formatDate } from '@angular/common';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage  implements OnInit{
+
+   valor;
+
   public currentUser: firebase.User;
   uidUsuario:any;
   fechaconcatenada:any;
@@ -184,12 +187,12 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
     // this.dni=dniscan;
     switch (nombrescan) {
       case "Mesa":
-     alert("Mesa");
+    //  alert("Mesa");
    this.mesa(segundodato);
 
       break;
       case "ListaDeEspera":
-          alert("Lista de espera");
+          // alert("Lista de espera");
 
         this.listaespera();
         break;
@@ -197,7 +200,7 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
           this.cargarqrJuegos(segundodato);
           break;
       case "Propina":
-        alert("propina");
+        // alert("propina");
        let mesaClienteSentado;
         this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN ALGUNA MESA
           if (element.cliente == this.uidUsuario)
@@ -212,14 +215,14 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
         if(segundodato == "cero")
         {
 
-          alert(" propina cero");
+          // alert(" propina cero");
           this.mesasService.Agregapropina(mesaClienteSentado,"cero")
         }
         if(segundodato == "diez")
         {
           this.mesasService.Agregapropina(mesaClienteSentado,"diez");
           
-          alert(" propina diez");
+          // alert(" propina diez");
         }
         if (segundodato == "cinco")
         {
@@ -227,7 +230,7 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
         }
         if(segundodato == "quince")
         {
-          alert("propina quince");
+          // alert("propina quince");
           this.mesasService.Agregapropina(mesaClienteSentado,"quince")
 
         }
@@ -235,7 +238,7 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
         {
           this.mesasService.Agregapropina(mesaClienteSentado,"veinte")
 
-          alert("propina veinte");
+          // alert("propina veinte");
         }
 
 
@@ -274,19 +277,20 @@ this.listadeespera.forEach(element => { //LISTA DE ESPERA///////////////////////
 
  
  this.mesas.forEach(element => {
-  if (element.id ==  codigomesa)
+  if (element.id ==  codigo)
   {
    estadomimesa= element.estado;
     
   }
   
 });
-
 this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN esta mesa
-  if (element.id == codigomesa)
+  if (element.id == codigo)
   { 
     if(element.cliente == this.uidUsuario)
     {
+
+     this.valor= element.cliente;
     estaSentadoenEstaMesa=true;
     }
   }
@@ -302,10 +306,10 @@ this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN
 });
  //////////////////////////////////LISTA DE RESERS//////////////////////////////////
 
- alert(this.uidUsuario);
+//  alert(this.uidUsuario);
  this.listareservas.forEach(element => {
-   console.log("imprime element.usuario"+ element.usuario );
-   console.log("imprime element.mesa"+ element.mesa );
+  //  console.log("imprime element.usuario"+ element.usuario );
+  //  console.log("imprime element.mesa"+ element.mesa );
 
   if( codigo == element.mesa )/////////////////////////////////////0 SI ESTA MESA ESTA RESERVADA
   {
@@ -326,11 +330,11 @@ this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN
  {
   this.mostrarToast("Se le ha asignado esta mesa Reservada .Ya puede sentarse..", "successToast");
   this.mesasService.AsignarClienteaMesa(codigo,this.uidUsuario,"Ocupada");
- //eliminar reserva
- }
+  this.mostrarToast("Se le ha asignado esta mesa.Ya puede sentarse..", "successToast");
+}
 
  let numero =this.diferencia();
- alert("tiempo es:"+numero);
+//  alert("tiempo es:"+numero);
  //calcular los minutos
  if( numero<5 && !eselusuarioquereservo)
  {
@@ -338,6 +342,13 @@ this.mesas.forEach(element => {////////////////////SI EL CLIENTE ESTA SENTADO EN
 
   this.mostrarToast("Esta mesa esta Reservada", "successToast");
   this.router.navigateByUrl('home');
+
+}
+if( this.valor == this.uidUsuario)
+{
+  this.mostrarToast("Estado de sus Pedidos", "successToast");
+
+  this.router.navigateByUrl('vericarmesapedido');
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////71111111
@@ -351,23 +362,30 @@ if(estadomimesa == "Disponible" &&  mesaClienteSentado=="parado" && estadoenlist
     }
     else
     {
-      this.mostrarToast("No se le puede asignar esta mesa por el momento", "successToast");
+      // this.mostrarToast("No se le puede asignar esta mesa por el momento", "successToast");
 
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////2222
-    if( estaSentadoenEstaMesa)
+   
+    ////////////////////////////////////////////////////////////////////////////////////////////////////333
+    // alert(estadoenlistadeespera);
+
+    // if (estadoenlistadeespera == "asignandomesa" && estadomimesa == "Disponible"  )
+    // {
+    //   // && mesaClienteSentado == codigo
+    //   // alert("entro");
+    //   this.mesasService.AsignarClienteaMesa(codigo,this.uidUsuario,"Ocupada");
+    //   this.mostrarToast("Se le ha asignado esta mesa.Ya puede sentarse..", "successToast");
+    //   // this.mostrarToast("No se le puede asignar esta mesa por el momento, usted esta sentado en otra mesa..", "successToast");
+
+    // }
+
+    if(estaSentadoenEstaMesa)//SI ESTA SENTADO EN ESTA MESA Mostrar estado
     {
       this.mostrarToast("Estado de sus Pedidos", "successToast");
 
       this.router.navigateByUrl('vericarmesapedido');
-
-    }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////333
-    if (estadoenlistadeespera=="asignandomesa" && mesaClienteSentado != codigo)
-    {
-      // this.mostrarToast("No se le puede asignar esta mesa por el momento, usted esta sentado en otra mesa..", "successToast");
-
-    }
+        }
 
 
 
@@ -430,6 +448,7 @@ if(estadomimesa == "Disponible" &&  mesaClienteSentado=="parado" && estadoenlist
   if(!estasentado)
   {
     this.mostrarToast("Para jugar debe estar sentado en una mesa", "successToast");
+    this.router.navigateByUrl('home');
 
   }
 
@@ -450,12 +469,12 @@ if(estadomimesa == "Disponible" &&  mesaClienteSentado=="parado" && estadoenlist
 
     }
   }
-  if(tipojuego =="postregratis" && estasentado)
+  if(tipojuego == "postregratis" && estasentado)
   {
     if(!postre)
     {
       this.router.navigateByUrl('juego-postre');
-      this.router.navigateByUrl('home');
+     // this.router.navigateByUrl('home');
 
     }
     else
@@ -534,7 +553,7 @@ if(estadomimesa == "Disponible" &&  mesaClienteSentado=="parado" && estadoenlist
     var endTime = new Date(this.fechaActual + " " + this.horaActual);
     var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
     var resultInMinutes = Math.round(difference / 60000);
-    alert("resultado:" + resultInMinutes);
+    // alert("resultado:" + resultInMinutes);
 
     // setTimeout(() => this.spinner = false, 3000);
 

@@ -26,6 +26,18 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Base64 } from '@ionic-native/base64/ngx';
 
+
+// Componentes externos que realizan peticiones
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+
+export function customTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,6 +50,14 @@ import { Base64 } from '@ionic-native/base64/ngx';
     AngularFireDatabaseModule,
     IonicModule.forRoot(), 
     AppRoutingModule, 
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: customTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

@@ -8,7 +8,11 @@ import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
 import { ReservasService } from 'src/app/services/reservas/reservas.service';
 import { EventService } from 'src/app/services/event/event.service';
-
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { Injectable } from '@angular/core';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 @Component({
   selector: 'app-abrir-mesa',
@@ -17,19 +21,49 @@ import { EventService } from 'src/app/services/event/event.service';
 })
 export class AbrirMesaPage implements OnInit {
   public listaEspera: Array<any>;
+  pedidos : any;
 
+  public currentUser: firebase.User;
+  uidUsuario:any;
   loading = false;
   mesas : any;
   reservas : any;
 
   constructor(
     private router: Router,private eventService: EventService, public reservaserv:ReservasService, 
-    private mesasService: MesasService,
+    private mesasService: MesasService,    private pedidosService: PedidosService,
+
     // private camara: Camera,
     public fotoService: FotosService,
     public toastCtrl: ToastController
   ) {
 
+    firebase.auth().onAuthStateChanged(user => {
+ 
+      this.currentUser = user;
+      this.uidUsuario = user.uid});
+    
+
+    this.pedidosService.TraerPedidos().subscribe(data => {
+
+      this.pedidos = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          idCliente:e.payload.doc.data()['idCliente'],
+          codigoPedido: e.payload.doc.data()['codigoPedido'],
+          codigoProducto: e.payload.doc.data()['codigoProducto'],
+          codigoMesa: e.payload.doc.data()['codigoMesa'],
+          detallePedido: e.payload.doc.data()['detallePedido'],
+          estadoPedido: e.payload.doc.data()['estadoPedido'],
+          tipoPedido: e.payload.doc.data()['tipoPedido'],
+          cantidad: e.payload.doc.data()['cantidad'],
+          monto: e.payload.doc.data()['monto'],
+          idMozo: e.payload.doc.data()['idEmpleado']
+        };
+      })
+      console.log(this.pedidos);
+    });
     this.eventService.getListaEspera().subscribe(data => {
 
       this.listaEspera = data.map(e => {
@@ -134,7 +168,20 @@ export class AbrirMesaPage implements OnInit {
     mesa['descuento10'] = false;
     mesa['monto'] = 0;
 
+
+    this.pedidos.forEach(element => {
+      if(element.codigoMesa == record.id){
+        this.pedidosService.EliminarPedido(element.id);
+      }
+    });
+    this.pedidos.forEach(element => {
+      if(element.idCliente == this.uidUsuario){
+        this.pedidosService.EliminarPedido(element.id);
+      }
+    });
      this.mesasService.ModificarMesa( record.id, mesa);
+     this.mesasService.Modificarclientedeunamesa( record.id);
+
     // alert("entro");
     record.isEdit = true;
     record.EditEstado = record.estado;

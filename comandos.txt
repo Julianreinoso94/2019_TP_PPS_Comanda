@@ -31,3 +31,8 @@ npm install @ionic-native/ionic-webview
 npm install @ionic/storage
 ionic cordova plugin add com-badrit-base64
 npm install @ionic-native/base64
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+npm install @ngx-translate/core @ngx-translate/http-loader --save

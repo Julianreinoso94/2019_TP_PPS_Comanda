@@ -217,6 +217,89 @@ export class LoginPage implements OnInit {
  }
 
 
+ async idioma() {
+  const actionSheet = await this.actionSheetController.create({
+    header: 'Usuarios',
+    buttons: [{
+      text: 'Supervisor',
+      role: 'destructive',
+      // icon:'assets/paises/eng.png',
+      icon:'assets/img/eng.png',
+
+      handler: () => {
+        this.email="julianreinoso94@gmail.com";
+        this.password="123456";
+        console.log('Delete clicked');
+      }
+    }, 
+    {
+     text: 'Delivery',
+     role: 'destructive',
+     handler: () => {
+       this.email="delivery@gmail.com";
+       this.password="123456";
+       console.log('Delete clicked');
+     }
+   },
+    {
+      text: 'Bartender',
+      handler: () => {
+        this.email="bartender@bartender.com";
+        this.password="123456";
+        console.log('Share clicked');
+      }
+    }, {
+      text: 'Cliente',
+      handler: () => {
+        this.email="cliente@cliente.com";
+        this.password="123456";
+        console.log('Play clicked');
+      }
+    }, {
+      text: 'Cliente2',
+      handler: () => {
+        this.email="mario@gmail.com";
+        this.password="123456";
+        console.log('Favorite clicked');
+      }
+    },{
+     text: 'Anonimo',
+     handler: () => {
+       this.email="Anonimo@anonimo.com";
+       this.password="123456";
+       console.log('Favorite clicked');
+     }
+   },
+    {
+      text: 'Cocinero',
+      handler: () => {
+        this.email="cocinero@cocinero.com";
+        this.password="123456";
+        console.log('Favorite clicked');
+      }
+    },
+    {
+     text: 'Mozo',
+     handler: () => {
+       this.email="mozo@mozo.com";
+       this.password="123456";
+       console.log('Favorite clicked');
+     }
+   },
+
+     {
+      text: 'Cancelar',
+      icon: 'close',
+      role: 'cancel',
+      handler: () => {
+
+        console.log('Cancel clicked');
+      }
+    }]
+  });
+  await actionSheet.present();
+}
+
 
  public async mostrarToast(miMsj:string,color:string)
  {
@@ -230,6 +313,8 @@ export class LoginPage implements OnInit {
    });
    return await toast.present();
  }
+
+ 
 
 
 
