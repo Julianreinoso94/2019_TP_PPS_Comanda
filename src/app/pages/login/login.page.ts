@@ -11,6 +11,7 @@ import * as firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ClienteService } from 'src/app/services/clientes/cliente.service';
 import { ToastController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 import { ModalController, PopoverController } from '@ionic/angular'
 import {LenguajePopoverPage} from 'src/app/lenguaje-popover/lenguaje-popover.page';
@@ -25,6 +26,17 @@ export class LoginPage implements OnInit {
   password:string;
   clientes: any;
   verificado: boolean = true;
+  product_id: string;
+
+  lng =[
+    {
+      img:"assets/paises/esp.png",
+      text:'ESP'
+
+
+    }
+  ];
+
 
   public loading: HTMLIonLoadingElement;
   constructor (
@@ -35,7 +47,7 @@ export class LoginPage implements OnInit {
     public router: Router,
     private formBuilder: FormBuilder, 
     private firestore: AngularFirestore,
-    private clienteService: ClienteService,
+    private clienteService: ClienteService,private actRoute: ActivatedRoute,
     public toastCtrl: ToastController
   ) {
       this.loginForm = this.formBuilder.group({
@@ -46,11 +58,13 @@ export class LoginPage implements OnInit {
           Validators.compose([Validators.required, Validators.minLength(6)]),
         ],
       });
+
+      this.product_id = this.actRoute.snapshot.params.id;
+
   }
 
   async openLanguagePopover(ev)
 {
-  alert("hola")
   const popover = await this.popoverCtrl.create({
        component:LenguajePopoverPage,
        event:ev

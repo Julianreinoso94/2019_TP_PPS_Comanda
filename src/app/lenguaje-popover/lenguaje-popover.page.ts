@@ -86,9 +86,15 @@ export class LenguajePopoverPage implements OnInit {
  
    }
 
+   select(valor){
+//  alert(valor);
+ this.popover.dismiss();
+
+   }
 
   ClosePopover()
   {
+  
    this.popover.dismiss();
   }
 } 

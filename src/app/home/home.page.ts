@@ -154,7 +154,6 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
         this.currentUser = user;
         this.uidUsuario = user.uid});
       
-      this.price = this.route.snapshot.params['price'];
 
     }
   ngOnInit() {

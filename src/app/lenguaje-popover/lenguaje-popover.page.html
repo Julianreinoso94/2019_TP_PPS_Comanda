@@ -1,10 +1,14 @@
 <ion-list>
   <ion-item button *ngFor="let lng of languages" (click)="select(lng.value)" detail="false">
+    <a [routerLink]="['/login/', lng.value]">
     <img [src]="lng.img" slot="start">
+  </a>
+
     <ion-label text-wrap>
       {{lng.text}}
     </ion-label>
     <ion-icon slot="end" name="checkmark" *ngIf="lng.value == selected"></ion-icon>
+
   </ion-item>
 
 </ion-list>

@@ -52,10 +52,14 @@
     </ion-button>
 
     
-    <ion-button (click)="CreatePopover()" expand="block">
-      AMERICA
+    <ion-button  class="button" (click)="CreatePopover()" expand="block">
+      <img [src]="'assets/paises/'+product_id+'.png'" slot="start">
+      <ion-label text-wrap>
+        {{product_id}}
+      </ion-label>
     </ion-button>
   </form>
+  <h5 class="card-title">Product Id is: {{product_id}}</h5>
 
   <ion-button expand="block" fill="clear" routerLink="/tipo-registro">
     Crear una nueva cuenta

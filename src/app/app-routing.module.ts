@@ -24,6 +24,7 @@ const routes: Routes = [
   },
   { path: 'event-list', loadChildren: './pages/event-list/event-list.module#EventListPageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: 'login/:id', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'alta-duenio', loadChildren: './pages/alta-duenio/alta-duenio.module#AltaDuenioPageModule' },
