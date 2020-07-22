@@ -31,7 +31,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import {LenguajePopoverPageModule} from './lenguaje-popover/lenguaje-popover.module'
 
 export function customTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,11 +42,12 @@ export function customTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule,    
+  BrowserModule,    
     DateFnsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,    
     AngularFireStorageModule,
+    LenguajePopoverPageModule,
     AngularFireDatabaseModule,
     IonicModule.forRoot(), 
     AppRoutingModule, 

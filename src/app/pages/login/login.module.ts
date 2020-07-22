@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginPage } from './login.page';
+import{LenguajePopoverPageModule} from  '../../lenguaje-popover/lenguaje-popover.module'
 
 const routes: Routes = [
   {
@@ -16,11 +17,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
+  CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   declarations: [LoginPage]
 })

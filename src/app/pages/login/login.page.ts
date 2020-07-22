@@ -12,7 +12,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ClienteService } from 'src/app/services/clientes/cliente.service';
 import { ToastController } from '@ionic/angular';
 
-
+import { ModalController, PopoverController } from '@ionic/angular'
+import {LenguajePopoverPage} from 'src/app/lenguaje-popover/lenguaje-popover.page';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -27,7 +28,7 @@ export class LoginPage implements OnInit {
 
   public loading: HTMLIonLoadingElement;
   constructor (
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController,public popoverCtrl: PopoverController,
     public actionSheetController: ActionSheetController,
     public alertCtrl: AlertController,
     private authService: AuthService,
@@ -47,6 +48,18 @@ export class LoginPage implements OnInit {
       });
   }
 
+  async openLanguagePopover(ev)
+{
+  alert("hola")
+  const popover = await this.popoverCtrl.create({
+       component:LenguajePopoverPage,
+       event:ev
+  });
+  await popover.present()
+
+ 
+  
+}
   ngOnInit() {
     this.clienteService.TraerClientes().subscribe(data => {
 
@@ -63,6 +76,13 @@ export class LoginPage implements OnInit {
     
   }
 
+  CreatePopover()
+  {
+   this.popoverCtrl.create({component:LenguajePopoverPage,
+   showBackdrop:false}).then((popoverElement)=>{
+   popoverElement.present();
+   })
+  }
   
   async loginUser(loginForm: FormGroup): Promise<void> {
 
@@ -216,89 +236,6 @@ export class LoginPage implements OnInit {
    await actionSheet.present();
  }
 
-
- async idioma() {
-  const actionSheet = await this.actionSheetController.create({
-    header: 'Usuarios',
-    buttons: [{
-      text: 'Supervisor',
-      role: 'destructive',
-      // icon:'assets/paises/eng.png',
-      icon:'assets/img/eng.png',
-
-      handler: () => {
-        this.email="julianreinoso94@gmail.com";
-        this.password="123456";
-        console.log('Delete clicked');
-      }
-    }, 
-    {
-     text: 'Delivery',
-     role: 'destructive',
-     handler: () => {
-       this.email="delivery@gmail.com";
-       this.password="123456";
-       console.log('Delete clicked');
-     }
-   },
-    {
-      text: 'Bartender',
-      handler: () => {
-        this.email="bartender@bartender.com";
-        this.password="123456";
-        console.log('Share clicked');
-      }
-    }, {
-      text: 'Cliente',
-      handler: () => {
-        this.email="cliente@cliente.com";
-        this.password="123456";
-        console.log('Play clicked');
-      }
-    }, {
-      text: 'Cliente2',
-      handler: () => {
-        this.email="mario@gmail.com";
-        this.password="123456";
-        console.log('Favorite clicked');
-      }
-    },{
-     text: 'Anonimo',
-     handler: () => {
-       this.email="Anonimo@anonimo.com";
-       this.password="123456";
-       console.log('Favorite clicked');
-     }
-   },
-    {
-      text: 'Cocinero',
-      handler: () => {
-        this.email="cocinero@cocinero.com";
-        this.password="123456";
-        console.log('Favorite clicked');
-      }
-    },
-    {
-     text: 'Mozo',
-     handler: () => {
-       this.email="mozo@mozo.com";
-       this.password="123456";
-       console.log('Favorite clicked');
-     }
-   },
-
-     {
-      text: 'Cancelar',
-      icon: 'close',
-      role: 'cancel',
-      handler: () => {
-
-        console.log('Cancel clicked');
-      }
-    }]
-  });
-  await actionSheet.present();
-}
 
 
  public async mostrarToast(miMsj:string,color:string)
