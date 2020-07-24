@@ -11,6 +11,7 @@ import * as firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ClienteService } from 'src/app/services/clientes/cliente.service';
 import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder, 
     private firestore: AngularFirestore,
     private clienteService: ClienteService,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController, public translate: TranslateService
   ) {
       this.loginForm = this.formBuilder.group({
         email: ['',
@@ -45,6 +46,14 @@ export class LoginPage implements OnInit {
           Validators.compose([Validators.required, Validators.minLength(6)]),
         ],
       });
+
+      translate.addLangs(['en', 'nl']);
+      translate.setDefaultLang('en');
+      
+  }
+
+  switchLang(lang: string) {
+    this.translate.use(lang);
   }
 
   ngOnInit() {
