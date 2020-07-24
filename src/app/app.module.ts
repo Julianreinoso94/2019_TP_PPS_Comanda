@@ -26,11 +26,24 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Base64 } from '@ionic-native/base64/ngx';
 
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule,    
+    BrowserModule, 
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),  
     DateFnsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,    
@@ -56,3 +69,6 @@ import { Base64 } from '@ionic-native/base64/ngx';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
