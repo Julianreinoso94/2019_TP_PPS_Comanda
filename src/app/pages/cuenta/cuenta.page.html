@@ -70,17 +70,28 @@
             <ion-label readonly=true
             position="stacked">Mi propina</ion-label>
             <ion-input
-              [(ngModel)]="propinada"
+              [(ngModel)]="mipropina"
               type="text"
-              placeholder="Precio">
+              placeholder="Valor propina">
             </ion-input>
           </ion-item>
-  
+          <ion-item>
+            <ion-label readonly=true style="color:red;font-size: 300%;"
+            position="stacked">TOTAL </ion-label>
+            <ion-input style="color:red;font-size: 300%;"
+              [(ngModel)]="resultadototal"
+              type="text"
+              placeholder="Valor total">$
+            </ion-input>
+          </ion-item>
+
+
+<!--           
       <ion-button
         expand="block"
         (click)="Pagar()">
         Pagar
-      </ion-button>
+      </ion-button> -->
       <ion-button
       expand="block"
       (click)="montoMesa()">
@@ -89,13 +100,13 @@
     <ion-button
     expand="block"
     (click)="Descuentos()">
-    Descuentos
+    Mostrar Total Con Descuento
   </ion-button>
-  <ion-button
+  <!-- <ion-button
   expand="block"
   (click)="cargarDatosqr()">
   Escanear propina
-</ion-button>
+</ion-button> -->
 
   
     </div>

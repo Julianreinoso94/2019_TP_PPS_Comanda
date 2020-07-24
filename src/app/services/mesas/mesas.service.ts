@@ -169,6 +169,11 @@ TraerMesaPorCodigo($idProducto)
     //this.firestore.doc('Mesas/'+id).update({ monto: monto });
     this.firestore.doc('Mesas/' + id).update({monto: monto})
   }
+  Modificarclientedeunamesa(id)
+  {
+    this.firestore.doc('Mesas/' + id).update({cliente:""})
+
+  }
 
   AsignarClienteaMesa(id,cliente ,estado)
   {

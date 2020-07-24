@@ -313,11 +313,11 @@ private decrement () {
    this.comidasList.forEach(element => {
      if(element.id == this.codigoProducto)
      {
-       alert("ntyto");
+      //  alert("ntyto");
        tipoproducto=element.tipo;
      }
    });
-alert(tipoproducto);
+// alert(tipoproducto);
     this.pedidosService
       .crearPedido(1, this.mimesa, this.codigoProducto, tipoproducto, 'PendienteDeAprobacion',this.cantidad,0,this.preciototalpedido)
       .then(() => {
@@ -328,11 +328,11 @@ alert(tipoproducto);
       //actualizar el monto total
 
       // alert(this.preciototalpedido);
-  alert(this.preciototalpedido);
-  alert(this.montoTotal);
+  // alert(this.preciototalpedido);
+  // alert(this.montoTotal);
       this.ActualizarmontoTotalmesa= +this.montoTotal + +this.preciototalpedido;
       // alert("el monto de la mesa es"+this.ActualizarmontoTotalmesa);
-alert(this.ActualizarmontoTotalmesa);
+// alert(this.ActualizarmontoTotalmesa);
       this.mesasService.ModificarMontoDeunaMesa(this.mimesa,this.ActualizarmontoTotalmesa);
       // alert("actualizomeza");
 
