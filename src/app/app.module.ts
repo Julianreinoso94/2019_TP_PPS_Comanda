@@ -36,7 +36,9 @@ import {LenguajePopoverPageModule} from './lenguaje-popover/lenguaje-popover.mod
 export function customTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,7 +49,7 @@ export function customTranslateLoader(http: HttpClient) {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,    
     AngularFireStorageModule,
-    LenguajePopoverPageModule,
+    // LenguajePopoverPageModule,
     AngularFireDatabaseModule,
     IonicModule.forRoot(), 
     AppRoutingModule, 

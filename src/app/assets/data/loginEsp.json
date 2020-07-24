@@ -1,0 +1,9 @@
+[
+    {
+        titulo:"Iniciar Sesión",
+        email:"Correo Electronico",
+        botonIngresar:"Ingresar",
+        botonUsuario:"Elegir Usuario"
+        
+    }
+]

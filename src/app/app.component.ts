@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 
 import * as firebase from 'firebase/app';
 import { environment } from '../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -17,9 +19,15 @@ export class AppComponent {
     private platform: Platform,
     private fcm: FCM,    private router: Router,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar, public translate: TranslateService
   ) {
+
+    translate.addLangs(['en', 'nl']);
+    translate.setDefaultLang('en');
+
     this.initializeApp();
+
+    
   }
 
   initializeApp() {

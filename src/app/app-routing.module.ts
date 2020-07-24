@@ -3,7 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   {
     path: 'home',
     loadChildren: './home/home.module#HomePageModule',
@@ -23,8 +24,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'event-list', loadChildren: './pages/event-list/event-list.module#EventListPageModule' },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-  { path: 'login/:id', loadChildren: './pages/login/login.module#LoginPageModule' },
+  // { path: 'login/:id', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'alta-duenio', loadChildren: './pages/alta-duenio/alta-duenio.module#AltaDuenioPageModule' },
@@ -73,7 +73,7 @@ const routes: Routes = [
   { path: 'alta-cliente', loadChildren: './pages/alta-cliente/alta-cliente.module#AltaClientePageModule' },
   { path: 'clienteconfirmapedido', loadChildren: './pages2/clienteconfirmapedido/clienteconfirmapedido.module#ClienteconfirmapedidoPageModule' },  { path: 'alta-anonimo', loadChildren: './pages/alta-anonimo/alta-anonimo.module#AltaAnonimoPageModule' },
   { path: 'lista-clientes', loadChildren: './pages/lista-clientes/lista-clientes.module#ListaClientesPageModule' },
-  { path: 'lenguaje-popover', loadChildren: './lenguaje-popover/lenguaje-popover.module#LenguajePopoverPageModule' },
+  // { path: 'lenguaje-popover', loadChildren: './lenguaje-popover/lenguaje-popover.module#LenguajePopoverPageModule' },
 
 
 
