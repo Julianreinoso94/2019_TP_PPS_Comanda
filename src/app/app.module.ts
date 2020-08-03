@@ -27,23 +27,35 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Base64 } from '@ionic-native/base64/ngx';
 
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+// other imports here...
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslatePipe } from './translate.pipe';
+import { LogicService } from '../app/services/logic.service'
+
+export function TranslationLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http,'assets/i18n/json','.json');
+}
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TranslatePipe],
   entryComponents: [],
   imports: [
     BrowserModule, 
     HttpClientModule,
     TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),  
+      
+           loader: {
+             provide: TranslateLoader,
+          useFactory: (createTranslateLoader),  // <--- add this
+        deps: [HttpClient] // <--- add this
+      } // <--- add this
+    }),
+  
     DateFnsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,    
@@ -62,13 +74,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     SplashScreen,BarcodeScanner,
     WebView,
     Base64,
-    Camera,
+    Camera,LogicService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

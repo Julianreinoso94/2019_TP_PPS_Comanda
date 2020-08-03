@@ -11,7 +11,7 @@ import * as firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ClienteService } from 'src/app/services/clientes/cliente.service';
 import { ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core'; // 1
 
 
 @Component({
@@ -25,6 +25,10 @@ export class LoginPage implements OnInit {
   password:string;
   clientes: any;
   verificado: boolean = true;
+  private language: string = this.translateService.currentLang; // 2 
+  private someProperty: string = ''; // 1
+
+
 
   public loading: HTMLIonLoadingElement;
   constructor (
@@ -36,7 +40,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder, 
     private firestore: AngularFirestore,
     private clienteService: ClienteService,
-    public toastCtrl: ToastController, public translate: TranslateService
+    public toastCtrl: ToastController,private translateService: TranslateService
   ) {
       this.loginForm = this.formBuilder.group({
         email: ['',
@@ -46,17 +50,35 @@ export class LoginPage implements OnInit {
           Validators.compose([Validators.required, Validators.minLength(6)]),
         ],
       });
+      // ___________________________________________________---service____________________________-
+      this.translateService.setTranslation('en', { // 2
+        'tab1.getStarted': 'Get Started', // add  this
+        'someProperty': 'We can use translations in {{var}}' // 3
+      }); 
 
-      translate.addLangs(['en', 'nl']);
-      translate.setDefaultLang('en');
-      
-  }
+      this.translateService.get('someProperty', { var: 'classes' }).subscribe((res: string) => { //  4
+        this.someProperty = res; // 5
+      }); 
+    }
 
-  switchLang(lang: string) {
-    this.translate.use(lang);
-  }
+  
+
+  languageChange() {  // add this
+    alert(this.language)
+    this.translateService.use(this.language);  // add this
+  }  
+
 
   ngOnInit() {
+    this.translateService.setTranslation('en', { // 2
+      'tab1.getStarted': 'Get Started', // add  this
+      'someProperty': 'We can use translations in {{var}}' // 3
+    }); 
+    
+    this.translateService.get('someProperty', { var: 'classes' }).subscribe((res: string) => { //  4
+      this.someProperty = res; // 5
+    }); 
+
     this.clienteService.TraerClientes().subscribe(data => {
 
       this.clientes = data.map(e => {

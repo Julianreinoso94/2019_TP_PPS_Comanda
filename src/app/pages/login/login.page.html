@@ -1,123 +1,19 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
+<ion-header>
+  <!--  other stuff -->
 </ion-header>
-
 <ion-content>
-  <img class = "icon" src="assets/icon/login.png">
-  <form [formGroup]="loginForm">
-    <ion-item>
-      <ion-label position="stacked">Email</ion-label>
-      <ion-input [(ngModel)]="email"
-        formControlName="email"
-        type="email"
-        placeholder="Ingrese Email"
-        [class.invalid]="!loginForm.controls['email'].valid &&
-        loginForm.controls['email'].touched"
-      >
-      </ion-input>
-    </ion-item>
-    <ion-item
-      class="error-message"
-      *ngIf="!loginForm.controls['email'].valid &&
-         loginForm.controls['email'].touched"
-    >
-      <ion-label>Por favor ingrese un email valido</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Clave</ion-label>
-      <ion-input [(ngModel)]="password"
-        formControlName="password"
-        type="password"
-        placeholder="Ingrese Clave"
-        [class.invalid]="!loginForm.controls['password'].valid&& loginForm.controls['password'].touched"
-      >
-      </ion-input>
-    </ion-item>
-    <ion-item
-      class="error-message"
-      *ngIf="!loginForm.controls['password'].valid
-        && loginForm.controls['password'].touched"
-    >
-      <ion-label>Su clave debe poseer mas de 6 caracteres</ion-label>
-    </ion-item>
-
-    <ion-button (click)="loginUser(loginForm)" expand="block" [disabled]="!loginForm.valid">
-      Ingresar
-    </ion-button>
-    <ion-button (click)="elegirusuario()" expand="block">
-      Elegir Usuario
-    </ion-button>
-  </form>
-
-  <ion-button expand="block" fill="clear" routerLink="/tipo-registro">
-    Crear una nueva cuenta
-  </ion-button>
- -->
-  <ion-button expand="block" fill="clear" routerLink="/reset-password">
-    Olvidaste tu clave?
-    <!-- {{'Sitetitle' | translate }} -->
-
-  </ion-button>
-
-
-<!-- </ion-content> -->
-
-
-
-
-<!-- <nav class="navbar navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand">
-      {{'Sitetitle' | translate }}
-    </a>
-    <span class="form-inline">
-      <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
-        <option *ngFor="let language of translate.getLangs()" [value]="language"
-          [selected]="language === translate.currentLang">
-          {{ language }}
-        </option>
-      </select>
-    </span>
-  </div>
-</nav> -->
-<!-- 
-<div class="container">
-  <form>
-
-    <div class="form-group"> -->
-      <!-- <label>{{'Name' | translate}}</label> -->
-      <!-- <input type="text" class="form-control">
-      <small class="text-danger">{{'NameError' | translate}}</small>
-    </div>
-
-    <div class="form-group">
-      <label>{{'Email' | translate}}</label>
-      <input type="email" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label>{{'PhoneNo' | translate}}</label>
-      <input type="tel" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label>{{'Password' | translate}}</label>
-      <input type="password" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label>{{'Bio' | translate}}</label>
-      <textarea rows="3" class="form-control"></textarea>
-    </div>
-
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input">
-      <label class="form-check-label">{{'TermsConditions' | translate}}</label>
-    </div>
-
-    <button type="submit" class="btn btn-block btn-danger">{{'Submit' | translate}}</button>
-  </form>
-</div> -->
+  <ion-card class="welcome-card">
+    <!--  other stuff -->
+    <ion-card-content>
+      <p translate [translateParams]="{ lang: language }">tab1.invite</p>
+      <ion-item> <!-- add this block -->
+        <ion-label translate>Language</ion-label>
+        <ion-select [(ngModel)]='language' (ionChange)='languageChange()' [placeholder]='"tab1.languageChangePlaceholder" | translate'>
+          <ion-select-option value='ru'>Russian</ion-select-option>
+          <ion-select-option value='en'>English</ion-select-option>
+        </ion-select>
+      </ion-item> <!-- add this block (end) -->
+    </ion-card-content>
+  </ion-card>
+  <!--  other stuff -->
+</ion-content>

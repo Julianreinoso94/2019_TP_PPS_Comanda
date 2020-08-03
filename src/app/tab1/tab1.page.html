@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Local Json in Ionic 4</ion-title>
+    <ion-title>{{array[0].login_titulo_login}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row *ngFor="let item of array; index as i">
+      <ion-col size="1">{{ i+ 1 }}</ion-col>
+      <ion-col size="3"> {{ item.login_titulo_login }}</ion-col>
+      <!-- <ion-col size="3"> {{ item.company }}</ion-col> -->
+    </ion-row>
+  </ion-grid>
+</ion-content>

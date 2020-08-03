@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'tab1', pathMatch: 'full' },
   {
     path: 'home',
     loadChildren: './home/home.module#HomePageModule',
@@ -72,6 +72,8 @@ const routes: Routes = [
   { path: 'alta-cliente', loadChildren: './pages/alta-cliente/alta-cliente.module#AltaClientePageModule' },
   { path: 'clienteconfirmapedido', loadChildren: './pages2/clienteconfirmapedido/clienteconfirmapedido.module#ClienteconfirmapedidoPageModule' },  { path: 'alta-anonimo', loadChildren: './pages/alta-anonimo/alta-anonimo.module#AltaAnonimoPageModule' },
   { path: 'lista-clientes', loadChildren: './pages/lista-clientes/lista-clientes.module#ListaClientesPageModule' },
+  { path: 'tab1', loadChildren: './tab1/tab1.module#Tab1PageModule' },
+
 
 
 
