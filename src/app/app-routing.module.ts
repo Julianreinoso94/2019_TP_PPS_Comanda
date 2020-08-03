@@ -73,7 +73,8 @@ const routes: Routes = [
   { path: 'clienteconfirmapedido', loadChildren: './pages2/clienteconfirmapedido/clienteconfirmapedido.module#ClienteconfirmapedidoPageModule' },  { path: 'alta-anonimo', loadChildren: './pages/alta-anonimo/alta-anonimo.module#AltaAnonimoPageModule' },
   { path: 'lista-clientes', loadChildren: './pages/lista-clientes/lista-clientes.module#ListaClientesPageModule' },
   { path: 'tab1', loadChildren: './tab1/tab1.module#Tab1PageModule' },
-  { path: 'lenguaje-popover', loadChildren: './lenguaje-popover/lenguaje-popover.module#LenguajePopoverPageModule' },
+  { path: 'lenguaje-popover', loadChildren: './lenguaje-popover/lenguaje-popover.module#LenguajePopoverPageModule' },  { path: 'popover', loadChildren: './popover/popover.module#PopoverPageModule' },
+
 
 
 
