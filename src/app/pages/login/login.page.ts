@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
   private someProperty: string = ''; // 1
   private array:any[];
   idiomaSeleccionado:any
+  imagenIdioma:any;
 
 
   public loading: HTMLIonLoadingElement;
@@ -92,31 +93,43 @@ export class LoginPage implements OnInit {
       switch(this.idiomaSeleccionado) { 
         case 'en': { 
           this.array= this.tabpag.arrayINGLES;
+          this.imagenIdioma ="eng";
          break; 
         } 
         case 'rus': { 
            this.array= this.tabpag.arrayRusia;
+           this.imagenIdioma ="rus";
+
            break; 
         } 
         case 'por': { 
           this.array= this.tabpag.arrayPor;
+          this.imagenIdioma ="por";
+
           break; 
        } 
        case'fr':{
          this.array=this.tabpag.arrayFra;
+         this.imagenIdioma ="fr";
+
          break
        }
        case'esp':{
         this.array=this.tabpag.arrayEs;
+        this.imagenIdioma ="esp";
+
         break
       }
   
       case'de':{
         this.array=this.tabpag.arrayDe;
+        this.imagenIdioma ="de";
         break
       } 
         default: { 
           this.array= this.tabpag.arrayEs;
+          this.imagenIdioma ="es";
+
            break; 
         } 
      } 

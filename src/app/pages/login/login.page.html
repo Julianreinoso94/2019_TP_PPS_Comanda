@@ -12,7 +12,7 @@
       <ion-input [(ngModel)]="email"
         formControlName="email"
         type="email"
-        placeholder="Ingrese Email"
+        placeholder="{{array[0].login_PlaceHolder_Ingrese_email}}"
         [class.invalid]="!loginForm.controls['email'].valid &&
         loginForm.controls['email'].touched"
       >
@@ -53,19 +53,19 @@
 
     
     <ion-button  class="button" (click)="popup()" expand="block">
-      <img [src]="'assets/paises/'+idiomaSeleccionado$+'.png'" slot="start">
+      <img [src]="'assets/paises/'+imagenIdioma+'.png'" slot="start">
       <ion-label text-wrap>
-        {{idiomaSeleccionado$}}
+        {{idiomaSeleccionado}}
       </ion-label>
     </ion-button>
   </form>
 
   <ion-button expand="block" fill="clear" routerLink="/tipo-registro">
-    Crear una nueva cuenta
-  </ion-button>
+    {{array[0].login_link_CrearUnaNuevaCuenta}}
+    </ion-button>
 
   <ion-button expand="block" fill="clear" routerLink="/reset-password">
-    Olvidaste tu clave?
+    {{array[0].login_link_olvidaste_tu_clave}}
   </ion-button>
 
 
