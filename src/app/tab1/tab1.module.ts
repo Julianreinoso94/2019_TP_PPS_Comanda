@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { Tab1Page } from './tab1.page';
+import{PopoverPageModule} from '../popover/popover.module';
 import { TranslateModule } from '@ngx-translate/core'; // add this
 
 
@@ -18,12 +19,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
+  CommonModule,
     FormsModule,
     IonicModule,
-    TranslateModule, // add this
     RouterModule.forChild(routes)
   ],
   declarations: [Tab1Page]
+  // entryComponents :[PopoverPage]
 })
 export class Tab1PageModule {}

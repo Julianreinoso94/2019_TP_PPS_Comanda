@@ -25,7 +25,7 @@ import {DateFnsModule} from 'ngx-date-fns';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Base64 } from '@ionic-native/base64/ngx';
-
+import { PopoverPage } from 'src/app/popover/popover.page';
 
 
 // other imports here...
@@ -40,12 +40,13 @@ export function TranslationLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http,'assets/i18n/json','.json');
 }
 
+import { PopoverPageModule } from './popover/popover.module';
 
 @NgModule({
   declarations: [AppComponent, TranslatePipe],
   entryComponents: [],
   imports: [
-    BrowserModule, 
+BrowserModule, 
     HttpClientModule,
     TranslateModule.forRoot({
       
@@ -64,7 +65,7 @@ export function TranslationLoaderFactory(http: HttpClient) {
     IonicModule.forRoot(), 
     AppRoutingModule, 
     CommonModule,
-    FormsModule,
+    FormsModule,PopoverPageModule,
     ReactiveFormsModule,
     IonicStorageModule.forRoot()
    ],
@@ -73,7 +74,7 @@ export function TranslationLoaderFactory(http: HttpClient) {
     StatusBar,
     SplashScreen,BarcodeScanner,
     WebView,
-    Base64,
+    Base64,PopoverPage,
     Camera,LogicService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

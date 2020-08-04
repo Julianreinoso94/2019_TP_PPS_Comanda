@@ -3,6 +3,10 @@ import { TranslateService } from '@ngx-translate/core'; // 1
 import { LogicService } from '../../app/services/logic.service'
 import { IData } from '../../app/services/logic.service'
 import { Observable } from "rxjs";
+import{PopoverPage} from '../popover/popover.page'
+import { PopoverController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: './tab1.page.html',
@@ -12,6 +16,54 @@ import { Observable } from "rxjs";
 
 
 export class Tab1Page implements OnInit {
+
+ 
+
+  questions$: Observable<IData[]>;
+  transData:any=[];
+  totalQuestions: number;
+  data: any;
+
+  // ../assets/i18n/en1.json
+
+  ngOnInit() {
+  //   fetch('../assets/data/datajson.json').then(res => res.json())
+  //   .then(json => {
+  //     this.data = json;
+  //   });
+ 
+  }
+  constructor(public modalController: ModalController,public popoverController: PopoverController) { 
+
+  
+
+  }
+  
+  
+  popup() {
+this.modalController.create({component:PopoverPage}).then((modalElement)=>{
+  modalElement.present();
+})
+
+    // const modal = await this.modalController.create({
+    //   component: PopoverPage,
+    //   cssClass: 'my-custom-class'
+    // });
+    // return await modal.present();
+  }
+
+
+
+  // async popup() {
+  //   let ev: any
+  //   const popover = await this.popoverController.create({
+  //     component: PopoverPage,
+  //     cssClass: 'my-custom-class',
+  //     event: ev,
+  //     translucent: true
+  //   });
+  //   return await popover.present();
+  // }
 
   public array:any=[{
     "login_titulo_login":"SIGN IN",
@@ -184,26 +236,4 @@ export class Tab1Page implements OnInit {
 
 
  }];
-
-  questions$: Observable<IData[]>;
-  transData:any=[];
-  totalQuestions: number;
-  data: any;
-
-  // ../assets/i18n/en1.json
-
-  ngOnInit() {
-  //   fetch('../assets/data/datajson.json').then(res => res.json())
-  //   .then(json => {
-  //     this.data = json;
-  //   });
- 
-  }
-  constructor(private translateService:TranslateService,public _logic: LogicService) { 
-
-  
-
-  }
-
-
 }

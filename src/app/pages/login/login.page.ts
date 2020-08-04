@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, PopoverController } from '@ionic/angular';
 import { AuthService } from '../../services/user/auth.service';
 import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
@@ -12,6 +12,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ClienteService } from 'src/app/services/clientes/cliente.service';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core'; // 1
+import { PopoverPage } from 'src/app/popover/popover.page'
 
 
 @Component({
@@ -40,7 +41,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder, 
     private firestore: AngularFirestore,
     private clienteService: ClienteService,
-    public toastCtrl: ToastController,private translateService: TranslateService
+    public toastCtrl: ToastController,private translateService: TranslateService,public PopoverController:PopoverPage
   ) {
       this.loginForm = this.formBuilder.group({
         email: ['',

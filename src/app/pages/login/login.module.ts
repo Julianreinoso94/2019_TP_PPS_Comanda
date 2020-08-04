@@ -21,8 +21,6 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    TranslateModule.forChild(), // add this
-
     RouterModule.forChild(routes),
     ReactiveFormsModule
   ],
