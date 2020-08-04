@@ -1,26 +1,72 @@
 <ion-header>
-  <!--  other stuff -->
+  <ion-toolbar>
+    <ion-title>{{array[0].login_titulo_login}}</ion-title>
+  </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-card class="welcome-card">
-    <!--  other stuff -->
-    <ion-card-content>
-      <p translate [translateParams]="{ lang: language }">tab1.invite</p>
-      <ion-item> <!-- add this block -->
-        <ion-label translate>Language</ion-label>
-        <ion-select [(ngModel)]='language' (ionChange)='languageChange()' [placeholder]='"tab1.languageChangePlaceholder" | translate'>
-          <ion-select-option value='ru'>Russian</ion-select-option>
-          <ion-select-option value='en'>English</ion-select-option>
-        </ion-select>
-      </ion-item> <!-- add this block (end) -->
-    </ion-card-content>
-  </ion-card>
 
-  <ion-button
-  expand="block"
-  routerLink="/alta-cliente"
-  >
-  Cliente Registrado
+<ion-content>
+  <img class = "icon" src="assets/icon/login.png">
+  <form [formGroup]="loginForm">
+    <ion-item>
+      <ion-label position="stacked">{{array[0].login_Textoformulario_email}}</ion-label>
+      <ion-input [(ngModel)]="email"
+        formControlName="email"
+        type="email"
+        placeholder="Ingrese Email"
+        [class.invalid]="!loginForm.controls['email'].valid &&
+        loginForm.controls['email'].touched"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item
+      class="error-message"
+      *ngIf="!loginForm.controls['email'].valid &&
+         loginForm.controls['email'].touched"
+    >
+      <ion-label>Por favor ingrese un email valido</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">{{array[0].Textoformulario}}</ion-label>
+      <ion-input [(ngModel)]="password"
+        formControlName="password"
+        type="password"
+        placeholder="Ingrese Clave"
+        [class.invalid]="!loginForm.controls['password'].valid&& loginForm.controls['password'].touched"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item
+      class="error-message"
+      *ngIf="!loginForm.controls['password'].valid
+        && loginForm.controls['password'].touched"
+    >
+      <ion-label>Su clave debe poseer mas de 6 caracteres</ion-label>
+    </ion-item>
+
+    <ion-button (click)="loginUser(loginForm)" expand="block" [disabled]="!loginForm.valid">
+      Ingresar
+    </ion-button>
+    <ion-button (click)="elegirusuario()" expand="block">
+      Elegir Usuario
+    </ion-button>
+
+    
+    <ion-button  class="button" (click)="popup()" expand="block">
+      <img [src]="'assets/paises/'+idiomaSeleccionado$+'.png'" slot="start">
+      <ion-label text-wrap>
+        {{idiomaSeleccionado$}}
+      </ion-label>
+    </ion-button>
+  </form>
+
+  <ion-button expand="block" fill="clear" routerLink="/tipo-registro">
+    Crear una nueva cuenta
   </ion-button>
-  <!--  other stuff -->
-</ion-content>
+
+  <ion-button expand="block" fill="clear" routerLink="/reset-password">
+    Olvidaste tu clave?
+  </ion-button>
+
+
+</ion-content> 

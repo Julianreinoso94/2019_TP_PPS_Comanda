@@ -49,7 +49,7 @@ export class PopoverPage implements OnInit {
      this.modal.dismiss({
       'dismissed': true
     });
-    this._router.navigate(['/tab1',valor])
+    this._router.navigate(['/login',valor])
    }
 
   ClosePopover()

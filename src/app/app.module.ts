@@ -25,8 +25,9 @@ import {DateFnsModule} from 'ngx-date-fns';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Base64 } from '@ionic-native/base64/ngx';
-import { PopoverPage } from 'src/app/popover/popover.page';
+import {Tab1Page} from '../app/tab1/tab1.page'
 
+import { PopoverPage } from 'src/app/popover/popover.page';
 
 // other imports here...
 
@@ -73,7 +74,7 @@ BrowserModule,
    StatusBar,FCM,DatePipe,Calendar,
     StatusBar,
     SplashScreen,BarcodeScanner,
-    WebView,
+    WebView,Tab1Page,
     Base64,PopoverPage,
     Camera,LogicService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

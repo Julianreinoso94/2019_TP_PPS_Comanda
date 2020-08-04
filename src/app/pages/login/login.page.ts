@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { LoadingController, AlertController, PopoverController } from '@ionic/angular';
 import { AuthService } from '../../services/user/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -13,6 +13,8 @@ import { ClienteService } from 'src/app/services/clientes/cliente.service';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core'; // 1
 import { PopoverPage } from 'src/app/popover/popover.page'
+import {Tab1Page} from '../../tab1/tab1.page'
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -28,19 +30,20 @@ export class LoginPage implements OnInit {
   verificado: boolean = true;
   private language: string = this.translateService.currentLang; // 2 
   private someProperty: string = ''; // 1
-
+  private array:any[];
+  idiomaSeleccionado:any
 
 
   public loading: HTMLIonLoadingElement;
   constructor (
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController,private route: ActivatedRoute,
     public actionSheetController: ActionSheetController,
     public alertCtrl: AlertController,
-    private authService: AuthService,
+    private authService: AuthService,public modalController: ModalController,
     public router: Router,
     private formBuilder: FormBuilder, 
     private firestore: AngularFirestore,
-    private clienteService: ClienteService,
+    private clienteService: ClienteService, private tabpag:Tab1Page,
     public toastCtrl: ToastController,private translateService: TranslateService,public PopoverController:PopoverPage
   ) {
       this.loginForm = this.formBuilder.group({
@@ -71,15 +74,7 @@ export class LoginPage implements OnInit {
 
 
   ngOnInit() {
-    this.translateService.setTranslation('en', { // 2
-      'tab1.getStarted': 'Get Started', // add  this
-      'someProperty': 'We can use translations in {{var}}' // 3
-    }); 
-    
-    this.translateService.get('someProperty', { var: 'classes' }).subscribe((res: string) => { //  4
-      this.someProperty = res; // 5
-    }); 
-
+   
     this.clienteService.TraerClientes().subscribe(data => {
 
       this.clientes = data.map(e => {
@@ -91,7 +86,41 @@ export class LoginPage implements OnInit {
           };
       })
       //console.log(this.clientes);
-    });
+    });  
+      this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+           break; 
+        } 
+     } 
+  
     
   }
 
@@ -249,6 +278,11 @@ export class LoginPage implements OnInit {
  }
 
 
+ popup() {
+  this.modalController.create({component:PopoverPage}).then((modalElement)=>{
+    modalElement.present();
+  })
+    }
 
  public async mostrarToast(miMsj:string,color:string)
  {

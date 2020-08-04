@@ -20,10 +20,6 @@ export class Tab1Page implements OnInit {
 
  
 
-  questions$: Observable<IData[]>;
-  transData:any=[];
-  totalQuestions: number;
-  data: any;
   idiomaSeleccionado:any;
 
   // ../assets/i18n/en1.json
