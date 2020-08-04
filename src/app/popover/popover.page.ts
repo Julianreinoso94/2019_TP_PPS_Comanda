@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-popover',
@@ -9,7 +10,7 @@ import { PopoverController, ModalController } from '@ionic/angular';
 export class PopoverPage implements OnInit {
   languages =[];
 
-  constructor(private popover:PopoverController,public modal:ModalController) {
+  constructor(private popover:PopoverController,public modal:ModalController,private _router: Router) {
  
 
   } 
@@ -46,9 +47,11 @@ export class PopoverPage implements OnInit {
    select(valor)
    {
      alert(valor);
+  
      this.modal.dismiss({
       'dismissed': true
     });
+    this._router.navigate(['/tab1',valor])
    }
 
   ClosePopover()

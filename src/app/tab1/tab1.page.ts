@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import{PopoverPage} from '../popover/popover.page'
 import { PopoverController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -23,17 +24,16 @@ export class Tab1Page implements OnInit {
   transData:any=[];
   totalQuestions: number;
   data: any;
+  idiomaSeleccionado:any;
 
   // ../assets/i18n/en1.json
 
   ngOnInit() {
-  //   fetch('../assets/data/datajson.json').then(res => res.json())
-  //   .then(json => {
-  //     this.data = json;
-  //   });
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+
  
   }
-  constructor(public modalController: ModalController,public popoverController: PopoverController) { 
+  constructor(public modalController: ModalController,public popoverController: PopoverController,private route: ActivatedRoute) { 
 
   
 
