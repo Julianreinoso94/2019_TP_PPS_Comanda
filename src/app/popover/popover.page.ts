@@ -45,9 +45,7 @@ export class PopoverPage implements OnInit {
    }
 
    select(valor)
-   {
-     alert(valor);
-  
+   {  
      this.modal.dismiss({
       'dismissed': true
     });
