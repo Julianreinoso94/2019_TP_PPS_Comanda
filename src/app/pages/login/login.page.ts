@@ -130,6 +130,7 @@ export class LoginPage implements OnInit {
         default: { 
           this.array= this.tabpag.arrayEs;
           this.imagenIdioma ="esp";
+          this.idiomaSeleccionado="esp"
 
            break; 
         } 
