@@ -1,12 +1,5 @@
 import { Component, OnInit,  ViewChild } from '@angular/core';
-//import { IonicPage, NavController, NavParams, Slides, LoadingController,Loading } from 'ionic-angular';
-import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-//import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-//import { AngularFireAuth } from 'angularfire2/auth';
-import { IUsuario } from '../../clases/usuario';
-//import {UsuariosProvider} from '../../../providers/usuarios/usuarios';
-//import {AuthProvider} from '../../../providers/auth/auth';
 import {EmpleadosService} from '../../services/empleados/empleados.service';
 import { FotosService } from '../../services/fotos/fotos.service';
 import { Router } from '@angular/router';
@@ -23,6 +16,9 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
+import {Tab1Page} from '../../tab1/tab1.page'
+import {ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-alta-empleado',
@@ -32,6 +28,8 @@ import 'firebase/storage';
 
 export class AltaEmpleadoPage implements OnInit {
 
+  idiomaSeleccionado:any;
+array:any=[];
   premio:any;
   empleados: any;
   nombre: string;
@@ -57,7 +55,7 @@ export class AltaEmpleadoPage implements OnInit {
 
   constructor(
     private empleadosService: EmpleadosService,
-    private router: Router,
+    private router: Router,private route: ActivatedRoute, private tabpag:Tab1Page,
     private db: AngularFirestore,
     private camera: Camera, 
     private storage: AngularFireStorage, 
@@ -76,6 +74,45 @@ export class AltaEmpleadoPage implements OnInit {
     }
 
   ngOnInit() {
+
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+    switch(this.idiomaSeleccionado) { 
+      case 'en': { 
+        this.array= this.tabpag.arrayINGLES;
+       break; 
+      } 
+      case 'rus': { 
+         this.array= this.tabpag.arrayRusia;
+
+         break; 
+      } 
+      case 'por': { 
+        this.array= this.tabpag.arrayPor;
+
+        break; 
+     } 
+     case'fr':{
+       this.array=this.tabpag.arrayFra;
+
+       break
+     }
+     case'esp':{
+      this.array=this.tabpag.arrayEs;
+
+      break
+    }
+
+    case'de':{
+      this.array=this.tabpag.arrayDe;
+      break
+    } 
+      default: { 
+        this.array= this.tabpag.arrayEs;
+
+         break; 
+      } 
+   } 
     
     this.empleadosService.TraerEmpleados().subscribe(data => {
 

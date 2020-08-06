@@ -8,7 +8,7 @@ import { MesasService } from '../services/mesas/mesas.service';
 import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Alert } from 'selenium-webdriver';
-
+import {Tab1Page} from '../tab1/tab1.page'
 
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
@@ -55,6 +55,8 @@ export class HomePage  implements OnInit{
     datos: any;
     loading = false;
  
+idiomaSeleccionado:any;
+array:any=[];
     //////////////
     encodeData: any;
   scannedData: {};
@@ -82,15 +84,7 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
      // isEdit: false,
       estado: e.payload.doc.data()['estado'],
       cliente: e.payload.doc.data()['uid'],
-    //  fechareserva: e.payload.doc.data()['fechareserva'],
-      // cantPersonas: e.payload.doc.data()['cantPersonas'],
-      // cliente: e.payload.doc.data()['cliente'],
-      // monto: e.payload.doc.data()['monto'],
-      // propina: e.payload.doc.data()['propina'],
-      // descuento10: e.payload.doc.data()['descuento10'],
-      // descuentoBebida: e.payload.doc.data()['descuentoBebida'],
-      // descuentoPostre: e.payload.doc.data()['descuentoPostre'],
-      // estadobool:false,
+
       };
   })
   console.log(this.listadeespera);
@@ -106,14 +100,7 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
           usuario: e.payload.doc.data()['usuario'],
           horareserva: e.payload.doc.data()['horareserva'],
           fechareserva: e.payload.doc.data()['fechareserva'],
-          // cantPersonas: e.payload.doc.data()['cantPersonas'],
-          // cliente: e.payload.doc.data()['cliente'],
-          // monto: e.payload.doc.data()['monto'],
-          // propina: e.payload.doc.data()['propina'],
-          // descuento10: e.payload.doc.data()['descuento10'],
-          // descuentoBebida: e.payload.doc.data()['descuentoBebida'],
-          // descuentoPostre: e.payload.doc.data()['descuentoPostre'],
-          // estadobool:false,
+   
           };
       })
       console.log(this.listareservas);
@@ -145,7 +132,7 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
       private alertCtrl: AlertController,private route: ActivatedRoute, private serviciolistadeespera: EventService,
       private authService: AuthService,   private scanner: BarcodeScanner,private barcodeScanner: BarcodeScanner,
       private profileService: ProfileService,     private router: Router,
-      public toastCtrl: ToastController
+      public toastCtrl: ToastController, private tabpag:Tab1Page
 
 
     ) {
@@ -158,6 +145,44 @@ this.serviciolistadeespera.getListaEspera().subscribe(data => {
 
     }
   ngOnInit() {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      // alert(this.idiomaSeleccionado);
+    switch(this.idiomaSeleccionado) { 
+      case 'en': { 
+        this.array= this.tabpag.arrayINGLES;
+       break; 
+      } 
+      case 'rus': { 
+         this.array= this.tabpag.arrayRusia;
+
+         break; 
+      } 
+      case 'por': { 
+        this.array= this.tabpag.arrayPor;
+
+        break; 
+     } 
+     case'fr':{
+       this.array=this.tabpag.arrayFra;
+
+       break
+     }
+     case'esp':{
+      this.array=this.tabpag.arrayEs;
+
+      break
+    }
+
+    case'de':{
+      this.array=this.tabpag.arrayDe;
+      break
+    } 
+      default: { 
+        this.array= this.tabpag.arrayEs;
+
+         break; 
+      } 
+   } 
 
 
   }
@@ -516,35 +541,7 @@ if(estadomimesa == "Disponible" &&  mesaClienteSentado=="parado" && estadoenlist
   
 
   diferencia():number {
-    // this.horayminutoconcatenadasIngreso = this.horaselect + ":" + this.minutoselect;
 
-    // this.dateStart = this.myDate.toString();
-    // let toArray = this.dateStart.split("-");
-    // this.primero = toArray[0] + "/";
-
-    // this.segundo = toArray[1] + "/";
-    // this.tercero = toArray[2];
-    // this.split = this.primero.toString() + "/" + this.segundo.toString() + "/" + this.tercero.toString();
-
-    // let toArray2 = this.dateStart.split("T");
-    // let horatomada = toArray2.toString()
-    // let horareserva = horatomada.split("-");
-    // let horareservada = horareserva[0];
-    // let horareservada1 = horareserva[1];
-    // let horareservada2 = horareserva[2];
-    // let diares = horareservada2.split(",");
-    // let dt = diares[0].toString();
-
-
-    // let horaa = this.hora.toString();
-    // let horacortada = horaa.split(":");
-
-    // let horacortada1 = horacortada[0];
-    // let vy = horacortada1.toString().split("T");
-    // let horacortada2 = horacortada[1];
-
-
-    // this.fechaconcatenada = horareservada + "/" + horareservada1 + "/" + dt;
 
     var startTime = new Date(this.fechaconcatenada + " " + this.horayminutoconcatenadasIngreso
     );

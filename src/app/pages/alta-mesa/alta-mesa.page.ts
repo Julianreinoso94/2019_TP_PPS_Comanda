@@ -8,6 +8,8 @@ import { ToastController } from '@ionic/angular';
 import { isBoolean } from 'util';
 import { timeout } from 'q';
 import { DatePipe } from '@angular/common';
+import {Tab1Page} from '../../tab1/tab1.page'
+import {  ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -22,11 +24,15 @@ export class AltaMesaPage implements OnInit {
   mesas : any;
   today = Date.now();
    ddMMyyyy:String ;
+
+   idiomaSeleccionado:any;
+array:any=[];
+
   
 
   constructor(
     private router: Router,private datePipe: DatePipe,
-    private mesasService: MesasService,
+    private mesasService: MesasService, private route: ActivatedRoute, private tabpag:Tab1Page,
     // private camara: Camera,
     public fotoService: FotosService,
     public toastCtrl: ToastController
@@ -34,6 +40,44 @@ export class AltaMesaPage implements OnInit {
 
   ngOnInit() {
     this.ddMMyyyy = this.datePipe.transform(new Date(),"dd-MM-yyyy");
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+
+           break; 
+        } 
+     } 
 
     this.mesasService.TraerMesas().subscribe(data => {
 

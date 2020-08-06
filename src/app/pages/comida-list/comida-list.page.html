@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button routerLink="/home/{{this.idiomaSeleccionado}}"></ion-back-button>
     </ion-buttons>
-    <ion-title> Comidas / Bebidas </ion-title>
+    <ion-title> {{array[0].home_btn_ListadoComida}} </ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/comida-create" *ngIf= "userProfile?.perfil=='bartender' || userProfile?.perfil=='cocinero' || userProfile?.perfil=='Supervisor'">
+      <ion-button routerLink="/comida-create/{{this.idiomaSeleccionado}}" *ngIf= "userProfile?.perfil=='bartender' || userProfile?.perfil=='cocinero' || userProfile?.perfil=='Supervisor'">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -15,7 +15,7 @@
 <ion-content padding>
   <ion-list>
       <ion-label>
-          <h1> Carta de Comidas</h1>
+          <h1> {{array[0].comida_list_subtitulo}}</h1>
       </ion-label>
 
     <ion-item *ngFor="let comida of comidas" >
@@ -24,9 +24,9 @@
         <h2>{{comida.nombre}}</h2>
         <!-- <p>Descripción: {{comida?.description}}</p> -->
         <!-- <p>Tiempo: {{comida?.time}}</p> -->
-        <p>Precio: ${{comida.precio}}</p>
+        <p>{{array[0].comida_list_Precio}}: ${{comida.precio}}</p>
       </ion-label>
-      <ion-button routerLink="/comida-detail/{{ comida.id }}">
+      <ion-button routerLink="/comida-detail/{{ comida.id }}/{{ this.idiomaSeleccionado}}">
         <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
       </ion-button>
       <ion-button (click)="borrarComida( comida.id )"  *ngIf="(userProfile?.perfil=='cocinero') ">
@@ -39,7 +39,7 @@
  
   <ion-list>
       <ion-label>
-          <h1> Carta de Bebidas</h1>
+          <h1> {{array[0].comida_list_bebidas}}</h1>
       </ion-label>
 
     <ion-item *ngFor="let comida of bebidas" >
@@ -48,9 +48,9 @@
         <h2>{{comida.nombre}}</h2>
         <!-- <p>Descripción: {{comida?.description}}</p> -->
         <!-- <p>Tiempo: {{comida?.time}}</p> -->
-        <p>Precio: ${{comida.precio}}</p>
+        <p>{{array[0].comida_list_Precio}}: ${{comida.precio}}</p>
       </ion-label>
-      <ion-button routerLink="/comida-detail/{{ comida.id }}">
+      <ion-button routerLink="/comida-detail/{{ comida.id }}/{{ this.idiomaSeleccionado}}">
         <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
       </ion-button>
       <ion-button (click)="borrarComida( comida.id )"  *ngIf="(userProfile?.perfil=='bartender') ">
@@ -62,7 +62,7 @@
 
   <ion-list>
       <ion-label>
-          <h1> Carta de Postres</h1>
+          <h1> {{array[0].comida_list_postre}}</h1>
       </ion-label>
 
     <ion-item *ngFor="let comida of postres" >
@@ -71,9 +71,9 @@
         <h2>{{comida.nombre}}</h2>
         <!-- <p>Descripción: {{comida?.description}}</p> -->
         <!-- <p>Tiempo: {{comida?.time}}</p> -->
-        <p>Precio: ${{comida.precio}}</p>
+        <p>{{array[0].comida_list_Precio}}: ${{comida.precio}}</p>
       </ion-label>
-      <ion-button routerLink="/comida-detail/{{ comida.id }}">
+      <ion-button routerLink="/comida-detail/{{ comida.id }}/{{ this.idiomaSeleccionado}}">
         <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
       </ion-button>
       <ion-button (click)="borrarComida( comida.id )"  *ngIf="(userProfile?.perfil=='cocinero') ">

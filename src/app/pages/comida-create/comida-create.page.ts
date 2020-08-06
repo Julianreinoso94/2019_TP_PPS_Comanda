@@ -12,6 +12,10 @@ import { Base64 } from '@ionic-native/base64/ngx';
 //import { GaleriaPage } from '../galeria/galeria.page';
 import { FormGroup } from '@angular/forms';
 
+import {Tab1Page} from '../../tab1/tab1.page'
+import {  ActivatedRoute } from '@angular/router';
+
+
 @Component({
   selector: 'app-comida-create',
   templateUrl: './comida-create.page.html',
@@ -29,6 +33,9 @@ export class ComidaCreatePage implements OnInit {
   comidaName: string;
   comidaCodigo: string;
 
+  idiomaSeleccionado:any;
+array:any=[];
+
   options: CameraOptions = {
     quality: 10,
     //destinationType: this.camera.DestinationType.DATA_URL,
@@ -38,7 +45,7 @@ export class ComidaCreatePage implements OnInit {
   }
 
   constructor(
-    private router: Router,
+    private router: Router,private route: ActivatedRoute, private tabpag:Tab1Page,
     private comidaService: ComidasService,
     public fotoService: FotosService,
     private camera: Camera,
@@ -50,6 +57,44 @@ export class ComidaCreatePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+
+           break; 
+        } 
+     } 
   }
 
   cargarComida(

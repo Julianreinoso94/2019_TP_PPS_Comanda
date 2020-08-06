@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button routerLink="/home/{{this.idiomaSeleccionado}}"
+      ></ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar Empleado</ion-title>
+    <ion-title>{{array[0].alta_empleado_Titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,65 +19,65 @@
   <div class="" *ngIf="!loading">
 
     <ion-item>
-        <ion-label position="stacked">Nombre</ion-label>
+        <ion-label position="stacked">{{array[0].alta_empleado_Formulario_Nombre}}</ion-label>
           <ion-input
             [(ngModel)]="unUsuario.nombre"
             type="text"
             name="nombre"
-            placeholder="Nombre"
+            placeholder="{{array[0].alta_empleado_Formulario_Nombre}}"
           >
         </ion-input>
       </ion-item>
 
       <ion-item>
-          <ion-label position="stacked">Apellido</ion-label>
+          <ion-label position="stacked">{{array[0].alta_empleado_Formulario_Apellido}}</ion-label>
             <ion-input
               [(ngModel)]="unUsuario.apellido"
               type="text"
-              placeholder="Apellido"
+              placeholder="{{array[0].alta_empleado_Formulario_Apellido}}"
               name="apellido"
             >
             </ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label position="stacked">DNI</ion-label>
+            <ion-label position="stacked">{{array[0].Alta_empleado_Formulario_PlaceHolder_IngreseDni}}</ion-label>
               <ion-input
                 [(ngModel)]="unUsuario.dni"
                 type="text"
-                placeholder="Ingresa dni"
+                placeholder="{{array[0].Alta_empleado_Formulario_PlaceHolder_IngreseDni}}"
                 name="dni"
               >
               </ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label position="stacked">CUIL</ion-label>
+            <ion-label position="stacked">{{array[0].alta_empleado_Formulario_Cuil}}</ion-label>
             <ion-input
             [(ngModel)]="unUsuario.cuil"
             type="text"
-            placeholder="Ingrese CUIL"
+            placeholder="{{array[0].Alta_empleado_Formulario_PlaceHolder_IngreseCuil}}"
             >
             </ion-input>
           </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Correo</ion-label>
+          <ion-label position="stacked">{{array[0].Alta_empleado_Formulario_PlaceHolder_IngresarCorreo}}</ion-label>
           <ion-input
             [(ngModel)]="unUsuario.email"
             type="text"
-            placeholder="Ingresa correo"
+            placeholder="{{array[0].Alta_empleado_Formulario_PlaceHolder_IngresarCorreo}}"
             name="correo"
           >
           </ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label>Tipo de empleado</ion-label>
-            <ion-select [(ngModel)]="unUsuario.perfil" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione cantidad de personas">
-              <ion-select-option value="cocinero">Cocinero</ion-select-option>
-              <ion-select-option value="bartender">Bartender</ion-select-option>
-              <ion-select-option value="Mozo">Mozo</ion-select-option>
+            <ion-label>{{array[0].Alta_empleado_Formulario_PlaceHolder_TipoEmpleado}}</ion-label>
+            <ion-select [(ngModel)]="unUsuario.perfil" value="brown" okText="{{array[0].Alta_Cliente_btn_Guardar}}" cancelText="{{array[0].alta_mesa_btn_Cancelar}}" placeholder="{{array[0].Alta_empleado_Formulario_PlaceHolder_SeleccioneTipoEmpleado}}">
+              <ion-select-option value="cocinero">{{array[0].Alta_empleado_Formulario_Option_Cocinero}}</ion-select-option>
+              <ion-select-option value="bartender">{{array[0].Alta_empleado_Formulario_Option_Bartender}}</ion-select-option>
+              <ion-select-option value="Mozo">{{array[0].Alta_empleado_Formulario_Option_Mozo}}</ion-select-option>
             </ion-select>
           </ion-item>
 
@@ -90,14 +91,14 @@
           expand="block"
           (click)="scanear()"
         >
-        Scannear DNI
+        {{array[0].alta_empleado_Formulario_BTN_ScannerDNI}}
         </ion-button>
 
         <ion-button
         expand="block"
         (click)="enviar()"
         >
-        Guardar
+        {{array[0].alta_mesa_btn_Aceptar}}
       </ion-button>
 
     </div>
@@ -197,8 +198,8 @@
 <ion-card *ngFor="let item of empleados">
     <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-header>
-        <ion-card-title> Empleado {{item.nombre}} - {{item.apellido}} </ion-card-title>
-        <ion-card-subtitle>Perfil: {{item.perfil}} - DNI: {{item.dni}}</ion-card-subtitle>
+        <ion-card-title> {{array[0].Alta_empleado_ListadoFormulario_Empleado}} {{item.nombre}} - {{item.apellido}} </ion-card-title>
+        <ion-card-subtitle>{{array[0].Alta_empleado_ListadoFormulario_Perfil}}: {{item.perfil}} - {{array[0].Alta_Cliente_Formulario_Texto_DNI}}: {{item.dni}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
             <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">

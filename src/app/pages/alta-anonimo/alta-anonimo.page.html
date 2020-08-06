@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title>Cargar Cliente Anonimo</ion-title>
+      <ion-title>{{array[0].alta_anonimo_titulo}}</ion-title>
     </ion-toolbar>
   </ion-header>
   
@@ -19,33 +19,33 @@
   <div class="" *ngIf="!loading">
   
   <ion-item>
-    <ion-label position="stacked">Nombre</ion-label>
+    <ion-label position="stacked">{{array[0].alta_anonimo_TextoFormulario_nombre}}</ion-label>
       <ion-input
         [(ngModel)]="unUsuario.nombre"
         type="text"
         name="nombre"
-        placeholder="Nombre"
+        placeholder="{{array[0].alta_anonimo_PlaceHolderNombre}}"
       >
     </ion-input>
   </ion-item>
   
   <ion-item>
-      <ion-label position="stacked">Correo</ion-label>
+      <ion-label position="stacked">{{array[0].alta_anonimo_TextoFormularioCorreo}}</ion-label>
         <ion-input
           [(ngModel)]="unUsuario.email"
           type="text"
-          placeholder="Ingresa correo"
+          placeholder="{{array[0].alta_anonimo_PlaceHolderCorreo}}"
           name="correo"
         >
         </ion-input>
   </ion-item>
   
   <ion-item>
-        <ion-label position="stacked">Clave</ion-label>
+        <ion-label position="stacked">{{array[0].login_PlaceHolder_Ingrese_clave}}</ion-label>
           <ion-input
             [(ngModel)]="unUsuario.clave"
             type="text"
-            placeholder="Ingresa clave"
+            placeholder="{{array[0].alta_anonimo_PlaceHolderIngreseClave}}"
             name="clave"
           >
         </ion-input>
@@ -62,7 +62,7 @@
     expand="block"
     (click)="enviar()"
     >
-    Guardar
+    {{array[0].Alta_Cliente_btn_Guardar}}
   </ion-button>
   
   </div>

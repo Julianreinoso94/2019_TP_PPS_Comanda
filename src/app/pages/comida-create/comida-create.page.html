@@ -1,9 +1,9 @@
 <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home"></ion-back-button>
+        <ion-back-button routerLink="/comida-list/{{this.idiomaSeleccionado}}" ></ion-back-button>
       </ion-buttons>
-      <ion-title>Cargar Comida</ion-title>
+      <ion-title>{{array[0].comida_create_Titulo}}</ion-title>
     </ion-toolbar>
   </ion-header>
   
@@ -14,61 +14,61 @@
     </div>
     <div class="" *ngIf="!loading">
       <ion-item>
-        <ion-label position="stacked">Nombre</ion-label>
+        <ion-label position="stacked">{{array[0].comida_create_FormularioTextNombre}}</ion-label>
         <ion-input
           [(ngModel)]="comidaName"
           type="text"
-          placeholder="Nombre de comida"
+          placeholder="{{array[0].comida_create_PlaceHolder_NombreDeComida}}"
         >
         </ion-input>
       </ion-item>
   
       <ion-item>
-        <ion-label position="stacked">Codigo</ion-label>
+        <ion-label position="stacked">{{array[0].comida_create_FormularioTextCodigo}}</ion-label>
         <ion-input
           [(ngModel)]="comidaCodigo"
           type="text"
-          placeholder="Codigo de comida"
+          placeholder="{{array[0].comida_create_PlaceHolder_Codigo}}"
         >
         </ion-input>
       </ion-item>
   
       <ion-item>
-        <ion-label position="stacked">Descripción</ion-label>
+        <ion-label position="stacked">{{array[0].comida_create_PlaceHolder_Descripcion}}</ion-label>
         <ion-input
           [(ngModel)]="comidaDescription"
           type="text"
-          placeholder="Que es?"
+          placeholder="{{array[0].comida_create_PlaceHolder_Descripcion}}"
         >
         </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Precio</ion-label>
+        <ion-label position="stacked">{{array[0].comida_create_FormularioTextPrecio}}</ion-label>
         <ion-input
           [(ngModel)]="comidaPrice"
           type="number"
-          placeholder="¿Cuanto cuesta?"
+          placeholder="{{array[0].comida_create_PlaceHolder_CuantoCuesta}}"
         >
         </ion-input>
       </ion-item>
   
       <ion-item>
-        <ion-label position="stacked">Tiempo de Preparación</ion-label>
+        <ion-label position="stacked">{{array[0].comida_create_FormularioTextPreparacion}}</ion-label>
         <ion-input
           [(ngModel)]="comidaTime"
           type="number"
-          placeholder="¿Cuanto tarda en hacerse?"
+          placeholder="{{array[0].comida_create_PlaceHolder_CuantoTardaenHacerce}}"
         >
         </ion-input>
       </ion-item>
 
 
     <ion-item>
-     <ion-label>Tipo de Producto</ion-label>
-       <ion-select [(ngModel)]="tipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione el tipo">
-         <ion-select-option value="comida">Comida</ion-select-option>
-         <ion-select-option value="bebida">Bebida</ion-select-option>
-         <ion-select-option value="postre">Postre</ion-select-option>
+     <ion-label>{{array[0].comida_create_FormularioTextTipoDeProducto}}</ion-label>
+       <ion-select [(ngModel)]="tipo" value="brown" okText="{{array[0].comida_create_Select_Boton_Aceptar}}" cancelText="{{array[0].comida_create_Select_Boton_Cancelar}}" placeholder="{{array[0].comida_create_Select_PlaceHolder_SeleccioneElTipo}}">
+         <ion-select-option value="comida">{{array[0].comida_create_Select_PlaceHolder_Comida}}</ion-select-option>
+         <ion-select-option value="bebida">{{array[0].comida_create_Select_PlaceHolder_Bebida}}</ion-select-option>
+         <ion-select-option value="postre">{{array[0].comida_create_Select_PlaceHolder_Postre}}</ion-select-option>
        </ion-select>  
       </ion-item>
   
@@ -82,7 +82,7 @@
         expand="block"
         (click)="cargarComida(comidaCodigo, comidaName, comidaDescription, comidaPrice, comidaTime,tipo)"
       >
-        Guardar
+      {{array[0].comida_create_Select_Boton_Aceptar}}
       </ion-button>
     </div>
   

@@ -5,6 +5,9 @@ import * as firebase from 'firebase';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Imagenes } from '../../../environments/environment';
 
+import {Tab1Page} from '../../tab1/tab1.page'
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-comida-detail',
   templateUrl: './comida-detail.page.html',
@@ -15,6 +18,8 @@ export class ComidaDetailPage implements OnInit {
   listaImagenes: any;
   public comidaAct: any;
   
+  idiomaSeleccionado:any;
+  array:any=[];
 
   slideOpts = {
     initialSlide: 1,
@@ -24,7 +29,7 @@ export class ComidaDetailPage implements OnInit {
   ref = firebase.database().ref('listaComida/');
 
   constructor(
-    private comidaService: ComidasService,
+    private comidaService: ComidasService,private tabpag:Tab1Page,
     private route: ActivatedRoute,
   ) {
     
@@ -35,6 +40,45 @@ export class ComidaDetailPage implements OnInit {
 
 
   ngOnInit() {
+
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('lenguaje');
+      
+    switch(this.idiomaSeleccionado) { 
+      case 'en': { 
+        this.array= this.tabpag.arrayINGLES;
+       break; 
+      } 
+      case 'rus': { 
+         this.array= this.tabpag.arrayRusia;
+
+         break; 
+      } 
+      case 'por': { 
+        this.array= this.tabpag.arrayPor;
+
+        break; 
+     } 
+     case'fr':{
+       this.array=this.tabpag.arrayFra;
+
+       break
+     }
+     case'esp':{
+      this.array=this.tabpag.arrayEs;
+
+      break
+    }
+
+    case'de':{
+      this.array=this.tabpag.arrayDe;
+      break
+    } 
+      default: { 
+        this.array= this.tabpag.arrayEs;
+
+         break; 
+      } 
+   } 
     const comidaId: string = this.route.snapshot.paramMap.get('id');
     this.comidaService
       .getDetalleComida(comidaId)

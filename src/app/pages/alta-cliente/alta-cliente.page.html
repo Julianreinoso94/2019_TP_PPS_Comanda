@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button  routerLink="/home/{{this.idiomaSeleccionado}}"
+></ion-back-button>
     </ion-buttons>
-    <ion-title>Cargar Cliente</ion-title>
+    <ion-title>{{array[0].Alta_Cliente_Titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,55 +20,55 @@
 <div class="" *ngIf="!loading">
 
 <ion-item>
-  <ion-label position="stacked">Nombre</ion-label>
+  <ion-label position="stacked">{{array[0].Alta_Cliente_Formulario_Texto_Nombre}}</ion-label>
     <ion-input
       [(ngModel)]="unUsuario.nombre"
       type="text"
       name="nombre"
-      placeholder="Nombre"
+      placeholder="{{array[0].Alta_Cliente_Formulario_PlaceHolder_Nombre}}"
     >
   </ion-input>
 </ion-item>
 
 <ion-item>
-  <ion-label position="stacked">Apellido</ion-label>
+  <ion-label position="stacked">{{array[0].Alta_Cliente_Formulario_Texto_Apellido}}</ion-label>
     <ion-input
       [(ngModel)]="unUsuario.apellido"
       type="text"
-      placeholder="Apellido"
+      placeholder="{{array[0].Alta_Cliente_Formulario_PlaceHolder_Apellido}}"
       name="apellido"
     >
     </ion-input>
 </ion-item>
 
 <ion-item>
-  <ion-label position="stacked">DNI</ion-label>
+  <ion-label position="stacked">{{array[0].Alta_Cliente_Formulario_Texto_DNI}}</ion-label>
     <ion-input
       [(ngModel)]="unUsuario.dni"
       type="text"
-      placeholder="Ingresa dni"
+      placeholder="{{array[0].Alta_Cliente_Formulario_PlaceHolder_DNI}}"
       name="dni"
     >
     </ion-input>
 </ion-item>
 
 <ion-item>
-    <ion-label position="stacked">Correo</ion-label>
+    <ion-label position="stacked">{{array[0].Alta_Cliente_Formulario_Texto_Correo}}</ion-label>
       <ion-input
         [(ngModel)]="unUsuario.email"
         type="text"
-        placeholder="Ingresa correo"
+        placeholder="{{array[0].Alta_Cliente_Formulario_PlaceHolder_Correo}}"
         name="correo"
       >
       </ion-input>
 </ion-item>
 
 <ion-item>
-      <ion-label position="stacked">Clave</ion-label>
+      <ion-label position="stacked">{{array[0].Alta_Cliente_Formulario_Texto_Clave}}</ion-label>
         <ion-input
           [(ngModel)]="unUsuario.clave"
           type="text"
-          placeholder="Ingresa clave"
+          placeholder="{{array[0].Alta_Cliente_Formulario_PlaceHolder_Clave}}"
           name="clave"
         >
       </ion-input>
@@ -83,14 +84,14 @@
   expand="block"
   (click)="scanear()"
   >
-  Scannear DNI
+ {{ array[0].Alta_Cliente_btn_Scannear_DNI}}
 </ion-button>
 
 <ion-button
   expand="block"
   (click)="enviar()"
   >
-  Guardar
+ {{ array[0].Alta_Cliente_btn_Guardar}}
 </ion-button>
 
 </div>

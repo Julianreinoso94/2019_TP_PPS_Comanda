@@ -19,6 +19,8 @@ import 'firebase/storage';
 import { ToastController } from '@ionic/angular';
 import { SupervisorService } from '../../services/supervisores/supervisor.service';
 
+import {Tab1Page} from '../../tab1/tab1.page'
+import {  ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alta-duenio',
@@ -52,13 +54,15 @@ export class AltaDuenioPage implements OnInit {
  filename:string = "";
  duenios : any;
 
+ idiomaSeleccionado:any;
+ array:any=[];
    constructor(
      private scanner: BarcodeScanner,
      private barcodeScanner: BarcodeScanner,
      private profileService: ProfileService,
      private crudService: CrudService,
      private storage: AngularFireStorage,
-     private camera: Camera,	
+     private camera: Camera,	private route: ActivatedRoute, private tabpag:Tab1Page,
      private alertController: AlertController,
      private user:AuthService,
      private db: AngularFirestore,
@@ -80,6 +84,44 @@ export class AltaDuenioPage implements OnInit {
 }
 
    ngOnInit() {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+    switch(this.idiomaSeleccionado) { 
+      case 'en': { 
+        this.array= this.tabpag.arrayINGLES;
+       break; 
+      } 
+      case 'rus': { 
+         this.array= this.tabpag.arrayRusia;
+
+         break; 
+      } 
+      case 'por': { 
+        this.array= this.tabpag.arrayPor;
+
+        break; 
+     } 
+     case'fr':{
+       this.array=this.tabpag.arrayFra;
+
+       break
+     }
+     case'esp':{
+      this.array=this.tabpag.arrayEs;
+
+      break
+    }
+
+    case'de':{
+      this.array=this.tabpag.arrayDe;
+      break
+    } 
+      default: { 
+        this.array= this.tabpag.arrayEs;
+
+         break; 
+      } 
+   } 
 
     this.supervisorServ.TraerSupervisores().subscribe(data => {
 

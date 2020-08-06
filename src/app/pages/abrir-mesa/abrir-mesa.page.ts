@@ -13,6 +13,9 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import {Tab1Page} from '../../tab1/tab1.page'
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-abrir-mesa',
@@ -29,14 +32,57 @@ export class AbrirMesaPage implements OnInit {
   mesas : any;
   reservas : any;
 
+  
+idiomaSeleccionado:any;
+array:any=[];
+
+
   constructor(
     private router: Router,private eventService: EventService, public reservaserv:ReservasService, 
-    private mesasService: MesasService,    private pedidosService: PedidosService,
+    private mesasService: MesasService, private route: ActivatedRoute, private tabpag:Tab1Page,   private pedidosService: PedidosService,
 
     // private camara: Camera,
     public fotoService: FotosService,
     public toastCtrl: ToastController
   ) {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+
+           break; 
+        } 
+     } 
 
     firebase.auth().onAuthStateChanged(user => {
  

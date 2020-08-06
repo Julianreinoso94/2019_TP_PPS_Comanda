@@ -21,7 +21,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 //para poder hacer las validaciones
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ClienteService} from '../../services/clientes/cliente.service';
-
+import {Tab1Page} from '../../tab1/tab1.page'
 
 @Component({
   selector: 'app-alta-cliente',
@@ -35,6 +35,8 @@ export class AltaClientePage implements OnInit {
   foto: string;
   filename:string = "";
   clientes: any;
+  array:any=[];
+  idiomaSeleccionado:any;
 
 
   constructor(
@@ -42,7 +44,7 @@ export class AltaClientePage implements OnInit {
     private camera: Camera, 
     private storage: AngularFireStorage, 
     private auth : AuthService,  
-    private router : Router,
+    private router : Router,private route: ActivatedRoute, private tabpag:Tab1Page,
     private clienteService: ClienteService,
     public toastCtrl: ToastController) 
   {
@@ -67,6 +69,45 @@ export class AltaClientePage implements OnInit {
       })
       console.log(this.clientes);
     });
+
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+
+           break; 
+        } 
+     } 
 
   }
 

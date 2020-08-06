@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button  routerLink="/home/{{this.idiomaSeleccionado}}"
+      ></ion-back-button>
     </ion-buttons>
-    <ion-title>Cargar Mesa</ion-title>
+    <ion-title>{{array[0].alta_mesa_titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,17 +15,17 @@
   </div>
   <div class="" *ngIf="!loading">
     <ion-item>
-      <ion-label position="stacked">Codigo de Mesa</ion-label>
+      <ion-label position="stacked">{{array[0].alta_mesa_TextoFormulario_codigo_de_mesa}}</ion-label>
       <ion-input
         [(ngModel)]="codigo"
         type="text"
-        placeholder="Ingrese codigo de Mesa"
+        placeholder="{{array[0].alta_mesa_TextoFormulario_PlaceholderCodigoDeMesa}}"
       >
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Cantidad de personas</ion-label>
-        <ion-select [(ngModel)]="cantPersonas" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione cantidad de personas">
+      <ion-label>{{array[0].alta_mesa_TextoFormulario_cantidad_de_personas}}</ion-label>
+        <ion-select [(ngModel)]="cantPersonas" value="brown" okText="{{array[0].alta_mesa_btn_Aceptar}}" cancelText="{{array[0].alta_mesa_btn_Cancelar}}" placeholder="{{array[0].alta_mesa_TextoFormulario_PlaceholderseleccionarCantidadDePersonas}}">
           <ion-select-option value="1">1</ion-select-option>
           <ion-select-option value="2">2</ion-select-option>
           <ion-select-option value="3">3</ion-select-option>
@@ -43,12 +44,12 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label>Tipo de mesa</ion-label>
-          <ion-select [(ngModel)]="tipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo de mesa">
-            <ion-select-option value="Vip">Vip</ion-select-option>
-            <ion-select-option value="Fumadores">Fumadores</ion-select-option>
-            <ion-select-option value="Discapacitados">Discapacitados</ion-select-option>
-            <ion-select-option value="Normal">Normal</ion-select-option>
+        <ion-label>{{array[0].alta_mesa_TextoFormulario_tipo_de_mesa}}</ion-label>
+          <ion-select [(ngModel)]="tipo" value="brown" okText="{{array[0].alta_mesa_btn_Aceptar}}" cancelText="{{array[0].alta_mesa_btn_Cancelar}}" placeholder="{{array[0].alta_mesa_TextoFormulario_PlaceholderseleccionartipoDemesa}}">
+            <ion-select-option value="Vip">{{array[0].alta_mesa_TextoFormulario_select_Option_VIP}}</ion-select-option>
+            <ion-select-option value="Fumadores">{{array[0].alta_mesa_TextoFormulario_select_Option_Fumadores}}</ion-select-option>
+            <ion-select-option value="Discapacitados">{{array[0].alta_mesa_TextoFormulario_select_Option_Discapacitados}}</ion-select-option>
+            <ion-select-option value="Normal">{{array[0].alta_mesa_TextoFormulario_select_Option_Normal}}</ion-select-option>
           </ion-select>
         </ion-item>
 
@@ -68,7 +69,7 @@
     <ion-button
       expand="block"
       (click)="cargarMesa(codigo, cantPersonas, tipo)">
-      Guardar
+      {{array[0].Alta_Cliente_btn_Guardar}}
     </ion-button>
   </div>
 
@@ -77,7 +78,7 @@
     <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-header>
         <ion-card-title> Mesa {{item.codigo}} - {{item.tipo}} </ion-card-title>
-        <ion-card-subtitle>Estado: {{item.estado}}</ion-card-subtitle>
+        <ion-card-subtitle>{{array[0].alta_mesa_Listado_Estado}}: {{item.estado}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
           <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
@@ -94,16 +95,16 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                Editar Mesa
+               {{array[0].alta_mesa_Listado_Editar}}
               </ion-col>
               <ion-col>
               </ion-col>
               <ion-col>
                 <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
-                  Confirmar
+                  {{array[0].alta_mesa_btn_Aceptar}}
                 </ion-button>
                 <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
-                  Cancelar
+                  {{array[0].alta_mesa_btn_Cancelar}}
                 </ion-button>
               </ion-col>
             </ion-row>
@@ -112,16 +113,16 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label><strong>Codigo</strong></ion-label>
+          <ion-label><strong>{{array[0].alta_mesa_TextoFormulario_codigo_de_mesa}}</strong></ion-label>
           <ion-input type="text" [(ngModel)]="item.EditCodigo"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>Tipo de mesa</ion-label>
-              <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo de mesa">
-                <ion-select-option value="Vip">Vip</ion-select-option>
-                <ion-select-option value="Fumadores">Fumadores</ion-select-option>
-                <ion-select-option value="Discapacitados">Discapacitados</ion-select-option>
-                <ion-select-option value="Normal">Normal</ion-select-option>
+            <ion-label>{{array[0].alta_mesa_TextoFormulario_tipo_de_mesa}}</ion-label>
+              <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="{{array[0].alta_mesa_btn_Aceptar}}" cancelText="{{array[0].alta_mesa_btn_Cancelar}}" placeholder="{{array[0].alta_mesa_TextoFormulario_PlaceholderseleccionartipoDemes}}">
+                <ion-select-option value="Vip">{{array[0].alta_mesa_TextoFormulario_select_Option_VIP}}</ion-select-option>
+                <ion-select-option value="Fumadores">{{array[0].alta_mesa_TextoFormulario_select_Option_Fumadores}}</ion-select-option>
+                <ion-select-option value="Discapacitados">{{array[0].alta_mesa_TextoFormulario_select_Option_Discapacitados}}</ion-select-option>
+                <ion-select-option value="Normal">{{array[0].alta_mesa_TextoFormulario_select_Option_Normal}}</ion-select-option>
               </ion-select>
             </ion-item>
     

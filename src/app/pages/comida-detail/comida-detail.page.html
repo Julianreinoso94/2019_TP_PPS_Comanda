@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-        <ion-back-button defaultHref="/comida-list"></ion-back-button>
+        <ion-back-button routerLink="/comida-list/{{this.idiomaSeleccionado}}"></ion-back-button>
     </ion-buttons>
-    <ion-title> Descripción
+    <ion-title> {{array[0].comida_detail_Titulo}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,9 +14,9 @@
       <ion-card-title>{{comidaActual?.name}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>Descripcion: <strong>{{comidaActual?.description}}</strong></p>
-      <p>Precio: <strong>{{comidaActual?.price | currency}}</strong></p>
-      <p>Tiempo: <strong>{{comidaActual?.time}} minutos</strong></p>
+      <p>{{array[0].comida_detail_Titulo}}: <strong>{{comidaActual?.description}}</strong></p>
+      <p>{{array[0].comida_detail_Precio}}: <strong>{{comidaActual?.price | currency}}</strong></p>
+      <p>{{array[0].comida_detail_Tiempo}}: <strong>{{comidaActual?.time}} "</strong></p>
 
     </ion-card-content>
   </ion-card>

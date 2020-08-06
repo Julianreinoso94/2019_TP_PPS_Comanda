@@ -35,6 +35,7 @@ export class LoginPage implements OnInit {
   imagenIdioma:any;
 
 
+
   public loading: HTMLIonLoadingElement;
   constructor (
     public loadingCtrl: LoadingController,private route: ActivatedRoute,
@@ -128,7 +129,7 @@ export class LoginPage implements OnInit {
       } 
         default: { 
           this.array= this.tabpag.arrayEs;
-          this.imagenIdioma ="es";
+          this.imagenIdioma ="esp";
 
            break; 
         } 
@@ -185,8 +186,8 @@ export class LoginPage implements OnInit {
 
             if(verificadoo == true)
             {
-      
-            this.router.navigateByUrl('home');
+              this.router.navigate(['/home',this.idiomaSeleccionado])
+
             }
             else{
               this.router.navigateByUrl('login');

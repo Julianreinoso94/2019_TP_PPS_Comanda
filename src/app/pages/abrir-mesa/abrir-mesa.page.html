@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button  routerLink="/home/{{this.idiomaSeleccionado}}"
+      ></ion-back-button>
     </ion-buttons>
-    <ion-title>Abrir / Reservar Mesa</ion-title>
+    <ion-title>{{array[0].abrir_mesa_titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,15 +20,15 @@
   <ion-card *ngFor="let item of mesas">
     <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-header>
-        <ion-card-title> Mesa {{item.codigo}} - {{item.tipo}} </ion-card-title>
-        <ion-card-subtitle>Estado: {{item.estado}} </ion-card-subtitle>
+        <ion-card-title> {{array[0].abrir_mesa_mesa}} {{item.codigo}} - {{item.tipo}} </ion-card-title>
+        <ion-card-subtitle>{{array[0].abrir_mesa_select_option_estado}}: {{item.estado}} </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
           <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
               <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
             </ion-button>
             <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
-              Limpiar Datos
+             {{array[0].abrir_mesa_btn_limpiarDatos}}
             </ion-button>
            
       </ion-card-content>
@@ -38,16 +39,16 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                Abrir / Reservar Mesa
+                {{array[0].abrir_mesa_titulo}}
               </ion-col>
               <ion-col>
               </ion-col>
               <ion-col>
                 <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
-                  Confirmar
+                  {{array[0].alta_mesa_btn_Aceptar}}
                 </ion-button>
                 <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
-                  Cancelar
+                  {{array[0].alta_mesa_btn_Cancelar}}
                 </ion-button>
               </ion-col>
             </ion-row>
@@ -56,16 +57,16 @@
       </ion-card-header>
       <ion-card-content>
             <ion-item>
-              <ion-label>Estado</ion-label>
-                <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione estado de mesa">
-                  <ion-select-option value="Ocupado">Ocupada</ion-select-option>
-                  <ion-select-option value="Disponible">Disponible</ion-select-option>
-                  <ion-select-option value="Reservada">Reservada</ion-select-option>
+              <ion-label>{{array[0].alta_mesa_Listado_Estado}}</ion-label>
+                <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="{{array[0].alta_mesa_btn_Aceptar}}" cancelText="{{array[0].alta_mesa_btn_Cancelar}}" placeholder="{{array[0].alta_mesa_Listado_Estado}}">
+                  <ion-select-option value="Ocupado">{{array[0].abrir_mesa_select_option_ocupado}}</ion-select-option>
+                  <ion-select-option value="Disponible">{{array[0].abrir_mesa_select_option_disponible}}</ion-select-option>
+                  <ion-select-option value="Reservada">{{array[0].abrir_mesa_select_option_reservada}}</ion-select-option>
                 </ion-select>
               </ion-item>
 
               <ion-item>
-                <ion-label><strong>Cliente</strong></ion-label>
+                <ion-label><strong>{{array[0].abrir_mesa_select_option_cliente}}</strong></ion-label>
                 <ion-input type="text" [(ngModel)]="item.EditCliente"></ion-input>
               </ion-item>
       </ion-card-content>

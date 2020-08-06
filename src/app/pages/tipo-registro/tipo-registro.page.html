@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tipo-registro</ion-title>
+    <ion-title>{{array[0].tipo_registro_titulo_tiporegistro}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,16 +15,16 @@
   <br>
   <ion-button
   expand="block"
-  routerLink="/alta-cliente"
+  routerLink="/alta-cliente/{{this.idiomaSeleccionado}}"
   >
-  Cliente Registrado
+  {{array[0].tipo_registro_btn_clienteRegistrado}}
   </ion-button>
 <br>
   <ion-button
   expand="block"
-  routerLink="/alta-anonimo"
+  routerLink="/alta-anonimo/{{this.idiomaSeleccionado}}"
   >
-  Cliente Anonimo
+  {{array[0].tipo_Registro_btn_clienteAnonimo}}
   </ion-button>
 
 

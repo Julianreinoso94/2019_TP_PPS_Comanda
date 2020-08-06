@@ -20,7 +20,7 @@ import { AuthService} from '../../services/user/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 //para poder hacer las validaciones
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-
+import {Tab1Page} from '../../tab1/tab1.page'
 @Component({
   selector: 'app-alta-anonimo',
   templateUrl: './alta-anonimo.page.html',
@@ -33,16 +33,23 @@ export class AltaAnonimoPage implements OnInit {
   foto: string;
   filename:string = "";
 
+  idiomaSeleccionado:any;
+array:any=[];
+
+
   constructor(
     private db: AngularFirestore, 
     private camera: Camera, 
     private storage: AngularFireStorage, 
     private auth : AuthService,  
     private router : Router,
+    private route: ActivatedRoute, private tabpag:Tab1Page,
     public toastCtrl: ToastController
   ) { 
     this.unUsuario = new Usuario();
     this.items = db.collection('anonimo').valueChanges();
+
+    
   }
 
   enviar()
@@ -112,6 +119,44 @@ export class AltaAnonimoPage implements OnInit {
 
 
   ngOnInit() {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+    switch(this.idiomaSeleccionado) { 
+      case 'en': { 
+        this.array= this.tabpag.arrayINGLES;
+       break; 
+      } 
+      case 'rus': { 
+         this.array= this.tabpag.arrayRusia;
+
+         break; 
+      } 
+      case 'por': { 
+        this.array= this.tabpag.arrayPor;
+
+        break; 
+     } 
+     case'fr':{
+       this.array=this.tabpag.arrayFra;
+
+       break
+     }
+     case'esp':{
+      this.array=this.tabpag.arrayEs;
+
+      break
+    }
+
+    case'de':{
+      this.array=this.tabpag.arrayDe;
+      break
+    } 
+      default: { 
+        this.array= this.tabpag.arrayEs;
+
+         break; 
+      } 
+   } 
   }
 
   async mostrarToast(miMsj:string,color:string)

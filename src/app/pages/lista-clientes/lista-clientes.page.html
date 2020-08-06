@@ -1,9 +1,10 @@
 <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home"></ion-back-button>
+        <ion-back-button  routerLink="/home/{{this.idiomaSeleccionado}}"
+        ></ion-back-button>
       </ion-buttons>
-      <ion-title>Listado de Clientes</ion-title>
+      <ion-title>{{array[0].listado_cliente_Titulo}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -12,8 +13,8 @@
     <ion-card *ngFor="let item of clientes">
         <span *ngIf="!item.isEdit; else elseBlock">
           <ion-card-header>
-            <ion-card-title> Cliente {{item.nombre}} - {{item.apellido}} </ion-card-title>
-            <ion-card-subtitle>Perfil: {{item.perfil}} - DNI: {{item.dni}}</ion-card-subtitle>
+            <ion-card-title> {{array[0].abrir_mesa_select_option_cliente}}: {{item.nombre}} - {{item.apellido}} </ion-card-title>
+            <ion-card-subtitle>{{array[0].listado_cliente_formulario}}: {{item.perfil}} - DNI: {{item.dni}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
                 <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
