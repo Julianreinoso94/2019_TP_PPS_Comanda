@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { EventService } from '../../services/event/event.service';
 import { Chart } from 'chart.js';
 
+import {Tab1Page} from '../../tab1/tab1.page'
+import {  ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-encuesta-graficos',
   templateUrl: './encuesta-graficos.page.html',
@@ -15,6 +17,9 @@ export class EncuestaGraficosPage implements OnInit {
   public selectCant: Array<any>;
   public unidadCantidad: Array<any>;
   public porcentajeCantidad: Array<any>;
+  idiomaSeleccionado:any;
+array:any=[];
+
 
   lineChart: any;
   donaChart: any;
@@ -25,9 +30,47 @@ export class EncuestaGraficosPage implements OnInit {
   @ViewChild('barCanvas') barCanvas;
   @ViewChild('percentCanvas') percentCanvas;
 
-  constructor(private router: Router, private eventService: EventService) {}
+  constructor(private router: Router, private eventService: EventService,private route: ActivatedRoute, private tabpag:Tab1Page    ) {}
 
   ngOnInit() {
+    // this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+    //   switch(this.idiomaSeleccionado) { 
+    //     case 'en': { 
+    //       this.array= this.tabpag.arrayINGLES;
+    //      break; 
+    //     } 
+    //     case 'rus': { 
+    //        this.array= this.tabpag.arrayRusia;
+
+    //        break; 
+    //     } 
+    //     case 'por': { 
+    //       this.array= this.tabpag.arrayPor;
+
+    //       break; 
+    //    } 
+    //    case'fr':{
+    //      this.array=this.tabpag.arrayFra;
+
+    //      break
+    //    }
+    //    case'esp':{
+    //     this.array=this.tabpag.arrayEs;
+
+    //     break
+    //   }
+  
+    //   case'de':{
+    //     this.array=this.tabpag.arrayDe;
+    //     break
+    //   } 
+    //     default: { 
+    //       this.array= this.tabpag.arrayEs;
+
+    //        break; 
+    //     } 
+    //  } 
     this.selectCant = [];
     this.unidadCantidad = [];
     this.porcentajeCantidad = [];
@@ -134,7 +177,7 @@ export class EncuestaGraficosPage implements OnInit {
 
         type: 'line',
         data: {
-            labels: ['Asqueroso', 'Sucio', 'Normal', 'Limpio', 'Impecable'],
+            labels: ['this.array[0]', 'Sucio', 'Normal', 'Limpio', 'Impecable'],
             datasets: [
                 {
                     label: 'Limpieza',

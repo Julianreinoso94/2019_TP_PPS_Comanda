@@ -1,37 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
+      <ion-back-button routerLink="/home/{{this.idiomaSeleccionado}}" ></ion-back-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-button expand="block" color="primary" routerLink="/encuesta-graficos">
-    graficos
-  </ion-button>
+  <!-- <ion-button expand="block" color="primary" routerLink="/encuesta-graficos/{{this.idiomaSeleccionado}}">
+    {{array[0].graficos}}
+  </ion-button> -->
   <div class="" *ngIf="loading">
       <ion-spinner name="dots" color="dark" ></ion-spinner>
   </div>
   <div class="" *ngIf="!loading">
     <div tappable *ngIf="alerta" (click)="apagar()" >
       <ion-label color="danger" class="ion-text-center" >
-        <h2 >TODOS LOS CAMPOS SON OBLIGATORIOS</h2>
+        <h2 >{{arrayTODOS}}</h2>
       </ion-label>
     </div>
     <ion-list>
       <ion-radio-group  [(ngModel)]="unidad">
-        <ion-label position="stacked">Turno:</ion-label>
+        <ion-label position="stacked">{{array[0].Turno}}:</ion-label>
         <ion-item>
-          <ion-label>Mañana</ion-label>
+          <ion-label>{{array[0].Manana}}</ion-label>
           <ion-radio slot="start" value="mañana" checked></ion-radio>
         </ion-item>
         <ion-item>
-          <ion-label>Mediodia</ion-label>
+          <ion-label>{{array[0].Mediodia}}</ion-label>
           <ion-radio slot="start" value="mediodia"></ion-radio>
         </ion-item>
         <ion-item>
-          <ion-label>Noche</ion-label>
+          <ion-label>{{array[0].Noche}}</ion-label>
           <ion-radio slot="start" value="noche"></ion-radio>
         </ion-item>
       </ion-radio-group>
@@ -39,30 +37,30 @@
 
     <ion-list >
       <ion-item>
-        <ion-label position="stacked">Como recibió el area de trabajo:</ion-label>
-        <ion-select  [(ngModel)]="select" value="normal" okText="ok" cancelText="Cancelar">
-          <ion-select-option value="impecable">Impecable</ion-select-option>
-          <ion-select-option value="limpio">Limpio</ion-select-option>
-          <ion-select-option value="normal">Normal</ion-select-option>
-          <ion-select-option value="sucio">Sucio</ion-select-option>
-          <ion-select-option value="asqueroso">Asqueroso</ion-select-option>
+        <ion-label position="stacked">{{array[0].Comorecibioelareadetrabajo}}:</ion-label>
+        <ion-select  [(ngModel)]="select" value="normal" okText="{{array[0].comida_create_Select_Boton_Aceptar}}" cancelText="{{array[0].comida_create_Select_Boton_Cancelar}}">
+          <ion-select-option value="impecable">{{array[0].Impecable}}</ion-select-option>
+          <ion-select-option value="limpio">{{array[0].Limpio}}</ion-select-option>
+          <ion-select-option value="normal">{{array[0].Normal}}</ion-select-option>
+          <ion-select-option value="sucio">{{array[0].sucio}}</ion-select-option>
+          <ion-select-option value="asqueroso">{{array[0].asqueroso}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
 
     <ion-item>
-      <ion-label position="stacked">Nivel de limpieza:</ion-label>
+      <ion-label position="stacked">{{array[0].Niveldelimpieza}}:</ion-label>
       <ion-input [ngModel]="porcentaje" name='cantidad'></ion-input>
       <ion-range [(ngModel)]="porcentaje" min="0" max="100" step="10" snaps="true" color="dark"></ion-range>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Cantidad de Faltas encontradas:</ion-label>
+      <ion-label position="stacked">{{array[0].CantidaddeFaltasencontradas}}:</ion-label>
       <ion-input [(ngModel)]="cantidad" type="number"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Comentarios:</ion-label>
+      <ion-label position="stacked">{{array[0].Comentarios}}:</ion-label>
       <ion-input [(ngModel)]="texto" type="text" ></ion-input>
     </ion-item>
 
@@ -83,7 +81,7 @@
       expand="block"
       (click)="crearEncuesta( unidad,select, porcentaje, cantidad, texto)"
     >
-      Guardar
+      {{array[0].alta_pedido_Guardar}}
     </ion-button>
   </div>
 </ion-content>

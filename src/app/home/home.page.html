@@ -15,103 +15,114 @@
       </ion-button>
       -->
 <ion-content>
-    <img class = "icon" src="assets/icon/home1.png">
+  <img class="icon" src="assets/icon/home1.png">
 
-    <ion-label>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="text-left" size="5"> {{array[0].Habilitar_Reservas_Usuario}} </ion-col>
-          <ion-col class="text-center" size="7" *ngIf="userProfile?.email">
-            {{userProfile?.email}}
-          </ion-col>
-          <ion-col
-            size="7"
-            class="placeholder-profile text-center"
-            *ngIf="!userProfile?.email"
-          >
-            <span> Tap here to edit. </span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-label>
-  <ion-button    expand="block" color="primary" routerLink="/comida-list/{{this.idiomaSeleccionado}}">
+  <ion-label>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="text-left" size="5"> {{array[0].Habilitar_Reservas_Usuario}} </ion-col>
+        <ion-col class="text-center" size="7" *ngIf="userProfile?.email">
+          {{userProfile?.email}}
+        </ion-col>
+        <ion-col size="7" class="placeholder-profile text-center" *ngIf="!userProfile?.email">
+          <span> Tap here to edit. </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-label>
+  <ion-button expand="block" color="primary" routerLink="/comida-list/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_ListadoComida}}
   </ion-button>
-  <ion-button expand="block"  *ngIf="userProfile?.perfil=='Supervisor'  " color="primary" routerLink="/alta-duenio/{{this.idiomaSeleccionado}}">
+  <ion-button expand="block" *ngIf="userProfile?.perfil=='Supervisor'  " color="primary"
+    routerLink="/alta-duenio/{{this.idiomaSeleccionado}}">
     {{array[0].alta_duenio_Titulo}}
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' "  expand="block" color="primary" routerLink="/alta-mesa/{{this.idiomaSeleccionado}}">
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"
+    routerLink="/alta-mesa/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_CargarMesa}}
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' "expand="block" color="primary" routerLink="/alta-empleado/{{this.idiomaSeleccionado}}">
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"
+    routerLink="/alta-empleado/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_AltaEmpeado}}
   </ion-button>
 
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/alta-cliente/{{this.idiomaSeleccionado}}">
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary"
+    routerLink="/alta-cliente/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_CargarCliente}}
   </ion-button>
 
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/lista-clientes/{{this.idiomaSeleccionado}}">
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary"
+    routerLink="/lista-clientes/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_ListadoCliente}}
   </ion-button>
 
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo'  " expand="block" color="primary" routerLink="/abrir-mesa/{{this.idiomaSeleccionado}}">
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo'  " expand="block" color="primary"
+    routerLink="/abrir-mesa/{{this.idiomaSeleccionado}}">
     <!-- Abrir o Reservar Mesa -->
     {{array[0].home_btn_AbrirMesa}}
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/cerrar-mesa/{{this.idiomaSeleccionado}}">
-   {{ array[0].home_btn_cerrarMesa}}
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' || userProfile?.perfil=='mozo' " expand="block" color="primary"
+    routerLink="/cerrar-mesa/{{this.idiomaSeleccionado}}">
+    {{ array[0].home_btn_cerrarMesa}}
   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='mozo' || userProfile?.perfil=='Supervisor'  " expand="block" color="primary" routerLink="/tomarpedidos/{{this.idiomaSeleccionado}}" >
-   {{array[0].home_btn_TomarPedido}}
-   </ion-button>
-   <ion-button  *ngIf=" userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/alta-pedido/{{this.idiomaSeleccionado}}">
+  <ion-button *ngIf="userProfile?.perfil=='mozo' || userProfile?.perfil=='Supervisor'  " expand="block" color="primary"
+    routerLink="/tomarpedidos/{{this.idiomaSeleccionado}}">
+    {{array[0].home_btn_TomarPedido}}
+  </ion-button>
+  <ion-button *ngIf=" userProfile?.perfil=='cliente' " expand="block" color="primary"
+    routerLink="/alta-pedido/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_CreatuPedido}}
-   </ion-button>
-  <ion-button  *ngIf="userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/encuesta-empleado">
-{{array[0].home_btn_encuesta_empleado}}
+  </ion-button>
+  <ion-button *ngIf="userProfile?.perfil=='mozo' " expand="block" color="primary" routerLink="/encuesta-empleado/{{this.idiomaSeleccionado}}">
+    {{array[0].home_btn_encuesta_empleado}}
   </ion-button>
 
   <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/reserva-cliente">
     {{array[0].home_btn_ReservaCliente}}
   </ion-button>
-  <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/ingreso">
-   {{array[0].home_btn_ListadoIngreso}}
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/ingreso/{{this.idiomaSeleccionado}}">
+    {{array[0].home_btn_ListadoIngreso}}
   </ion-button>
   <ion-button *ngIf="userProfile?.perfil=='cocinero' " expand="block" color="primary" routerLink="/tomarpedidococina">
-  {{array[0].home_btn_TomarPedidoCocina}}
+    {{array[0].home_btn_TomarPedidoCocina}}
   </ion-button>
   <ion-button *ngIf="userProfile?.perfil=='bartender'  " expand="block" color="primary" routerLink="/tomarpedidosbar">
     {{array[0].home_btn_tomar_pedido_bar}}
-    </ion-button>
+  </ion-button>
 
-    <ion-button *ngIf="userProfile?.perfil=='cliente' || userProfile?.perfil=='anonimo' " expand="block" color="primary" (click)="scanCodepag()" >
- {{array[0].home_btn_EscanearCodigo}}
-    </ion-button>
-       <!-- <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" (click)="mesa('a')" >
+  <ion-button *ngIf="userProfile?.perfil=='cliente' || userProfile?.perfil=='anonimo' " expand="block" color="primary"
+    (click)="scanCodepag()">
+    {{array[0].home_btn_EscanearCodigo}}
+  </ion-button>
+  <!-- <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" (click)="mesa('a')" >
           Escanea tu Codigo!
            </ion-button> -->
-       <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"  routerLink="/habilitar-reservas/{{this.idiomaSeleccionado}}"  >
-        {{array[0].home_btn_HabilitarReservas}}
-           </ion-button>  
-              <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"  routerLink="/supervisor-delivery"  >
-       {{array[0].home_btn_Habilitar_Pedido_Delivery}}
-           </ion-button>     
- 
+  <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"
+    routerLink="/habilitar-reservas/{{this.idiomaSeleccionado}}">
+    {{array[0].home_btn_HabilitarReservas}}
+  </ion-button>
 
-           <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary"  routerLink="/clienteconfirmapedido"  >
-{{array[0].home_btn_ConfirmarLLegadaPedido}}
-          </ion-button>    
-       
-               <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary"  routerLink="/delivery"  >
-                {{array[0].home_btn_Hacetudelivery}}
-                   </ion-button>    
+  
+  <!-- <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary"
+    routerLink="/supervisor-delivery">
+    {{array[0].home_btn_Habilitar_Pedido_Delivery}}
+  </ion-button> -->
 
-                   <ion-button *ngIf="userProfile?.perfil=='delivery' " expand="block" color="primary"  routerLink="/supervisor-delivery"  >
-                    {{array[0].home_btn_enviar_Pedido}}
-                       </ion-button>     
-                       <ion-button *ngIf="userProfile?.perfil=='delivery' " expand="block" color="primary"  routerLink="/supervisor-delivery"  >
-                    {{array[0].home_btn_chat}}
-                      </ion-button>   
-               
+
+  <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary"
+    routerLink="/clienteconfirmapedido">
+    {{array[0].home_btn_ConfirmarLLegadaPedido}}
+  </ion-button>
+
+  <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/delivery">
+    {{array[0].home_btn_Hacetudelivery}}
+  </ion-button>
+
+  <ion-button *ngIf="userProfile?.perfil=='delivery' " expand="block" color="primary" routerLink="/supervisor-delivery">
+    {{array[0].home_btn_enviar_Pedido}}
+  </ion-button>
+  <ion-button *ngIf="userProfile?.perfil=='delivery' " expand="block" color="primary" routerLink="/supervisor-delivery">
+    {{array[0].home_btn_chat}}
+  </ion-button>
+
 </ion-content>

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
-    <ion-title>lista-espera</ion-title>
+    <ion-title>{{array[0].ingreso_Titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,19 +11,19 @@
 <ion-card *ngFor="let item of listaEspera">
     <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-header>
-        <ion-card-title> Cliente En Espera: {{item.uid}}  </ion-card-title>
-        <ion-card-subtitle>Estado: {{item.estado}}</ion-card-subtitle>
+        <ion-card-title> {{array[0].ingreso_cliente_en_espera}}: {{item.uid}}  </ion-card-title>
+        <ion-card-subtitle>{{array[0].ingreso_estado}}: {{item.estado}}</ion-card-subtitle>
         <!-- <ion-card-subtitle>Estado: {{item.estado}}</ion-card-subtitle> -->
-        <p>Status: <strong>{{item?.status}}</strong></p>
-        <p>codigo de espera: <strong>{{item?.id}}</strong></p>
+        <p>{{array[0].ingreso_estado}}: <strong>{{item?.status}}</strong></p>
+        <p>{{array[0].comida_create_FormularioTextCodigo}}: <strong>{{item?.id}}</strong></p>
 
       </ion-card-header>
       <ion-card-content>
           <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item.id)">
-          Confirmar Ingreso
+          {{array[0].ingreso_btn_confirmarIngreso}}
           </ion-button>
             <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
-          Denegar Acceso
+          {{array[0].ingreso_btn_DenegarAcceso}}
             </ion-button>
       </ion-card-content>
     </span>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event/event.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import {Tab1Page} from '../../tab1/tab1.page'
+import {  ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-ingreso',
@@ -11,10 +14,51 @@ import { ToastController } from '@ionic/angular';
 export class IngresoPage implements OnInit {
 
   public listaEspera: Array<any>;
-  constructor(private eventService: EventService,    public toastCtrl: ToastController,
+  idiomaSeleccionado:any;
+array:any=[];
+  constructor(private eventService: EventService,  private route: ActivatedRoute,
+     private tabpag:Tab1Page,   public toastCtrl: ToastController,
     private router: Router) {}
 
   ngOnInit() {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+
+           break; 
+        } 
+     } 
     this.eventService.getListaEspera().subscribe(data => {
 
       this.listaEspera = data.map(e => {

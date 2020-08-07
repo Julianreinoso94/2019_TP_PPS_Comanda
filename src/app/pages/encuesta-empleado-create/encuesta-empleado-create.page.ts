@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from '../../services/event/event.service';
 import { FotosService } from '../../services/fotos/fotos.service';
+import {Tab1Page} from '../../tab1/tab1.page'
+import {  ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-encuesta-empleado-create',
@@ -10,20 +12,56 @@ import { FotosService } from '../../services/fotos/fotos.service';
 })
 export class EncuestaEmpleadoCreatePage implements OnInit {
 
-  // public cantidad: any;
-  // public select: any;
-  // public porcentaje: any;
-  // public texto: any;
   loading = false;
   alerta = false;
+  idiomaSeleccionado:any;
+   array:any=[];
 
   constructor(
-    private router: Router,
+    private router: Router,   private route: ActivatedRoute, private tabpag:Tab1Page,
     private eventService: EventService,
     public fotoService: FotosService
   ) {}
 
   ngOnInit() {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+
+           break; 
+        } 
+     } 
     this.fotoService.fotoUnica = null;
   }
 

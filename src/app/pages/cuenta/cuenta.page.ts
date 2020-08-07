@@ -10,6 +10,8 @@ import { isBoolean } from 'util';
 import { ComidasService } from 'src/app/services/comidas/comidas.service';
 import {BarcodeScannerOptions,BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 
+import {Tab1Page} from '../../tab1/tab1.page'
+import { ActivatedRoute } from '@angular/router';
 
 
 import { Injectable } from '@angular/core';
@@ -27,6 +29,10 @@ export class CuentaPage implements  OnInit {
   datosEscaneados: any;
     datos: any;
     loading = false;
+
+    
+    idiomaSeleccionado:any;
+    array:any=[];
  
     //////////////
     encodeData: any;
@@ -66,7 +72,7 @@ export class CuentaPage implements  OnInit {
 
   constructor(private comidaService: ComidasService, private scanner: BarcodeScanner,private barcodeScanner: BarcodeScanner,
     private router: Router,  private empleadosService: EmpleadosService,
-    private mesasService: MesasService,
+    private mesasService: MesasService, private route: ActivatedRoute, private tabpag:Tab1Page,
     // private camara: Camera,
     public fotoService: FotosService,
     public toastCtrl: ToastController,
@@ -121,6 +127,44 @@ export class CuentaPage implements  OnInit {
 
 
    ngOnInit() {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+    switch(this.idiomaSeleccionado) { 
+      case 'en': { 
+        this.array= this.tabpag.arrayINGLES;
+       break; 
+      } 
+      case 'rus': { 
+         this.array= this.tabpag.arrayRusia;
+
+         break; 
+      } 
+      case 'por': { 
+        this.array= this.tabpag.arrayPor;
+
+        break; 
+     } 
+     case'fr':{
+       this.array=this.tabpag.arrayFra;
+
+       break
+     }
+     case'esp':{
+      this.array=this.tabpag.arrayEs;
+
+      break
+    }
+
+    case'de':{
+      this.array=this.tabpag.arrayDe;
+      break
+    } 
+      default: { 
+        this.array= this.tabpag.arrayEs;
+
+         break; 
+      } 
+   } 
    
     this.pedidosService.TraerPedidosPorMesa(this.mimesa).subscribe(data => {
 

@@ -1,14 +1,14 @@
 <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home"></ion-back-button>
+        <ion-back-button  routerLink="/home/{{this.idiomaSeleccionado}}"
+        ></ion-back-button>
       </ion-buttons>
-      <ion-title>Aqui tiene la Cuenta...</ion-title>
+      <ion-title>{{array[0].aqui_tiene_la_cuenta}}</ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content padding>
-    <!--<img class = "icon" src="assets/icon/mesa1.png">-->
     <div class="" *ngIf="loading">
         <ion-spinner name="dots" color="dark" ></ion-spinner>
     </div>
@@ -16,50 +16,50 @@
  
 
       <ion-item>
-          <ion-label>Mesa</ion-label>
-          <ion-select disabled ="{{isEnabled}}"  [(ngModel)]="mimesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
-              <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+          <ion-label>{{array[0].abrir_mesa_mesa}}</ion-label>
+          <ion-select disabled ="{{isEnabled}}"  [(ngModel)]="mimesa" okText="{{array[0].Seleccionar}}" (ngModelChange)="montoMesa()" cancelText="{{array[0].alta_mesa_btn_Cancelar}}" >
+              <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> {{array[0].abrir_mesa_mesa}} {{item.codigo}} - {{item.tipo}}</ion-select-option>
           </ion-select>
       </ion-item>
       <ion-item>
         <ion-label readonly=true
-        position="stacked">Descuento Postre</ion-label>
+        position="stacked">{{array[0].DescuentoPostre}}</ion-label>
         <ion-input
           [(ngModel)]="preciounpostre"
           type="text"
-          placeholder="Precio">
+          placeholder="{{array[0].comida_list_Precio}}">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label readonly=true
-        position="stacked">Descuento 10%</ion-label>
+        position="stacked">{{array[0].Descuento10}}</ion-label>
         <ion-input
           [(ngModel)]="preciocondescuento10"
           type="text"
-          placeholder="Precio">
+          placeholder="{{array[0].comida_list_Precio}}">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label readonly=false
-        position="stacked">Descuento Bebida gratis</ion-label>
+        position="stacked">{{array[0].DescuentoBebidagratis}}</ion-label>
         <ion-input
           [(ngModel)]="preciounabebida"
           type="text"
-          placeholder="Precio">
+          placeholder="{{array[0].comida_list_Precio}}">
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label readonly=true
-        position="stacked">Descuento</ion-label>
+        position="stacked">{{array[0].Descuento}}</ion-label>
         <ion-input
           [(ngModel)]="preciototalpedido"
           type="text"
-          placeholder="Precio">
+          placeholder="{{array[0].comida_list_Precio}}">
         </ion-input>
       </ion-item>
       <ion-item>
-          <ion-label readonly=true position="stacked">Precio Sin Descuento</ion-label>
+          <ion-label readonly=true position="stacked">{{array[0].PrecioSinDescuento}}</ion-label>
           <ion-input 
             [(ngModel)]="montoTotal" value={{mesaActual?.monto}}
             type="text"
@@ -68,45 +68,36 @@
         </ion-item>
         <ion-item>
             <ion-label readonly=true
-            position="stacked">Mi propina</ion-label>
+            position="stacked">{{array[0].Mipropina}}</ion-label>
             <ion-input
               [(ngModel)]="mipropina"
               type="text"
-              placeholder="Valor propina">
+              placeholder="">
             </ion-input>
           </ion-item>
           <ion-item>
             <ion-label readonly=true style="color:red;font-size: 300%;"
-            position="stacked">TOTAL </ion-label>
+            position="stacked">{{array[0].TOTAL}} </ion-label>
             <ion-input style="color:red;font-size: 300%;"
               [(ngModel)]="resultadototal"
               type="text"
-              placeholder="Valor total">$
+              placeholder="">$
             </ion-input>
           </ion-item>
 
 
-<!--           
-      <ion-button
-        expand="block"
-        (click)="Pagar()">
-        Pagar
-      </ion-button> -->
+
       <ion-button
       expand="block"
       (click)="montoMesa()">
-      Detalle
+      {{array[0].Detalle}}
     </ion-button>
     <ion-button
     expand="block"
     (click)="Descuentos()">
-    Mostrar Total Con Descuento
+    {{array[0].MostrarTotalConDescuento}}
   </ion-button>
-  <!-- <ion-button
-  expand="block"
-  (click)="cargarDatosqr()">
-  Escanear propina
-</ion-button> -->
+
 
   
     </div>
@@ -115,9 +106,9 @@
       <!-- <span *ngIf="!item.isEdit; else elseBlock"> -->
         <span>
         <ion-card-header>
-          <ion-card-title> Pedido {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
-          <ion-card-subtitle>Cantidad: {{item.cantidad}}</ion-card-subtitle>
-          <ion-card-subtitle>Precio: {{item.monto}}</ion-card-subtitle>
+          <ion-card-title> {{array[0].alta_pedido_pedido}} {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
+          <ion-card-subtitle>{{array[0].Cantidad}}: {{item.cantidad}}</ion-card-subtitle>
+          <ion-card-subtitle>{{array[0].comida_detail_Precio}}: {{item.monto}}</ion-card-subtitle>
 
         </ion-card-header>
      

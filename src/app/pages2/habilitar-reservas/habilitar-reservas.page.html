@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button  routerLink="/home/{{this.idiomaSeleccionado}}"
+      ></ion-back-button>
     </ion-buttons>
-    <ion-title>Habilitar Reservas</ion-title>
+    <ion-title>{{array[0].Habilitar_Reservas_Titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,17 +14,17 @@
   <ion-card *ngFor="let item of reservas">
     <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-header>
-        <ion-card-title> Reserva {{item.codigo}} - {{item.tipo}} </ion-card-title>
-        <ion-card-subtitle>Fecha: {{item.fechareserva}}</ion-card-subtitle>
-        <ion-card-subtitle>Hora: {{item.horareserva}}</ion-card-subtitle>
-        <ion-card-subtitle>Usuario: {{item.usuario}}</ion-card-subtitle>
-        <ion-card-subtitle>Cantidad de Personas: {{item.cantidad}}</ion-card-subtitle>
-        <ion-card-subtitle>Mesa: {{item.usuario}}</ion-card-subtitle>
-        <ion-card-subtitle>Estado: {{item.estado}}</ion-card-subtitle>
+        <ion-card-title> {{array[0].Habilitar_Reservas_Titulo}} {{item.codigo}} - {{item.tipo}} </ion-card-title>
+        <ion-card-subtitle>{{array[0].Habilitar_Reservas_Fecha}}: {{item.fechareserva}}</ion-card-subtitle>
+        <ion-card-subtitle>{{array[0].Habilitar_Reservas_Hora}}: {{item.horareserva}}</ion-card-subtitle>
+        <ion-card-subtitle>{{array[0].Habilitar_Reservas_Usuario}}: {{item.usuario}}</ion-card-subtitle>
+        <ion-card-subtitle>{{array[0].Habilitar_Reservas_Cantidad_de_Personas}}: {{item.cantidad}}</ion-card-subtitle>
+        <ion-card-subtitle>{{array[0].Habilitar_Reservas_Mesa}}: {{item.usuario}}</ion-card-subtitle>
+        <ion-card-subtitle>{{array[0].alta_mesa_Listado_Estado}}: {{item.estado}}</ion-card-subtitle>
         <ion-item>
-            <ion-label>Mesa</ion-label>
-            <ion-select  [(ngModel)]="mesaelegida" ok-text="Seleccionar"  cancel-text="Cancelar" >
-                <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+            <ion-label>{{array[0].alta_mesa_TextoFormulario_codigo_de_mesa}}</ion-label>
+            <ion-select  [(ngModel)]="mesaelegida" okText="{{array[0].alta_mesa_TextoFormulario_PlaceholderseleccionartipoDemesa}}"  cancelText="{{array[0].alta_mesa_btn_Cancelar}}" >
+                <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> {{array[0].alta_mesa_TextoFormulario_codigo_de_mesa}} {{item.codigo}} - {{item.tipo}}</ion-select-option>
             </ion-select>
         </ion-item>
 
@@ -35,10 +36,10 @@
       </ion-card-header>
       <ion-card-content>
           <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item.id)">
-              Habilitar
+              {{array[0].Habilitar_Btn_Habilitar}}
             </ion-button>
             <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
-              Rechazar
+              {{array[0].Habilitar_Btn_Rechazar}}
             </ion-button>
       </ion-card-content>
     </span>
@@ -48,16 +49,16 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                Editar Mesa
+                {{array[0].alta_mesa_Listado_Editar}}
               </ion-col>
               <ion-col>
               </ion-col>
               <ion-col>
                 <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
-                  Confirmar
+                  {{array[0].Habilitar_Btn_Habilitar}}
                 </ion-button>
                 <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
-                  Cancelar
+                  {{array[0].Habilitar_option_Cancelar}}
                 </ion-button>
               </ion-col>
             </ion-row>
@@ -66,24 +67,24 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label><strong>Codigo</strong></ion-label>
+          <ion-label><strong>{{array[0].comida_create_FormularioTextCodigo}}</strong></ion-label>
           <ion-input type="text" [(ngModel)]="item.EditCodigo"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>Tipo de mesa</ion-label>
-              <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione tipo de mesa">
-                <ion-select-option value="Vip">Vip</ion-select-option>
-                <ion-select-option value="Fumadores">Fumadores</ion-select-option>
-                <ion-select-option value="Discapacitados">Discapacitados</ion-select-option>
-                <ion-select-option value="Normal">Normal</ion-select-option>
+            <ion-label>{{array[0].alta_mesa_TextoFormulario_tipo_de_mesa}}</ion-label>
+              <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="{{array[0].comida_create_Select_Boton_Aceptar}}" cancelText="{{array[0].comida_create_Select_Boton_Cancelar}}" placeholder="{{array[0].comida_create_Select_PlaceHolder_SeleccioneElTipo}}">
+                <ion-select-option value="Vip">{{array[0].alta_mesa_TextoFormulario_select_Option_VIP}}</ion-select-option>
+                <ion-select-option value="Fumadores">{{array[0].alta_mesa_TextoFormulario_select_Option_Fumadores}}</ion-select-option>
+                <ion-select-option value="Discapacitados">{{array[0].alta_mesa_TextoFormulario_select_Option_Discapacitados}}</ion-select-option>
+                <ion-select-option value="Normal">{{array[0].alta_mesa_TextoFormulario_select_Option_Normal}}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item>
-                <ion-label>Mesa</ion-label>
-                <ion-select [(ngModel)]="codigoMesa" ok-text="Seleccionar" (ngModelChange)="montoMesa()" cancel-text="Cancelar" >
-                    <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> Mesa {{item.codigo}} - {{item.tipo}}</ion-select-option>
+                <ion-label>{{array[0].Habilitar_Reservas_Mesa}}</ion-label>
+                <ion-select [(ngModel)]="codigoMesa" okText="{{array[0].comida_create_Select_Boton_Aceptar}}" (ngModelChange)="montoMesa()" cancelText="{{array[0].Habilitar_option_Cancelar}}" >
+                    <ion-select-option  *ngFor="let item of  mesas" value="{{item.id}}"> {{array[0].Habilitar_Reservas_Mesa}} {{item.codigo}} - {{item.tipo}}</ion-select-option>
                 </ion-select>
-            </ion-item>
+            </ion-item> 
 
               <ion-grid>
                 <ion-row>

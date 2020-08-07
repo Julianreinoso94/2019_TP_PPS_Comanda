@@ -2,19 +2,15 @@ import { PedidosService } from 'src/app/services/pedidos.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MesasService } from '../../services/mesas/mesas.service';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FotosService } from '../../services/fotos/fotos.service';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { ToastController } from '@ionic/angular';
-import { isBoolean } from 'util';
 import { ComidasService } from 'src/app/services/comidas/comidas.service';
-
-import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { EventService } from '../../services/event/event.service';
-//import { threadId } from 'worker_threads';
+import {Tab1Page} from '../../tab1/tab1.page'
+import {  ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alta-pedido',
@@ -22,6 +18,8 @@ import { EventService } from '../../services/event/event.service';
   styleUrls: ['./alta-pedido.page.scss'],
 })
 export class AltaPedidoPage implements OnInit {
+  idiomaSeleccionado:any;
+array:any=[];
   empleados: any;
   public comidaActual: any = {};
   public mesaActual: any = {};
@@ -44,7 +42,7 @@ mimesa:any;
    a:String;
 
 
-  constructor(private comidaService: ComidasService,
+  constructor(private comidaService: ComidasService,private route: ActivatedRoute, private tabpag:Tab1Page,
     private router: Router,  private empleadosService: EmpleadosService,
     private mesasService: MesasService,
     // private camara: Camera,
@@ -52,7 +50,44 @@ mimesa:any;
     public toastCtrl: ToastController,
     private pedidosService: PedidosService
   ) {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+    switch(this.idiomaSeleccionado) { 
+      case 'en': { 
+        this.array= this.tabpag.arrayINGLES;
+       break; 
+      } 
+      case 'rus': { 
+         this.array= this.tabpag.arrayRusia;
 
+         break; 
+      } 
+      case 'por': { 
+        this.array= this.tabpag.arrayPor;
+
+        break; 
+     } 
+     case'fr':{
+       this.array=this.tabpag.arrayFra;
+
+       break
+     }
+     case'esp':{
+      this.array=this.tabpag.arrayEs;
+
+      break
+    }
+
+    case'de':{
+      this.array=this.tabpag.arrayDe;
+      break
+    } 
+      default: { 
+        this.array= this.tabpag.arrayEs;
+
+         break; 
+      } 
+   } 
     firebase.auth().onAuthStateChanged(user => {
  
       this.currentUser = user;
@@ -378,10 +413,6 @@ private decrement () {
     this.router.navigateByUrl('/alta-pedido');
   }
 
-  Cuenta(){
-    this.router.navigateByUrl('cuenta');
-
-}
 
 
 }
