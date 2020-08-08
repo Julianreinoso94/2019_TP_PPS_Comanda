@@ -40,7 +40,7 @@ array:any=[];
           private profileService: ProfileService) { }
 
   ngOnInit() {
-    his.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
       
       switch(this.idiomaSeleccionado) { 
         case 'en': { 
