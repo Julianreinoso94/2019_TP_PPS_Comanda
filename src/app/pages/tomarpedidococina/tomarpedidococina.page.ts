@@ -11,6 +11,8 @@ import { isBoolean } from 'util';
 import { ComidasService } from 'src/app/services/comidas/comidas.service';
 import { ProfileService } from '../../services/user/profile.service';
 
+import {Tab1Page} from '../../tab1/tab1.page'
+import {  ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -21,6 +23,9 @@ import { ProfileService } from '../../services/user/profile.service';
 export class TomarpedidococinaPage implements OnInit {
 
   pedidos : any;
+  idiomaSeleccionado:any;
+array:any=[];
+
 
       public userProfile: any;
       public birthDate: Date;
@@ -30,11 +35,49 @@ export class TomarpedidococinaPage implements OnInit {
       mimesa:Array<any>;
 
 
-  constructor(    public toastCtrl: ToastController,
+  constructor(    public toastCtrl: ToastController,private route: ActivatedRoute, private tabpag:Tab1Page,
       private pedidosService: PedidosService, private authService: AuthService,
           private profileService: ProfileService) { }
 
   ngOnInit() {
+    his.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+
+           break; 
+        } 
+     } 
     this.pedidosService.TraerPedidosPorTipoBebida().subscribe(data => {
 
             this.pedidos = data.map(e => {

@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title>Tomar Pedidos Cocina</ion-title>
+      <ion-title>{{array[0].home_btn_TomarPedido}}</ion-title>
     </ion-toolbar>
   </ion-header>
   
@@ -14,8 +14,8 @@
       <div *ngIf="item?.tipoPedido =='cocina'||item?.tipoPedido =='postre' " >
             <span *ngIf="!item.isEdit; else elseBlock" >
         <ion-card-header>
-          <ion-card-title> Pedido {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
-          <ion-card-subtitle>Estado: {{item.estadoPedido}}</ion-card-subtitle>
+          <ion-card-title> {{array[0].tomarpedidos_titulo}} {{item.codigoPedido}} - {{item.tipoPedido}} </ion-card-title>
+          <ion-card-subtitle>{{array[0].Estado}}: {{item.estadoPedido}}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content  >
             <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
@@ -30,16 +30,18 @@
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  Editar Pedido
+                  {{array[0].Editar_pedido}}
                 </ion-col>
                 <ion-col>
                 </ion-col>
                 <ion-col>
                   <ion-button expand="block" color="success" size="small" (click)="UpdateRecord(item)">
-                    Confirmar
+                    {{array[0].alta_mesa_btn_Aceptar}}
                   </ion-button>
                   <ion-button expand="block" color="danger" size="small" (click)="item.isEdit = false">
-                    Cancelar
+                 
+                    {{array[0].alta_mesa_btn_Cancelar}}
+
                   </ion-button>
                 </ion-col>
               </ion-row>
@@ -48,27 +50,27 @@
         </ion-card-header>
         <ion-card-content>
           <ion-item>
-            <ion-label><strong>Codigo</strong></ion-label>
+            <ion-label><strong>{{array[0].comida_create_FormularioTextCodigo}}</strong></ion-label>
             <ion-input type="text" [(ngModel)]="item.EditCodigo"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label>Tiempo</ion-label>
-                <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Tiempo:">
-                    <ion-select-option value="5">5 minutos</ion-select-option>
-                    <ion-select-option value="10">10 minutos</ion-select-option>
-                    <ion-select-option value="15">15 minutos</ion-select-option>
-                    <ion-select-option value="20">20 minutos</ion-select-option>
-                    <ion-select-option value="30">30 minutos</ion-select-option>
-                    <ion-select-option value="40">40 minutos</ion-select-option>
-                    <ion-select-option value="50">50 minutos</ion-select-option>
+                <ion-select [(ngModel)]="item.EditTipo" value="brown" okText="{{array[0].comida_create_Select_Boton_Aceptar}}" cancelText="{{array[0].comida_create_Select_Boton_Cancelar}}" placeholder="{{array[0].comida_detail_Tiempo}}:">
+                    <ion-select-option value="5">5"</ion-select-option>
+                    <ion-select-option value="10">10"</ion-select-option>
+                    <ion-select-option value="15">15"</ion-select-option>
+                    <ion-select-option value="20">20"</ion-select-option>
+                    <ion-select-option value="30">30"</ion-select-option>
+                    <ion-select-option value="40">40"</ion-select-option>
+                    <ion-select-option value="50">50"</ion-select-option>
                     <ion-select-option value="60">1 hs</ion-select-option>
                              </ion-select>
               </ion-item>
   
               <ion-item>
-              <ion-label>Estado</ion-label>
-              <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione estado de pedido">
-                <ion-select-option value="Realizado">Realizado</ion-select-option>
+              <ion-label>{{array[0].Estado}}</ion-label>
+              <ion-select [(ngModel)]="item.EditEstado" value="brown" okText="{{array[0].alta_mesa_btn_Aceptar}}" cancelText="{{array[0].alta_mesa_btn_Cancelar}}" placeholder="{{array[0].alta_pedido_Seleccione_estado_de_pedido}}">
+                <ion-select-option value="Realizado">{{array[0].alta_pedido_Entregado}}</ion-select-option>
               </ion-select>
             </ion-item>
   

@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+    <ion-buttons slot="star">
+      <ion-back-button  routerLink="/home/{{this.idiomaSeleccionado}}"></ion-back-button>
     </ion-buttons>
-    <ion-title>Hace tu Reserva!</ion-title>
+    <ion-title>{{array[0].HacetuReserva}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,19 +14,19 @@
   <ion-card >
   
     <ion-item>
-      <ion-label>ELIGE FECHA DE RESERVA (AÑO-MES-DIA)</ion-label>
+      <ion-label>{{array[0].ElegirFecha}}</ion-label>
       <ion-datetime displayFormat="YYYY/MM/DD/" [(ngModel)]="myDate">
       </ion-datetime>
     </ion-item>
 
-<ion-item><ion-label>Hora </ion-label>
+<ion-item><ion-label>{{array[0].Hora}} </ion-label>
 <select style="background-color: aqua; font-size: 46px;margin-left:260px" [(ngModel)]="horaselect" >
     <option  value="{{item}}" *ngFor="let item of horareserva" >{{item}}</option>
     
   </select>
   
 </ion-item>
-<ion-item><ion-label>Minuto </ion-label>
+<ion-item><ion-label>{{array[0].Minuto}} </ion-label>
   <select style="background-color: aqua; font-size: 46px;margin-left:260px" [(ngModel)]="minutoselect" >
       <option  value="{{item}}" *ngFor="let item of minutoreserva" >{{item}}</option>
       
@@ -35,8 +35,8 @@
   </ion-item>
 
   <ion-item>
-    <ion-label>Cantidad de personas</ion-label>
-      <ion-select [(ngModel)]="cantPersonas" value="brown" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione cantidad de personas">
+    <ion-label>{{array[0].alta_mesa_TextoFormulario_cantidad_de_personas}}</ion-label>
+      <ion-select [(ngModel)]="cantPersonas" value="brown" okText="{{array[0].alta_mesa_btn_Aceptar}}" cancelText="{{array[0].alta_mesa_btn_Cancelar}}" placeholder="{{array[0].alta_mesa_TextoFormulario_PlaceholderseleccionarCantidadDePersonas}}">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
         <ion-select-option value="3">3</ion-select-option>
@@ -60,7 +60,7 @@
 <ion-button
 expand="block"
 (click)="diferencia()">
-Guardar
+{{array[0].alta_mesa_btn_Aceptar}}
 </ion-button>
 
    </ion-card>
@@ -71,7 +71,7 @@ Guardar
   <ion-button
       expand="block"
       (click)="hacerReserva(codigoMesa)">
-      Guardar
+      {{array[0].alta_pedido_Guardar}}
     </ion-button>
   
 

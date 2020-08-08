@@ -79,6 +79,11 @@ this.modalController.create({component:PopoverPage}).then((modalElement)=>{
   public array:any[];
 
   public arrayDe:any=[ {
+    "HaceTuReserva":"Reservieren Sie!",
+"ElegirFecha":"BUCHUNGSDATUM WÄHLEN (JAHR-MONAT-TAG)",
+"Hora":"Zeit",
+"Minuto":"Minute",
+
    "Circulo":"Kreis",
    "Barras":"Riegel",
     "Porcentajes": "Prozentsätze",
@@ -323,6 +328,11 @@ this.modalController.create({component:PopoverPage}).then((modalElement)=>{
 
 
   public arrayEs:any = [{
+    "HaceTuReserva":"Hace tu Reserva!",
+    "ElegirFecha":"ELIGE FECHA DE RESERVA (AÑO-MES-DIA)",
+    "Hora":"Hora",
+    "Minuto":"Minuto",
+
     "Circulo":"Circulo",
     "Barras":"Barras",
     "Porcentajes":"Porcentajes",
@@ -557,6 +567,11 @@ this.modalController.create({component:PopoverPage}).then((modalElement)=>{
  }];
 
   public arrayFra:any= [{
+    "HaceTuReserva":"Faites votre réservation!",
+    "ElegirFecha":"CHOISIR LA DATE DE RÉSERVATION (ANNÉE-MOIS-JOUR)",
+    "Hora":"temps",
+    "Minuto":"Minuto",
+
     "Circulo":"cercles",
     "Barras":"Bars",
     "Porcentajes":"Pourcentages",
@@ -795,6 +810,10 @@ this.modalController.create({component:PopoverPage}).then((modalElement)=>{
 
  }];
   public arrayINGLES:any=[{
+    "HaceTuReserva":"Make your Reservation!",
+    "ElegirFecha":"CHOOSE BOOKING DATE (YEAR-MONTH-DAY)",
+    "Hora":"Time",
+    "Minuto":"Minute",
     "Circulo":"Circle",
     "Barras":"Bars",
     "Porcentajes":"Percentages",
@@ -1030,6 +1049,11 @@ this.modalController.create({component:PopoverPage}).then((modalElement)=>{
 
 
  public arrayRusia:any=[{
+  "HaceTuReserva":"Сделайте заказ!",
+  "ElegirFecha":"ВЫБЕРИТЕ ДАТУ БРОНИРОВАНИЯ (ГОД-МЕСЯЦ-ДЕНЬ)",
+  "Hora":"Время",
+  "Minuto":"Минута",
+
   "Circulo":"Круг",
   "Barras":"Барс",
   "Porcentajes":"Проценты",
@@ -1272,6 +1296,11 @@ this.modalController.create({component:PopoverPage}).then((modalElement)=>{
 
 public arrayPor: any =[
 {
+  "HaceTuReserva":"Faça sua reserva!",
+"ElegirFecha":"ESCOLHER A DATA DA RESERVA (ANO-MÊS-DIA)",
+"Hora":"Hora",
+"Minuto":"Minuto",
+
   "Circulo":"Circulo",
   "Barras":"Barras",
   "Porcentajes":"Porcentagens",

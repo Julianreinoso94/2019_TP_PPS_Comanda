@@ -1,6 +1,7 @@
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Tab1Page} from '../../tab1/tab1.page'
+import { Router, ActivatedRoute } from '@angular/router';
 import { MesasService } from '../../services/mesas/mesas.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FotosService } from '../../services/fotos/fotos.service';
@@ -71,6 +72,10 @@ export class ReservaClientePage implements OnInit {
   price: any = '';
   uidUsuario:any;
 
+  
+idiomaSeleccionado:any;
+array:any=[];
+
 
   //nuevo////////////////////////////////////////////////////////////
 
@@ -92,7 +97,7 @@ export class ReservaClientePage implements OnInit {
   result: number;
   public currentUser: firebase.User;
 
-  constructor(private comidaService: ComidasService,
+  constructor(private comidaService: ComidasService,private route: ActivatedRoute, private tabpag:Tab1Page,
     private dfns: DateFnsModule,
     private router: Router,
     private empleadosService: EmpleadosService,
@@ -112,6 +117,44 @@ export class ReservaClientePage implements OnInit {
   }
 
   ngOnInit() {
+    this.idiomaSeleccionado = this.route.snapshot.paramMap.get('id');
+      
+      switch(this.idiomaSeleccionado) { 
+        case 'en': { 
+          this.array= this.tabpag.arrayINGLES;
+         break; 
+        } 
+        case 'rus': { 
+           this.array= this.tabpag.arrayRusia;
+
+           break; 
+        } 
+        case 'por': { 
+          this.array= this.tabpag.arrayPor;
+
+          break; 
+       } 
+       case'fr':{
+         this.array=this.tabpag.arrayFra;
+
+         break
+       }
+       case'esp':{
+        this.array=this.tabpag.arrayEs;
+
+        break
+      }
+  
+      case'de':{
+        this.array=this.tabpag.arrayDe;
+        break
+      } 
+        default: { 
+          this.array= this.tabpag.arrayEs;
+
+           break; 
+        } 
+     } 
     // this.profileService
     // .getUserProfile()
     // .get()

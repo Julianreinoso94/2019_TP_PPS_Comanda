@@ -77,13 +77,13 @@
     {{array[0].home_btn_encuesta_empleado}}
   </ion-button>
 
-  <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/reserva-cliente">
+  <ion-button *ngIf="userProfile?.perfil=='cliente' " expand="block" color="primary" routerLink="/reserva-cliente/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_ReservaCliente}}
   </ion-button>
   <ion-button *ngIf="userProfile?.perfil=='Supervisor' " expand="block" color="primary" routerLink="/ingreso/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_ListadoIngreso}}
   </ion-button>
-  <ion-button *ngIf="userProfile?.perfil=='cocinero' " expand="block" color="primary" routerLink="/tomarpedidococina">
+  <ion-button *ngIf="userProfile?.perfil=='cocinero' " expand="block" color="primary" routerLink="/tomarpedidococina/{{this.idiomaSeleccionado}}">
     {{array[0].home_btn_TomarPedidoCocina}}
   </ion-button>
   <ion-button *ngIf="userProfile?.perfil=='bartender'  " expand="block" color="primary" routerLink="/tomarpedidosbar">
